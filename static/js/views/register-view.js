@@ -33,7 +33,7 @@ var app = app || {};
                 app.showMessageBar(id, str);
             }
             else if (app.Lock.attach({
-				loading: '#login-control',
+				loading: '#register-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
 				},
