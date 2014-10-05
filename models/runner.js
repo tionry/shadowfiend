@@ -77,6 +77,12 @@ function Runner(name, type, src){
 					}}
 				];
 				break;
+            case 'hs':
+                that.script = [
+                    {cmd:'ghc', args:['-o', that.name + '.out', that.name]},
+                    {cmd:A, args:['0', that.name + '.out'], start:true}
+                ];
+                break;
 		}
 	}else{
 		switch(type){
@@ -126,6 +132,12 @@ function Runner(name, type, src){
 				that.script = [
 					{cmd:'javac', args:[that.name]},
 					{cmd:'java', args:[that.class], start:true}
+				];
+				break;
+            case 'hs':
+				that.script = [
+					{cmd:'ghc', args:['-o', that.name + '.out', that.name]},
+					{cmd:'./' + that.name + '.out', args:[], start:true}
 				];
 				break;
 		}
