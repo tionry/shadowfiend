@@ -143,7 +143,7 @@ app.init_suf || (app.init_suf = {});
 		app.init_suf.socket();
     	var socket = app.socket;
 		
-    	socket.on('register', app.Lock.detach);
+    	socket.on('register', onLogin);
     	socket.on('avatar', app.Lock.detach);
     	socket.on('password', app.Lock.detach);
     	socket.on('download', onDownload);

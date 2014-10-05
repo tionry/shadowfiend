@@ -33,17 +33,6 @@ var app = app || {};
                 app.showMessageBar(id, str);
             }
             else if (app.Lock.attach({
-                loading: '#login-control',
-                error: function (data) {
-                    app.showMessageBar('#login-message', data.err, 'error');
-                },
-            })) {
-                app.socket.emit('login', {
-                    name: name,
-                    password: pass,
-                });
-            } 
-            /*else if (app.Lock.attach({
 				loading: '#register-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
@@ -56,7 +45,7 @@ var app = app || {};
                     name: name,
                     password: pass,
                 });
-            }*/
+            }
         },
         /*快捷键回车注册*/
         registerOnEnter: function (e) {
