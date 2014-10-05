@@ -32,7 +32,7 @@ var app = app || {};
             if (str) {
                 app.showMessageBar(id, str);
             }
-            else if (app.Lock.attach({
+            /*else if (app.Lock.attach({
                 loading: '#login-control',
                 error: function (data) {
                     app.showMessageBar('#login-message', data.err, 'error');
@@ -42,9 +42,9 @@ var app = app || {};
                     name: name,
                     password: pass,
                 });
-            } 
-            /*else if (app.Lock.attach({
-				loading: '#register-control',
+            }*/ 
+            else if (app.Lock.attach({
+				loading: '#login-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
 				},
@@ -56,7 +56,7 @@ var app = app || {};
                     name: name,
                     password: pass,
                 });
-            }*/
+            }
         },
         /*快捷键回车注册*/
         registerOnEnter: function (e) {
