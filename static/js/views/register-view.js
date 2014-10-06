@@ -48,15 +48,16 @@ var app = app || {};
                     app.socket.emit('register', {
                         name: name,
                         password: pass,
-                    });
+                        });
+                    }
                     else
                     {
                     app.socket.emit('login', {
                         name: name,
                         password: pass,
                     });
+                    }
                 }
-            }
         },
         /*快捷键回车注册*/
         registerOnEnter: function (e) {
