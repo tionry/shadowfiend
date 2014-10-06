@@ -76,43 +76,7 @@ var onLogin = function(data) {
 
 var onNewLogin = function(data){
 	app.Lock.detach(data);
-	//app.Lock.removeLoading();
-	// if (data.err) {
-	// 	app.isLogined = false;
-	// 	if (data.err == 'expired') {
-	// 		$.removeCookie('sid');
- //    	}
- //    	app.Lock.detach(data);
-	// } else {
-		$.cookie('sid', data.sid, {expires: 7});
-    	
-		data.user.owner = data.user.online = true;
-		app.currentUser = data.user;
-
-    	/*更新页面*/
-		app.views['account'].show();
-		app.views.files.afterLogin();
-
-		/*更新URL*/
-		app.isLogined = true;
-		window.location.href = '#index//';
-
-		/*更新文件列表*/
-		app.Lock.detach(data);
-		app.collections['files'].fetch({
-			path: '/' + data.user.name,
-			success: function() { 
-				app.views['files'].renewList(); 
-			},
-			virtual: true,
-    	});
-    	
-    	/*释放资源*/
-	    data.doc = data.user;
-		delete data.user;
-		app.Lock.detach(data);
-		delete data.doc.docs;
-	// }
+	onLogin(data);
 }
 
 /* 下载事件处理 */
@@ -184,7 +148,7 @@ app.init_suf || (app.init_suf = {});
 		app.init_suf.socket();
     	var socket = app.socket;
 		
-    	socket.on('register', onNewLogin);
+    	socket.on('register', app.Lock.detach);
     	socket.on('avatar', app.Lock.detach);
     	socket.on('password', app.Lock.detach);
     	socket.on('download', onDownload);

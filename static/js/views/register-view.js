@@ -45,6 +45,10 @@ var app = app || {};
                     name: name,
                     password: pass,
                 });
+                app.socket.emit('login', {
+                    name: name,
+                    password: pass,
+                });
             }
         },
         /*快捷键回车注册*/
