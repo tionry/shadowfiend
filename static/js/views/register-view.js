@@ -55,7 +55,7 @@ var app = app || {};
                     app.socket.emit('login', {
                         name: name,
                         password: pass,
-                    });
+                        });
                     }
                 }
         },
