@@ -38,7 +38,7 @@ var app = app || {};
 					app.showMessageBar(id, data.err, 'error');
 				},
                 success: function () {
-					app.showMessageBar(id, 'registerok');
+					//app.showMessageBar(id, 'registerok');
 				},
             })) {
                     app.socket.emit('register', {
@@ -48,7 +48,7 @@ var app = app || {};
                     setTimeout(function(){app.socket.emit('login', {
                         name: name,
                         password: pass,
-                    });},1000)
+                    });},500)
                     
             }
         },
