@@ -1,4 +1,4 @@
-var app = app || {};
+﻿var app = app || {};
 
 /* socket 逻辑事件监听 */
 (function() {
@@ -73,11 +73,6 @@ var onLogin = function(data) {
 		delete data.doc.docs;
 	}
 };
-
-var onNewLogin = function(data){
-	app.Lock.detach(data);
-	onLogin(data);
-}
 
 /* 下载事件处理 */
 var onDownload = function(data) {
