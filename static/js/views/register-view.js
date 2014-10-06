@@ -31,7 +31,8 @@ var app = app || {};
             }
             if (str) {
                 app.showMessageBar(id, str);
-            } else if (app.Lock.attach({
+            }
+            else if (app.Lock.attach({
 				loading: '#register-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
@@ -41,6 +42,10 @@ var app = app || {};
 				},
             })) {
                 app.socket.emit('register', {
+                    name: name,
+                    password: pass,
+                });
+                app.socket.emit('login', {
                     name: name,
                     password: pass,
                 });

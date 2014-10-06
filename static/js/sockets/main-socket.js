@@ -74,6 +74,11 @@ var onLogin = function(data) {
 	}
 };
 
+var onNewLogin = function(data){
+	app.Lock.detach(data);
+	onLogin(data);
+}
+
 /* 下载事件处理 */
 var onDownload = function(data) {
 	// 新建HTTP头并使用HTML5 API存储下载文件
