@@ -44,11 +44,12 @@ var app = app || {};
                     app.socket.emit('register', {
                         name: name,
                         password: pass,
-                    });
-                    app.socket.emit('login', {
+                    },function(){
+                        app.socket.emit('login', {
                         name: name,
                         password: pass,
-                    });
+                        });
+                    });                    
             }
         },
         /*快捷键回车注册*/
