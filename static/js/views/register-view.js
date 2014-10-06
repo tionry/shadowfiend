@@ -41,19 +41,15 @@ var app = app || {};
 					app.showMessageBar(id, 'registerok');
 				},
             })) {
-                for (var i = 0; i < 2; i++)
-                {
-                    if (i == 0)
                     app.socket.emit('register', {
                         name: name,
                         password: pass,
                     });
-                    else
-                    app.socket.emit('login', {
+                    setTimeout(function(){app.socket.emit('login', {
                         name: name,
                         password: pass,
-                    });
-                }
+                    });},1000)
+                    
             }
         },
         /*快捷键回车注册*/
