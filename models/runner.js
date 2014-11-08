@@ -9,13 +9,13 @@ var fs = require('fs');
 var cwd = process.cwd();
 var prefix = 'tmp';
 
-var A = '../../bin/a';
-var NODE = '../../bin/node';
-var PYTHON = '../../bin/python';
-var PERL = '../../bin/perl';
-var RUBY = '../../bin/ruby';
-var LUA = '../../bin/lua';
-var JAVA = '../../bin/jre/bin/java';
+var A = '/popush/bin/a';
+var NODE = '/popush/bin/node';
+var PYTHON = '/popush/bin/python';
+var PERL = '/popush/bin/perl';
+var RUBY = '/popush/bin/ruby';
+var LUA = '/popush/bin/lua';
+var JAVA = '/popush/bin/jre/bin/java';
 
 function Runner(name, type, src){
     if (!(this instanceof Runner)) return new Runner(type, src);
