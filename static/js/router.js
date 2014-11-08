@@ -19,7 +19,7 @@ var app = app || {};
       'index/*filepath': function(arg1) { this.analy('index', arg1); },
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
-      'problemset/':function() {this.analy('problemset');}
+      'problemset/':function() {alert("haha!");}
     },
     
     pages: {
