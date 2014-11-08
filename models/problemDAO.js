@@ -52,3 +52,26 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 		return callback(null, problem);
 	});
 }
+
+ProblemDAO.prototype.deleteProblem = function (name, callback) {
+	lock.acquire(name, function() {
+		db.problem.findOne({name:name}, {_id:1}, function (err, problem) {
+			if (err) {
+				lock.release(name);
+				return callback("inner error");
+			}
+			if (!problem) {
+				lock.release(name);
+				return callback("unauthorized");
+			}
+			db.problem.remove({_id: problem._id}, function (err, reply) {
+				if (err) {
+					lock.release(name);
+					return callback("inner error");
+				}
+				lock.release(name);
+				return callback(null);
+			});
+		});
+	});
+}
