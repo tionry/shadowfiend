@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var fs = require('fs');
 var UserDAO = require('./models/userDAO');
 var DocDAO = require('./models/docDAO');
+var ProblemDAO = require('./models/problemDAO');
 var DocBuffer = require('./models/docBuffer');
 var Runner = require('./models/runner');
 var Debugger = require('./models/debugger');
