@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -298,14 +298,49 @@
       </div>
     </div>
 
-      <div id="problemset" class="row">
-          <div class="col-xs-12">
-              <button class="btn btn-white" type="button" title="button"></button>
-            this is the problemset page.
-          </div>>
+      <div id="problemset" class="hide">
+        <div class="panel panel-default">
+          <div class="panel-heading">Problem Set</div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>A+B Problem</td>
+                <td>2014.11.07 18:55</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-    
+    <!-- popover -->
+    <div id="newproblem" class="modal" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+      <div class="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="newproblem-label" localization>newproblem</h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <div class="modal-buttons">
+                    <button class="btn btn-primary modal-confirm" localization>ok</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
     <!-- popover -->
     <div id="newfile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog">

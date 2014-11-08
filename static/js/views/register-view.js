@@ -1,4 +1,4 @@
-﻿/*注册视图*/
+/*注册视图*/
 var app = app || {};
 (function () {
     'use strict';
