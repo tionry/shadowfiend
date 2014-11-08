@@ -1,4 +1,4 @@
-/*注册视图*/
+﻿/*注册视图*/
 var app = app || {};
 (function () {
     'use strict';
@@ -32,30 +32,24 @@ var app = app || {};
             if (str) {
                 app.showMessageBar(id, str);
             }
-            /*else if (app.Lock.attach({
-                loading: '#login-control',
-                error: function (data) {
-                    app.showMessageBar('#login-message', data.err, 'error');
-                },
-            })) {
-                app.socket.emit('login', {
-                    name: name,
-                    password: pass,
-                });
-            }*/ 
             else if (app.Lock.attach({
 				loading: '#register-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
 				},
                 success: function () {
-					app.showMessageBar(id, 'registerok');
+					//app.showMessageBar(id, 'registerok');
 				},
             })) {
-                app.socket.emit('register', {
-                    name: name,
-                    password: pass,
-                });
+                    app.socket.emit('register', {
+                        name: name,
+                        password: pass,
+                    });
+                    setTimeout(function(){app.socket.emit('login', {
+                        name: name,
+                        password: pass,
+                    });},500)
+                    
             }
         },
         /*快捷键回车注册*/

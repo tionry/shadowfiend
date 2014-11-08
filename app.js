@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var fs = require('fs');
 var UserDAO = require('./models/userDAO');
 var DocDAO = require('./models/docDAO');
+var ProblemDAO = require('./models/problemDAO');
 var DocBuffer = require('./models/docBuffer');
 var Runner = require('./models/runner');
 var Debugger = require('./models/debugger');
@@ -97,6 +98,7 @@ io.sockets.on('connection', function(socket){
 
 	var userDAO = new UserDAO();
 	var docDAO = new DocDAO();
+	var problemDAO = new ProblemDAO();
 
 	var ip = socket.handshake.headers['x-real_ip'];
 	if(!ip){
@@ -894,5 +896,33 @@ io.sockets.on('connection', function(socket){
 			return _broadcast(room.id, 'rm-expr', {expr:data.expr});
 		}
 	});
+
+	socket.on('add-problem', function(data) {
+		if (!check(data, 'name', 'description')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+
+	});
+
+	socket.on('modify-problem', function(data) {
+		if (!check(data, 'name', 'description')) {
+			return;
+		}
+	});
+
+	socket.on('find-problem', function(data) {
+		if (!check(data, 'name', 'description')) {
+			return;
+		}
+	});
+
+	socket.on('delete-problem', function(data) {
+		if (!check(data, 'name', 'description')) {
+			return;
+		}
+	})
 
 });

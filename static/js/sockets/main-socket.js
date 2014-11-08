@@ -1,4 +1,4 @@
-var app = app || {};
+﻿var app = app || {};
 
 /* socket 逻辑事件监听 */
 (function() {
