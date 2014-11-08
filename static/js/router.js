@@ -19,6 +19,7 @@ var app = app || {};
       'index/*filepath': function(arg1) { this.analy('index', arg1); },
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
+      'problemset/':function() {this.analy('problemset');}
     },
     
     pages: {
@@ -81,6 +82,14 @@ var app = app || {};
           app.views.room.closeeditor();
           this.el.hide();
         },
+      }),
+
+      problemset: new Page({
+        el: '#problemset',
+        depend: ['_head2'],
+        logined: true,
+        show: Page.prototype.show,
+        hide: Page.prototype.hide,
       }),
       
       // dependency

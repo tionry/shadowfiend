@@ -44,7 +44,7 @@ var app = app || {};
                 });
             }*/ 
             else if (app.Lock.attach({
-				loading: '#login-control',
+				loading: '#register-control',
 				error: function (data) {
 					app.showMessageBar(id, data.err, 'error');
 				},
