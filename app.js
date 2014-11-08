@@ -904,25 +904,21 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-
+		problemDAO.createProblem(data.name, data.description, function(err) {
+			socket.emit('add-problem', {err: err});
+		});
 	});
-
-	socket.on('modify-problem', function(data) {
-		if (!check(data, 'name', 'description')) {
-			return;
-		}
-	});
-
-	socket.on('find-problem', function(data) {
-		if (!check(data, 'name', 'description')) {
-			return;
-		}
-	});
-
+	
 	socket.on('delete-problem', function(data) {
-		if (!check(data, 'name', 'description')) {
+		if (!check(data, 'name')) {
 			return;
 		}
-	})
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		problemDAO.deleteProblem(data.name, function(err) {
+			return socket.emit('delete-problem', {err: err});
+		});
+	});
 
 });
