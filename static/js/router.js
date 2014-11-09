@@ -86,7 +86,7 @@ var app = app || {};
 
       problemset: new Page({
         el: '#problemset',
-        depend: ['_head2'],
+        depend: ['_head2', '_footer'],
         logined: true,
         show: Page.prototype.show,
         hide: Page.prototype.hide,
