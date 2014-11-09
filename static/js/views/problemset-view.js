@@ -3,7 +3,7 @@ var app = app || {};
 (function(){
     'use strict' ;
     app.ProblemsetView = Backbone.View.extend({
-        el:"#problemset",
+        el:"#newproblem",
         events: {
             'click #btn_newproblemconfirm':'createproblem'
         },
