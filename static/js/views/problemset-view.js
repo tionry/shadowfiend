@@ -9,6 +9,7 @@ var app = app || {};
         },
 
         createproblem: function(){
+            alert('done!');
             var name = $('#newproblem-name').val();
             var description = $('#newproblem-description').val();
             if (app.Lock.attach({
@@ -21,7 +22,7 @@ var app = app || {};
                         //app.showMessageBox('changepassword', 'changepassworddone');
                     },
                 })) {
-                alert('done!');
+                alert('done2!');
                 app.socket.emit('add-problem', {
                     name: name,
                     description: description,
