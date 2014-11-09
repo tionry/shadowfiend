@@ -313,10 +313,12 @@
       <div id="problemset" class="hide">
           <div class="row">
               <div class="col-xs-12">
-                  <ul class="nav nav-tabs">
-                      <li id="problems"><a href="#"  localization>Problem Set Vol1</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#newproblem" localization>Add New Problem</a></li>
-                  </ul>
+                      <ul class="nav navbar-nav navbar-left">
+                          <li id="problems"><a href="#"  localization>Problem Set Vol1</a></li>
+                      </ul>
+                      <ul class="nav navbar-nav navbar-right">
+                          <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newproblem" localization>New Problem</button></li>
+                      </ul>
               </div>
           </div>
           <div class="row">
@@ -342,7 +344,7 @@
           </div>
 
     <!-- popover -->
-    <div id="newproblem" class="modal" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+    <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
       <div class="dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -350,7 +352,18 @@
                 <h3 id="newproblem-label" localization>newproblem</h3>
             </div>
             <div class="modal-body">
-                ahaha
+                <div class="form-group">
+                    <label class="control-label col-sm-3" localization>name</label>
+                    <div class="col-sm-7">
+                        <input class="modal-input form-control" type="text" />
+                        <span class="help-inline"></span>
+                    </div>
+                    <label class="control-label col-sm-3" localization>description</label>
+                    <div class="col-sm-7">
+                        <input class="modal-input form-control" type="text" />
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="modal-buttons">
