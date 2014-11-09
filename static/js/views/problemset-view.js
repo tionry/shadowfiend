@@ -9,7 +9,7 @@ var app = app || {};
         },
 
         createproblem: function(){
-            alert('done!');
+            alert('don!');
             var name = $('#newproblem-name').val();
             var description = $('#newproblem-description').val();
             if (app.Lock.attach({
