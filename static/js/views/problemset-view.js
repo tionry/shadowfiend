@@ -36,6 +36,6 @@ var app = app || {};
         if (app.views['problemset']) {
             return;
         }
-        app.views['problemset'] = new app.ProblemView();
+        app.views['problemset'] = new app.ProblemsetView();
     };
 })();
