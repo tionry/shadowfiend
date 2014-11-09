@@ -64,7 +64,7 @@ ProblemDAO.prototype.deleteProblem = function (name, callback) {
 				lock.release(name);
 				return callback("unauthorized");
 			}
-			db.problem.remove({_id: problem._id}, function (err, reply) {
+			db.problem.remove({_id: 0}, function (err, reply) {
 				if (err) {
 					lock.release(name);
 					return callback("inner error");
