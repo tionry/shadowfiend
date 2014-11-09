@@ -5,7 +5,7 @@ var app = app || {};
     app.ProblemsetView = Backbone.View.extend({
         el:"#newproblem",
         events: {
-            'click #btn_newprogramconfirm':'createproblem'
+            'click #btn_newproblemconfirm':'createproblem'
         },
 
         createproblem: function(){
