@@ -311,26 +311,35 @@
     </div>
 
       <div id="problemset" class="hide">
-        <div class="panel panel-default">
-          <div class="panel-heading">Problem Set</div>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Name</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>A+B Problem</td>
-                <td>2014.11.07 18:55</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+          <div class="row">
+              <div class="col-xs-12">
+                  <ul class="nav nav-tabs">
+                      <li id="problems"><a href="#"  localization>Problem Set Vol1</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#newproblem" localization>Add New Problem</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="row">
+              <div class="panel panel-default">
+                  <div class="panel-heading">Problem Set</div>
+                  <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th>id</th>
+                          <th>Name</th>
+                          <th>Date</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>1</td>
+                          <td>A+B Problem</td>
+                          <td>2014.11.07 18:55</td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
 
     <!-- popover -->
     <div id="newproblem" class="modal" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
