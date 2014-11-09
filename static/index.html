@@ -342,6 +342,7 @@
                   </table>
               </div>
           </div>
+      </div>
 
     <!-- popover -->
     <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
@@ -355,18 +356,18 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" localization>name</label>
                     <div class="col-sm-7">
-                        <input class="modal-input form-control" type="text" />
+                        <input id="newproblem-name" class="modal-input form-control" type="text" />
                     </div>
                     </hr>
                     <label class="control-label col-sm-3" localization>description</label>
                     <div class="col-sm-7">
-                        <input class="modal-input form-control" type="text" />
+                        <input id="newproblem-description" class="modal-input form-control" type="text" />
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="modal-buttons">
-                    <button id = "addproblem" class="btn btn-primary modal-confirm" localization>ok</button>
+                <div class="modal-buttons" id="newproblem-buttons">
+                    <button id="btn_newproblemconfirm" class="btn btn-primary modal-confirm" localization>ok</button>
                     <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
                 </div>
             </div>
@@ -634,6 +635,7 @@
   <script type="text/javascript" src="js/sockets/room-socket.js"></script>
   <script type="text/javascript" src="js/views/login-view.js"></script>
   <script type="text/javascript" src="js/views/register-view.js"></script>
+  <script type="text/javascript" src="js/views/problemset-view.js"></script>
   <script type="text/javascript" src="js/views/account-view.js"></script>
   <script type="text/javascript" src="js/views/member-view.js"></script>
   <script type="text/javascript" src="js/views/memberlist-view.js"></script>
