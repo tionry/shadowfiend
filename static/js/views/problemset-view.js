@@ -15,6 +15,9 @@ var app = app || {};
                 name: '',
                 all: true,
                 virtual: true
+                success: function() {
+                    alert('fetch success!');
+                }
             });
         },
 
