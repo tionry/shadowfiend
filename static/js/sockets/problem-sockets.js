@@ -9,9 +9,12 @@ var app = app || {};
         // Add problem
         "add-problem": function() {
             app.collection.problems.fetch({
+                all: true,
+                name: '',
                 success: function() {
                     app.views['problemset'].renewList();
-                }
+                },
+                virtual: true
             });
         }
 
@@ -19,15 +22,16 @@ var app = app || {};
 
     // Start listening
     (function() {
-        app.init_suf.socket = function() {
+        app.init_suf.problemSocket = function() {
             if (app.socket) {
                 return;
             }
-            var socket = app.socket;
+            var socket = app.socket = io.connect(app.Package.SOCKET_IO);
             for (var i in listeners) {
                 socket.on(i, listeners[i]);
             }
         };
+        app.init_suf.problemSocket();
     })();
 
 })();

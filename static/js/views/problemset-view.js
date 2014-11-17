@@ -10,9 +10,15 @@ var app = app || {};
             //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
-
-            //this.collection.fetch();
             //try here
+            this.collection.fetch({
+                name: '',
+                all: true,
+                virtual: true,
+                success: function() {
+                    alert('fetch success!');
+                }
+            });
         },
 
         addOne: function(model) {

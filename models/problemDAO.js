@@ -53,6 +53,18 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 	});
 }
 
+ProblemDAO.prototype.getAllProblems = function (callback) {
+	db.problem.find({}, {name:1, description:1}, function (err, problems) {
+		if (err) {
+			return callback("inner error");
+		}
+		if (!problems) {
+			return callback("unauthorized");
+		}
+		return callback(null, problems);
+	});
+}
+
 ProblemDAO.prototype.deleteProblem = function (name, callback) {
 	lock.acquire(name, function() {
 		db.problem.findOne({name:name}, {_id:1}, function (err, problem) {
