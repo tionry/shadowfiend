@@ -22,7 +22,7 @@ var app = app || {};
 
     // Start listening
     (function() {
-        app.init_suf.socket = function() {
+        app.init_suf.problemSocket = function() {
             if (app.socket) {
                 return;
             }
@@ -31,6 +31,7 @@ var app = app || {};
                 socket.on(i, listeners[i]);
             }
         };
+        app.init_suf.problemSocket();
     })();
 
 })();
