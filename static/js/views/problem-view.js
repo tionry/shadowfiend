@@ -10,11 +10,14 @@ var app = app || {};
         }),
 
         events:{
-
+            'click .problem-go':'go',
+            'click .problem-modify':'modify',
+            'click .problem-delete':'delete',
+            'click .problem-toggle':'toggleDone',
         },
         initialize: function(){
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo(this.model, 'remove', this.remove);
+            //this.listenTo(this.model, 'remove', this.remove);
             this.listenTo(this.model, 'destroy', this.remove);
         },
 
@@ -24,14 +27,22 @@ var app = app || {};
             return this;
         },
 
+        //Check one problem
+        go:function(){
+
+        },
+        //Modify problem information
+        modify:function(){
+
+        },
         // Toggle the `"done"` state of the model.
         toggleDone: function() {
             this.model.toggle();
         },
 
         // Remove the item, destroy the model.
-        clear: function() {
+        delete: function() {
             this.model.destroy();
-        }
+        },
     });
 })();
