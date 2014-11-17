@@ -11,11 +11,17 @@ var app = app || {};
 	
 	app.Problem = Backbone.Model.extend({
     idAttribute: 'name',
-    
-		defaults: {
-			name: '',
-			description: '',
+    	//default attributes for problem item
+		defaults: function(){
+			return {
+				name: '',
+				description: '',
+				done:false
+			}
 		},
+		toggle: function() {
+			this.save({done: !this.get("done")});
+		}
     
 	});
   
