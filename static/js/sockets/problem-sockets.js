@@ -26,7 +26,7 @@ var app = app || {};
             if (app.socket) {
                 return;
             }
-            var socket = app.socket;
+            var socket = app.socket = io.connect(app.Package.SOCKET_IO);
             for (var i in listeners) {
                 socket.on(i, listeners[i]);
             }
