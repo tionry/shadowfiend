@@ -75,7 +75,7 @@ var app = app || {};
         el:"#problemset-control",
 
         initialize: function(){
-            this.table = this.el.find('#problemset-table');
+            //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.collection.fetch();
@@ -85,18 +85,19 @@ var app = app || {};
         addOne: function(model) {
             var v = model.view;
             var that = this;
+
             model.set({"eid": model.get("eid") || that.collection.length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
-                    this.table.append(v.el);
+                    $('#problemset-table').append(v.el);
                     v.delegateEvents();
                 }
             } else {
                 model.view = new app.ProblemView({
                     model: model
                 });
-                this.table.append(model.view.render().el);
+                $('#problemset-table').append(model.view.render().el);
             }
             return this;
         },
