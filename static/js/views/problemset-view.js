@@ -10,8 +10,6 @@ var app = app || {};
             //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
-            var npb = $("#new-pro-btn");
-            npb.on('click', newproblem());
             //this.collection.fetch();
             //try here
         },
