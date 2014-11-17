@@ -48,8 +48,8 @@ var app = app || {};
 
     app.init || (app.init = {});
     app.init.problemSync = function() {
-        app.File.prototype.sync = syncProblem;
-        app.Files.prototype.sync = syncProblems;
+        app.Problem.prototype.sync = syncProblem;
+        app.Problems.prototype.sync = syncProblems;
     };
 
     app.init_suf || (app.init_suf = {});
