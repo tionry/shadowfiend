@@ -7,7 +7,7 @@ var app = app || {};
     var listeners = {
 
         // Add problem
-        "add-problem": function() {
+        "add-problem": function(data) {
             app.collection.problems.fetch({
                 all: true,
                 name: '',
@@ -20,9 +20,11 @@ var app = app || {};
 
     };
 
+    app.init_suf || (app.init_suf = {});
+
     // Start listening
     (function() {
-        app.init_suf.socket = function() {
+        app.init_suf.problemSocket = function() {
             if (app.socket) {
                 return;
             }
@@ -30,7 +32,7 @@ var app = app || {};
             for (var i in listeners) {
                 socket.on(i, listeners[i]);
             }
-        };
+        }
     })();
 
 })();
