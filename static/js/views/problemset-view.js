@@ -75,7 +75,7 @@ var app = app || {};
         el:"#problemset-control",
 
         initialize: function(){
-            this.$table = el.find('#problemset-table');
+            this.$table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.collection.fetch();
