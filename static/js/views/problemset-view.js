@@ -79,6 +79,7 @@ var app = app || {};
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.collection.fetch();
+            //try here
         },
 
         addOne: function(model) {
