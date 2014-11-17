@@ -85,7 +85,7 @@ var app = app || {};
       }),
 
       problemset: new Page({
-        el: '#problemset',
+        el: '#problemset-control',
         depend: ['_head2', '_footer'],
         logined: true,
         show: Page.prototype.show,
