@@ -68,7 +68,7 @@ io.sockets.on('connection', function(socket){
 		var ignore = {
 			'change':1,
 			'ok':1,
-			'avatar':1,
+			'avatar':1
 		};
 		function _log(id, arg){
 			id += '[' + (socket.session ? socket.session.user.name : ip) + ']';
@@ -524,12 +524,12 @@ io.sockets.on('connection', function(socket){
 			if (!room)
 				socket.emit('download', { 
 					text: revision.content.toString(),
-					name: n,
+					name: n
 				});
 			else
 				socket.emit('download', {
 					text: room.buffer.toString(),
-					name: n,
+					name: n
 				});
 		});
 	});
@@ -908,7 +908,7 @@ io.sockets.on('connection', function(socket){
 			socket.emit('add-problem', {err: err});
 		});
 	});
-	
+
 	socket.on('delete-problem', function(data) {
 		if (!check(data, 'name')) {
 			return;
