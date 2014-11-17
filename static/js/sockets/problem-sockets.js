@@ -9,9 +9,12 @@ var app = app || {};
         // Add problem
         "add-problem": function() {
             app.collection.problems.fetch({
+                all: true,
+                name: '',
                 success: function() {
                     app.views['problemset'].renewList();
-                }
+                },
+                virtual: true
             });
         }
 

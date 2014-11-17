@@ -921,4 +921,21 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('read-problem', function(data) {
+		if (!check(data, 'name', 'all')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		if (data.all == true) {
+			problemDAO.getAllProblems(function(err, problem) {
+				if (err) {
+					return socket.emit('read-problem', {err: err});
+				}
+				socket.emit('read-problem', {problem: problem});
+			});
+		}
+	});
+
 });
