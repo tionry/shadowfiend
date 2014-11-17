@@ -91,4 +91,6 @@ var app = app || {};
             collection: app.collections['problems'],
         });
     };
+
+    $("new-pro-btm").bind('click', newproblem);
 })();
