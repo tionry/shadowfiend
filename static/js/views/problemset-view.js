@@ -78,7 +78,7 @@ var app = app || {};
             //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
-            this.collection.fetch();
+            //this.collection.fetch();
             //try here
         },
 
