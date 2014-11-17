@@ -181,48 +181,48 @@
             </ul>
           </div>
         </div>
-        
-				<div class="row" id="file-list" style="margin-bottom: 20px;">
-					<div class="col-xs-10">
-						<p><span localization>currentdir:</span>&nbsp;<span id="current-dir"></span><!--<img src="images/newfile.png" width="28"/><img src="images/newfolder.png" width="35">--></p>
-            <table class="table table-hover" id="file-list-table">
-              <tr class="head">
-                <th class="col1">&nbsp;</th>
-                <th class="col2" localization>filename</th>
-                <th class="col3" localization>state</th>
-                <th class="col4" localization>timestamp</th>
-                <th class="col5">&nbsp;</th>
-              </tr>
-              <tr id="no-file"><td></td><td localization>nofile</td> <td></td> <td></td> <td></td></tr>
-<script type="text/template" id="file-template">
-<td class="col1"><img src="<%=model.pic%>" height="32" width="32" /></td>
-<td class="col2"><a href="#index<%=encodeURI(model.shownPath)%>" class="file-go"><%=_.escape(model.shownName)%></a></td>
-<% if (model.belongSelf) { %>
-<td class="col3" localization><%=model.shared?strings["shared"]:""%></td>
-<% } else { var o = model.owner; %>
-<td class="col3 owner"><img class="user-other" src="<%=o.avatar%>" width="32" height="32"/><%=_.escape(o.name)%></td>
-<% } %>
-<td class="col4"><%=model.time%></td>
-<td class="col5">
-  <div class="dropdown">
-    <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
-    <ul class="dropdown-menu">
-      <% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>
-      <li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>
-      <li><a href="#" class="file-go-rename" localization><%=strings["rename"]%></a></li>
-      <li><a href="#" class="file-go-download" localization><%=strings["download"]%></a></li>
-    </ul>
-  </div>
-</td></script>
-            </table>
+
+          <div class="row" id="file-list" style="margin-bottom: 20px;">
+              <div class="col-xs-10">
+                  <p><span localization>currentdir:</span>&nbsp;<span id="current-dir"></span><!--<img src="images/newfile.png" width="28"/><img src="images/newfolder.png" width="35">--></p>
+                  <table class="table table-hover" id="file-list-table">
+                      <tr class="head">
+                          <th class="col1">&nbsp;</th>
+                          <th class="col2" localization>filename</th>
+                          <th class="col3" localization>state</th>
+                          <th class="col4" localization>timestamp</th>
+                          <th class="col5">&nbsp;</th>
+                      </tr>
+                      <tr id="no-file"><td></td><td localization>nofile</td> <td></td> <td></td> <td></td></tr>
+                      <script type="text/template" id="file-template">
+                          <td class="col1"><img src="<%=model.pic%>" height="32" width="32" /></td>
+                          <td class="col2"><a href="#index<%=encodeURI(model.shownPath)%>" class="file-go"><%=_.escape(model.shownName)%></a></td>
+                          <% if (model.belongSelf) { %>
+                          <td class="col3" localization><%=model.shared?strings["shared"]:""%></td>
+                          <% } else { var o = model.owner; %>
+                          <td class="col3 owner"><img class="user-other" src="<%=o.avatar%>" width="32" height="32"/><%=_.escape(o.name)%></td>
+                          <% } %>
+                          <td class="col4"><%=model.time%></td>
+                          <td class="col5">
+                              <div class="dropdown">
+                                  <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
+                                  <ul class="dropdown-menu">
+                                      <% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>
+                                      <li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>
+                                      <li><a href="#" class="file-go-rename" localization><%=strings["rename"]%></a></li>
+                                      <li><a href="#" class="file-go-download" localization><%=strings["download"]%></a></li>
+                                  </ul>
+                              </div>
+                          </td></script>
+                  </table>
+              </div>
+              <div class="col-xs-2">
+                  <span localization>shareduser</span>：
+                  <div id="member-list">
+                      <!--              <img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>-->
+                  </div>
+              </div>
           </div>
-          <div class="col-xs-2">
-            <span localization>shareduser</span>：
-            <div id="member-list">
-<!--              <img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>-->
-            </div>
-          </div>
-        </div>
       </div>
     
       <div id="editor" class="row hide">
@@ -310,7 +310,7 @@
       </div>
     </div>
 
-      <div id="problemset" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+      <div id="problemset-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
           <div class="row">
               <div class="col-xs-12">
                       <ul class="nav navbar-nav navbar-left">
@@ -324,7 +324,7 @@
           <div class="row">
               <div class="panel panel-default">
                   <div class="panel-heading">Problem Set</div>
-                  <table class="table table-hover">
+                  <table class="table table-hover" id="problemset-table">
                       <thead>
                       <tr>
                           <th>id</th>
@@ -338,6 +338,10 @@
                           <td>A+B Problem</td>
                           <td>2014.11.07 18:55</td>
                       </tr>
+                      <script type="text/template" id="problem-template">
+                          <td><%= eid %></td>
+                          <td class="name"><%= name %></td>
+                      </script>
                       </tbody>
                   </table>
               </div>

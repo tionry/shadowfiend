@@ -29,7 +29,8 @@ var app = app || {};
             this.$dir = el.find('#current-dir');
             this.$tabOwnedEx = el.find('#ownedfileex');
             this.$tabShared = el.find('#sharedfile');
-            this.$uploadfile = el.find('#uploadfile'); (this.$tabOwned = el.find('#ownedfile')).find('.dropdown-menu a').bind('click', {
+            this.$uploadfile = el.find('#uploadfile');
+            (this.$tabOwned = el.find('#ownedfile')).find('.dropdown-menu a').bind('click', {
                 context: this
             },
 			newFile);
