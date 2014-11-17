@@ -115,6 +115,7 @@ var app = app || {};
             return;
         }
         var np = new app.NewProblemView();
+        app.collections['problems'] || app.init.problems();
         app.views['problemset'] = new app.ProblemsetView({
             collection: app.collections['problems'],
         });
