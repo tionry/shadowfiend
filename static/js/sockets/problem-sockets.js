@@ -27,9 +27,6 @@ var app = app || {};
 
             app.Lock.detach(data);
             app.collections.problems.fetch({
-                success: function() {
-                    alert('success');
-                },
                 all: true,
                 name: ''
             });
