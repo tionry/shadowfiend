@@ -32,7 +32,8 @@ var app = app || {};
 			if (opts.all || opts.name) {
 				opts.reset = (opts.all != this.all) && (opts.name != this.name);
 				var oldName = this.name, oldAll = this.all, err = opts.error, fail = opts.fail, that = this;
-				this.path = opts.path;
+				this.all = opts.all;
+				this.name = opts.name;
 				opts.error = function() {
 					that.name = oldName;
 					that.all = oldAll;
