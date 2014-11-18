@@ -30,7 +30,7 @@ var app = app || {};
 		fetch: function(opts) {
 			var _fetch = Backbone.Collection.prototype.fetch;
 			if (opts.all || opts.name) {
-				opts.reset = (opts.all || this.all) || (opts.name != this.name);
+				opts.reset = (opts.all != this.all) && (opts.name != this.name);
 				var oldName = this.name, oldAll = this.all, err = opts.error, fail = opts.fail, that = this;
 				this.path = opts.path;
 				opts.error = function() {

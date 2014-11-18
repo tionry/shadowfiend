@@ -343,7 +343,8 @@
 
                       <script type="text/template" id="problem-template">
                           <td class = "col1"><%= model.eid %></td>
-                          <td class="col2"><a href="#index<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
+                          <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
+                          <td class="col4"><%=model.time%></td>
                           <td class="col5">
                               <div class="dropdown">
                                   <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
@@ -362,6 +363,9 @@
           </div>
       </div>
 
+        <div id = "problem-item" class="hide" style="margin-bottom: 104px;margin-top:55px">
+
+        </div>
       <div id="interviewers-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
             <div class="row">
                 <div class="col-xs-12">
