@@ -16,6 +16,24 @@ var app = app || {};
                 },
                 virtual: true
             });
+        },
+
+        "read-problem": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
+            }
+
+            app.Lock.detach(data);
+            app.collections.problems.fetch({
+                success: function() {
+                    alert('success');
+                },
+                all: true,
+                name: ''
+            });
+            app.Lock.detach(data);
+            delete data.problem;
         }
 
     };
