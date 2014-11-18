@@ -19,7 +19,8 @@ var app = app || {};
       'index/*filepath': function(arg1) { this.analy('index', arg1); },
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
-      'problemset':function() { this.analy('problemset');}
+      'problemset':function() { this.analy('problemset');},
+      'interviews':function() { this.analy('interviews');},
     },
     
     pages: {
@@ -86,6 +87,14 @@ var app = app || {};
 
       problemset: new Page({
         el: '#problemset-control',
+        depend: ['_head2', '_footer'],
+        logined: true,
+        show: Page.prototype.show,
+        hide: Page.prototype.hide,
+      }),
+
+      interviews: new Page({
+        el: '#interviews-control',
         depend: ['_head2', '_footer'],
         logined: true,
         show: Page.prototype.show,
