@@ -7,7 +7,7 @@ var app = app || {};
     var listeners = {
 
         // Add problem
-        "add-problem": function(data) {
+        /*"add-problem": function(data) {
             app.collection.problems.fetch({
                 all: true,
                 name: '',
@@ -16,8 +16,9 @@ var app = app || {};
                 },
                 virtual: true
             });
-        },
+        },*/
 
+        // Refresh problem collection
         "read-problem": function(data) {
             if (data == null) {
                 app.Lock.remove();

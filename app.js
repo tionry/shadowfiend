@@ -911,7 +911,15 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		problemDAO.createProblem(data.name, data.description, function(err) {
-			socket.emit('add-problem', {err: err});
+			if (err) {
+				return socket.emit('add-problem', {err: err});
+			}
+			problemDAO.getAllProblems(function(err, problem) {
+				if (err) {
+					return socket.emit('read-problem', {err: err});
+				}
+				socket.emit('read-problem', {problem: problem});
+			});
 		});
 	});
 
