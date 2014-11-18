@@ -319,6 +319,7 @@
                       </ul>
                       <ul class="nav navbar-nav navbar-right">
                           <li><button id="new-pro-btn" type="button" class="btn btn-primary" data-toggle="modal" localization>New Problem</button></li>
+                          <li><button id="delete-selected-pro-btn" type="button" class="btn btn-primary" data-toggle="modal" localization>Delete Problem</button></li>
                       </ul>
               </div>
           </div>
@@ -328,6 +329,7 @@
                   <table class="table table-hover" id="problemset-table">
                       <thead>
                       <tr>
+                          <th><input id="toggle-all" type="checkbox">select all</th>
                           <th>id</th>
                           <th>Name</th>
                           <th>Date</th>
@@ -335,15 +337,26 @@
                       </thead>
                       <tbody>
                       <tr>
-                          <input class="toggle" type="checkbox">
+                          <td><input class="toggle" type="checkbox"></td>
                           <td>1</td>
-                          <td>A+B Problem</td>
+                          <td><a >A+B Problem</a></td>
                           <td>2014.11.07 18:55</td>
                       </tr>
+
                       <script type="text/template" id="problem-template">
                           <td><%= eid %></td>
                           <td class="name"><%= name %></td>
-                      </script>
+                          <td class="col5">
+                              <div class="dropdown">
+                                  <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
+                                  <ul class="dropdown-menu">
+                                      <li><a href="#" class="problem-go-select" localization><%=strings["select"]%></a></li>
+                                      <li><a href="#" class="problem-go-rename" localization><%=strings["modify"]%></a></li>
+                                      <li><a href="#" class="problem-go-delete" localization><%=strings["delete"]%></a></li>
+
+                                  </ul>
+                              </div>
+                          </td></script>
                       </tbody>
                   </table>
               </div>
