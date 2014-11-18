@@ -5,7 +5,9 @@ var app = app || {};
 
     app.ProblemsetView = Backbone.View.extend({
         el:"#problemset-control",
-
+        events:{
+            "click #toggle-all": "toggleAllComplete"
+        },
         initialize: function(){
             //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
@@ -35,7 +37,12 @@ var app = app || {};
 
         addAll: function(){
             this.collection.each(this.addOne);
-        }
+        },
+
+        toggleAllComplete: function () {
+            var done = this.allCheckbox.checked;
+            problems.each(function (problem) { problem.save({'done': done}); });
+        },
     })
 
     var newproblem = function(){
