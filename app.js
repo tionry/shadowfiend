@@ -153,12 +153,6 @@ io.sockets.on('connection', function(socket){
 			docDAO.getDocByPath(socket.session.user._id, '/' + socket.session.user.name, function(err, docs){
 				socket.session.user.docs = docs;
 				socket.emit('login', {user:socket.session.user, sid:socket.session.sid});
-				problemDAO.getAllProblems(function(err, problem) {
-					if (err) {
-						return socket.emit('read-problem', {err: err});
-					}
-					socket.emit('read-problem', {problem: problem});
-				});
 			});
 		}else{
 			socket.emit('login', {err:'expired'});
@@ -186,12 +180,6 @@ io.sockets.on('connection', function(socket){
 			}
 			users[user.name] = socket;
 			socket.emit('login', socket.session);
-			problemDAO.getAllProblems(function(err, problem) {
-				if (err) {
-					return socket.emit('read-problem', {err: err});
-				}
-				socket.emit('read-problem', {problem: problem});
-			});
 		});
 	});
 
