@@ -32,25 +32,10 @@ var app = app || {};
                 name: this.model.get('name'),
                 description: this.model.get('description'),
             })
-            checkproblem(this.model);
+            $('#problem-name').html(this.model.attributes.name);
+            $('#problem-description').html(this.model.attributes.description);
         },
 
-        checkproblem:function(model){
-            app.Lock.attach({
-                loading: loading,
-                tend: 5000,
-                fail: function(data) {
-                    app.showMessageBox('error', data && data.err);
-                },
-                error: function(data) {
-                    app.showMessageBox('error', data.err);
-                },
-                success: function(data) {
-                    window.location.href = '#problem/';
-                    this.onSet(data);
-                },
-            });
-        },
         // Remove the item, destroy the model.
         delete:function(){
             var modal = $('#delete'),
@@ -85,14 +70,6 @@ var app = app || {};
         toggleDone: function() {
             this.model.toggle();
         },
-
-        Onset:function(data){
-            app.Lock.remove();
-            data.notRemove = true;
-            var proobj = this.model.json;
-            $('#problem-name').html(_.escape(proobj.shownName));
-            $('#problem-description').html("hahahahah");
-        }
 
     });
 })();
