@@ -17,9 +17,8 @@ var app = app || {};
 
         addOne: function(model) {
             var v = model.view;
-            var that = this;
 
-            model.set({"eid": model.get("eid") || that.collection.length});
+            model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
