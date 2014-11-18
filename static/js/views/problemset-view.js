@@ -14,7 +14,6 @@ var app = app || {};
             this.collection.fetch({
                 name: '',
                 all: true,
-                virtual: true,
                 success: function() {
                     alert('fetch success!');
                 }
