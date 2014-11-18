@@ -13,11 +13,6 @@ var app = app || {};
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             //try here
-            app.socket.emit('read-problem', {
-                all: true,
-                name: '',
-                virtual: true,
-            });
         },
 
         addOne: function(model) {
