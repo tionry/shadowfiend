@@ -334,11 +334,6 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go">A+B Problem</a></td>
-                          <td>2014.11.07 18:55</td>
-                      </tr>
 
                       <script type="text/template" id="problem-template">
                           <td class = "col1"><%= model.eid %></td>
@@ -363,8 +358,25 @@
       </div>
 
         <div id = "problem-item" class="hide" style="margin-bottom: 104px;margin-top:55px">
-
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li id="problem"><a href="#"  localization>Problem Set Vol1</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><button id="modify-pro-btn" type="button" class="btn btn-primary" data-toggle="modal" localization>Modify Problem</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-9">
+                <div id="problemmain">
+                    <div id="problemmain-inner">
+                        <textarea id="problem-textarea" ></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
+
       <div id="interviewers-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
             <div class="row">
                 <div class="col-xs-12">

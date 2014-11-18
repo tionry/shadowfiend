@@ -7,16 +7,6 @@ var app = app || {};
     var listeners = {
 
         // Add problem
-        /*"add-problem": function(data) {
-            app.collection.problems.fetch({
-                all: true,
-                name: '',
-                success: function() {
-                    app.views['problemset'].renewList();
-                },
-                virtual: true
-            });
-        },*/
 
         // Refresh problem collection
         "read-problem": function(data) {
@@ -24,11 +14,17 @@ var app = app || {};
                 app.Lock.remove();
                 return;
             }
+            app.Lock.removeLoading();
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
 
             app.Lock.detach(data);
             app.collections.problems.fetch({
                 all: true,
-                name: ''
+                name: '',
+                virtual: true
             });
             app.Lock.detach(data);
             delete data.problem;

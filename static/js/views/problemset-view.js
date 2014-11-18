@@ -92,7 +92,7 @@ var app = app || {};
                     },
                     success: function () {
                         modal.modal('hide');
-                    },
+                    }
                 })) {
                 app.socket.emit('add-problem', {
                     name: name,

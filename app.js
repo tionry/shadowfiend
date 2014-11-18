@@ -906,7 +906,7 @@ io.sockets.on('connection', function(socket){
 		}
 		problemDAO.createProblem(data.name, data.description, function(err) {
 			if (err) {
-				return socket.emit('add-problem', {err: err});
+				return socket.emit('read-problem', {err: err});
 			}
 			problemDAO.getAllProblems(function(err, problem) {
 				if (err) {
