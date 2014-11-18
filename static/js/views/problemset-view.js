@@ -73,7 +73,7 @@ var app = app || {};
         app.socket.emit('read-problem', {
             all: true,
             name: '',
-            virtual: true
+            virtual: true,
         });
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
