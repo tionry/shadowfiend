@@ -23,7 +23,8 @@ var app = app || {};
             app.Lock.detach(data);
             app.collections.problems.fetch({
                 all: true,
-                name: ''
+                name: '',
+                virtual: true
             });
             app.Lock.detach(data);
             delete data.problem;
