@@ -91,8 +91,8 @@ var app = app || {};
                        // app.showMessageBar(id, data.err, 'error');
                     },
                     success: function () {
-                        modal.modal('hide');
-                    },
+                        //modal.modal('hide');
+                    }
                 })) {
                 app.socket.emit('add-problem', {
                     name: name,
