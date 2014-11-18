@@ -21,9 +21,12 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 				lock.release(name);
 				return callback("name exists");
 			}
+			var length = db.problem.find().length;
 			db.problem.insert({
-				name:name,
-				description:description
+				name: name,
+				description: description,
+				ord: length + 1,
+				createTime: new Date().getTime()
 			},
 			function (err, newProblem) {
 				if(err) {
@@ -42,7 +45,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 }
 
 ProblemDAO.prototype.getProblemByName = function (name, callback) {
-	db.problem.findOne({name:name}, {name:1, description:1}, function (err, problem) {
+	db.problem.findOne({name:name}, {name:1, description:1, ord:1, createTime:1}, function (err, problem) {
 		if (err) {
 			return callback("inner error");
 		}
@@ -54,7 +57,7 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 }
 
 ProblemDAO.prototype.getAllProblems = function (callback) {
-	db.problem.find({}, {name:1, description:1}, function (err, problems) {
+	db.problem.find({}, {name:1, description:1, ord:1, createTime:1}, function (err, problems) {
 		if (err) {
 			return callback("inner error");
 		}
