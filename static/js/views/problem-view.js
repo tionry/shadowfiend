@@ -28,10 +28,11 @@ var app = app || {};
 
         //Check one problem
         go:function(e){
-            var model = this.model.collection.fetch({
+            this.model.collection.fetch({
                 name: this.model.get('name'),
                 discription: this.model.get('discription'),
             })
+            checkproblem(this.model);
         },
 
         // Remove the item, destroy the model.
@@ -68,6 +69,13 @@ var app = app || {};
         toggleDone: function() {
             this.model.toggle();
         },
+
+        Onset:function(data){
+            app.Lock.remove();
+            data.notRemove = true;
+            $('#problem-name').html(_.escape(docobj.shownName));
+            $('#problem-discription').html("hahahahah");
+        }
 
     });
 })();
