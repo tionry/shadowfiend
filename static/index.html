@@ -356,7 +356,7 @@
                         <li><a href="#"  localization>Interviews</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><button type="button" class="btn btn-primary" data-toggle="modal" localization>New Interview</button></li>
+                        <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-interview" localization>New Interview</button></li>
                     </ul>
                 </div>
             </div>
@@ -379,6 +379,12 @@
                             <td>waiting</td>
                             <td>2014.11.20 19:00</td>
                         </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Interview in Google</td>
+                            <td>waiting</td>
+                            <td>2014.11.21 19:00</td>
+                        </tr>
                         <script type="text/template">
                             <td><%= eid %></td>
                             <td class="name"><%= name %></td>
@@ -395,9 +401,6 @@
                 <div class="col-xs-12">
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="#"  localization>Interviews</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><button type="button" class="btn btn-primary" data-toggle="modal" localization>New Interview</button></li>
                     </ul>
                 </div>
             </div>
@@ -427,37 +430,67 @@
                 </div>
             </div>
         </div>
-    <!-- popover -->
-    <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 id="newproblem-label" localization>New Problem</h3>
-            </div>
-            <div class="modal-body form-horizontal">
-                <div class="form-group">
-                    <label class="control-label col-sm-3" localization>name</label>
-                    <div class="col-sm-7">
-                        <input id="newproblem-name" class="modal-input form-control" type="text" />
+        <!-- popover -->
+        <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 id="newproblem-label" localization>New Problem</h3>
                     </div>
-                    </hr>
-                    <label class="control-label col-sm-3" localization>description</label>
-                    <div class="col-sm-7">
-                        <input id="newproblem-description" class="modal-input form-control" type="text" />
+                    <div class="modal-body form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" localization>name</label>
+                            <div class="col-sm-7">
+                                <input id="newproblem-name" class="modal-input form-control" type="text" />
+                            </div>
+                            </hr>
+                            <label class="control-label col-sm-3" localization>description</label>
+                            <div class="col-sm-7">
+                                <input id="newproblem-description" class="modal-input form-control" type="text" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="modal-buttons" id="newproblem-buttons">
-                    <button id="btn_newproblemconfirm" class="btn btn-primary modal-confirm" localization>ok</button>
-                    <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+                    <div class="modal-footer">
+                        <div class="modal-buttons" id="newproblem-buttons">
+                            <button id="btn_newproblemconfirm" class="btn btn-primary modal-confirm" localization>ok</button>
+                            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
-    </div>
 
+        <!-- popover -->
+        <div id="new-interview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 id="newinterview-label" localization>New Interview</h3>
+                    </div>
+                    <div class="modal-body form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" localization>name</label>
+                            <div class="col-sm-7">
+                                <input id="newinterview-name" class="modal-input form-control" type="text" />
+                            </div>
+                            </hr>
+                            <label class="control-label col-sm-3" localization>description</label>
+                            <div class="col-sm-7">
+                                <input id="newinterview-description" class="modal-input form-control" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="modal-buttons" id="newinterview-buttons">
+                            <button id="btn_nic" class="btn btn-primary modal-confirm" localization>ok</button>
+                            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- popover -->
     <div id="newfile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog">
