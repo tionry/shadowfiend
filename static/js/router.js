@@ -88,7 +88,7 @@ var app = app || {};
       }),
 
       problem:new Page({
-        el:'#problem-control',
+        el:'#problem-item',
         depend:['_head2','_footer'],
         logined: true,
         show: Page.prototype.show,
