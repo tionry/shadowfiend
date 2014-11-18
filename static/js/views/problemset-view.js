@@ -11,14 +11,6 @@ var app = app || {};
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             //try here
-            this.collection.fetch({
-                name: '',
-                all: true,
-                success: function() {
-                    alert('fetch success!');
-                },
-                virtual: true
-            });
         },
 
         addOne: function(model) {

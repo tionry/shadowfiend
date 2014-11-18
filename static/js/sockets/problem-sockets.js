@@ -16,6 +16,24 @@ var app = app || {};
                 },
                 virtual: true
             });
+        },
+
+        "read-problem": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
+            }
+
+            app.Lock.detach(data);
+            app.collections.problems.fetch({
+                success: function() {
+                    alert('success');
+                },
+                all: true,
+                name: ''
+            });
+            app.Lock.detach(data);
+            delete data.problem;
         }
 
     };
@@ -24,15 +42,20 @@ var app = app || {};
 
     // Start listening
     (function() {
+        var _init = false;
         app.init_suf.problemSocket = function() {
-            if (app.socket) {
+            if (_init) {
                 return;
+            } else {
+                _init = true;
             }
-            var socket = app.socket = io.connect(app.Package.SOCKET_IO);
+            app.init_suf.socket();
+            var socket = app.socket;
+
             for (var i in listeners) {
                 socket.on(i, listeners[i]);
             }
-        }
+        };
     })();
 
 })();

@@ -29,15 +29,25 @@ var app = app || {};
     };
 
     var syncProblems = (function() {
-        var method = 'reset', success = null;
+        var method = 'reset', success = null, dealProblem = function(data) {
+            if (!data || !data.problem) {
+                return;
+            }
+            if (typeof success == 'function') {
+                success(data.problem);
+            }
+        };
 
         return function(m, c, options) {
             if (m !== 'read') {
                 return;
             }
+            var newSuccess = options.success;
+            options.success = dealProblem;
             if (!(app.Lock.attach(options))) {
                 return false;
             }
+            success = newSuccess;
             method = options.reset ? 'reset' : 'set';
             if (options.virtual === true) {
                 return;
