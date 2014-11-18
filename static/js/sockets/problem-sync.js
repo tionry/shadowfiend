@@ -75,7 +75,7 @@ var app = app || {};
             _init = true;
 
             var detach = app.Lock.detach;
-            app.socket.on('read-problem', detach);
+            //app.socket.on('read-problem', detach);
         };
     })();
 })();
