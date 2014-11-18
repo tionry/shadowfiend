@@ -43,7 +43,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Interview <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">New Interview</a></li>
-                        <li><a href="#interviews">Interview List</a></li>
+                        <li><a href="#interviewers">I'm Interviewer</a></li>
+                        <li><a href="#interviewees">I'm Interviewee</a></li>
                     </ul>
                 </li>
                 <li><a href="#problemset">Problem Set</a></li>
@@ -348,20 +349,61 @@
           </div>
       </div>
 
-      <div id="interviews-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+      <div id="interviewers-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
             <div class="row">
                 <div class="col-xs-12">
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="#"  localization>Problem Set Vol1</a></li>
+                        <li><a href="#"  localization>Interviews</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><button type="button" class="btn btn-primary" data-toggle="modal" localization>New Problem</button></li>
+                        <li><button type="button" class="btn btn-primary" data-toggle="modal" localization>New Interview</button></li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="panel panel-default">
-                    <div class="panel-heading">As Interviewer</div>
+                    <div class="panel-heading">Interview</div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>State</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Graduate Admission Exam</td>
+                            <td>waiting</td>
+                            <td>2014.11.20 19:00</td>
+                        </tr>
+                        <script type="text/template">
+                            <td><%= eid %></td>
+                            <td class="name"><%= name %></td>
+                        </script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+      </div>
+
+      <div id="interviewees-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="#"  localization>Interviews</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><button type="button" class="btn btn-primary" data-toggle="modal" localization>New Interview</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Interview</div>
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -373,8 +415,8 @@
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Graduate Admission Exam</td>
-                            <td>2014.11.20 19:00</td>
+                            <td>Interview in Google</td>
+                            <td>2014.11.21 08:00</td>
                         </tr>
                         <script type="text/template">
                             <td><%= eid %></td>
@@ -384,33 +426,7 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">As Interviewee</div>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Name</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td>Interview in Google</td>
-                          <td>2014.11.21 08:00</td>
-                      </tr>
-                      <script type="text/template">
-                          <td><%= eid %></td>
-                          <td class="name"><%= name %></td>
-                      </script>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-
+        </div>
     <!-- popover -->
     <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog">
