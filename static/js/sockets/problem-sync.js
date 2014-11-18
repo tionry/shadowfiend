@@ -35,9 +35,9 @@ var app = app || {};
             if (m !== 'read') {
                 return;
             }
-            if (!(app.Lock.attach(options))) {
-                return false;
-            }
+            //if (!(app.Lock.attach(options))) {
+            //    return false;
+            //}
             success = options.success;
             method = options.reset ? 'reset' : 'set';
             if (options.virtual === true) {
