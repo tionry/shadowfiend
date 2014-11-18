@@ -88,7 +88,7 @@ var app = app || {};
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (data) {
-                       // app.showMessageBar(id, data.err, 'error');
+                       alert("add problem error!");
                     },
                     success: function () {
                         modal.modal('hide');
