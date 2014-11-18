@@ -17,9 +17,8 @@ var app = app || {};
 
         addOne: function(model) {
             var v = model.view;
-            var that = this;
 
-            model.set({"eid": model.get("eid") || that.collection.length});
+            model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
@@ -70,6 +69,11 @@ var app = app || {};
             }
         });
 
+        app.socket.emit('read-problem', {
+            all: true,
+            name: '',
+            virtual: true,
+        });
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
             var description = Backbone.$.trim(modal.find('#newproblem-description').val());
