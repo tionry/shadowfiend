@@ -92,7 +92,7 @@ var app = app || {};
         logined: true,
         show: Page.prototype.show,
         hide:Page.prototype.hide,
-      })
+      }),
 
       problemset: new Page({
         el: '#problemset-control',
