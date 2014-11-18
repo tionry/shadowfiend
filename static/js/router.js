@@ -20,7 +20,14 @@ var app = app || {};
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
       'problem':function(){this.analy('problem')},
-      'problemset':function() { this.analy('problemset');},
+      'problemset':function() {
+        app.socket.emit('read-problem', {
+          all: true,
+          name: '',
+          virtual: true
+        });
+        this.analy('problemset');
+      },
       'interviewers':function() { this.analy('interviewers');},
       'interviewees':function() { this.analy('interviewees');},
     },
