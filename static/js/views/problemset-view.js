@@ -70,11 +70,6 @@ var app = app || {};
             }
         });
 
-        app.socket.emit('read-problem', {
-            all: true,
-            name: '',
-            virtual: true
-        });
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
             var description = Backbone.$.trim(modal.find('#newproblem-description').val());
