@@ -29,10 +29,7 @@ var app = app || {};
 
         //Check one problem
         go:function(e){
-            this.model.collection.fetch({
-                title: this.model.get('name'),
-                discription: this.model.get('discription'),
-            })
+            app.room.tryEnter(this.model, this.$('.col1 > *'));
         },
 
         // Remove the item, destroy the model.
