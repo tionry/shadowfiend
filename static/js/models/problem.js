@@ -23,7 +23,20 @@ var app = app || {};
 			this.save({done: !this.get("done")});
 		},
 
+		initialize: function() {
+			this.on('change', app.Problem.prototype.setShow);
+		},
 
+		setShow: function() {
+			var a = this.attributes;
+			var o = {
+				ord: a.ord,
+				name: a.name,
+				time: new Date(a.createTime).toLocaleJSON(),
+			}
+			this.json = o;
+			return this;
+		},
     
 	});
   
