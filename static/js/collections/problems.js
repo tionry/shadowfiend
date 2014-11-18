@@ -56,11 +56,6 @@ var app = app || {};
 
 	app.init.problems = function() {
 		app.collections['problems'] || (app.collections['problems'] = new app.Problems());
-		app.socket.emit('read-problem', {
-			all: true,
-			name: '',
-			virtual: true
-		});
 	};
 
 })();
