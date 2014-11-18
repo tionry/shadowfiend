@@ -180,12 +180,6 @@ io.sockets.on('connection', function(socket){
 			}
 			users[user.name] = socket;
 			socket.emit('login', socket.session);
-			problemDAO.getAllProblems(function(err, problem) {
-				if (err) {
-					return socket.emit('read-problem', {err: err});
-				}
-				socket.emit('read-problem', {problem: problem});
-			});
 		});
 	});
 

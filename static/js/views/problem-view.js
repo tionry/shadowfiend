@@ -30,7 +30,7 @@ var app = app || {};
         //Check one problem
         go:function(e){
             this.model.collection.fetch({
-                title: this.model.get('name'),
+                name: this.model.get('name'),
                 discription: this.model.get('discription'),
             })
         },
