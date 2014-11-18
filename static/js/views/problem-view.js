@@ -28,10 +28,7 @@ var app = app || {};
 
         //Check one problem
         go:function(e){
-            this.model.collection.fetch({
-                name: this.model.get('name'),
-                description: this.model.get('description'),
-            })
+
             $('#problem-name').html(this.model.attributes.name);
             $('#problem-description').html(this.model.attributes.description);
         },
