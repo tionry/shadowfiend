@@ -91,13 +91,14 @@ var app = app || {};
                        // app.showMessageBar(id, data.err, 'error');
                     },
                     success: function () {
-                        //app.showMessageBar(id, 'registerok');
+                        modal.modal('hide');
                     },
                 })) {
                 app.socket.emit('add-problem', {
                     name: name,
                     description: description,
                 });
+
             }
         });
     }
