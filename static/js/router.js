@@ -19,7 +19,7 @@ var app = app || {};
       'index/*filepath': function(arg1) { this.analy('index', arg1); },
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
-      'problem/*problemname':function(argl){this.analy('problem')},
+      'problem/':function(argl){this.analy('problem',argl)},
       'problemset':function() {
         app.socket.emit('read-problem', {
           all: true,
