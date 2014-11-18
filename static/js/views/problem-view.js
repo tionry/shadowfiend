@@ -30,11 +30,27 @@ var app = app || {};
         go:function(e){
             this.model.collection.fetch({
                 name: this.model.get('name'),
-                discription: this.model.get('discription'),
+                description: this.model.get('description'),
             })
             checkproblem(this.model);
         },
 
+        checkproblem:function(model){
+            app.Lock.attach({
+                loading: loading,
+                tend: 5000,
+                fail: function(data) {
+                    app.showMessageBox('error', data && data.err);
+                },
+                error: function(data) {
+                    app.showMessageBox('error', data.err);
+                },
+                success: function(data) {
+                    window.location.href = '#problem/';
+                    this.onSet(data);
+                },
+            });
+        },
         // Remove the item, destroy the model.
         delete:function(){
             var modal = $('#delete'),
@@ -73,8 +89,9 @@ var app = app || {};
         Onset:function(data){
             app.Lock.remove();
             data.notRemove = true;
-            $('#problem-name').html(_.escape(docobj.shownName));
-            $('#problem-discription').html("hahahahah");
+            var proobj = this.model.json;
+            $('#problem-name').html(_.escape(proobj.shownName));
+            $('#problem-description').html("hahahahah");
         }
 
     });
