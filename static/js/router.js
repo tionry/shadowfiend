@@ -20,7 +20,8 @@ var app = app || {};
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
       'problemset':function() { this.analy('problemset');},
-      'interviews':function() { this.analy('interviews');},
+      'interviewers':function() { this.analy('interviewers');},
+      'interviewees':function() { this.analy('interviewees');},
     },
     
     pages: {
@@ -93,8 +94,16 @@ var app = app || {};
         hide: Page.prototype.hide,
       }),
 
-      interviews: new Page({
-        el: '#interviews-control',
+      interviewers: new Page({
+        el: '#interviewers-control',
+        depend: ['_head2', '_footer'],
+        logined: true,
+        show: Page.prototype.show,
+        hide: Page.prototype.hide,
+      }),
+
+      interviewees: new Page({
+        el: '#interviewees-control',
         depend: ['_head2', '_footer'],
         logined: true,
         show: Page.prototype.show,
