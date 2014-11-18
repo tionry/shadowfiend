@@ -21,7 +21,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 				lock.release(name);
 				return callback("name exists");
 			}
-			var length = db.problem.find().length;
+			var length = db.problem.find().length();
 			db.problem.insert({
 				name: name,
 				description: description,
