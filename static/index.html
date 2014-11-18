@@ -494,6 +494,33 @@
                                 <input id="newinterview-description" class="modal-input form-control" type="text" />
                             </div>
                         </div>
+
+                        <p>
+                            <span localization>file</span>
+                            <span id="interviewee-name"></span>
+                            <span localization>sshareduser</span></p>
+                        <div id="interviewee-user-box">
+                            <ul class="nav nav-pills nav-stacked" id="interviewee-user-list">
+                            </ul>
+                        </div>
+                        <div class="alert hide" id="interviewee-message">
+                            <button type="button" class="close" onclick="$('#share-message').slideUp()">&times;</button>
+                            <span>Nothing here</span>
+                        </div>
+                        <div class="row" id="interviewee-buttons">
+                            <div class="form-inline col-xs-9">
+                                <label localization>newuser:</label>
+                                <div class="input-group">
+                                    <input type="text" id="interviewee-inputName" class="form-control"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" id="interviewee-confirm" localization>add</button>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <button class="btn pull-right btn-primary" type="button" id="interviewee-remove" localization>delete</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <div class="modal-buttons" id="newinterview-buttons">
