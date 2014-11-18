@@ -38,6 +38,7 @@ var app = app || {};
             if (!(app.Lock.attach(options))) {
                 return false;
             }
+            success = options.success;
             method = options.reset ? 'reset' : 'set';
             if (options.virtual === true) {
                 return;
