@@ -23,13 +23,12 @@ var app = app || {};
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-            this.$el.toggleClass('done', this.model.get('done'));
             return this;
         },
 
         //Check one problem
         go:function(e){
-            this.model.collection.fetch({
+            var model = this.model.collection.fetch({
                 name: this.model.get('name'),
                 discription: this.model.get('discription'),
             })
