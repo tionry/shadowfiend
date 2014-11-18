@@ -25,7 +25,31 @@ var app = app || {};
 			return this.last().get('order') + 1;
 		},
 
-		comparator:'order'
+		comparator:'order',
+
+		fetch: function(opts) {
+			var _fetch = Backbone.Collection.prototype.fetch;
+			if (opts.all || opts.name) {
+				opts.reset = (opts.all || this.all) || (opts.name != this.name);
+				var oldName = this.name, oldAll = this.all, err = opts.error, fail = opts.fail, that = this;
+				this.path = opts.path;
+				opts.error = function() {
+					that.name = oldName;
+					that.all = oldAll;
+					if (typeof err == 'function') {
+						err.apply(that, arguments);
+					}
+				};
+				opts.fail = function() {
+					that.name = oldName;
+					that.all = oldAll;
+					if (typeof fail == 'function') {
+						fail.apply(that, arguments);
+					}
+				};
+			}
+			_fetch.call(this, opts);
+		}
 	});
 
 	app.init || (app.init = {});

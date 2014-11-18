@@ -38,12 +38,14 @@ var app = app || {};
             if (!(app.Lock.attach(options))) {
                 return false;
             }
-            success = options.success;
             method = options.reset ? 'reset' : 'set';
             if (options.virtual === true) {
                 return;
             }
-            app.socket.emit('read-problem', {name: c.name});
+            app.socket.emit('read-problem', {
+                name: c.name,
+                all: c.all
+            });
         };
     })();
 
