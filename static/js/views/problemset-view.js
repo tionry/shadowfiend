@@ -13,6 +13,11 @@ var app = app || {};
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             //try here
+            app.socket.emit('read-problem', {
+                all: true,
+                name: '',
+                virtual: true,
+            });
         },
 
         addOne: function(model) {
@@ -69,11 +74,7 @@ var app = app || {};
             }
         });
 
-        app.socket.emit('read-problem', {
-            all: true,
-            name: '',
-            virtual: true,
-        });
+
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
             var description = Backbone.$.trim(modal.find('#newproblem-description').val());
@@ -102,18 +103,6 @@ var app = app || {};
                     name: name,
                     description: description,
                 });
-                app.collections['problems'].fetch({
-                    name: '',
-                    all: true,
-                    virtual: true,
-                    success: function() {
-                        alert('fetch success!');
-                    },
-                    error: function() {
-                        alert('fetch error!');
-                    },
-                });
-
             }
         });
     }
