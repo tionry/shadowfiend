@@ -42,15 +42,20 @@ var app = app || {};
 
     // Start listening
     (function() {
+        var _init = false;
         app.init_suf.problemSocket = function() {
-            if (app.socket) {
+            if (_init) {
                 return;
+            } else {
+                _init = true;
             }
-            var socket = app.socket = io.connect(app.Package.SOCKET_IO);
+            app.init_suf.socket();
+            var socket = app.socket;
+
             for (var i in listeners) {
                 socket.on(i, listeners[i]);
             }
-        }
+        };
     })();
 
 })();
