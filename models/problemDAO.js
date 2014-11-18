@@ -21,24 +21,29 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 				lock.release(name);
 				return callback("name exists");
 			}
-			var length = db.problem.find().length();
-			db.problem.insert({
-				name: name,
-				description: description,
-				ord: length + 1,
-				createTime: new Date().getTime()
-			},
-			function (err, newProblem) {
-				if(err) {
+			db.problem.find({},{_id:1},function(err, problems) {
+				if (err) {
 					lock.release(name);
 					return callback("inner error");
 				}
-				if(!newProblem) {
+				db.problem.insert({
+					name: name,
+					description: description,
+					ord: problems.length + 1,
+					createTime: new Date().getTime()
+				},
+				function (err, newProblem) {
+					if(err) {
+						lock.release(name);
+						return callback("inner error");
+					}
+					if(!newProblem) {
+						lock.release(name);
+						return callback("inner error");
+					}
 					lock.release(name);
-					return callback("inner error");
-				}
-				lock.release(name);
-				return callback(null);
+					return callback(null);
+				});
 			});
 		});
 	});
