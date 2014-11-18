@@ -342,8 +342,9 @@
                       </tr>
 
                       <script type="text/template" id="problem-template">
-                          <td><%= model.eid %></td>
-                          <td class="name"><%= model.name %></td>
+                          <td class = "col1"><%= model.eid %></td>
+                          <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
+                          <td class="col4"><%=model.time%></td>
                           <td class="col5">
                               <div class="dropdown">
                                   <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
