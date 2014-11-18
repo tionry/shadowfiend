@@ -98,6 +98,17 @@ var app = app || {};
                     name: name,
                     description: description,
                 });
+                app.collections['problems'].fetch({
+                    name: '',
+                    all: true,
+                    virtual: true,
+                    success: function() {
+                        alert('fetch success!');
+                    },
+                    error: function() {
+                        alert('fetch error!');
+                    },
+                });
 
             }
         });
