@@ -20,14 +20,7 @@ var app = app || {};
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
       'problem':function(){this.analy('problem')},
-      'problemset':function() {
-        app.socket.emit('read-problem', {
-          all: true,
-          name: '',
-          virtual: true
-        });
-        this.analy('problemset');
-      },
+      'problemset':function() { this.analy('problemset');},
       'interviewers':function() { this.analy('interviewers');},
       'interviewees':function() { this.analy('interviewees');},
     },
@@ -95,7 +88,7 @@ var app = app || {};
       }),
 
       problem:new Page({
-        el:'#problem-control',
+        el:'#problem-item',
         depend:['_head2','_footer'],
         logined: true,
         show: Page.prototype.show,
