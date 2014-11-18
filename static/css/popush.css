@@ -195,6 +195,11 @@ body{
 	min-width:900px;
 	z-index:4
 }
+#problem-item{
+	background:rgba(0,0,0,0);
+	min-width:900px;
+	z-index:4
+}
 .btn-white{
 	background:white;
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.1);
@@ -383,6 +388,13 @@ body{
 	position:relative
 }
 #editormain-inner{
+	position:relative
+}
+#problemmain{
+	min-width:600px;
+	position:relative
+}
+#problemmain-inner{
 	position:relative
 }
 #chat-show{
