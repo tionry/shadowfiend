@@ -6,8 +6,6 @@ var app = app || {};
 (function() {
     var listeners = {
 
-        // Add problem
-
         // Refresh problem collection
         "read-problem": function(data) {
             if (data == null) {

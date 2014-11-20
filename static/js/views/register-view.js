@@ -38,18 +38,16 @@ var app = app || {};
 					app.showMessageBar(id, data.err, 'error');
 				},
                 success: function () {
-					//app.showMessageBar(id, 'registerok');
-				},
+                    app.socket.emit('login', {
+                        name: name,
+                        password: pass
+                    });
+				}
             })) {
                     app.socket.emit('register', {
                         name: name,
-                        password: pass,
+                        password: pass
                     });
-                    setTimeout(function(){app.socket.emit('login', {
-                        name: name,
-                        password: pass,
-                    });},500)
-                    
             }
         },
         /*快捷键回车注册*/
