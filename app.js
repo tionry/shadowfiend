@@ -946,4 +946,31 @@ io.sockets.on('connection', function(socket){
 		}
 	});
 
+	socket.on('add-interview', function(data) {
+		if (!check(data, 'interviewer_list', 'interviewee_list', 'problem_list')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+	});
+
+	socket.on('check-user', function(data) {
+		if (!check(data, 'name', 'interviewer')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		userDAO.getUserByName(data.name, function(err, user) {
+			if (err) {
+				return socket.emit('add-member', {err: err});
+			}
+			socket.emit('add-member', {
+				user: user,
+				interviewer: data.interviewer
+			});
+		});
+ 	});
+
 });

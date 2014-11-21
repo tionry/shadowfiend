@@ -32,7 +32,7 @@ var app = app || {};
 					name: d.name,
 					avatar: d.avatar,
 					online: d.online || false,
-					owner: d.owner || false,
+					owner: d.owner || false
 				});
 			}
 		},
@@ -43,7 +43,7 @@ var app = app || {};
 				name: doc.owner.name,
 				avatar: doc.owner.name == app.currentUser.name ? app.currentUser.avatar: doc.owner.avatar,
 				online: doc.owner.online || false,
-				owner: true,
+				owner: true
 			});
 			for (var i = 0; i < doc.members.length; i++) {
 				var user = doc.members[i];
@@ -51,10 +51,10 @@ var app = app || {};
 					name: user.name,
 					avatar: user.avatar,
 					online: user.online || false,
-					owner: false,
+					owner: false
 				});
 			}
-		},
+		}
 	});
 
 	app.init || (app.init = {});
@@ -67,6 +67,12 @@ var app = app || {};
 	};
 	app.init.shares = function() {
 		app.collections['shares'] || (app.collections['shares'] = new app.Members());
+	};
+	app.init.interviewers = function() {
+		app.collections['interviewers'] || (app.collections['interviewers'] = new app.Members());
+	};
+	app.init.interviewees = function() {
+		app.collections['interviewees'] || (app.collections['interviewees'] = new app.Members());
 	};
 	
 })();
