@@ -1,6 +1,3 @@
-/**
- * Created by qiaocy on 14-11-21.
- */
 module.exports = interviewDAO;
 var db = require('./db.js');
 var Lock = require('./lock.js');
@@ -67,30 +64,57 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     });
 }
 
-InterviewDAO.prototype.getAllInterviews = function (callback) {
-    db.interview.find({}, {name:1, description:1, ord:1, createTime:1}, function (err, interviews) {
+InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
+    db.interview.find({interviewer:userId}, {name:1}, function (err, interviews) {
         if (err) {
             return callback("inner error");
         }
-        if (!problems) {
+        if (!interviews) {
             return callback("unauthorized");
         }
         return callback(null, interviews);
     });
+    if(interviews == null){
+        return callback(null, interviews);
+    }
+    var allviews = [];
+    var length = 0;
+    interviews.forEach(function(elements,length){
+        //search by interviewer
+        if(mode == 1){
+            elements.interviewer.forEach(function(viewer){
+                if(viewer == userName){
+                    allviews[length] = elements;
+                    length++;
+                }
+            });
+        }
+        //search by interviewee
+        else{
+            elements.interviewee.forEach(function(viewer){
+                if(viewer == userName){
+                    allviews[length] = elements;
+                    length++;
+                }
+            });
+        }
+    });
+    return callback(null, interviews);
 }
 
-InterviewDAO.prototype.deleteInterview = function (name, callback) {
+
+InterviewDAO.prototype.deleteInterview = function (name,callback) {
     lock.acquire(name, function() {
-        db.problem.findOne({name:name}, {_id:1}, function (err, problem) {
+        db.interview.findOne({name:name}, {_id:1}, function (err, interview) {
             if (err) {
                 lock.release(name);
                 return callback("inner error");
             }
-            if (!problem) {
+            if (!interview) {
                 lock.release(name);
                 return callback("unauthorized");
             }
-            db.problem.remove({_id: problem._id}, function (err, reply) {
+            db.interviewm.remove({_id: interview._id}, function (err, reply) {
                 if (err) {
                     lock.release(name);
                     return callback("inner error");
