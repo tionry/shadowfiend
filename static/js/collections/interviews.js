@@ -1,5 +1,5 @@
-/**
- * Created by qiaocy on 14-11-21.
+/*
+*Interview Collection
  */
 (function() {
     'use strict';

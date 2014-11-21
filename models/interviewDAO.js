@@ -1,6 +1,3 @@
-/**
- * Created by qiaocy on 14-11-21.
- */
 module.exports = interviewDAO;
 var db = require('./db.js');
 var Lock = require('./lock.js');
@@ -67,7 +64,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     });
 }
 
-InterviewDAO.prototype.getInterviews = function (userId,mode,callback) {
+InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
     db.interview.find({interviewer:userId}, {name:1}, function (err, interviews) {
         if (err) {
             return callback("inner error");
@@ -86,7 +83,7 @@ InterviewDAO.prototype.getInterviews = function (userId,mode,callback) {
         //search by interviewer
         if(mode == 1){
             elements.interviewer.forEach(function(viewer){
-                if(viewer == userId){
+                if(viewer == userName){
                     allviews[length] = elements;
                     length++;
                 }
@@ -95,7 +92,7 @@ InterviewDAO.prototype.getInterviews = function (userId,mode,callback) {
         //search by interviewee
         else{
             elements.interviewee.forEach(function(viewer){
-                if(viewer == userId){
+                if(viewer == userName){
                     allviews[length] = elements;
                     length++;
                 }

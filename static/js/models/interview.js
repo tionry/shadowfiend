@@ -1,10 +1,9 @@
-/**
- * Created by qiaocy on 14-11-21.
- */
-/* Problem Model */
-/* Problem Model has 'name', 'description' attributes.
- * name: 题目名
- * description: 题目描述
+/* Interview Model */
+/* Interview Model has 'name', 'interviewer','interviewee','problemlist' attributes.
+ * name: 面试名
+ * interviewer: 面试官
+ * interviewee：参与面试者
+ * problemlist：题目列表
  */
 var app = app || {};
 
