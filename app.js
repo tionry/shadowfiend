@@ -956,7 +956,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('check-user', function(data) {
-		if (!check(data, 'name', 'interviewer')) {
+		if (!check(data, 'name')) {
 			return;
 		}
 		if (!socket.session) {
@@ -966,10 +966,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('add-member', {err: err});
 			}
-			socket.emit('add-member', {
-				user: user,
-				interviewer: data.interviewer
-			});
+			socket.emit('add-member', {user: user});
 		});
  	});
 

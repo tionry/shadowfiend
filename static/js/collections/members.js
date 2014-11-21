@@ -68,11 +68,5 @@ var app = app || {};
 	app.init.shares = function() {
 		app.collections['shares'] || (app.collections['shares'] = new app.Members());
 	};
-	app.init.interviewers = function() {
-		app.collections['interviewers'] || (app.collections['interviewers'] = new app.Members());
-	};
-	app.init.interviewees = function() {
-		app.collections['interviewees'] || (app.collections['interviewees'] = new app.Members());
-	};
 	
 })();

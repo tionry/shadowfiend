@@ -35,17 +35,6 @@ var app = app || {};
                 return;
             }
             app.Lock.removeLoading();
-            if (data.err) {
-                app.Lock.detach(data);
-                return;
-            }
-
-            app.Lock.detach(data);
-            if (data.interviewer) {
-                app.collections.interviewers.add(data.user);
-            } else {
-                app.collections.interviewees.add(data.user);
-            }
             app.Lock.detach(data);
         }
 
