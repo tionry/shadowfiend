@@ -7,7 +7,7 @@ var app = app || {};
 (function() {
     var listeners = {
 
-        // Refresh problem collection
+        // Refresh interview collection
         "read-interview": function(data) {
             if (data == null) {
                 app.Lock.remove();
@@ -23,13 +23,14 @@ var app = app || {};
             app.collections.interviews.fetch({
                 all: true,
                 name: '',
-                virtual: true
+                virtual: true,
+                mode: data.mode
             });
             app.Lock.detach(data);
             delete data.problem;
         },
 
-        "add-member": function(data) {
+        "check-user": function(data) {
             if (data == null) {
                 app.Lock.remove();
                 return;
