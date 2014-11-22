@@ -12,6 +12,16 @@ var app = app || {};
         },
 
         addOne: function(model) {
+            var interviewerList = model.interviewer;
+            var user = app.currentUser;
+            var flag;
+            for (var i = 0; i < interviewerList.length; i++){
+                if (interviewerList[i] == user) {
+                    flag = 'true';
+                    break;
+                }
+            }
+            if (flag != 'true') return;
             var v = model.view;
             if (v) {
                 v.render();
