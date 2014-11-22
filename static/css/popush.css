@@ -333,7 +333,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -343,31 +343,12 @@ body{
 	-moz-border-radius:4px;
 	border-radius:4px
 }
-#share-user-box img{
+#share-user-box img,#interviewee-box img,#interviewer-box img,#interview-problem-box img{
 	margin-right:10px;
 	max-height:32px;
 	max-width:32px
 }
-#share-user-box ul{
-	margin:0
-}
-
-#interviewee-user-box{
-	height:220px;
-	width:100%;
-	margin:10px 0;
-	overflow:auto;
-	border:1px solid #ccc;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	border-radius:4px
-}
-#interviewee-user-box img{
-	margin-right:10px;
-	max-height:32px;
-	max-width:32px
-}
-#interviewee-user-box ul{
+#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul{
 	margin:0
 }
 
