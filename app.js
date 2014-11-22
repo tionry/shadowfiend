@@ -4,6 +4,7 @@ var fs = require('fs');
 var UserDAO = require('./models/userDAO');
 var DocDAO = require('./models/docDAO');
 var ProblemDAO = require('./models/problemDAO');
+var InterviewDAO = require('./models/interviewDAO');
 var DocBuffer = require('./models/docBuffer');
 var Runner = require('./models/runner');
 var Debugger = require('./models/debugger');
@@ -99,6 +100,7 @@ io.sockets.on('connection', function(socket){
 	var userDAO = new UserDAO();
 	var docDAO = new DocDAO();
 	var problemDAO = new ProblemDAO();
+	var interviewDAO = new InterviewDAO();
 
 	var ip = socket.handshake.headers['x-real_ip'];
 	if(!ip){
@@ -117,7 +119,7 @@ io.sockets.on('connection', function(socket){
 			}
 		}
 		return true;
-	};
+	}
 
 	socket.on('disconnect', function(){
 		if(socket.session){
@@ -947,12 +949,26 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('add-interview', function(data) {
-		if (!check(data, 'interviewer_list', 'interviewee_list', 'problem_list')) {
+		if (!check(data, 'name', 'interviewer', 'interviewee', 'problem')) {
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		interviewDAO.createInterview(data.name, data.interviewer, data.interviewee, data.problem, function(err) {
+			if (err) {
+				return socket.emit('read-interview', {err: err});
+			}
+			interviewDAO.getInterviews(1, data.mode, function(err, interview) {
+				if (err) {
+					return socket.emit('read-interview', {err: err});
+				}
+				socket.emit('read-interview', {
+					interview: interview,
+					mode: 1
+				});
+			});
+		});
 	});
 
 	socket.on('check-user', function(data) {
@@ -964,10 +980,28 @@ io.sockets.on('connection', function(socket){
 		}
 		userDAO.getUserByName(data.name, function(err, user) {
 			if (err) {
-				return socket.emit('add-member', {err: err});
+				return socket.emit('check-user', {err: err});
 			}
-			socket.emit('add-member', {user: user});
+			socket.emit('check-user', {user: user});
 		});
  	});
+
+	socket.on('read-interview', function(data) {
+		if (!check(data, 'username', 'mode')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getInterviews(data.username, data.mode, function(err, interview) {
+			if (err) {
+				return socket.emit('read-interview', {err: err});
+			}
+			socket.emit('read-interview', {
+				interview: interview,
+				mode: data.mode
+			});
+		});
+	});
 
 });

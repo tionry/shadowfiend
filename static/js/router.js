@@ -28,8 +28,24 @@ var app = app || {};
         });
         this.analy('problemset');
       },
-      'interviewers':function() { this.analy('interviewers');},
-      'interviewees':function() { this.analy('interviewees');},
+      'interviewers':function() {
+        app.socket.emit('read-interview', {
+          all: true,
+          mode:'interviewer',
+          name: '',
+          virtual: true
+        });
+        this.analy('problemset');this.analy('interviewers');
+      },
+      'interviewees':function() {
+        app.socket.emit('read-interview', {
+          all: true,
+          mode:'interviewee',
+          name: '',
+          virtual: true
+        });
+        this.analy('interviewees');
+      },
     },
     
     pages: {

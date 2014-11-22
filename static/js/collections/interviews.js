@@ -10,21 +10,21 @@
 
         fetch: function(opts) {
             var _fetch = Backbone.Collection.prototype.fetch;
-            if (opts.all || opts.name) {
-                opts.reset = (opts.all != this.all) && (opts.name != this.name);
-                var oldName = this.name, oldAll = this.all, err = opts.error, fail = opts.fail, that = this;
-                this.all = opts.all;
-                this.name = opts.name;
+            if (opts.username) {
+                opts.reset = opts.username != this.username;
+                var oldUsername = this.username, oldMode = this.mode, err = opts.error, fail = opts.fail, that = this;
+                this.username = opts.username;
+                this.mode = opts.mode;
                 opts.error = function() {
-                    that.name = oldName;
-                    that.all = oldAll;
+                    that.username = oldUsername;
+                    that.mode = oldMode;
                     if (typeof err == 'function') {
                         err.apply(that, arguments);
                     }
                 };
                 opts.fail = function() {
-                    that.name = oldName;
-                    that.all = oldAll;
+                    that.username = oldUsername;
+                    that.mode = oldMode;
                     if (typeof fail == 'function') {
                         fail.apply(that, arguments);
                     }
@@ -37,7 +37,7 @@
     app.init || (app.init = {});
 
     app.init.interview = function() {
-        app.collections['interview'] || (app.collections['interview'] = new app.Interview());
+        app.collections['interviews'] || (app.collections['interviews'] = new app.Interview());
     };
 
 })();
