@@ -5,9 +5,9 @@ var app = app || {};
     app.interviewView = Backbone.View.extend({
         tagName: 'li',
         //className: 'problem-item',
-        template : _.template($('#interview-template').html(), null, {
+        /*template : _.template($('#interviewer-template').html(), null, {
             variable: 'model'
-        }),
+        }),*/
 
         //events:{
         //    'click a.problem-go':'go',

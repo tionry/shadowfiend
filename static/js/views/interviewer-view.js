@@ -6,7 +6,7 @@ var app = app || {};
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
 
-        template : _.template($('#interviewer-template').html(), null, {
+        template : _.template($('#interview-template').html(), null, {
             variable: 'model'
         }),
 
@@ -141,7 +141,7 @@ var app = app || {};
                         modal.modal('hide');
                     }
                 })) {
-                app.socket.emit('add-problem', {
+                app.socket.emit('add-interview', {
                     name: name,
                     interviewer: newinterviewers,
                     interviewee: newinterviewees,
