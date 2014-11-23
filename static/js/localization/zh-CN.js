@@ -122,4 +122,8 @@ app.languages['zh-CN'] = { Name : '中文版',
   'DIR!!'					: '目标是文件夹',
   'illegal file name'		: '无效的名称',
   'can not upload'			: '无法上传该类型文件',
+  'problem exists'          : '该问题已经存在',
+  'problem not found'       : '找不到问题',
+  'interview exists'        : '面试已存在',
+  'interview not found'     : '找不到面试'
 };

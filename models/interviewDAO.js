@@ -20,7 +20,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
             }
             if (interview) {
                 lock.release(name);
-                return callback("name exists");
+                return callback("interview exists");
             }
             db.interview.find({},{_id:1},function(err, interviews) {
                 if (err) {
@@ -58,7 +58,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
             return callback("inner error");
         }
         if (!interview) {
-            return callback("unauthorized");
+            return callback("interview not found");
         }
         return callback(null, interview);
     });
@@ -70,7 +70,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
             return callback("inner error");
         }
         if (!interviews) {
-            return callback("unauthorized");
+            return callback("interview not found");
         }
         return callback(null, interviews);
     });
@@ -112,7 +112,7 @@ InterviewDAO.prototype.deleteInterview = function (name,callback) {
             }
             if (!interview) {
                 lock.release(name);
-                return callback("unauthorized");
+                return callback("interview not found");
             }
             db.interviewm.remove({_id: interview._id}, function (err, reply) {
                 if (err) {

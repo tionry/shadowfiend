@@ -19,7 +19,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 			}
 			if (problem) {
 				lock.release(name);
-				return callback("name exists");
+				return callback("problem exists");
 			}
 			db.problem.find({},{_id:1},function(err, problems) {
 				if (err) {
@@ -55,7 +55,7 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 			return callback("inner error");
 		}
 		if (!problem) {
-			return callback("unauthorized");
+			return callback("problem not found");
 		}
 		return callback(null, problem);
 	});
@@ -67,7 +67,7 @@ ProblemDAO.prototype.getAllProblems = function (callback) {
 			return callback("inner error");
 		}
 		if (!problems) {
-			return callback("unauthorized");
+			return callback("problem not found");
 		}
 		return callback(null, problems);
 	});
@@ -82,7 +82,7 @@ ProblemDAO.prototype.deleteProblem = function (name, callback) {
 			}
 			if (!problem) {
 				lock.release(name);
-				return callback("unauthorized");
+				return callback("problem not found");
 			}
 			db.problem.remove({_id: problem._id}, function (err, reply) {
 				if (err) {
