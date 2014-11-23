@@ -5,9 +5,9 @@ var app = app || {};
     app.interviewView = Backbone.View.extend({
         tagName: 'li',
         //className: 'problem-item',
-        /*template : _.template($('#interviewer-template').html(), null, {
+        template : _.template($('#interviewer-template').html(), null, {
             variable: 'model'
-        }),*/
+        }),
 
         //events:{
         //    'click a.problem-go':'go',
@@ -29,8 +29,8 @@ var app = app || {};
         //Check one problem
         go:function(e){
 
-            $('#problem-name').html(this.model.attributes.name);
-            $('#problem-description').html(this.model.attributes.description);
+            //$('#problem-name').html(this.model.attributes.name);
+            //$('#problem-description').html(this.model.attributes.description);
         },
 
         // Remove the item, destroy the model.
