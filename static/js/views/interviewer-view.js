@@ -43,6 +43,9 @@ var app = app || {};
     });
 
     var newinterview = function(){
+        this.newinterviewers = new Array();
+        this.newinterviewees = new Array();
+        this.newinterviewproblems = new Array();
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
@@ -72,19 +75,23 @@ var app = app || {};
         });
 
         add_interviewer.on('click', function(){
-            alert("done!");
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interviewer-message', data.err, 'error');
                     },
                     success: function (model) {
-                        alert("success!");
-                        alert(model);
+                        for (var i = 0; i < this.newinterviewers.length; i++)
+                            if (this.newinterviewers[i] == model.name){
+                                app.showMessageBar('#interviewer-message', 'name exists', 'error');
+                                return;
+                            }
+                        this.newinterviewers.push(model.name);
                         var m = new app.User({
                             name: model.name,
                             avatar: model.avatar
                         });
+
                         var view = new app.SharerView({
                             model: m
                         });
@@ -128,15 +135,7 @@ var app = app || {};
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
-            var newinterviewers = new Array();
-            var newinterviewees = new Array();
             var newinterviewproblems = new Array();
-            $("interviewer-list").children().each(function(){
-                newinterviewers.push(this.innerText);
-            });
-            $("interviewee-list").children().each(function(){
-                newinterviewees.push(this.innerText);
-            });
             if (app.Lock.attach({
                     loading: '#newinterview-buttons',
                     error: function (data) {
@@ -148,8 +147,8 @@ var app = app || {};
                 })) {
                 app.socket.emit('add-interview', {
                     name: name,
-                    interviewer: newinterviewers,
-                    interviewee: newinterviewees,
+                    interviewer: this.newinterviewers,
+                    interviewee: this.newinterviewees,
                     problem: newinterviewproblems,
                 });
 
