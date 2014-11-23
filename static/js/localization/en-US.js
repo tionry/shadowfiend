@@ -122,4 +122,8 @@ app.languages['en-US'] = { Name :'English Version',
   'DIR!!'					: 'The destination is a directory',
   'illegal file name'		: 'illegal name',
   'can not upload'			: 'can not upload files with such a type',
+  'problem exists'          : 'problem already exists',
+  'problem not found'       : 'problem not found',
+  'interview exists'        : 'interview already exists',
+  'interview not found'     : 'interview not found',
 };
