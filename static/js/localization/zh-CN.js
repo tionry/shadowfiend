@@ -125,5 +125,7 @@ app.languages['zh-CN'] = { Name : '中文版',
   'problem exists'          : '该问题已经存在',
   'problem not found'       : '找不到问题',
   'interview exists'        : '面试已存在',
-  'interview not found'     : '找不到面试'
+  'interview not found'     : '找不到面试',
+  'isInterviewee'           : '该用户已在面试者列表中',
+  'isInterviewer'           : '该用户已在面试官列表中',
 };

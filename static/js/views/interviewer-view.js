@@ -86,6 +86,13 @@ var app = app || {};
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
                                 return;
                             }
+                        for (var i = 0; i < newinterviewees.length; i++)
+                            if (newinterviewees[i] == model.name){
+                                app.showMessageBar('#interview-message', 'isInterviewee', 'error');
+                                return;
+                            }
+                        $('#interview-message').hide();
+                        $('#interviewer-inputName').val('');
                         newinterviewers.push(model.name);
                         var m = new app.User({
                             name: model.name,
@@ -116,6 +123,13 @@ var app = app || {};
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
                                 return;
                             }
+                        for (var i = 0; i < newinterviewers.length; i++)
+                            if (newinterviewers[i] == model.name){
+                                app.showMessageBar('#interview-message', 'isInterviewer', 'error');
+                                return;
+                            }
+                        $('#interview-message').hide();
+                        $('#interviewee-inputName').val('');
                         newinterviewees.push(model.name);
                         var m = new app.User({
                             name: model.name,

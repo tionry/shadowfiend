@@ -126,4 +126,6 @@ app.languages['en-US'] = { Name :'English Version',
   'problem not found'       : 'problem not found',
   'interview exists'        : 'interview already exists',
   'interview not found'     : 'interview not found',
+  'isInterviewee'           : 'The user has been selected as an interviewee',
+  'isInterviewer'           : 'The user has been selected as an interviewer',
 };
