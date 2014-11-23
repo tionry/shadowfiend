@@ -145,42 +145,13 @@ body{
 .main-body{
 	background:rgba(0,0,0,0)
 }
-.mian-body{
+.main-body{
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
 	border-radius:10px
 }
-#filecontrol{
-	padding:25px;
-	background-color:#fff;
-	font-size:16px;
-	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	min-width:800px;
-	z-index:3
-}
 
-#problemset-control{
-	padding:25px;
-	background-color:#fff;
-	font-size:16px;
-	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	min-width:800px;
-	z-index:3
-}
-
-#interviewers-control{
-	padding:25px;
-	background-color:#fff;
-	font-size:16px;
-	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	min-width:800px;
-	z-index:3
-}
-
-#interviewees-control{
+#filecontrol, #problemset-control, #interviewers-control, #interviewees-control, #problem-item{
 	padding:25px;
 	background-color:#fff;
 	font-size:16px;
@@ -195,11 +166,7 @@ body{
 	min-width:900px;
 	z-index:4
 }
-#problem-item{
-	background:rgba(0,0,0,0);
-	min-width:900px;
-	z-index:4
-}
+
 .btn-white{
 	background:white;
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.1);
