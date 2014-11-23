@@ -167,6 +167,21 @@ var app = app || {};
                         });
                         var text = view.render().el;
                         $("#interviewee-list").append(text);
+                        $(".sharer-delete").click(function(){
+                            var l = $(this).parent().parent();
+                            var Mname = l.innerText;
+                            for (var i = 0; i < newinterviewees.length; i++)
+                                if (newinterviewees[i] == Mname){
+                                    newinterviewees.splice(i,1);
+                                    break;
+                                }
+                            for (var i = 0; i < newinterviewers.length; i++)
+                                if (newinterviewers[i] == Mname){
+                                    newinterviewers.splice(i,1);
+                                    break;
+                                }
+                            l.remove();
+                        });
                     }
                 })) {
                 app.socket.emit('check-user', {
@@ -175,9 +190,7 @@ var app = app || {};
             }
         });
 
-        $(".sharer-delete").click(function(){
-            $(this).hide();
-        });
+
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
