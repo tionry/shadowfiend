@@ -965,7 +965,8 @@ io.sockets.on('connection', function(socket){
 				}
 				socket.emit('read-interview', {
 					interview: interview,
-					mode: 1
+					mode: 1,
+					username: socket.session.user.name
 				});
 			});
 		});
@@ -1003,7 +1004,8 @@ io.sockets.on('connection', function(socket){
 			}
 			socket.emit('read-interview', {
 				interview: interview,
-				mode: mode
+				mode: mode,
+				username: socket.session.user.name
 			});
 		});
 	});
