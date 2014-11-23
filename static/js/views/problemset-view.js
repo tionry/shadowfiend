@@ -102,10 +102,6 @@ var app = app || {};
         });
     }
 
-    var remove_member = function(tar){
-        tar.remove();
-    }
-
     app.init || (app.init = {});
     app.init.problemsetView = function () {
         if (app.views['problemset']) {
