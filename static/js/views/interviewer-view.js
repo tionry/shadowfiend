@@ -149,7 +149,7 @@ var app = app || {};
         });
 
         $(".sharer-delete").click(function(){
-            $(this).remove();
+            $(this).hide();
         });
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
