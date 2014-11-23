@@ -314,7 +314,7 @@
               <li id="problems"><a href="#"  localization>Problem Set Vol1</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><button id="new-pro-btn" type="button" class="btn btn-primary" data-toggle="modal" localization>New Problem</button></li>
+              <li><button id="new-pro-btn" type="button" class="btn btn-primary" localization>New Problem</button></li>
             </ul>
           </div>
         </div>
@@ -406,8 +406,19 @@
       </div>
 
       <div id="interviewer-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
-        <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
-        <h2 id="interviewer-item-name"></h2>
+        <div class="btn-toolbar" style="margin:0 0 5px 0;">
+          <div class="btn-group pull-right">
+            <button id="set-interviewer-btn" class="btn btn-primary">Set Interviewers</button>
+            <button id="set-interviewee-btn" class="btn btn-primary">Set Interviewees</button>
+            <button id="set-problem-btn" class="btn btn-primary">Set Problems</button>
+          </div>
+          <div class="btn-group pull-left" style="margin-left:0">
+            <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
+          </div>
+          <div class="btn-group">
+            <h2 id="interviewer-item-name" style="margin-top: 7px;"></h2>
+          </div>
+        </div>
         <div class="row">
           <div class="panel panel-default">
             <div class="panel-heading">Interview Problem Set</div>
