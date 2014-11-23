@@ -36,7 +36,7 @@
 
     app.init || (app.init = {});
 
-    app.init.interview = function() {
+    app.init.interviews = function() {
         app.collections['interviews'] || (app.collections['interviews'] = new app.Interviews());
     };
 

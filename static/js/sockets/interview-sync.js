@@ -33,11 +33,11 @@ var app = app || {};
 
     var syncInterviews = (function() {
         var method = 'reset', success = null, dealInterview = function(data) {
-            if (!data || !data.problem) {
+            if (!data || !data.interview) {
                 return;
             }
             if (typeof success == 'function') {
-                success(data.problem);
+                success(data.interview);
             }
         };
 
