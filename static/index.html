@@ -533,7 +533,7 @@
 
   <!-- popover -->
   <div id="new-interview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog" style="width: 1200px">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -547,21 +547,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-inline col-xs-5">
-              <p>
-                <span localization>Interviewees</span>
-              </p>
-              <div id="interviewee-box">
-                <ul class="nav nav-pills nav-stacked" id="interviewee-list"></ul>
-              </div>
-              <label localization>newuser:</label>
-              <div class="input-group">
-                <input type="text" id="interviewee-inputName" class="form-control"/>
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button" id="interviewee-confirm" localization>add</button>
-                </span>
-              </div>
-            </div>
+
             <div class="form-inline col-xs-5">
               <p>
                 <span localization>Interviewers</span>
@@ -577,10 +563,24 @@
                 </span>
               </div>
             </div>
-
+            <div class="form-inline col-xs-5">
+              <p>
+                <span localization>Interviewees</span>
+              </p>
+              <div id="interviewee-box">
+                <ul class="nav nav-pills nav-stacked" id="interviewee-list"></ul>
+              </div>
+              <label localization>newuser:</label>
+              <div class="input-group">
+                <input type="text" id="interviewee-inputName" class="form-control"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="interviewee-confirm" localization>add</button>
+                </span>
+              </div>
+            </div>
               <div class="form-inline col-xs-2">
                 <p>
-                  <span localization>Interview problems</span>
+                  <span localization>Problems</span>
                 </p>
                 <div id="interview-problem-box">
                   <ul class="nav nav-pills nav-stacked" id="interview-problem-list"></ul>
