@@ -23,6 +23,7 @@ var app = app || {};
             }
             if (flag != 'true') return;
             var v = model.view;
+            model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
