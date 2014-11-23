@@ -959,7 +959,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('read-interview', {err: err});
 			}
-			interviewDAO.getInterviews(1, data.mode, function(err, interview) {
+			interviewDAO.getInterviews(socket.session.user.name, 1, function(err, interview) {
 				if (err) {
 					return socket.emit('read-interview', {err: err});
 				}
@@ -987,19 +987,23 @@ io.sockets.on('connection', function(socket){
  	});
 
 	socket.on('read-interview', function(data) {
-		if (!check(data, 'username', 'mode')) {
+		if (!check(data, 'mode')) {
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		interviewDAO.getInterviews(data.username, data.mode, function(err, interview) {
+		var mode = 0;
+		if (data.mode == 'interviewer') {
+			mode = 1;
+		}
+		interviewDAO.getInterviews(socket.session.user.name, mode, function(err, interview) {
 			if (err) {
 				return socket.emit('read-interview', {err: err});
 			}
 			socket.emit('read-interview', {
 				interview: interview,
-				mode: data.mode
+				mode: mode
 			});
 		});
 	});
