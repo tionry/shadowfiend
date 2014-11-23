@@ -983,7 +983,10 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('check-user', {err: err});
 			}
-			socket.emit('check-user', {user: user});
+			socket.emit('check-user', {
+				name: user.name,
+				avatar: user.avatar
+			});
 		});
  	});
 

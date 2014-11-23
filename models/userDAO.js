@@ -87,7 +87,7 @@ UserDAO.prototype.getUserByName = function(name,callback){
 			return callback("innerError");
 		}
 		else if(!user){
-			return callback("unauthorized");
+			return callback("member doesn't exists");
 		}
 		return callback(null,user);
 	});
