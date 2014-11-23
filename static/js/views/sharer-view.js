@@ -18,7 +18,8 @@ var app = app || {};
         },
 		/*共享者被选中*/
         select: function () {
-            app.views['shares'].$el.find('li').removeClass('active');
+            //app.views['shares'].$el.find('li').removeClass('active');
+            $('.li').removeClass('active');
             this.$el.addClass('active');
             app.views['shares'].selected = this.model;
         },

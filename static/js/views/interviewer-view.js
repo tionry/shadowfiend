@@ -81,12 +81,12 @@ var app = app || {};
                     success: function (model) {
                         alert("success!");
                         alert(model);
-                        app.mylove = new app.User({
+                        var m = new app.User({
                             name: model.name,
                             avatar: model.avatar
                         });
                         var view = new app.SharerView({
-                            model: app.mylove
+                            model: m
                         });
                         var text = view.render().el;
                         $("#interviewer-list").append(text);
