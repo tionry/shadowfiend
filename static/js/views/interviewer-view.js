@@ -103,12 +103,12 @@ var app = app || {};
 
         add_interviewer.on('click', function(){
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
+            updateinterList();
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interview-message', data.err, 'error');
                     },
                     success: function (model){
-                        updateinterList();
                         for (var i = 0; i < newinterviewers.length; i++)
                             if (newinterviewers[i] == model.name){
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
@@ -141,12 +141,12 @@ var app = app || {};
 
         add_interviewee.on('click', function(){
             var name = Backbone.$.trim(modal.find('#interviewee-inputName').val());
+            updateinterList();
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interview-message', data.err, 'error');
                     },
                     success: function (model){
-                        updateinterList();
                         for (var i = 0; i < newinterviewees.length; i++)
                             if (newinterviewees[i] == model.name){
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
