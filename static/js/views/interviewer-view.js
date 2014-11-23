@@ -6,7 +6,7 @@ var app = app || {};
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
 
-        template : _.template($('#interviewer-template').html(), null, {
+        template : _.template($('#interview-template').html(), null, {
             variable: 'model'
         }),
 
