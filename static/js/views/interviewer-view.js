@@ -43,15 +43,15 @@ var app = app || {};
     });
 
     var newinterview = function(){
-        this.newinterviewers = new Array();
-        this.newinterviewees = new Array();
-        this.newinterviewproblems = new Array();
+        var newinterviewers = new Array();
+        var newinterviewees = new Array();
+        var newinterviewproblems = new Array();
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
         var add_interviewer = modal.find("#interviewer-confirm");
         var add_interviewee = modal.find("#interviewee-confirm");
-        //var add_problem = modal.find("#interviewproblem-confirm");
+        var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
         modal.on('hide', function () {
             input.off('input');
@@ -80,18 +80,17 @@ var app = app || {};
                     error: function (data){
                         app.showMessageBar('#interviewer-message', data.err, 'error');
                     },
-                    success: function (model) {
-                        for (var i = 0; i < this.newinterviewers.length; i++)
-                            if (this.newinterviewers[i] == model.name){
+                    success: function (model){
+                        for (var i = 0; i < newinterviewers.length; i++)
+                            if (newinterviewers[i] == model.name){
                                 app.showMessageBar('#interviewer-message', 'name exists', 'error');
                                 return;
                             }
-                        this.newinterviewers.push(model.name);
+                        newinterviewers.push(model.name);
                         var m = new app.User({
                             name: model.name,
                             avatar: model.avatar
                         });
-
                         var view = new app.SharerView({
                             model: m
                         });
@@ -147,8 +146,8 @@ var app = app || {};
                 })) {
                 app.socket.emit('add-interview', {
                     name: name,
-                    interviewer: this.newinterviewers,
-                    interviewee: this.newinterviewees,
+                    interviewer: newinterviewers,
+                    interviewee: newinterviewees,
                     problem: newinterviewproblems,
                 });
 
