@@ -141,7 +141,7 @@ var app = app || {};
                         modal.modal('hide');
                     }
                 })) {
-                app.socket.emit('add-problem', {
+                app.socket.emit('add-interview', {
                     name: name,
                     interviewer: newinterviewers,
                     interviewee: newinterviewees,
