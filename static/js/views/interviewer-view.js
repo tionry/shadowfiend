@@ -76,7 +76,7 @@ var app = app || {};
                     }
                 })
                 if (flag == "false"){
-                    newinterviewers.slice(i,1);
+                    newinterviewees.slice(i,1);
                 };
             }
         }
