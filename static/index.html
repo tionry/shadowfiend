@@ -393,7 +393,7 @@
                   <td>waiting</td>
                   <td>2014.11.21 19:00</td>
                 </tr>
-                <script type="text/template">
+                <script type="text/template" id="interview-template">
                   <td class="col1"><%= model.ord %></td>
                   <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
                   <td class="col3"><%= model.state %></td>
@@ -456,12 +456,14 @@
                   <td>Interview in Google</td>
                   <td>2014.11.21 08:00</td>
                 </tr>
-                <script type="text/template">
+<!--
+                <script type="text/template" id="interview-template">
                   <td class="col1"><%= model.ord %></td>
                   <td class="col2"><a href="/#interviewee/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
                   <td class="col3"><%= model.state %></td>
                   <td class="col4"><%= model.time %></td>
                 </script>
+-->
               </tbody>
             </table>
           </div>
