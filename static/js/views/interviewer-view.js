@@ -88,8 +88,8 @@ var app = app || {};
                         var view = new app.SharerView({
                             model: app.mylove
                         });
-                        var text = view.render().$el;
-                        this.$el.find("#interviewer-list").append(text);
+                        var text = view.render().el;
+                        $("#interviewer-list").append(text);
                     }
                 })) {
                 app.socket.emit('check-user', {
