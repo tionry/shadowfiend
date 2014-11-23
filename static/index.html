@@ -347,7 +347,7 @@
             <a class="btn btn-white" id="problem-item-back" href="#problemset"><span class="glyphicon glyphicon-home"></span></a>
           </div>
           <div class="btn-group">
-            <h2 id="problem-name" style="margin-top: 0px;"></h2>
+            <h2 id="problem-name" style="margin-top: 7px;"></h2>
           </div>
         </div>
         <div id="problemmain">
@@ -420,11 +420,7 @@
                 </tr>
               </thead>
               <tbody>
-                <script type="text/template" id="interview-problem-template">
-                  <td class="col1"><%= model.ord %></td>
-                  <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
-                  <td class="col3"><%=model.time%></td>
-                </script>
+
               </tbody>
             </table>
           </div>
@@ -456,14 +452,6 @@
                   <td>Interview in Google</td>
                   <td>2014.11.21 08:00</td>
                 </tr>
-<!--
-                <script type="text/template" id="interview-template">
-                  <td class="col1"><%= model.ord %></td>
-                  <td class="col2"><a href="/#interviewee/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
-                  <td class="col3"><%= model.state %></td>
-                  <td class="col4"><%= model.time %></td>
-                </script>
--->
               </tbody>
             </table>
           </div>
