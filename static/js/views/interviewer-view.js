@@ -71,6 +71,7 @@ var app = app || {};
                         app.showMessageBar('#interviewer-message', data.err, 'error');
                     },
                     success: function (model) {
+                        alert("success!");
                         v = model.view;
                         if (v) {
                             v.render();
