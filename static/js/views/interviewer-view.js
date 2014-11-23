@@ -148,6 +148,21 @@ var app = app || {};
             }
         });
 
+        $(".user-item").on('dblclick', function(){
+            var name = this.innerText;
+            for (var i = 0; i < newinterviewees.length; i++)
+                if (newinterviewees[i] == name){
+                    newinterviewees.splice(i,1);
+                    break;
+                }
+            for (var i = 0; i < newinterviewers.length; i++)
+                if (newinterviewers[i] == name){
+                    newinterviewers.splice(i,1);
+                    break;
+                }
+            this.hide();
+        });
+
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
             var newinterviewproblems = new Array();
@@ -182,6 +197,6 @@ var app = app || {};
         });
     };
 
-    var btn = $("#btn_nic");
-    btn.bind('click', newinterview);
+    $("#btn_nic").bind('click', newinterview);
+
 })()
