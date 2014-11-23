@@ -70,7 +70,7 @@ var app = app || {};
             for (var i = 0; i < newinterviewees.length; i++){
                 var Mname = newinterviewees[i];
                 var flag = "false";
-                $('#interviewer-list').children().each(function(){
+                $('#interviewee-list').children().each(function(){
                     if ($(this).innerText == Mname){
                         flag = "true";
                     }
