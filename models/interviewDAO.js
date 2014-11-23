@@ -99,7 +99,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
             });
         }
     });
-    return callback(null, interviews);
+    return callback(null, allviews);
 }
 
 
