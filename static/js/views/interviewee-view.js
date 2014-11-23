@@ -12,16 +12,16 @@ var app = app || {};
         },
 
         addOne: function(model) {
-            var intervieweeList = model.interviewee;
-            var user = app.currentUser;
-            var flag;
-            for (var i = 0; i < intervieweeList.length; i++){
-                if (intervieweeList[i] == user) {
-                    flag = 'true';
-                    break;
-                }
-            }
-            if (flag != 'true') return;
+            //var intervieweeList = model.interviewee;
+            //var user = app.currentUser;
+            //var flag;
+            //for (var i = 0; i < intervieweeList.length; i++){
+            //    if (intervieweeList[i] == user) {
+            //        flag = 'true';
+            //        break;
+            //    }
+            //}
+            //if (flag != 'true') return;
             var v = model.view;
             model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {

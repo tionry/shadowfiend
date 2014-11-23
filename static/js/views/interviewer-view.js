@@ -12,16 +12,6 @@ var app = app || {};
         },
 
         addOne: function(model) {
-            var interviewerList = model.interviewer;
-            var user = app.currentUser;
-            var flag;
-            for (var i = 0; i < interviewerList.length; i++){
-                if (interviewerList[i] == user) {
-                    flag = 'true';
-                    break;
-                }
-            }
-            if (flag != 'true') return;
             var v = model.view;
             model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {
@@ -74,6 +64,7 @@ var app = app || {};
         });
 
         add_interviewer.on('click', function(){
+            alert("done!");
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
             if (app.Lock.attach({
                     error: function (data){
