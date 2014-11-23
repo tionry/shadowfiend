@@ -148,7 +148,7 @@ var app = app || {};
             }
         });
 
-        $(".user-item").dbclick( function(){
+        $(".user-item").dblclick( function(){
             var name = $(this).innerText;
             for (var i = 0; i < newinterviewees.length; i++)
                 if (newinterviewees[i] == name){
