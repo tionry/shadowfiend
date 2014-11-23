@@ -81,6 +81,7 @@ var app = app || {};
                     success: function (model) {
                         alert("success!");
                         alert(model);
+                        app.mylove = model;
                         var view = new app.SharerView({
                             model: model
                         });
