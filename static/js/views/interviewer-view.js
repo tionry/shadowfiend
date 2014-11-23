@@ -103,7 +103,6 @@ var app = app || {};
 
         add_interviewer.on('click', function(){
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
-            updateinterList();
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interview-message', data.err, 'error');
@@ -141,7 +140,6 @@ var app = app || {};
 
         add_interviewee.on('click', function(){
             var name = Backbone.$.trim(modal.find('#interviewee-inputName').val());
-            updateinterList();
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interview-message', data.err, 'error');
