@@ -33,8 +33,8 @@ var app = app || {};
             var o = {
                 //ord: a.ord,
                 name: a.name,
-                interviewerlist: a.interviewer,
-                intervieweelist: a.interviewee,
+                interviewer: a.interviewer,
+                interviewee: a.interviewee,
                 problemlist: a.problemlist,
                 status: a.status,
                 time: new Date(a.createTime).toLocaleJSON(),
