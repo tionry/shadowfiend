@@ -177,7 +177,7 @@ var app = app || {};
     var newinterviewees = new Array();
     var newinterviewproblems = new Array();
 
-    $(".user-item").dblclick( function(){
+    $(".user-item").bind('dblclick', function(){
         var name = $(this).innerText;
         for (var i = 0; i < newinterviewees.length; i++)
             if (newinterviewees[i] == name){
