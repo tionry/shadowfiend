@@ -43,9 +43,9 @@ var app = app || {};
     });
 
     var newinterview = function(){
-        newinterviewers = new Array();
-        newinterviewees = new Array();
-        newinterviewproblems = new Array();
+        var newinterviewers = new Array();
+        var newinterviewees = new Array();
+        var newinterviewproblems = new Array();
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
@@ -148,7 +148,9 @@ var app = app || {};
             }
         });
 
-
+        $(".sharer-delete").click(function(){
+            $(this).remove();
+        });
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
@@ -172,26 +174,6 @@ var app = app || {};
             }
         });
     }
-
-    var newinterviewers = new Array();
-    var newinterviewees = new Array();
-    var newinterviewproblems = new Array();
-
-    $(".sharer-delete").click(function(){
-        var l = $(this).parent().parent();
-        var name = l.innerText;
-        for (var i = 0; i < newinterviewees.length; i++)
-            if (newinterviewees[i] == name){
-                newinterviewees.splice(i,1);
-                break;
-            }
-        for (var i = 0; i < newinterviewers.length; i++)
-            if (newinterviewers[i] == name){
-                newinterviewers.splice(i,1);
-                break;
-            }
-        l.remove();
-    });
 
     app.init || (app.init = {});
     app.init.interviewerView = function () {
