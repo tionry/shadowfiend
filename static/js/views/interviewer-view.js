@@ -6,6 +6,14 @@ var app = app || {};
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
 
+        template : _.template($('#interviewer-template').html(), null, {
+            variable: 'model'
+        }),
+
+        render: function () {
+            this.$el.html(this.template(this.model.json));
+            return this;
+        },
         initialize: function(){
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
