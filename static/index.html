@@ -711,12 +711,18 @@
            <h3 id="shareLabel" localization>sharemanage</h3>
          </div>
          <div class="modal-body">
-            <p><span localization>file</span> <span id="share-name"></span> <span localization>sshareduser</span></p>
+            <div class="row">
+              <div class="col-sm-8">
+                <p><span localization>file</span> <span id="share-name"></span> <span localization>sshareduser</span></p>
+              </div>
+              <div class="col-sm-4">
+                <button class="btn pull-right btn-primary" type="button" id="share-remove" localization>delete</button>
+              </div>
+            </div>
             <div id="share-user-box">
               <ul class="nav nav-pills nav-stacked" id="share-user-list">
               </ul>
             </div>
-            <button class="btn pull-right btn-primary" type="button" id="share-remove" localization>delete</button>
             <div class="alert hide" id="share-message">
               <button type="button" class="close" onclick="$('#share-message').slideUp()">&times;</button>
               <span>Nothing here</span>
