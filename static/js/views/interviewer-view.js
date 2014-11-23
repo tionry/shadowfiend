@@ -81,7 +81,7 @@ var app = app || {};
                     success: function (model) {
                         alert("success!");
                         alert(model);
-                        app.mylove = new app.user({
+                        app.mylove = new app.User({
                             name: model.name,
                             avatar: model.avatar
                         });
