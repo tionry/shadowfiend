@@ -53,6 +53,33 @@ var app = app || {};
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
+
+        var updateinterList = function(){
+            for (var i = 0; i < newinterviewers.length; i++){
+                var Mname = newinterviewers[i];
+                var flag = "false";
+                $('#interviewer-list').children().each(function(){
+                    if ($(this).innerText == Mname){
+                        flag = "true";
+                    }
+                })
+                if (flag == "false"){
+                    newinterviewers.slice(i,1);
+                };
+            }
+            for (var i = 0; i < newinterviewees.length; i++){
+                var Mname = newinterviewees[i];
+                var flag = "false";
+                $('#interviewer-list').children().each(function(){
+                    if ($(this).innerText == Mname){
+                        flag = "true";
+                    }
+                })
+                if (flag == "false"){
+                    newinterviewers.slice(i,1);
+                };
+            }
+        }
         modal.on('hide', function () {
             input.off('input');
             cnfm.off('click');
@@ -81,6 +108,7 @@ var app = app || {};
                         app.showMessageBar('#interview-message', data.err, 'error');
                     },
                     success: function (model){
+                        updateinterList();
                         for (var i = 0; i < newinterviewers.length; i++)
                             if (newinterviewers[i] == model.name){
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
@@ -118,6 +146,7 @@ var app = app || {};
                         app.showMessageBar('#interview-message', data.err, 'error');
                     },
                     success: function (model){
+                        updateinterList();
                         for (var i = 0; i < newinterviewees.length; i++)
                             if (newinterviewees[i] == model.name){
                                 app.showMessageBar('#interview-message', 'name exists', 'error');
@@ -164,6 +193,7 @@ var app = app || {};
                         modal.modal('hide');
                     }
                 })) {
+                updateinterList();
                 app.socket.emit('add-interview', {
                     name: name,
                     interviewer: newinterviewers,
