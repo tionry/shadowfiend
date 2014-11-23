@@ -72,19 +72,11 @@ var app = app || {};
                     },
                     success: function (model) {
                         alert("success!");
-                        v = model.view;
-                        if (v) {
-                            v.render();
-                            if (v.el.is(':hidden')) {
-                                $('#interviewer-list').append(v.el);
-                                v.delegateEvents();
-                            }
-                        } else {
-                            model.view = new app.SharerView({
-                                model: model
-                            });
-                            $('#interviewer-list').append(model.view.render().el);
-                        }
+                        var view = new app.SharerView({
+                            model: model
+                        });
+                        var text = view.render().$el;
+                        this.$el.find("#interviewer-list").append(text);
                     }
                 })) {
                 app.socket.emit('check-user', {
