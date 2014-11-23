@@ -554,10 +554,6 @@
               <div id="interviewee-box">
                 <ul class="nav nav-pills nav-stacked" id="interviewee-list"></ul>
               </div>
-              <div class="alert hide" id="interviewee-message">
-                <button type="button" class="close" onclick="$('#interviewee-message').slideUp()">&times;</button>
-                <span>Nothing here</span>
-              </div>
               <label localization>newuser:</label>
               <div class="input-group">
                 <input type="text" id="interviewee-inputName" class="form-control"/>
@@ -572,10 +568,6 @@
               </p>
               <div id="interviewer-box">
                 <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
-              </div>
-              <div class="alert hide" id="interviewer-message">
-                <button type="button" class="close" onclick="$('#interviewer-message').slideUp()">&times;</button>
-                <span>Nothing here</span>
               </div>
               <label localization>newuser:</label>
               <div class="input-group">
@@ -592,10 +584,6 @@
               <div id="interview-problem-box">
                 <ul class="nav nav-pills nav-stacked" id="interview-problem-list"></ul>
               </div>
-              <div class="alert hide" id="interview-problem-message">
-                <button type="button" class="close" onclick="$('#interview-problem-message').slideUp()">&times;</button>
-                <span>Nothing here</span>
-              </div>
               <label localization>newproblem:</label>
               <div class="input-group">
                 <input type="text" id="problem-inputName" class="form-control"/>
@@ -604,6 +592,10 @@
                 </span>
               </div>
             </div>
+          </div>
+          <div class="alert hide" id="interview-message">
+            <button type="button" class="close" onclick="$('#interview-message').slideUp()">&times;</button>
+            <span>Nothing here</span>
           </div>
         </div>
         <div class="modal-footer">

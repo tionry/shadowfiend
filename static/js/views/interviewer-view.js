@@ -78,12 +78,12 @@ var app = app || {};
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
             if (app.Lock.attach({
                     error: function (data){
-                        app.showMessageBar('#interviewer-message', data.err, 'error');
+                        app.showMessageBar('#interview-message', data.err, 'error');
                     },
                     success: function (model){
                         for (var i = 0; i < newinterviewers.length; i++)
                             if (newinterviewers[i] == model.name){
-                                app.showMessageBar('#interviewer-message', 'name exists', 'error');
+                                app.showMessageBar('#interview-message', 'name exists', 'error');
                                 return;
                             }
                         newinterviewers.push(model.name);
@@ -108,22 +108,24 @@ var app = app || {};
             var name = Backbone.$.trim(modal.find('#interviewee-inputName').val());
             if (app.Lock.attach({
                     error: function (data){
-                        app.showMessageBar('#interviewee-message', data.err, 'error');
+                        app.showMessageBar('#interview-message', data.err, 'error');
                     },
-                    success: function (model) {
-                        v = model.view;
-                        if (v) {
-                            v.render();
-                            if (v.el.is(':hidden')) {
-                                $('#interviewee-list').append(v.el);
-                                v.delegateEvents();
+                    success: function (model){
+                        for (var i = 0; i < newinterviewees.length; i++)
+                            if (newinterviewees[i] == model.name){
+                                app.showMessageBar('#interview-message', 'name exists', 'error');
+                                return;
                             }
-                        } else {
-                            model.view = new app.SharerView({
-                                model: model
-                            });
-                            $('#interviewee-list').append(model.view.render().el);
-                        }
+                        newinterviewees.push(model.name);
+                        var m = new app.User({
+                            name: model.name,
+                            avatar: model.avatar
+                        });
+                        var view = new app.SharerView({
+                            model: m
+                        });
+                        var text = view.render().el;
+                        $("#interviewee-list").append(text);
                     }
                 })) {
                 app.socket.emit('check-user', {
