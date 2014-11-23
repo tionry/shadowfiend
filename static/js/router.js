@@ -35,7 +35,7 @@ var app = app || {};
           name: '',
           virtual: true
         });
-        this.analy('problemset');this.analy('interviewers');
+        this.analy('interviewers');
       },
       'interviewees':function() {
         app.socket.emit('read-interview', {
