@@ -64,7 +64,7 @@ var app = app || {};
                     }
                 })
                 if (flag == "false"){
-                    newinterviewers.slice(i,1);
+                    newinterviewers.splice(i,1);
                 };
             }
             for (var i = 0; i < newinterviewees.length; i++){
@@ -76,7 +76,7 @@ var app = app || {};
                     }
                 })
                 if (flag == "false"){
-                    newinterviewees.slice(i,1);
+                    newinterviewees.splice(i,1);
                 };
             }
         }
