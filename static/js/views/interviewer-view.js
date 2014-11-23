@@ -132,6 +132,7 @@ var app = app || {};
                         $("#interviewer-list").append(text);
                         $(".sharer-delete").click(function(){
                             var l = $(this).prev();
+                            var p = $(this).parent().parent();
                             var Mname = l[0].innerText;
                             for (var i = 0; i < newinterviewees.length; i++)
                                 if (newinterviewees[i] == Mname){
@@ -143,7 +144,7 @@ var app = app || {};
                                     newinterviewers.splice(i,1);
                                     break;
                                 }
-                            l.remove();
+                            p.remove();
                         });
                     }
                 })) {
@@ -184,6 +185,7 @@ var app = app || {};
                         $("#interviewee-list").append(text);
                         $(".sharer-delete").click(function(){
                             var l = $(this).prev();
+                            var p = $(this).parent().parent();
                             var Mname = l[0].innerText;
                             for (var i = 0; i < newinterviewees.length; i++)
                                 if (newinterviewees[i] == Mname){
@@ -195,7 +197,7 @@ var app = app || {};
                                     newinterviewers.splice(i,1);
                                     break;
                                 }
-                            l.remove();
+                            p.remove();
                         });
                     }
                 })) {
