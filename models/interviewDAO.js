@@ -72,7 +72,6 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
         if (!interviews) {
             return callback("interview not found");
         }
-        return callback(null, interviews);
     });
     if(interviews == null){
         return callback(null, interviews);
