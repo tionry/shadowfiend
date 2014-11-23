@@ -716,22 +716,18 @@
               <ul class="nav nav-pills nav-stacked" id="share-user-list">
               </ul>
             </div>
+            <button class="btn pull-right btn-primary" type="button" id="share-remove" localization>delete</button>
             <div class="alert hide" id="share-message">
               <button type="button" class="close" onclick="$('#share-message').slideUp()">&times;</button>
               <span>Nothing here</span>
             </div>
-            <div class="row" id="share-buttons">
-              <div class="form-inline col-xs-9">
-                <label localization>newuser:</label>
-                <div class="input-group">
-                  <input type="text" id="share-inputName" class="form-control"/>
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" id="share-confirm" localization>add</button>
-                  </span>
-                </div>
-              </div>
-              <div class="col-xs-3">
-                <button class="btn pull-right btn-primary" type="button" id="share-remove" localization>delete</button>
+            <div class="form-group">
+              <label localization>newuser:</label>
+              <div class="input-group">
+                <input type="text" id="share-inputName" class="form-control"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="share-confirm" localization>add</button>
+                </span>
               </div>
             </div>
           </div>
