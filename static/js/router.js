@@ -29,23 +29,13 @@ var app = app || {};
         this.analy('problemset');
       },
       'interviewers':function() {
-        app.socket.emit('read-interview', {
-          all: true,
-          mode:'interviewer',
-          name: '',
-          virtual: true
-        });
+        app.socket.emit('read-interview', {mode:'interviewer'});
         this.analy('interviewers');
       },
       'interviewees':function() {
-        app.socket.emit('read-interview', {
-          all: true,
-          mode:'interviewee',
-          name: '',
-          virtual: true
-        });
+        app.socket.emit('read-interview', {mode:'interviewee'});
         this.analy('interviewees');
-      },
+      }
     },
     
     pages: {

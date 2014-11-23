@@ -21,8 +21,7 @@ var app = app || {};
 
             app.Lock.detach(data);
             app.collections.interviews.fetch({
-                all: true,
-                name: '',
+                username: data.username,
                 virtual: true,
                 mode: data.mode
             });
