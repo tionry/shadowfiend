@@ -12,16 +12,6 @@ var app = app || {};
         },
 
         addOne: function(model) {
-            var interviewerList = model.interviewer;
-            var user = app.currentUser;
-            var flag;
-            for (var i = 0; i < interviewerList.length; i++){
-                if (interviewerList[i] == user) {
-                    flag = 'true';
-                    break;
-                }
-            }
-            if (flag != 'true') return;
             var v = model.view;
             model.set({"eid": model.get("eid") || app.collections['problems'].length});
             if (v) {
@@ -74,25 +64,19 @@ var app = app || {};
         });
 
         add_interviewer.on('click', function(){
+            alert("done!");
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBar('#interviewer-message', data.err, 'error');
                     },
                     success: function (model) {
-                        v = model.view;
-                        if (v) {
-                            v.render();
-                            if (v.el.is(':hidden')) {
-                                $('#interviewer-list').append(v.el);
-                                v.delegateEvents();
-                            }
-                        } else {
-                            model.view = new app.SharerView({
-                                model: model
-                            });
-                            $('#interviewer-list').append(model.view.render().el);
-                        }
+                        alert("success!");
+                        var view = new app.SharerView({
+                            model: model
+                        });
+                        var text = view.render().$el;
+                        this.$el.find("#interviewer-list").append(text);
                     }
                 })) {
                 app.socket.emit('check-user', {
