@@ -333,7 +333,7 @@
                 <script type="text/template" id="problem-template">
                   <td class="col1"><%= model.ord %></td>
                   <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
-                  <td class="col4"><%=model.time%></td>
+                  <td class="col3"><%=model.time%></td>
                 </script>
               </tbody>
             </table>
@@ -341,11 +341,11 @@
         </div>
       </div>
 
-      <div id = "problem-item" class="hide" style="margin-bottom: 104px;margin-top:55px">
+      <div id="problem-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
         <h1 id="problem-name"></h1>
         <div id="problemmain">
           <div id="problemmain-inner">
-            <pre id="problem-description"></pre>
+            <pre id="problem-description" style="min-height:80px;"></pre>
           </div>
         </div>
       </div>
@@ -387,10 +387,10 @@
                   <td>2014.11.21 19:00</td>
                 </tr>
                 <script type="text/template">
-                  <td><%= model.ord %></td>
-                  <td><%= model.name %></td>
-                  <td><%= model.state %></td>
-                  <td><%= model.time %></td>
+                  <td class="col1"><%= model.ord %></td>
+                  <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
+                  <td class="col3"><%= model.state %></td>
+                  <td class="col4"><%= model.time %></td>
                 </script>
               </tbody>
             </table>
@@ -424,10 +424,10 @@
                   <td>2014.11.21 08:00</td>
                 </tr>
                 <script type="text/template">
-                  <td><%= model.ord %></td>
-                  <td><%= model.name %></td>
-                  <td><%= model.state %></td>
-                  <td><%= model.time %></td>
+                  <td class="col1"><%= model.ord %></td>
+                  <td class="col2"><a href="/#interviewee/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
+                  <td class="col3"><%= model.state %></td>
+                  <td class="col4"><%= model.time %></td>
                 </script>
               </tbody>
             </table>
