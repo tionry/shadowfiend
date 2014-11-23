@@ -148,8 +148,8 @@ var app = app || {};
             }
         });
 
-        $(".user-item").on('dbclick', function(){
-            var name = this.innerText;
+        $(".user-item").dbclick( function(){
+            var name = $(this).innerText;
             for (var i = 0; i < newinterviewees.length; i++)
                 if (newinterviewees[i] == name){
                     newinterviewees.splice(i,1);
@@ -160,7 +160,7 @@ var app = app || {};
                     newinterviewers.splice(i,1);
                     break;
                 }
-            this.hide();
+            $(this).remove();
         });
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
