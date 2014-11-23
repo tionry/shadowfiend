@@ -3,7 +3,6 @@ var app = app || {};
 (function () {
     app.SharerView = Backbone.View.extend({
         tagName: 'li',
-        className: 'user-item',
         template: _.template($('#sharer-template').html()),
         events: {
             'click a': 'select'

@@ -177,8 +177,9 @@ var app = app || {};
     var newinterviewees = new Array();
     var newinterviewproblems = new Array();
 
-    $(".user-item").bind('dblclick', function(){
-        var name = $(this).innerText;
+    $(".sharer-delete").click(function(){
+        var l = $(this).parent().parent();
+        var name = l.innerText;
         for (var i = 0; i < newinterviewees.length; i++)
             if (newinterviewees[i] == name){
                 newinterviewees.splice(i,1);
@@ -189,7 +190,7 @@ var app = app || {};
                 newinterviewers.splice(i,1);
                 break;
             }
-        $(this).remove();
+        l.remove();
     });
 
     app.init || (app.init = {});
