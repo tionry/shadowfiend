@@ -68,9 +68,6 @@ var app = app || {};
             }
         });
 
-        var remove_member = function(tar){
-            tar.remove();
-        }
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
@@ -105,7 +102,9 @@ var app = app || {};
         });
     }
 
-
+    var remove_member = function(tar){
+        tar.remove();
+    }
 
     app.init || (app.init = {});
     app.init.problemsetView = function () {
