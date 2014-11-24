@@ -88,7 +88,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
         });
     }
     else{
-        return callback("bad mode info");
+        return callback("bad mode infomation");
     }
 
 
