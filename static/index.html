@@ -415,31 +415,40 @@
         <div class="row">
           <div class="panel panel-default">
             <div class="panel-heading">All interviewees</div>
-            <div class="interviewer-interviewee">
-              <div class="interviewee-img-div">
-                <img class="interviewee-img" src="images/character.png" />
+            <div class="interviewer-interviewee-control">
+              <div class="interviewer-interviewee">
+                <div class="interviewee-img-div">
+                  <img class="interviewee-img" src="images/character.png" />
+                </div>
+                <p>Interviewee name</p>
               </div>
-              <p>Interviewee name</p>
-            </div>
-            <div class="interviewer-interviewee">
-              <div class="interviewee-img-div">
-                <img class="interviewee-img" src="images/character.png" />
+              <div class="interviewer-interviewee">
+                <div class="interviewee-img-div">
+                  <img class="interviewee-img" src="images/character.png" />
+                </div>
+                <p>Interviewee name</p>
               </div>
-              <p>Interviewee name</p>
-            </div>
-            <div class="interviewer-interviewee">
-              <div class="interviewee-img-div">
-                <img class="interviewee-img" src="images/character.png" />
+              <div class="interviewer-interviewee">
+                <div class="interviewee-img-div">
+                  <img class="interviewee-img" src="images/character.png" />
+                </div>
+                <p>Interviewee name</p>
               </div>
-              <p>Interviewee name</p>
-            </div>
-            <div class="interviewer-interviewee">
-              <div class="interviewee-img-div">
-                <img class="interviewee-img" src="images/character.png" />
+              <div class="interviewer-interviewee">
+                <div class="interviewee-img-div">
+                  <img class="interviewee-img" src="images/character.png" />
+                </div>
+                <p>Interviewee name</p>
               </div>
-              <p>Interviewee name</p>
             </div>
-
+            <script type="text/template" id="interviewer-interviewee-template">
+              <div class="interviewer-interviewee">
+                <div class="interviewee-img-div">
+                  <img class="interviewee-img" src="#" />
+                </div>
+                <p><%= model.name %></p>
+              </div>
+            </script>
           </div>
         </div>
       </div>
