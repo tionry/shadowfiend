@@ -455,6 +455,7 @@
           </div>
         </div>
       </div>
+
       <div id="interviewee-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
           <div class="btn-group pull-left" style="margin-left:0">
@@ -541,7 +542,6 @@
             </div>
           </div>
           <div class="row">
-
             <div class="form-inline col-xs-5">
               <p>
                 <span localization>Interviewers</span>
@@ -549,7 +549,7 @@
               <div id="interviewer-box">
                 <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
               </div>
-              <label localization>newuser:</label>
+              <label localization>new interviewer:</label>
               <div class="input-group">
                 <input type="text" id="interviewer-inputName" class="form-control"/>
                 <span class="input-group-btn">
@@ -564,7 +564,7 @@
               <div id="interviewee-box">
                 <ul class="nav nav-pills nav-stacked" id="interviewee-list"></ul>
               </div>
-              <label localization>newuser:</label>
+              <label localization>new interviewee:</label>
               <div class="input-group">
                 <input type="text" id="interviewee-inputName" class="form-control"/>
                 <span class="input-group-btn">
@@ -579,7 +579,7 @@
                 <div id="interview-problem-box">
                   <ul class="nav nav-pills nav-stacked" id="interview-problem-list"></ul>
                 </div>
-                <label localization>newproblem:</label>
+                <label localization>new problem:</label>
                 <div class="input-group">
                   <input type="text" id="problem-inputName" class="form-control"/>
                 <span class="input-group-btn">
@@ -587,14 +587,11 @@
                 </span>
                 </div>
               </div>
-
           </div>
           <div class="alert hide" id="interview-message">
             <button type="button" class="close" onclick="$('#interview-message').slideUp()">&times;</button>
             <span>Nothing here</span>
           </div>
-
-
         </div>
         <div class="modal-footer">
           <div class="modal-buttons" id="newinterview-buttons">
@@ -605,6 +602,112 @@
       </div>
     </div>
   </div>
+
+  <!-- popover -->
+  <div id="set-interviewer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="setinterviewer-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="setinterviewer-label" localization>Set interviewer</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="form-inline">
+              <p>
+                <span localization>Interviewers</span>
+              </p>
+              <div id="setinterviewer-box">
+                <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
+              </div>
+              <label localization>new interviewer:</label>
+              <div class="input-group">
+                <input type="text" id="setinterviewer-inputName" class="form-control"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="setinterviewer-confirm" localization>add</button>
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <!-- popover -->
+  <div id="set-interviewee" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="setinterviewee-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="setinterviewee-label" localization>Set interviewee</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="form-inline">
+              <p>
+                <span localization>Interviewees</span>
+              </p>
+              <div id="setinterviewee-box">
+                <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
+              </div>
+              <label localization>new interviewer:</label>
+              <div class="input-group">
+                <input type="text" id="setinterviewee-inputName" class="form-control"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="setinterviewee-confirm" localization>add</button>
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <!-- popover -->
+  <div id="set-problem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="setproblem-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="setproblem-label" localization>Set problem</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="form-inline">
+              <p>
+                <span localization>Problems</span>
+              </p>
+              <div id="setproblem-box">
+                <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
+              </div>
+              <label localization>new problem:</label>
+              <div class="input-group">
+                <input type="text" id="setproblem-inputName" class="form-control"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="setproblem-confirm" localization>add</button>
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
   <!-- popover -->
   <div id="newfile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
