@@ -991,22 +991,22 @@ io.sockets.on('connection', function(socket){
  	});
 
 	socket.on('read-interview', function(data) {
-		console.log('enter app.js-read-interview');
 		if (!check(data, 'mode')) {
-			return;
+			return socket.emit('read-interview', {log: 'enter app.js-read-interview'});
 		}
 		if (!socket.session) {
-			return socket.emit('unauthorized');
+			//return socket.emit('unauthorized');
+			socket.emit('read-interview', {log: 'unauthorized'});
 		}
 		var mode = 0;
 		if (data.mode == 'interviewer') {
 			mode = 1;
 		}
+		socket.emit('read-interview', {log: 'change mode'});
 		interviewDAO.getInterviews(socket.session.user.name, mode, function(err, interview) {
 			if (err) {
 				return socket.emit('read-interview', {err: err});
 			}
-			console.log('get interviews success.');
 			socket.emit('read-interview', {
 				interview: interview,
 				mode: mode,
