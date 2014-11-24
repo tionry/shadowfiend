@@ -73,7 +73,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
             return callback("interview not found");
         }
         return callback(null, allviews);
-        var allviews = [];
+        /*var allviews = [];
         var length = 0;
         interviews.forEach(function(elements,length){
             //search by interviewer
@@ -95,7 +95,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
                 });
             }
         });
-        return callback(null, allviews);
+        return callback(null, allviews);*/
     });
 
 }
