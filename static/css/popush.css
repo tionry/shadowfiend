@@ -151,7 +151,7 @@ body{
 	border-radius:10px
 }
 
-#filecontrol, #problemset-control, #interviewers-control, #interviewees-control, #problem-item{
+#filecontrol, #problemset-control, #interviewers-control, #interviewees-control, #problem-item, #interviewer-item, #interviewee-item{
 	padding:25px;
 	background-color:#fff;
 	font-size:16px;
