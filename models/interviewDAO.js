@@ -65,40 +65,38 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
 }
 
 InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
-    var interviews = db.interview.find({}, {name:1,interviewer:1,interviewee:1,status:1}, function (err) {
+     db.interview.find({}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,interviews) {
         if (err) {
             return callback("inner error");
         }
         if (!interviews) {
             return callback("interview not found");
         }
+        var allviews = [];
+        var length = 0;
+        interviews.forEach(function(elements,length){
+            //search by interviewer
+            if(mode == 1){
+                elements.interviewer.forEach(function(viewer){
+                    if(viewer == userName){
+                        allviews[length] = elements;
+                        length++;
+                    }
+                });
+            }
+            //search by interviewee
+            else{
+                elements.interviewee.forEach(function(viewer){
+                    if(viewer == userName){
+                        allviews[length] = elements;
+                        length++;
+                    }
+                });
+            }
+        });
+        return callback(null, allviews);
     });
-    if(interviews == null){
-        return callback(null, interviews);
-    }
-    var allviews = [];
-    var length = 0;
-    interviews.forEach(function(elements,length){
-        //search by interviewer
-        if(mode == 1){
-            elements.interviewer.forEach(function(viewer){
-                if(viewer == userName){
-                    allviews[length] = elements;
-                    length++;
-                }
-            });
-        }
-        //search by interviewee
-        else{
-            elements.interviewee.forEach(function(viewer){
-                if(viewer == userName){
-                    allviews[length] = elements;
-                    length++;
-                }
-            });
-        }
-    });
-    return callback(null, allviews);
+
 }
 
 
