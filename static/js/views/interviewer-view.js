@@ -35,9 +35,11 @@ var app = app || {};
     });
 
     var newinterview = function(){
-        var newinterviewers = new Array();//
+        var newinterviewers = new Array();
         var newinterviewees = new Array();
         var newinterviewproblems = new Array();
+        $("#interviewer-list").html('');
+        $("#interviewee-list").html('');
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
