@@ -38,8 +38,6 @@ var app = app || {};
         var newinterviewers = new Array();
         var newinterviewees = new Array();
         var newinterviewproblems = new Array();
-        if (newinterviewers.length == 0){$("#interviewer-list").html('');}
-        if (newinterviewees.length == 0){$("#interviewee-list").html('');}
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
@@ -47,7 +45,7 @@ var app = app || {};
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
-        if (newinterviewers.length == 0){
+        if ($("#interviewer-list")[0].innerText.length < 1) {
             var cur = app.currentUser;
             var m = new app.User({
                 name: cur.name,
