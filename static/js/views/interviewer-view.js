@@ -45,7 +45,16 @@ var app = app || {};
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
-
+        var cur = app.currentUser;
+        var m = new app.User({
+            name: cur.name,
+            avatar: cur.avatar
+        });
+        var view = new app.SharerView({
+            model: m
+        });
+        var text = view.render().el;
+        $("#interviewer-list").append(text);
         var deleteUserInList = function(){
             $(".sharer-delete").click(function(){
                 var l = $(this).prev();
