@@ -20,6 +20,7 @@ var app = app || {};
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
       'problem/*problemtitle':function(argl){this.analy('problem',argl)},
+      'interview/*interviewtitle':function(argl){this.analy('interview',argl)},
       'problemset':function() {
         app.socket.emit('read-problem', {
           all: true,
@@ -114,6 +115,14 @@ var app = app || {};
         logined: true,
         show: Page.prototype.fadeIn,
         hide: Page.prototype.hide,
+      }),
+
+      interview:new Page({
+        el:'#interview-item',
+        depend:['_head2','_footer'],
+        logined: true,
+        show: Page.prototype.fadeIn,
+        hide:Page.prototype.hide,
       }),
 
       interviewers: new Page({
