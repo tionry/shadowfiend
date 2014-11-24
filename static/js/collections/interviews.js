@@ -11,7 +11,7 @@
         fetch: function(opts) {
             var _fetch = Backbone.Collection.prototype.fetch;
             if (opts.username) {
-                opts.reset = (opts.username != this.username) || (opts.mode != this.mode);
+                opts.reset = opts.username != this.username;
                 var oldUsername = this.username, err = opts.error, fail = opts.fail, that = this;
                 this.username = opts.username;
                 opts.error = function() {

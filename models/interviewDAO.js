@@ -66,7 +66,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
 
 InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
     if(mode == 1){
-        db.interview.find({"interviewer":userName}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,interviews) {
+        db.interview.find({"interviewer":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime:1}, function (err,interviews) {
             if (err) {
                 return callback("inner error");
             }
@@ -77,7 +77,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
         });
     }
     else if(mode == 2){
-        db.interview.find({"interviewee":userName}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,interviews) {
+        db.interview.find({"interviewee":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime: 1}, function (err,interviews) {
             if (err) {
                 return callback("inner error");
             }
