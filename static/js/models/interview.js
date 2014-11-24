@@ -31,7 +31,10 @@ var app = app || {};
         setShow: function() {
             var a = this.attributes;
             var check = function(){
-                return true;
+                for (var i = 0 ; i < a.interviewer.length; i++)
+                    if (a.interviewer[i] == app.currentUser.name)
+                        return true;
+                return false;
             }
             var o = {
                 //ord: a.ord,
