@@ -384,7 +384,7 @@
                 <script type="text/template" id="interview-template">
                   <td class="col1"><%= model.ord %></td>
 
-                  <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name %></a></td>
+                  <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="interviewer-go"><%= model.name %></a></td>
                   <td class="col3"><%= model.status %></td>
                   <td class="col4"><%= model.time %></td>
                 </script>
@@ -451,36 +451,37 @@
           </div>
         </div>
       </div>
+      <div id="interviewee-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
+        <div class="btn-toolbar" style="margin:0 0 5px 0;">
+          <div class="btn-group pull-left" style="margin-left:0">
+            <a class="btn btn-white" id="interviewee-item-back" href="#interviewees"><span class="glyphicon glyphicon-home"></span></a>
+          </div>
+          <div class="btn-group">
+            <h2 id="interviewee-item-name" style="margin-top: 7px;"></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">Interview Problem Set</div>
+            <table class="table table-hover" id="interviewee-problemset-table">
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Date</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="interviewee-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
-    <div class="btn-toolbar" style="margin:0 0 5px 0;">
-      <div class="btn-group pull-left" style="margin-left:0">
-        <a class="btn btn-white" id="interviewee-item-back" href="#interviewees"><span class="glyphicon glyphicon-home"></span></a>
-      </div>
-      <div class="btn-group">
-        <h2 id="interviewee-item-name" style="margin-top: 7px;"></h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="panel panel-default">
-        <div class="panel-heading">Interview Problem Set</div>
-        <table class="table table-hover" id="interviewee-problemset-table">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
 
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 
   <!-- popover -->
   <div id="newproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
