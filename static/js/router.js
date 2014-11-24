@@ -20,7 +20,8 @@ var app = app || {};
       '/*filepath': function(arg1) { this.analy('index', arg1); },
       'edit/': function(arg1) { this.analy('edit'); },
       'problem/*problemtitle':function(argl){this.analy('problem',argl)},
-      'interview/*interviewtitle':function(argl){this.analy('interview',argl)},
+      'interviewer/*interviewtitle':function(argl){this.analy('interviewer',argl)},
+      'interviewee/*interviewtitle':function(argl){this.analy('interviewee',argl)},
       'problemset':function() {
         app.socket.emit('read-problem', {
           all: true,
@@ -117,8 +118,16 @@ var app = app || {};
         hide: Page.prototype.hide,
       }),
 
-      interview:new Page({
-        el:'#interview-item',
+      interviewer:new Page({
+        el:'#interviewer-item',
+        depend:['_head2','_footer'],
+        logined: true,
+        show: Page.prototype.fadeIn,
+        hide:Page.prototype.hide,
+      }),
+
+      interviewee:new Page({
+        el:'#interviewee-item',
         depend:['_head2','_footer'],
         logined: true,
         show: Page.prototype.fadeIn,
