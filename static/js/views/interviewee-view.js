@@ -35,7 +35,7 @@ var app = app || {};
     });
 
     app.init || (app.init = {});
-    app.init.interviewerView = function () {
+    app.init.intervieweeView = function () {
         if (app.views['interviewees']) {
             return;
         }
