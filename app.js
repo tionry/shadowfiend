@@ -997,7 +997,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		var mode = 0;
+		var mode = 2;
 		if (data.mode == 'interviewer') {
 			mode = 1;
 		}
