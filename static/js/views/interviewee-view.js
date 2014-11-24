@@ -39,9 +39,9 @@ var app = app || {};
         if (app.views['interviewees']) {
             return;
         }
-        app.collections['interviews'] || app.init.interviews();
+        app.collections['interviewee-interviews'] || app.init.interviews();
         app.views['interviewees'] = new app.IntervieweeView({
-            collection: app.collections['interviews'],
+            collection: app.collections['interviewee-interviews'],
         });
     };
 })()

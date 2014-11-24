@@ -191,9 +191,9 @@ var app = app || {};
         if (app.views['interviewers']) {
             return;
         }
-        app.collections['interviews'] || app.init.interviews();
+        app.collections['interviewer-interviews'] || app.init.interviews();
         app.views['interviewers'] = new app.InterviewerView({
-            collection: app.collections['interviews'],
+            collection: app.collections['interviewer-interviews'],
         });
     };
 

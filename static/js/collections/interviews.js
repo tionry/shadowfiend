@@ -37,7 +37,8 @@
     app.init || (app.init = {});
 
     app.init.interviews = function() {
-        app.collections['interviews'] || (app.collections['interviews'] = new app.Interviews());
+        app.collections['interviewer-interviews'] || (app.collections['interviewer-interviews'] = new app.Interviews());
+        app.collections['interviewee-interviews'] || (app.collections['interviewee-interviews'] = new app.Interviews());
     };
 
 })();
