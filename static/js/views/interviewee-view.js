@@ -12,8 +12,8 @@ var app = app || {};
         },
 
         addOne: function(model) {
-            var v = model.view;
-            model.set({"eid": model.get("eid") || app.collections['interviews'].length});
+            var v = model.view;//
+            model.set({"eid": model.get("eid") || app.collections['interviewee-interviews'].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
