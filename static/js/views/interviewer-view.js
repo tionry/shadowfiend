@@ -6,14 +6,6 @@ var app = app || {};
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
 
-        template : _.template($('#interview-template').html(), null, {
-            variable: 'model'
-        }),
-
-        render: function () {
-            this.$el.html(this.template(this.model.json));
-            return this;
-        },
         initialize: function(){
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
@@ -25,14 +17,14 @@ var app = app || {};
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
-                    $('#interviewer-table').append(v.el);
+                    $('#interviewers-control-table').append(v.el);
                     v.delegateEvents();
                 }
             } else {
                 model.view = new app.interviewView({
                     model: model
                 });
-                $('#interviewer-table').append(model.view.render().el);
+                $('#interviewers-control-table').append(model.view.render().el);
             }
             return this;
         },

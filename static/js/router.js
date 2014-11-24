@@ -33,7 +33,7 @@ var app = app || {};
         this.analy('interviewers');
       },
       'interviewees':function() {
-        //app.socket.emit('read-interview', {mode: 'interviewee'});
+        app.socket.emit('read-interview', {mode: 'interviewee'});
         this.analy('interviewees');
       }
     },
