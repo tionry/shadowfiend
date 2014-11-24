@@ -29,7 +29,7 @@ var app = app || {};
         this.analy('problemset');
       },
       'interviewers':function() {
-        //app.socket.emit('read-interview', {mode: 'interviewer'});
+        app.socket.emit('read-interview', {mode: 'interviewer'});
         this.analy('interviewers');
       },
       'interviewees':function() {
