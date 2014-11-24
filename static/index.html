@@ -383,7 +383,7 @@
               <tbody>
                 <script type="text/template" id="interview-template">
                   <td class="col1"><%= model.ord %></td>
-                  <% if (model.belongSelf) { %>
+                  <% if (model.isInterviewer) { %>
                   <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="interviewer-go"><%= model.name %></a></td>
                   <% } else {  %>
                   <td class="col2"><a href="/#interviewee/<%=encodeURI(model.name)%>" class="interviewer-go"><%= model.name %></a></td>

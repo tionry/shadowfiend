@@ -30,6 +30,13 @@ var app = app || {};
 
         setShow: function() {
             var a = this.attributes;
+            var interviewers = a.interviewer;
+            var flag = false;
+            for (var i = 0; i < interviewers.length; i++)
+                if (interviewers[i] == app.currentUser){
+                    flag = true;
+                    break;
+                }
             var o = {
                 //ord: a.ord,
                 name: a.name,
@@ -38,6 +45,7 @@ var app = app || {};
                 problemlist: a.problemlist,
                 status: a.status,
                 time: new Date(a.createTime).toLocaleJSON(),
+                isInterviewer: flag,
             }
             this.json = o;
             return this;
