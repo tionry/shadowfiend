@@ -12,29 +12,19 @@ var app = app || {};
         },
 
         addOne: function(model) {
-            //var intervieweeList = model.interviewee;
-            //var user = app.currentUser;
-            //var flag;
-            //for (var i = 0; i < intervieweeList.length; i++){
-            //    if (intervieweeList[i] == user) {
-            //        flag = 'true';
-            //        break;
-            //    }
-            //}
-            //if (flag != 'true') return;
             var v = model.view;
-            model.set({"eid": model.get("eid") || app.collections['problems'].length});
+            model.set({"eid": model.get("eid") || app.collections['interviews'].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
-                    $('#interviewer-table').append(v.el);
+                    $('#interviewees-control-table').append(v.el);
                     v.delegateEvents();
                 }
             } else {
                 model.view = new app.interviewView({
                     model: model
                 });
-                $('#interviewee-table').append(model.view.render().el);
+                $('#interviewees-control-table').append(model.view.render().el);
             }
             return this;
         },
