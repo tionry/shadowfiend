@@ -3,9 +3,9 @@ var app = app || {};
 (function(){
     'use strict'
     app.interviewView = Backbone.View.extend({
-        tagName: 'li',
+        tagName: 'tr',
         //className: 'problem-item',
-        template : _.template($('#interviewer-template').html(), null, {
+        template : _.template($('#interview-template').html(), null, {
             variable: 'model'
         }),
 

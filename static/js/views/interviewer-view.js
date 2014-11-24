@@ -54,31 +54,23 @@ var app = app || {};
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
 
-        var updateinterList = function(){
-            for (var i = 0; i < newinterviewers.length; i++){
-                var Mname = newinterviewers[i];
-                var flag = "false";
-                $('#interviewer-list').children().each(function(){
-                    if ($(this).innerText == Mname){
-                        flag = "true";
+        var deleteUserInList = function(){
+            $(".sharer-delete").click(function(){
+                var l = $(this).prev();
+                var p = $(this).parent().parent();
+                var Mname = l[0].innerText;
+                for (var i = 0; i < newinterviewees.length; i++)
+                    if (newinterviewees[i] == Mname){
+                        newinterviewees.splice(i,1);
+                        break;
                     }
-                })
-                if (flag == "false"){
-                    newinterviewers.splice(i,1);
-                };
-            }
-            for (var i = 0; i < newinterviewees.length; i++){
-                var Mname = newinterviewees[i];
-                var flag = "false";
-                $('#interviewee-list').children().each(function(){
-                    if ($(this).innerText == Mname){
-                        flag = "true";
+                for (var i = 0; i < newinterviewers.length; i++)
+                    if (newinterviewers[i] == Mname){
+                        newinterviewers.splice(i,1);
+                        break;
                     }
-                })
-                if (flag == "false"){
-                    newinterviewees.splice(i,1);
-                };
-            }
+                p.remove();
+            });
         }
         modal.on('hide', function () {
             input.off('input');
@@ -130,22 +122,7 @@ var app = app || {};
                         });
                         var text = view.render().el;
                         $("#interviewer-list").append(text);
-                        $(".sharer-delete").click(function(){
-                            var l = $(this).prev();
-                            var p = $(this).parent().parent();
-                            var Mname = l[0].innerText;
-                            for (var i = 0; i < newinterviewees.length; i++)
-                                if (newinterviewees[i] == Mname){
-                                    newinterviewees.splice(i,1);
-                                    break;
-                                }
-                            for (var i = 0; i < newinterviewers.length; i++)
-                                if (newinterviewers[i] == Mname){
-                                    newinterviewers.splice(i,1);
-                                    break;
-                                }
-                            p.remove();
-                        });
+                        deleteUserInList();
                     }
                 })) {
                 app.socket.emit('check-user', {
@@ -183,22 +160,7 @@ var app = app || {};
                         });
                         var text = view.render().el;
                         $("#interviewee-list").append(text);
-                        $(".sharer-delete").click(function(){
-                            var l = $(this).prev();
-                            var p = $(this).parent().parent();
-                            var Mname = l[0].innerText;
-                            for (var i = 0; i < newinterviewees.length; i++)
-                                if (newinterviewees[i] == Mname){
-                                    newinterviewees.splice(i,1);
-                                    break;
-                                }
-                            for (var i = 0; i < newinterviewers.length; i++)
-                                if (newinterviewers[i] == Mname){
-                                    newinterviewers.splice(i,1);
-                                    break;
-                                }
-                            p.remove();
-                        });
+                        deleteUserInList();
                     }
                 })) {
                 app.socket.emit('check-user', {
@@ -221,7 +183,6 @@ var app = app || {};
                         modal.modal('hide');
                     }
                 })) {
-                updateinterList();
                 app.socket.emit('add-interview', {
                     name: name,
                     interviewer: newinterviewers,
