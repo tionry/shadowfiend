@@ -991,7 +991,7 @@ io.sockets.on('connection', function(socket){
  	});
 
 	socket.on('read-interview', function(data) {
-		alert('enter app.js-read-interview');
+		console.log('enter app.js-read-interview');
 		if (!check(data, 'mode')) {
 			return;
 		}
@@ -1006,7 +1006,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('read-interview', {err: err});
 			}
-			alert('get interviews success.');
+			console.log('get interviews success.');
 			socket.emit('read-interview', {
 				interview: interview,
 				mode: mode,
