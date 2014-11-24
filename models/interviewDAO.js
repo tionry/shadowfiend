@@ -65,7 +65,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
 }
 
 InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
-    var interviews = db.interview.find({}, {name:1}, function (err) {
+    var interviews = db.interview.find({}, {name:1,interviewer:1,interviewee:1,status:1}, function (err) {
         if (err) {
             return callback("inner error");
         }
