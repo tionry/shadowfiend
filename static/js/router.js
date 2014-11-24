@@ -104,7 +104,7 @@ var app = app || {};
         el:'#problem-item',
         depend:['_head2','_footer'],
         logined: true,
-        show: Page.prototype.show,
+        show: Page.prototype.fadeIn,
         hide:Page.prototype.hide,
       }),
 
@@ -112,7 +112,7 @@ var app = app || {};
         el: '#problemset-control',
         depend: ['_head2', '_footer'],
         logined: true,
-        show: Page.prototype.show,
+        show: Page.prototype.fadeIn,
         hide: Page.prototype.hide,
       }),
 
@@ -120,7 +120,7 @@ var app = app || {};
         el: '#interviewers-control',
         depend: ['_head2', '_footer'],
         logined: true,
-        show: Page.prototype.show,
+        show: Page.prototype.fadeIn,
         hide: Page.prototype.hide,
       }),
 
@@ -128,7 +128,7 @@ var app = app || {};
         el: '#interviewees-control',
         depend: ['_head2', '_footer'],
         logined: true,
-        show: Page.prototype.show,
+        show: Page.prototype.fadeIn,
         hide: Page.prototype.hide,
       }),
       
