@@ -38,8 +38,8 @@ var app = app || {};
         var newinterviewers = new Array();
         var newinterviewees = new Array();
         var newinterviewproblems = new Array();
-        $("#interviewer-list").html('');
-        $("#interviewee-list").html('');
+        if (newinterviewers.length == 0){$("#interviewer-list").html('');}
+        if (newinterviewees.length == 0){$("#interviewee-list").html('');}
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
