@@ -55,6 +55,7 @@ var app = app || {};
         });
         var text = view.render().el;
         $("#interviewer-list").append(text);
+        $('#interviewer-list').find('.sharer-delete').hide();
         var deleteUserInList = function(){
             $(".sharer-delete").click(function(){
                 var l = $(this).prev();
