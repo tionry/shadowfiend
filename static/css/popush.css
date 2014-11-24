@@ -323,6 +323,10 @@ body{
 	height: 192px;
 	cursor: pointer;
 }
+.interviewer-interviewee{
+	float: left;
+	margin: 10px;
+}
 #member-list{
 	margin-top:5px
 }
