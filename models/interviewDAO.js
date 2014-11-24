@@ -65,38 +65,32 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
 }
 
 InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
-     db.interview.find({}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,allviews) {
-        if (err) {
-            return callback("inner error");
-        }
-        if (!interviews) {
-            return callback("interview not found");
-        }
-        return callback(null, allviews);
-        /*var allviews = [];
-        var length = 0;
-        interviews.forEach(function(elements,length){
-            //search by interviewer
-            if(mode == 1){
-                elements.interviewer.forEach(function(viewer){
-                    if(viewer == userName){
-                        allviews[length] = elements;
-                        length++;
-                    }
-                });
+    if(mode == 1){
+        db.interview.find({"interviewer":userName}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,interviews) {
+            if (err) {
+                return callback("inner error");
             }
-            //search by interviewee
-            else{
-                elements.interviewee.forEach(function(viewer){
-                    if(viewer == userName){
-                        allviews[length] = elements;
-                        length++;
-                    }
-                });
+            if (!interviews) {
+                return callback("interview not found");
             }
+            return callback(null, interviews);
         });
-        return callback(null, allviews);*/
-    });
+    }
+    else if(mode == 2){
+        db.interview.find({"interviewee":userName}, {name:1,interviewer:1,interviewee:1,status:1}, function (err,interviews) {
+            if (err) {
+                return callback("inner error");
+            }
+            if (!interviews) {
+                return callback("interview not found");
+            }
+            return callback(null, interviews);
+        });
+    }
+    else{
+        return callback("bad mode info");
+    }
+
 
 }
 
