@@ -35,7 +35,7 @@ var app = app || {};
     });
 
     var newinterview = function(){
-        var newinterviewers = new Array();
+        var newinterviewers = new Array();//
         var newinterviewees = new Array();
         var newinterviewproblems = new Array();
         var modal = Backbone.$('#new-interview');
@@ -45,17 +45,21 @@ var app = app || {};
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
-        var cur = app.currentUser;
-        var m = new app.User({
-            name: cur.name,
-            avatar: cur.avatar
-        });
-        var view = new app.SharerView({
-            model: m
-        });
-        var text = view.render().el;
-        $("#interviewer-list").append(text);
-        $('#interviewer-list').find('.sharer-delete').hide();
+        if (newinterviewers.length == 0){
+            var cur = app.currentUser;
+            var m = new app.User({
+                name: cur.name,
+                avatar: cur.avatar
+            });
+            var view = new app.SharerView({
+                model: m
+            });
+            var text = view.render().el;
+            $("#interviewer-list").append(text);
+            $('#interviewer-list').find('.sharer-delete').hide();
+            newinterviewers.push(cur.name);
+        }
+
         var deleteUserInList = function(){
             $(".sharer-delete").click(function(){
                 var l = $(this).prev();
