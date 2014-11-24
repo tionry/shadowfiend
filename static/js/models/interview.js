@@ -38,7 +38,7 @@ var app = app || {};
                 problemlist: a.problemlist,
                 status: a.status,
                 time: new Date(a.createTime).toLocaleJSON(),
-                isInterviewer: (a.interviewer[0] == app.currentUser),
+                isInterviewer: (a.interviewer[0] == app.currentUser.name),
             }
             this.json = o;
             return this;
