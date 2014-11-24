@@ -20,11 +20,17 @@ var app = app || {};
             }
 
             app.Lock.detach(data);
-            app.collections.interviews.fetch({
-                username: data.username,
-                virtual: true,
-                mode: data.mode
-            });
+            if (data.mode == 1) {
+                app.collections['interviewer-interviews'].fetch({
+                    username: data.username,
+                    virtual: true
+                });
+            } else {
+                app.collections['interviewee-interviews'].fetch({
+                    username: data.username,
+                    virtual: true
+                });
+            }
             app.Lock.detach(data);
             delete data.problem;
         },
