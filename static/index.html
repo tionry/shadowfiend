@@ -364,7 +364,7 @@
               <li><a href="#"  localization>Interviews</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><button id="btn_nic" type="button" class="btn btn-primary" data-toggle="modal" localization>New Interview</button></li>
+              <li><button id="btn_nic" type="button" class="btn btn-primary" localization>New Interview</button></li>
             </ul>
           </div>
         </div>
@@ -401,9 +401,9 @@
       <div id="interviewer-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
           <div class="btn-group pull-right">
-            <button id="set-interviewer-btn" class="btn btn-primary">Set Interviewers</button>
-            <button id="set-interviewee-btn" class="btn btn-primary">Set Interviewees</button>
-            <button id="set-problem-btn" class="btn btn-primary">Set Problems</button>
+            <button id="set-interviewer-btn" type="button" class="btn btn-primary" localization>Set Interviewers</button>
+            <button id="set-interviewee-btn" type="button" class="btn btn-primary" localization>Set Interviewees</button>
+            <button id="set-problem-btn" type="button" class="btn btn-primary" localization>Set Problems</button>
           </div>
           <div class="btn-group pull-left" style="margin-left:0">
             <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
@@ -520,7 +520,7 @@
   </div>
 
   <!-- popover -->
-  <div id="new-interview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+  <div id="new-interview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newinterview-label" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="width: 1200px">
       <div class="modal-content">
         <div class="modal-header">
@@ -532,6 +532,12 @@
             <label class="control-label col-sm-3" localization>name</label>
             <div class="col-sm-7">
               <input id="newinterview-name" class="modal-input form-control" type="text" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" localization>time</label>
+            <div class="col-sm-7">
+              <input id="newinterview-time" class="modal-input form-control" type="text" />
             </div>
           </div>
           <div class="row">
