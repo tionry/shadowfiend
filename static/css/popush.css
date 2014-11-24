@@ -319,13 +319,14 @@ body{
 	margin:0
 }
 .interviewee-img{
-	width: 192px;
-	height: 192px;
+	width: 96px;
+	height: 96px;
 	cursor: pointer;
 }
 .interviewer-interviewee{
 	float: left;
 	margin: 10px;
+	text-align: center;
 }
 #member-list{
 	margin-top:5px
