@@ -72,18 +72,6 @@ var app = app || {};
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
             var description = Backbone.$.trim(modal.find('#newproblem-description').val());
-            //app.collections['problems'].create({
-            //    name:name,
-            //    description:description
-            //}, {
-            //    loading: modal.find('.modal-buttons'),
-            //    error: function (m, data) {
-            //        app.showMessageInDialog(modal, data.err);
-            //    },
-            //    success: function () {
-            //        modal.modal('hide');
-            //    }
-            //});
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (data) {
