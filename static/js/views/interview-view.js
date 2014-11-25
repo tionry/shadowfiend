@@ -9,12 +9,12 @@ var app = app || {};
             variable: 'model'
         }),
 
-        //events:{
-        //    'click a.problem-go':'go',
+        events:{
+            'click a.interview-go':'go',
         //    'click a.problem-modify':'modify',
         //    'click a.problem-delete':'delete',
         //    'click a.problem-toggle':'toggleDone',
-        //},
+        },
         initialize: function(){
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'remove', this.remove);
@@ -26,9 +26,36 @@ var app = app || {};
             return this;
         },
 
-        //Check one problem
+        //enter an interview
         go:function(e){
-
+            var cur = app.currentUser.name;
+            var interviewer = this.model.attributes.interviewer;
+            var check = function(){
+                for (var i = 0 ; i < interviewer.length; i++)
+                    if (interviewer[i] == cur)
+                        return true;
+                return false;
+            }
+            if (check()){
+                var v = this.model.v;
+                if (!v) {
+                    app.collections['intervieweeList'] = new app.members();
+                    app.collections['problemList'] = new app.problems();
+                    this.model.v = new app.InterviewerMainView({
+                        model: this.model,
+                        intervieweeList: app.collections['intervieweeList'],
+                        problems: new app.collections['problemList'],
+                    });
+                }else{
+                    app.collections['intervieweeList'] = new app.members();
+                    app.collections['problemList'] = new app.problems();
+                    this.model.v.renewList();
+                }
+            }else{
+                var view = new app.IntervieweeMainView({
+                    model:this.model
+                });
+            }
             //$('#problem-name').html(this.model.attributes.name);
             //$('#problem-description').html(this.model.attributes.description);
         },

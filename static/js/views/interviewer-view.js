@@ -1,8 +1,9 @@
 /**
- * 面试官主页面
+ * 查看面试官所有面试页面
  */
 var app = app || {};
 (function(){
+    'use strict';
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
 
@@ -174,7 +175,6 @@ var app = app || {};
                 })
             }
         });
-
 
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
