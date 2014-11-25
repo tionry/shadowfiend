@@ -16,10 +16,10 @@ var app = app || {};
 
         initialize: function(){
             this.itv = this.model.attributes;
-            this.listenTo(this.intervieweeList, 'add', this.addOneInterviewee);
-            this.listenTo(this.intervieweeList, 'reset', this.addAllInterviewee);
-            this.listenTo(this.problemList, 'add', this.addOneProblem);
-            this.listenTo(this.problemList, 'reset', this.addAllProblem);
+            //this.listenTo(this.intervieweeList, 'add', this.addOneInterviewee);
+            //this.listenTo(this.intervieweeList, 'reset', this.addAllInterviewee);
+            //this.listenTo(this.problemList, 'add', this.addOneProblem);
+            //this.listenTo(this.problemList, 'reset', this.addAllProblem);
 
             //初始化界面显示
             $('#interviewer-item-name')[0].innerText = this.itv.name;
