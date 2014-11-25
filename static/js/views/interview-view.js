@@ -20,6 +20,8 @@ var app = app || {};
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'remove', this.remove);
             this.listenTo(this.model, 'destroy', this.remove);
+            app.collections['intervieweeList'] || (app.collections['intervieweeList'] = new app.Members());
+            app.collections['problemList'] || (app.collections['problemList'] = new app.Problems());
         },
 
         render: function () {
@@ -31,8 +33,6 @@ var app = app || {};
         interviewer_go:function(e){
             var v = this.model.v;
             if (!v) {
-                app.collections['intervieweeList'] || (app.collections['intervieweeList'] = new app.Members());
-                app.collections['problemList'] || (app.collections['problemList'] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     intervieweeList: app.collections['intervieweeList'],
