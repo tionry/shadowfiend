@@ -32,17 +32,17 @@ var app = app || {};
         },
 
         add_interviewee: function(){
-            var modal = Backbone.$('#set-interviewee-btn');
+            var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
         },
 
         add_interviewer: function(){
-            var modal = Backbone.$('#set-interviewer-btn');
+            var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
         },
 
         add_problem: function(){
-            var modal = Backbone.$('#set-problem-btn');
+            var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
         },
 
