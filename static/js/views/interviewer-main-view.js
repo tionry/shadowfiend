@@ -8,9 +8,9 @@ var app = app || {};
         el: "#interviewer-item",
 
         events:{
-            'click #set-interviewee': 'add_interviewee',
-            'click #set-interviewer': 'add_interviewer',
-            'click #set-problem': 'add_problem',
+            'click #set-interviewee-btn': 'add_interviewee',
+            'click #set-interviewer-btn': 'add_interviewer',
+            'click #set-problem-btn': 'add_problem',
             'click #start-interview': 'start_interview'
         },
 
@@ -32,17 +32,17 @@ var app = app || {};
         },
 
         add_interviewee: function(){
-            var modal = $('#set-interviewee-btn');
+            var modal = Backbone.$('#set-interviewee-btn');
             app.showInputModal(modal);
         },
 
         add_interviewer: function(){
-            var modal = $('#set-interviewer-btn');
+            var modal = Backbone.$('#set-interviewer-btn');
             app.showInputModal(modal);
         },
 
         add_problem: function(){
-            var modal = $('#set-problem-btn');
+            var modal = Backbone.$('#set-problem-btn');
             app.showInputModal(modal);
         },
 
