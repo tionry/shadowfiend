@@ -300,7 +300,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#set-interviewer,#set-interviewee,#set-problem{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#set-interviewer-box,#set-interviewee-box,#set-problem-box,#interviewer-problem-box{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -310,12 +310,12 @@ body{
 	-moz-border-radius:4px;
 	border-radius:4px
 }
-#share-user-box img,#interviewee-box img,#interviewer-box img,#interview-problem-box img,#set-interviewer img,#set-interviewee img,#set-problem img{
+#share-user-box img,#interviewee-box img,#interviewer-box img,#interview-problem-box img,#set-interviewer-box img,#set-interviewee-box img,#set-problem-box img,#interviewer-problem-box img{
 	margin-right:10px;
 	max-height:32px;
 	max-width:32px
 }
-#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#set-interviewer ul,#set-interviewee ul,#set-problem ul{
+#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#set-interviewer-box ul,#set-interviewee-box ul,#set-problem-box ul,#interviewer-problem-box ul{
 	margin:0
 }
 .interviewee-img{
