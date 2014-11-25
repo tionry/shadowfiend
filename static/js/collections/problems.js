@@ -57,7 +57,6 @@ var app = app || {};
 
 	app.init.problems = function() {
 		app.collections['problems'] || (app.collections['problems'] = new app.Problems());
-		app.collections['allproblems'] || (app.collections['allproblems'] = new app.Problems());
 	};
 
 })();
