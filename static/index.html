@@ -714,7 +714,7 @@
                 <span localization>Interviewees</span>
               </p>
               <div id="setinterviewee-box">
-                <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
+                <ul class="nav nav-pills nav-stacked" id="interviewee-list"></ul>
               </div>
               <label localization>new interviewee:</label>
               <div class="input-group">
@@ -744,21 +744,30 @@
           <h3 id="setproblem-label" localization>Set problem</h3>
         </div>
         <div class="modal-body form-horizontal">
-            <div class="form-inline">
-              <p>
-                <span localization>Problems</span>
-              </p>
-              <div id="setproblem-box">
-                <ul class="nav nav-pills nav-stacked" id="interviewer-list"></ul>
+          <div class="form-inline">
+            <div class="row">
+              <div class="col-sm-5">
+                <p>
+                  <span localization>All problems</span>
+                </p>
+                <div id="setproblemall-box">
+                  <ul class="nav nav-pills nav-stacked" id="allproblem-list"></ul>
+                </div>
               </div>
-              <label localization>new problem:</label>
-              <div class="input-group">
-                <input type="text" id="setproblem-inputName" class="form-control"/>
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button" id="setproblem-confirm" localization>add</button>
-                </span>
+              <div class="col-sm-2">
+                <button class="btn btn-white" type="button" title="add" id="setproblem-add"><span class="glyphicon glyphicon-forward"></span></button>
+                <button class="btn btn-white" type="button" title="remove" id="setproblem-remove"><span class="glyphicon glyphicon-backward"></span></button>
+              </div>
+              <div class="col-sm-5">
+                <p>
+                  <span localization>Interview problems</span>
+                </p>
+                <div id="setprobleminterview-box">
+                  <ul class="nav nav-pills nav-stacked" id="interviewproblem-list"></ul>
+                </div>
               </div>
             </div>
+          </div>
         </div>
         <div class="modal-footer">
           <div class="modal-buttons">
