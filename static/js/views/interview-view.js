@@ -29,21 +29,18 @@ var app = app || {};
 
         //enter an interview
         interviewer_go:function(e){
-            var cur = app.currentUser.name;
-            var interviewer = this.model.attributes.interviewer;
-
             var v = this.model.v;
             if (!v) {
-                app.collections['intervieweeList'] = new app.members();
-                app.collections['problemList'] = new app.problems();
+                app.collections['intervieweeList'] || (app.collections['intervieweeList'] = new app.Members());
+                app.collections['problemList'] || (app.collections['problemList'] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     intervieweeList: app.collections['intervieweeList'],
                     problems: new app.collections['problemList'],
                 });
             }else{
-                app.collections['intervieweeList'] = new app.members();
-                app.collections['problemList'] = new app.problems();
+                app.collections['intervieweeList'] = new app.Members();
+                app.collections['problemList'] = new app.Problems();
                 this.model.v.renewList();
             }
         },
