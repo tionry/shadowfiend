@@ -468,6 +468,12 @@
                 <p><%= model.name %></p>
               </div>
             </script>
+            <script type="text/template" id="interviewer-problem-template">
+              <a href="#">
+                <ii><%= model.name %></ii>
+                <button class="btn btn-white disabled" type="button" id="push-problem-btn" title="push problem"><span class="glyphicon glyphicon-play"></span></button>
+              </a>
+            </script>
           </div>
         </div>
       </div>
@@ -616,7 +622,14 @@
                   <span localization>Problems</span>
                 </p>
                 <div id="interview-problem-box">
-                  <ul class="nav nav-pills nav-stacked" id="interview-problem-list"></ul>
+                  <ul class="nav nav-pills nav-stacked" id="interview-problem-list">
+                    <li>
+                      <a href="#">
+                        <ii><%= model.name %></ii>
+                        <button type="button" class="close sharer-delete">&times;</button>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
                 <label localization>new problem:</label>
                 <div class="input-group">
@@ -627,6 +640,12 @@
                 </div>
               </div>
           </div>
+          <script type="text/template" id="problem-template">
+            <a href="#">
+              <ii><%= model.name %></ii>
+              <button type="button" class="close sharer-delete">&times;</button>
+            </a>
+          </script>
           <div class="alert hide" id="interview-message">
             <button type="button" class="close" onclick="$('#interview-message').slideUp()">&times;</button>
             <span>Nothing here</span>
@@ -988,12 +1007,6 @@
   <script type="text/template" id="sharer-template">
     <a href="#">
       <img src="<%= avatar %>" width="32" height="32" class="sharer-avatar userlistimg user-<%= name %>" />
-      <ii><%=name%></ii>
-      <button type="button" class="close sharer-delete">&times;</button>
-    </a>
-  </script>
-  <script type="text/template" id="problem-template">
-    <a href="#">
       <ii><%=name%></ii>
       <button type="button" class="close sharer-delete">&times;</button>
     </a>
