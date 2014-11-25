@@ -16,8 +16,8 @@ var app = app || {};
 
         initialize: function(){
             this.itv = this.model.attributes;
-            //this.listenTo(this.intervieweeList, 'add', this.addOneInterviewee);
-            //this.listenTo(this.intervieweeList, 'reset', this.addAllInterviewee);
+            this.listenTo(this.intervieweeList, 'add', this.addOneInterviewee);
+            this.listenTo(this.intervieweeList, 'reset', this.addAllInterviewee);
             //this.listenTo(this.problemList, 'add', this.addOneProblem);
             //this.listenTo(this.problemList, 'reset', this.addAllProblem);
 
