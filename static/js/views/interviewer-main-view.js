@@ -18,9 +18,9 @@ var app = app || {};
             this.itv = this.model.attributes;
             this.listenTo(this.options.intervieweeList, 'add', this.addOneInterviewee);
             this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
-            //this.listenTo(this.problemList, 'add', this.addOneProblem);
-            //this.listenTo(this.problemList, 'reset', this.addAllProblem);
-
+            this.listenTo(this.options.problemList, 'add', this.addOneProblem);
+            this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
+            this.listenTo(app.collections.problems, 'reset', this.addAllProblem2);
             //初始化界面显示
             $('#interviewer-item-name')[0].innerText = this.itv.name;
             this.renewList();
@@ -44,6 +44,21 @@ var app = app || {};
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
+            //获取所有题目，添加在左侧
+            if (app.Lock.attach({
+                    error: function (data) {
+                    },
+                    success: function () {
+
+                    }
+                })) {
+                app.socket.emit('read-problem', {
+                    all: true,
+                    name: '',
+                    virtual: true
+                });
+
+            }
         },
 
         start_interview: function(){
@@ -86,12 +101,34 @@ var app = app || {};
             return this;
         },
 
+        addOneProblem2: function(model){
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.el.is(':hidden')) {
+                    $('#allproblem-list').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.TestProblemView({
+                    model: model
+                });
+                $('#allproblem-list').append(model.view.render().el);
+            }
+            return this;
+        },
+
         addAllInterviewee: function(){
             this.intervieweeList.each(this.add_interviewee);
         },
 
         addAllProblem: function(){
             this.problemList.each(this.addOneProblem);
+        },
+
+        addAllProblem2: function(){
+            app.collections.problems.each(this.addOneProblem2);
         },
     });
 
