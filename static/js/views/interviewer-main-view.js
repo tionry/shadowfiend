@@ -32,17 +32,17 @@ var app = app || {};
         },
 
         add_interviewee: function(){
-            var modal = $('#set-interviewee');
+            var modal = $('#set-interviewee-btn');
             app.showInputModal(modal);
         },
 
         add_interviewer: function(){
-            var modal = $('#set-interviewer');
+            var modal = $('#set-interviewer-btn');
             app.showInputModal(modal);
         },
 
         add_problem: function(){
-            var modal = $('#set-problem');
+            var modal = $('#set-problem-btn');
             app.showInputModal(modal);
         },
 
