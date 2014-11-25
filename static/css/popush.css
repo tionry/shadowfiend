@@ -558,3 +558,6 @@ hr{
 	margin-top:14px;
 	margin-bottom:14px
 }
+#push-problem-btn{
+	float: right;
+}
