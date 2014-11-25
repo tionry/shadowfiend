@@ -562,3 +562,6 @@ hr{
 	float: right;
 	padding: 0px;
 }
+.add-problem, .remove-problem{
+	margin: 10px;
+}
