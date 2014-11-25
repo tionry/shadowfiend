@@ -33,10 +33,12 @@ var app = app || {};
             if (!v) {
                 app.collections['intervieweeList'] || (app.collections['intervieweeList'] = new app.Members());
                 app.collections['problemList'] || (app.collections['problemList'] = new app.Problems());
+                app.collections['allproblems'] || (app.collections['allproblems'] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     intervieweeList: app.collections['intervieweeList'],
                     problemList: app.collections['problemList'],
+                    allproblems: app.collections['allproblems'],
                 });
             }else{
                 app.collections['intervieweeList'] = new app.Members();

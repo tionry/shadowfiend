@@ -20,7 +20,8 @@ var app = app || {};
             this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            this.listenTo(app.collections.problems, 'reset', this.addAllProblem2);
+            this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
+            this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
             //初始化界面显示
             $('#interviewer-item-name')[0].innerText = this.itv.name;
             this.renewList();

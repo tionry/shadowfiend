@@ -6,7 +6,7 @@ var app = app || {};
     'use strict'
     app.TestProblemView = Backbone.View.extend({
         tagName: 'li',
-        template : _.template($('#interviewer-problem-template').html(), null, {
+        template : _.template($('#allproblem-template').html(), null, {
             variable: 'model'
         }),
 

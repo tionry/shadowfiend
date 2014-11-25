@@ -24,6 +24,11 @@ var app = app || {};
                 name: '',
                 virtual: true
             });
+            app.collections.allproblems.fetch({
+                all: true,
+                name: '',
+                virtual: true
+            });
             app.Lock.detach(data);
             delete data.problem;
         }
