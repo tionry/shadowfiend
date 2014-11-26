@@ -94,7 +94,7 @@ var app = app || {};
                 var problemArr = function(){
                     var result = new Array();
                     il.children().each(function(){
-                        result.push(this.innerText);
+                        result.push(this.innerText.trim());
                     });
                     return result;
                 }
