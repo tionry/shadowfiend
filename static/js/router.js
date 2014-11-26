@@ -26,7 +26,7 @@ var app = app || {};
         app.socket.emit('read-problem', {
           all: true,
           name: '',
-          virtual: true
+          mode: 'problemset'
         });
         this.analy('problemset');
       },

@@ -19,11 +19,19 @@ var app = app || {};
             }
 
             app.Lock.detach(data);
-            app.collections.problems.fetch({
-                all: true,
-                name: '',
-                virtual: true
-            });
+            if (data.mode == 'interview') {
+                app.collections.allproblems.fetch({
+                    all: true,
+                    name: '',
+                    virtual: true
+                });
+            } else {
+                app.collections.problems.fetch({
+                    all: true,
+                    name: '',
+                    virtual: true
+                });
+            }
             app.Lock.detach(data);
             delete data.problem;
         }

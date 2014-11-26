@@ -56,7 +56,8 @@ var app = app || {};
                 app.socket.emit('read-problem', {
                     all: true,
                     name: '',
-                    virtual: true
+                    virtual: true,
+                    mode: 'interview'
                 });
 
             }
