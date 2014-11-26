@@ -126,21 +126,12 @@ var app = app || {};
                             //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
                         },
                         success: function () {
-                            if (app.Lock.attach({
-                                    error: function (data) {
-                                        //do nothing
-                                    },
-                                    success: function () {
-                                        //do nothing
-                                    }
-                                })) {
-                                app.socket.emit('read-problem', {
-                                    all: true,
-                                    name: this.itv.name,
-                                    virtual: true,
-                                    mode: 'problem-in-interview'
-                                });
-                            }
+                            app.socket.emit('read-problem', {
+                                all: true,
+                                name: itvname,
+                                virtual: true,
+                                mode: 'problem-in-interview'
+                            });
                             modal.modal('hide');
                         }
                     })) {
