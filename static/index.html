@@ -906,6 +906,65 @@
   </div>
 
   <!-- popover -->
+  <div id="remark" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newproblem-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="remark-label" localization>Remark</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-3" localization>score</label>
+            <div class="col-sm-7">
+              <input id="remark-score" class="modal-input form-control" type="text" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" localization>description</label>
+            <div class="col-sm-7">
+              <textarea id="remark-description" class="modal-input form-control" rows="8"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- popover -->
+  <div id="newfile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="newfile-label" localization>newfile</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="newfile-input" localization>name</label>
+            <div class="col-sm-7">
+              <input class="modal-input form-control" type="text" id="newfile-input" />
+              <span class="help-inline"></span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+ <!-- popover -->
   <div id="newfile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
