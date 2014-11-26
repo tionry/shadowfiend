@@ -12,7 +12,7 @@ var app = app || {};
             'click #set-interviewer-btn': 'add_interviewer',
             'click #set-problem-btn': 'add_problem',
             'click #start-interview-btn': 'start_interview',
-            'click #end-interview-btn': 'end_interview',
+            'click #end-interview-btn': 'end_interview'
         },
 
         initialize: function(){
@@ -36,21 +36,12 @@ var app = app || {};
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
 
-            if (app.Lock.attach({
-                    error: function (data) {
-                        //do nothing
-                    },
-                    success: function () {
-                        //do nothing
-                    }
-                })) {
-                app.socket.emit('read-problem', {
-                    all: true,
-                    name: this.itv.name,
-                    virtual: true,
-                    mode: 'problem-in-interview'
-                });
-            }
+            app.socket.emit('read-problem', {
+                all: true,
+                name: this.itv.name,
+                virtual: true,
+                mode: 'problem-in-interview'
+            });
         },
 
         add_interviewee: function(){
@@ -71,7 +62,7 @@ var app = app || {};
 
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
-            var itvname = this.itv.name;
+            var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
@@ -82,21 +73,12 @@ var app = app || {};
             il.html('');
             al.html('');
             //获取所有题目，添加在左侧
-            if (app.Lock.attach({
-                    error: function (data) {
-                        //do nothing
-                    },
-                    success: function () {
-                        //do nothing
-                    }
-                })) {
-                app.socket.emit('read-problem', {
-                    all: true,
-                    name: '',
-                    virtual: true,
-                    mode: 'all-problem'
-                });
-            }
+            app.socket.emit('read-problem', {
+                all: true,
+                name: '',
+                virtual: true,
+                mode: 'all-problem'
+            });
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
