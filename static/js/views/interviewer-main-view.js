@@ -48,7 +48,8 @@ var app = app || {};
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
                 il = $('#interviewproblem-list'),
-                al = $('#allproblem-list')
+                al = $('#allproblem-list'),
+                cnfm = $('#setinterviewproblem-cnfm');
             //获取所有题目，添加在左侧
             if (app.Lock.attach({
                     error: function (data) {
@@ -67,17 +68,23 @@ var app = app || {};
             }
 
             ap.attr('disabled', 'disabled').on('click', function () {
-                var l = $('#allproblem-list').find('.active');
+                var l = al.find('.active');
                 il.append(l);
                 l.removeClass('active');
                 ap.attr('disabled', 'disabled');
             });
             dp.attr('disabled', 'disabled').on('click', function () {
-                var l = $('#interviewproblem-list').find('.active');
+                var l = il.find('.active');
                 al.append(l);
                 l.removeClass('active');
                 dp.attr('disabled', 'disabled');
             });
+            cnfm.on('click', function(){
+                var problemArr = new Array();
+                il.children().each(function(){
+                    problemArr.push(this[0].innerText);
+                })
+            })
 
         },
 
