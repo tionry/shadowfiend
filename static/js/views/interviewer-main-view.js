@@ -92,7 +92,7 @@ var app = app || {};
             cnfm.on('click', function(){
                 var problemArr = new Array();
                 il.children().each(function(){
-                    problemArr.push(this[0].innerText);
+                    problemArr.push(this.innerText);
                 })
                 if (app.Lock.attach({
                         error: function (data) {
