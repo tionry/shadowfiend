@@ -28,7 +28,7 @@ var app = app || {};
         select: function(){
             $('li').removeClass('active');
             this.$el.addClass('active');
-            var ap = $('setproblem-add');
+            var ap = $('#setproblem-add');
             ap.removeAttr('disabled');
         },
 
