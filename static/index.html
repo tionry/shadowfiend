@@ -543,7 +543,8 @@
                   <button class="btn btn-white" type="button" id="interview-editor-console" title="console"><span class="glyphicon glyphicon-share"></span></button>
                 </div>
                 <div class="btn-group pull-left" style="margin-left:0">
-                  <a class="btn btn-white" id="interview-toggle-problem"><span class="glyphicon glyphicon-backward"></span></a>
+                  <button class="btn btn-white" type="button" title="hide-title" id="interview-toggle-problem"><span class="glyphicon glyphicon-backward"></span></button>
+                  <a class="btn btn-white" id="interview-back"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
                 <div class="btn-group" id="interview-current-doc-outer">
                   <p id="interview-current-doc-p">
@@ -556,13 +557,13 @@
               </div>
               <textarea id="interview-editor-textarea" ></textarea>
               <div id="interview-under-editor" class="hide">
-                <div id="interview-console">
+                <div id="interview-console" style="width:67%">
                   <div id="interview-console-title" class="well well-top" style="border-bottom:1px solid #ddd;padding:4px 0 5px 10px;" localization>console</div>
                   <div id="interview-console-inner">
                   </div>
                   <input id="interview-console-input"  class="form-control" type="text"/>
                 </div>
-                <div id="interview-varlist">
+                <div id="interview-varlist" style="width:33%">
                   <div class="well well-top">
                     <div class="btn-group">
                       <button class="btn disabled debugandwait" type="button" title="step-title" id="interview-debugstep">
