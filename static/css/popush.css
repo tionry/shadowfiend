@@ -300,7 +300,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#interviewer-problem-box,#setuserall-box,#setuserround-box{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#interviewer-problem-box,#setuserall-box,#setuserround-box,#interviewer-interviewee-control{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -562,6 +562,6 @@ hr{
 	float: right;
 	padding: 0px;
 }
-.add-problem, .remove-problem, #set-round-btn{
+.add-problem, .remove-problem{
 	margin: 10px;
 }
