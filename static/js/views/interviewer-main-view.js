@@ -29,6 +29,7 @@ var app = app || {};
         },
 
         renewList: function(){
+            $('.remark-btn').attr('disabled', 'disabled');
             $('#interviewer-item-name')[0].innerText = this.itv.name;
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
@@ -145,7 +146,16 @@ var app = app || {};
         },
 
         start_interview: function(){
-
+            $('.remark-btn').removeAttr('disabled').on('click', function(){
+                var modal = Backbone.$('#remark');
+                app.showInputModal(modal);
+            });
+            $('#interviewer-item-name').text(this.itv.name+'(进行中)');
+            $('#set-interview-menu').hide();
+            $('#start-interview-button').hide();
+            $('.interviewee-img').on('click', function(){
+                window.location.href = '#interviewee/'+this.itv.name;
+            });
         },
 
         addOneInterviewee: function(model){

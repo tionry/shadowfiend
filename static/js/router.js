@@ -128,7 +128,7 @@ var app = app || {};
 
       interviewee:new Page({
         el:'#interview-editor',
-        depend:['_head2','_footer'],
+        depend:['_head2'],
         logined: true,
         show: Page.prototype.fadeIn,
         hide:Page.prototype.hide,
