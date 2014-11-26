@@ -28,8 +28,8 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                     return callback("inner error");
                 }
                 var intervieweelist = [];
-                var i = 0
-                interviewee.forEach(function(iname,i){
+                var i = 0;
+                interviewees.forEach(function(iname,i){
                     intervieweelist[i] = {name:iname,status:"waiting"};
                     i++;
                 });
@@ -83,7 +83,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
         });
     }
     else if(mode == 2){
-        db.interview.find({"interviewee":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime: 1}, function (err,interviews) {
+        db.interview.find({"interviewee.name":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime: 1}, function (err,interviews) {
             if (err) {
                 return callback("inner error");
             }
@@ -173,7 +173,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             {name: interviewname},
             {
                 $set:{
-                    "interviewee.intervieweename.status":status
+                    //interviewee.name.status:status
                 }
 
         }, function(err, interview) {
