@@ -98,7 +98,7 @@ var app = app || {};
                     });
                     return result;
                 }
-
+                //
                 if (app.Lock.attach({
                         error: function (data) {
                             //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
