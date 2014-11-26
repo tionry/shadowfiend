@@ -136,7 +136,7 @@ var app = app || {};
                     v.delegateEvents();
                 }
             } else {
-                model.view = new app.PickProblemView({
+                model.view = new app.TestProblemView({
                     model: model
                 });
                 $('#interviewer-problem-control').append(model.view.render().el);
@@ -154,7 +154,7 @@ var app = app || {};
                     v.delegateEvents();
                 }
             } else {
-                model.view = new app.TestProblemView({
+                model.view = new app.PickProblemView({
                     model: model
                 });
                 $('#allproblem-list').append(model.view.render().el);
