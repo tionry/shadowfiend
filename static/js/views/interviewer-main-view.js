@@ -31,7 +31,7 @@ var app = app || {};
 
         renewList: function(){
             $('.remark-btn').attr('disabled', 'disabled');
-            $('#interviewer-item-name')[0].innerText = this.itv.name;
+            $('#interviewer-item-name').text(this.itv.name);
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
