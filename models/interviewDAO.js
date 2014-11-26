@@ -173,7 +173,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             {name: interviewname},
             {
                 $set:{
-                    interviewee.intervieweename.status:status
+                    //interviewee.name.status:status
                 }
 
         }, function(err, interview) {
