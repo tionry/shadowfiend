@@ -562,6 +562,6 @@ hr{
 	float: right;
 	padding: 0px;
 }
-.add-problem, .remove-problem{
+.add-problem, .remove-problem, #set-round-btn{
 	margin: 10px;
 }
