@@ -121,7 +121,7 @@ InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
     lock.acquire(name, function() {
         db.interview.findAndModify({
             query: {name: name},
-            update: {problemlist: problem},
+            update: {$set: {problemlist: problem}},
             new: true,
             fields: {problemlist: 1},
             upsert: true
