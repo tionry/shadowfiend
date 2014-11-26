@@ -71,7 +71,7 @@ var app = app || {};
 
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
-            var itvname = this.itv.name;
+            var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
