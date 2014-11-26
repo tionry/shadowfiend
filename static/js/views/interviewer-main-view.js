@@ -33,6 +33,7 @@ var app = app || {};
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
+
             if (app.Lock.attach({
                     error: function (data) {
                         //do nothing
@@ -42,21 +43,6 @@ var app = app || {};
                     }
                 })) {
                 app.socket.emit('read-problem', {
-                    all: true,
-                    name: '',
-                    virtual: true,
-                    mode: 'interview'
-                });
-            }
-            if (app.Lock.attach({
-                    error: function (data) {
-                        //do nothing
-                    },
-                    success: function () {
-                        //do nothing
-                    }
-                })) {
-                app.socket.emit('', {
                     all: true,
                     name: '',
                     virtual: true,
@@ -91,7 +77,24 @@ var app = app || {};
                 al = $('#allproblem-list'),
                 cnfm = $('#setinterviewproblem-cnfm');
             $('#interviewer-problem-list').html('');
+            il.html('');
+            al.html('');
             //获取所有题目，添加在左侧
+            if (app.Lock.attach({
+                    error: function (data) {
+                        //do nothing
+                    },
+                    success: function () {
+                        //do nothing
+                    }
+                })) {
+                app.socket.emit('read-problem', {
+                    all: true,
+                    name: '',
+                    virtual: true,
+                    mode: 'interview'
+                });
+            }
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
