@@ -116,7 +116,7 @@ var app = app || {};
                 var problemArr = function(){
                     var result = new Array();
                     il.children().each(function(){
-                        result.push(this.innerText.trim());
+                        result.push($(this).text().trim());
                     });
                     return result;
                 }
