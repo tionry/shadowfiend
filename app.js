@@ -941,16 +941,36 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		if (data.all == true) {
-			problemDAO.getAllProblems(function(err, problem) {
-				if (err) {
-					return socket.emit('read-problem', {err: err});
-				}
-				socket.emit('read-problem', {
-					problem: problem,
-					mode : data.mode
+		switch (data.mode) {
+			case 'problem-in-interview':
+				interviewDAO.getInterviewByName(data.name, function(err, interview) {
+					if (err) {
+						return socket.emit('read-problem', {err: err});
+					}
+					problemDAO.getProblemByNameList(interview.problemlist, function(err, problems) {
+						if (err) {
+							return socket.emit('read-problem', {err: err});
+						}
+						socket.emit('read-problem', {
+							problem: problems,
+							mode: 'problem-in-interview'
+						});
+					});
 				});
-			});
+				break;
+			default:
+				if (data.all == true) {
+					problemDAO.getAllProblems(function(err, problem) {
+						if (err) {
+							return socket.emit('read-problem', {err: err});
+						}
+						socket.emit('read-problem', {
+							problem: problem,
+							mode : data.mode
+						});
+					});
+				}
+				break;
 		}
 	});
 
