@@ -66,6 +66,10 @@ var app = app || {};
                     mode: 'interview'
                 });
             }
+            modal.on('hide', function () {
+                cnfm.off('click');
+                modal.off('hide');
+            });
 
             ap.attr('disabled', 'disabled').on('click', function () {
                 var l = al.find('.active');
@@ -84,6 +88,18 @@ var app = app || {};
                 il.children().each(function(){
                     problemArr.push(this[0].innerText);
                 })
+                if (app.Lock.attach({
+                        error: function (data) {
+                            //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
+                        },
+                        success: function () {
+                            modal.modal('hide');
+                        }
+                    })) {
+                    app.socket.emit('add-problems', {
+
+                    });
+                }
             })
 
         },
@@ -120,7 +136,7 @@ var app = app || {};
                     v.delegateEvents();
                 }
             } else {
-                model.view = new app.TestProblemView({
+                model.view = new app.PickProblemView({
                     model: model
                 });
                 $('#interviewer-problem-control').append(model.view.render().el);
