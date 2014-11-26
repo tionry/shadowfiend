@@ -23,13 +23,46 @@ var app = app || {};
             this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
             this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
             //初始化界面显示
-            $('#interviewer-item-name')[0].innerText = this.itv.name;
+
             this.renewList();
 
         },
 
         renewList: function(){
-
+            $('#interviewer-item-name')[0].innerText = this.itv.name;
+            $('#interviewer-problem-list').html('');
+            $('#allproblem-list').html('');
+            $('#interviewproblem-list').html('');
+            if (app.Lock.attach({
+                    error: function (data) {
+                        //do nothing
+                    },
+                    success: function () {
+                        //do nothing
+                    }
+                })) {
+                app.socket.emit('read-problem', {
+                    all: true,
+                    name: '',
+                    virtual: true,
+                    mode: 'interview'
+                });
+            }
+            if (app.Lock.attach({
+                    error: function (data) {
+                        //do nothing
+                    },
+                    success: function () {
+                        //do nothing
+                    }
+                })) {
+                app.socket.emit('', {
+                    all: true,
+                    name: '',
+                    virtual: true,
+                    mode: 'update-interview'
+                });
+            }
         },
 
         add_interviewee: function(){
@@ -57,22 +90,8 @@ var app = app || {};
                 il = $('#interviewproblem-list'),
                 al = $('#allproblem-list'),
                 cnfm = $('#setinterviewproblem-cnfm');
+            $('#interviewer-problem-list').html('');
             //获取所有题目，添加在左侧
-            if (app.Lock.attach({
-                    error: function (data) {
-                        //do nothing
-                    },
-                    success: function () {
-                        //do nothing
-                    }
-                })) {
-                app.socket.emit('read-problem', {
-                    all: true,
-                    name: '',
-                    virtual: true,
-                    mode: 'interview'
-                });
-            }
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
@@ -121,6 +140,7 @@ var app = app || {};
         },
 
         addOneInterviewee: function(model){
+            if (!model) return;
             var v = model.view;
             model.set({"eid": 'CrazyOutput'});
             if (v) {
@@ -139,6 +159,7 @@ var app = app || {};
         },
 
         addOneProblem: function(model){
+            if (!model) return;
             var v = model.view;
             model.set({"eid": 'CrazyOutput'});
             if (v) {
@@ -157,6 +178,7 @@ var app = app || {};
         },
 
         addOneProblem2: function(model){
+            if (!model) return;
             var v = model.view;
             model.set({"eid": 'CrazyOutput'});
             if (v) {
