@@ -91,10 +91,14 @@ var app = app || {};
                 dp.attr('disabled', 'disabled');
             });
             cnfm.on('click', function(){
-                var problemArr = new Array();
-                il.children().each(function(){
-                    problemArr.push(this.innerText);
-                })
+                var problemArr = function(){
+                    var result = new Array();
+                    il.children().each(function(){
+                        result.push(this.innerText);
+                    });
+                    return result;
+                }
+
                 if (app.Lock.attach({
                         error: function (data) {
                             //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
@@ -105,7 +109,7 @@ var app = app || {};
                     })) {
                     app.socket.emit('update-problem-in-interview', {
                         name: itvname,
-                        problemlist: problemArr,
+                        problemlist: problemArr(),
                     });
                 }
             })
