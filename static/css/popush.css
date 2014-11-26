@@ -161,7 +161,8 @@ body{
 	z-index:3
 }
 
-#editor{
+#editor,#interview-editor{
+	margin-top: 65px;
 	background:rgba(0,0,0,0);
 	min-width:900px;
 	z-index:4
