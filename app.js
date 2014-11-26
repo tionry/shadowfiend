@@ -914,7 +914,10 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('read-problem', {err: err});
 				}
-				socket.emit('read-problem', {problem: problem});
+				socket.emit('read-problem', {
+					problem: problem,
+					mode: 'problemset'
+				});
 			});
 		});
 	});
@@ -932,7 +935,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('read-problem', function(data) {
-		if (!check(data, 'name', 'all')) {
+		if (!check(data, 'name', 'all', 'mode')) {
 			return;
 		}
 		if (!socket.session) {
@@ -943,7 +946,10 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('read-problem', {err: err});
 				}
-				socket.emit('read-problem', {problem: problem});
+				socket.emit('read-problem', {
+					problem: problem,
+					mode : data.mode
+				});
 			});
 		}
 	});
