@@ -47,7 +47,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 			});
 		});
 	});
-}
+};
 
 ProblemDAO.prototype.getProblemByName = function (name, callback) {
 	db.problem.findOne({name:name}, {name:1, description:1, ord:1, createTime:1}, function (err, problem) {
@@ -59,7 +59,7 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 		}
 		return callback(null, problem);
 	});
-}
+};
 
 ProblemDAO.prototype.getAllProblems = function (callback) {
 	db.problem.find({}, {name:1, description:1, ord:1, createTime:1}, function (err, problems) {
@@ -71,7 +71,7 @@ ProblemDAO.prototype.getAllProblems = function (callback) {
 		}
 		return callback(null, problems);
 	});
-}
+};
 
 ProblemDAO.prototype.deleteProblem = function (name, callback) {
 	lock.acquire(name, function() {
@@ -94,4 +94,16 @@ ProblemDAO.prototype.deleteProblem = function (name, callback) {
 			});
 		});
 	});
-}
+};
+
+ProblemDAO.prototype.getProblemByNameList = function(nameList, callback) {
+	db.problem.find({name: {$in: nameList}}, {name: 1}, function(err, problems) {
+		if (err) {
+			return callback("inner error");
+		}
+		if (!problems) {
+			return callback("problem not found");
+		}
+		return callback(null, problems);
+	});
+};

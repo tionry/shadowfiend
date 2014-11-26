@@ -19,18 +19,28 @@ var app = app || {};
             }
 
             app.Lock.detach(data);
-            if (data.mode == 'interview') {
-                app.collections.allproblems.fetch({
-                    all: true,
-                    name: '',
-                    virtual: true
-                });
-            } else {
-                app.collections.problems.fetch({
-                    all: true,
-                    name: '',
-                    virtual: true
-                });
+            switch (data.mode) {
+                case 'interview':
+                    app.collections.allproblems.fetch({
+                        all: true,
+                        name: '',
+                        virtual: true
+                    });
+                    break;
+                case 'problemset':
+                    app.collections.problems.fetch({
+                        all: true,
+                        name: '',
+                        virtual: true
+                    });
+                    break;
+                case 'update-interview':
+                    app.collections.problemList.fetch({
+                        all: true,
+                        name: '',
+                        virtual: true
+                    });
+                    break;
             }
             app.Lock.detach(data);
             delete data.problem;

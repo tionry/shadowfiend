@@ -50,7 +50,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
             });
         });
     });
-}
+};
 
 InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     db.interview.findOne({name:name}, {name:1, interviewer:1, interviewee:1, problemlist:1,status:1 ,createTime:1}, function (err, interview) {
@@ -62,7 +62,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
         }
         return callback(null, interview);
     });
-}
+};
 
 InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
     if(mode == 1){
@@ -91,8 +91,7 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
         return callback("bad mode infomation");
     }
 
-
-}
+};
 
 
 InterviewDAO.prototype.deleteInterview = function (name,callback) {
@@ -106,7 +105,7 @@ InterviewDAO.prototype.deleteInterview = function (name,callback) {
                 lock.release(name);
                 return callback("interview not found");
             }
-            db.interviewm.remove({_id: interview._id}, function (err, reply) {
+            db.interview.remove({_id: interview._id}, function (err, reply) {
                 if (err) {
                     lock.release(name);
                     return callback("inner error");
@@ -116,4 +115,26 @@ InterviewDAO.prototype.deleteInterview = function (name,callback) {
             });
         });
     });
-}
+};
+
+InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
+    lock.acquire(name, function() {
+        db.interview.findAndModify({
+            query: {name: name},
+            update: {problemlist: problem},
+            new: true,
+            fields: {problemlist: 1}
+        }, function(err, interview) {
+            if (err) {
+                lock.release(name);
+                return callback("inner error");
+            }
+            if (!interview) {
+                lock.release(name);
+                return callback("interview not found");
+            }
+            lock.release(name);
+            return callback(null, interview);
+        });
+    });
+};

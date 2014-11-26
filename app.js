@@ -1019,4 +1019,26 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('update-problem-in-interview', function(data) {
+		if (!check(data, 'name', 'problemlist')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.updateProblem(data.name, data.problemlist, function(err, interview) {
+			if (err) {
+				return socket.emit('read-problem', {err: err});
+			}
+			problemDAO.getProblemByNameList(interview.problemlist, function(err, problems) {
+				if (err) {
+					return socket.emit('read-problem', {err: err});
+				}
+				socket.emit('read-problem', {
+					problem: interview.problemlist,
+					mode: 'update-interview'
+				});
+			});
+		});
+	});
 });

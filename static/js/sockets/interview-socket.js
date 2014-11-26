@@ -32,9 +32,10 @@ var app = app || {};
                 });
             }
             app.Lock.detach(data);
-            delete data.problem;
+            delete data.interview;
         },
 
+        // Check the user exists
         "check-user": function(data) {
             if (data == null) {
                 app.Lock.remove();
