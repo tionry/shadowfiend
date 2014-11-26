@@ -44,7 +44,9 @@ var app = app || {};
                 });
             }else{
                 app.collections['intervieweeList'] = new app.Members();
+                app.collections['interviewerList'] = new app.Members();
                 app.collections['problemList'] = new app.Problems();
+                app.collections['allproblems'] = new app.Problems();
                 this.model.v.renewList();
             }
         },
