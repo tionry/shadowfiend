@@ -157,14 +157,12 @@ body{
 	font-size:16px;
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
-	min-width:800px;
 	z-index:3
 }
 
 #editor,#interview-editor{
 	margin-top: 65px;
 	background:rgba(0,0,0,0);
-	min-width:900px;
 	z-index:4
 }
 
@@ -342,14 +340,12 @@ body{
 	min-width:200px
 }
 #editormain, #interview-editormain{
-	min-width:600px;
 	position:relative
 }
 #editormain-inner, #interview-editormain-inner{
 	position:relative
 }
 #problemmain{
-	min-width:600px;
 	position:relative
 }
 #problemmain-inner{

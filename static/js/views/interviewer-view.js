@@ -32,7 +32,7 @@ var app = app || {};
 
         addAll: function(){
             this.collection.each(this.addOne);
-        },
+        }
     });
 
     var newinterview = function(){
@@ -46,7 +46,7 @@ var app = app || {};
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
         var cnfm = modal.find('.modal-confirm');
-        if (!($("#interviewer-list")[0].innerText)) {
+        if (!($("#interviewer-list").html())) {
             var cur = app.currentUser;
             var m = new app.User({
                 name: cur.name,
@@ -133,7 +133,7 @@ var app = app || {};
                     }
                 })) {
                 app.socket.emit('check-user', {
-                    name: name,
+                    name: name
                 })
             }
         });
@@ -171,7 +171,7 @@ var app = app || {};
                     }
                 })) {
                 app.socket.emit('check-user', {
-                    name: name,
+                    name: name
                 })
             }
         });
@@ -193,7 +193,7 @@ var app = app || {};
                     name: name,
                     interviewer: newinterviewers,
                     interviewee: newinterviewees,
-                    problem: newinterviewproblems,
+                    problem: newinterviewproblems
                 });
 
             }
@@ -207,7 +207,7 @@ var app = app || {};
         }
         app.collections['interviewer-interviews'] || app.init.interviews();
         app.views['interviewers'] = new app.InterviewerView({
-            collection: app.collections['interviewer-interviews'],
+            collection: app.collections['interviewer-interviews']
         });
     };
 
