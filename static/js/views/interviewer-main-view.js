@@ -45,12 +45,14 @@ var app = app || {};
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
+            var ap = modal.find('#setproblem-add');
             //获取所有题目，添加在左侧
             if (app.Lock.attach({
                     error: function (data) {
+                        //do nothing
                     },
                     success: function () {
-
+                        //do nothing
                     }
                 })) {
                 app.socket.emit('read-problem', {
@@ -59,8 +61,11 @@ var app = app || {};
                     virtual: true,
                     mode: 'interview'
                 });
-
             }
+            ap.attr('disabled', 'disabled').on('click', function () {
+                var l = $('#allproblem-list').find('.active');
+                $('#setprobleminterview-box').append(l);
+            });
         },
 
         start_interview: function(){

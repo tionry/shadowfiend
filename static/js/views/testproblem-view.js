@@ -26,10 +26,10 @@ var app = app || {};
         },
 
         select: function(){
-            //app.views['shares'].$el.find('li').removeClass('active');
             $('li').removeClass('active');
             this.$el.addClass('active');
-            //app.views['shares'].selected = this.model;
+            var ap = $('setproblem-add');
+            ap.removeAttr('disabled');
         },
 
 
