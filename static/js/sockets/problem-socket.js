@@ -20,7 +20,7 @@ var app = app || {};
 
             app.Lock.detach(data);
             switch (data.mode) {
-                case 'interview':
+                case 'all-problem':
                     app.collections.allproblems.fetch({
                         all: true,
                         name: '',
@@ -35,7 +35,7 @@ var app = app || {};
                         virtual: true
                     });
                     break;
-                case 'update-interview':
+                case 'problem-in-interview':
                     app.collections.problemList.fetch({
                         all: true,
                         name: '',

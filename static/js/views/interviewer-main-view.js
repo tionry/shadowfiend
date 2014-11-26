@@ -46,7 +46,7 @@ var app = app || {};
                     all: true,
                     name: '',
                     virtual: true,
-                    mode: 'update-interview'
+                    mode: 'problem-in-interview'
                 });
             }
         },
@@ -92,7 +92,7 @@ var app = app || {};
                     all: true,
                     name: '',
                     virtual: true,
-                    mode: 'interview'
+                    mode: 'all-problem'
                 });
             }
             modal.on('hide', function () {
@@ -131,7 +131,7 @@ var app = app || {};
                     })) {
                     app.socket.emit('update-problem-in-interview', {
                         name: itvname,
-                        problemlist: problemArr(),
+                        problemlist: problemArr()
                     });
                 }
             })
@@ -209,7 +209,7 @@ var app = app || {};
 
         addAllProblem2: function(){
             this.options.allproblems.each(this.addOneProblem2);
-        },
+        }
     });
 
 })()
