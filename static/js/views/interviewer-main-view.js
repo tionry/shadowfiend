@@ -50,6 +50,7 @@ var app = app || {};
 
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
+            var itvname = this.itv.name;
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
@@ -103,7 +104,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {
-                        name: this.itv.name,
+                        name: itvname,
                         problemlist: problemArr,
                     });
                 }
