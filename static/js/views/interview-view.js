@@ -31,6 +31,10 @@ var app = app || {};
         interviewer_go:function(e){
             var v = this.model.v;
             if (!v) {
+                app.collections['interviewerList'] = new app.Members();
+                app.collections['intervieweeList'] = new app.Members();
+                app.collections['problemList'] = new app.Problems();
+                app.collections['allproblems'] = new app.Problems();
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     interviewerList: app.collections['interviewerList'],
