@@ -44,7 +44,7 @@ var app = app || {};
                 })) {
                 app.socket.emit('read-problem', {
                     all: true,
-                    name: '',
+                    name: this.itv.name,
                     virtual: true,
                     mode: 'problem-in-interview'
                 });
