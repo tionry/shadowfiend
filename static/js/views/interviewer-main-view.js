@@ -32,6 +32,7 @@ var app = app || {};
         renewList: function(){
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
+            $('#endinterview-cfm').attr('disabled', 'disabled');
             $('#interviewer-item-name').text(this.itv.name);
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
@@ -130,6 +131,7 @@ var app = app || {};
         },
 
         start_interview: function(){
+            $('#endinterview-cfm').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
@@ -143,7 +145,7 @@ var app = app || {};
                     cnfm.off('click');
                     modal.off('hide');
                 });
-                $('#set-round-interviewee-btn').on('click',function(){
+                $('#setrounduser-cnfm').on('click',function(){
                     modal.modal('hide');
                     $('.remark-btn').removeAttr('disabled').on('click', function(){
                         var modal = Backbone.$('#remark');
