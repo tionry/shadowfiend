@@ -276,6 +276,7 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
                     lock.release(interviewname);
                     return callback("interview not found");
                 }
+
                 lock.release(interviewname);
                 return callback(null, interview);
             });
