@@ -123,8 +123,7 @@ InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
             query: {name: name},
             update: {$set: {problemlist: problem}},
             new: true,
-            fields: {problemlist: 1},
-            upsert: true
+            fields: {problemlist: 1}
         }, function(err, interview) {
             if (err) {
                 lock.release(name);
