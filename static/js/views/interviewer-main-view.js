@@ -70,13 +70,13 @@ var app = app || {};
                 var l = $('#allproblem-list').find('.active');
                 il.append(l);
                 l.removeClass('active');
-                ap.attr('disabled');
+                ap.attr('disabled', 'disabled');
             });
             dp.attr('disabled', 'disabled').on('click', function () {
                 var l = $('#interviewproblem-list').find('.active');
                 al.append(l);
                 l.removeClass('active');
-                dp.attr('disabled');
+                dp.attr('disabled', 'disabled');
             });
 
         },
