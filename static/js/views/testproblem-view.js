@@ -29,7 +29,7 @@ var app = app || {};
             $('li').removeClass('active');
             this.$el.addClass('active');
 
-            if (this.$el.parents('#interviewproblem-list')){
+            if (this.$el.parents('#interviewproblem-list').length > 0){
                 var dp = $('#setproblem-remove');
                 dp.removeAttr('disabled');
             }else{
