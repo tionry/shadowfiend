@@ -139,3 +139,49 @@ InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
         });
     });
 };
+
+InterviewDAO.prototype.changestatus = function(name, status){
+    lock.acquire(name, function() {
+       db.interview.findAndModify({
+        query:{name:name},
+        update:{$set:{status:status}},
+        fields:{status:1},
+        new:true
+    },function(err,interview){
+           if (err) {
+               lock.release(name);
+               return callback("inner error");
+           }
+           if (!interview) {
+               lock.release(name);
+               return callback("interview not found");
+           }
+           lock.release(name);
+           return callback(null, interview);
+        });
+    });
+};
+
+InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
+    lock.acquire(name, function() {
+        db.interview.update(
+            {name: interviewname},
+            {
+                $set:{
+                    "interviewee.intervieweename.status":status
+                }
+
+        }, function(err, interview) {
+            if (err) {
+                lock.release(name);
+                return callback("inner error");
+            }
+            if (!interview) {
+                lock.release(name);
+                return callback("interview not found");
+            }
+            lock.release(name);
+            return callback(null, interview);
+        });
+    });
+};
