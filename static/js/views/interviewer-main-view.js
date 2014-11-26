@@ -159,7 +159,7 @@ var app = app || {};
                 cnfm.off('click');
                 modal.off('hide');
             });
-            $('endinterview-cnfm').on('click', function(){
+            $('#endinterview-cnfm').on('click', function(){
                 modal.modal('hide');
                 $('#interviewer-item-name').text(this.itv.name+'(已结束)');
             });
