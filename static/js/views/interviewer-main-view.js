@@ -11,7 +11,8 @@ var app = app || {};
             'click #set-interviewee-btn': 'add_interviewee',
             'click #set-interviewer-btn': 'add_interviewer',
             'click #set-problem-btn': 'add_problem',
-            'click #start-interview-btn': 'start_interview'
+            'click #start-interview-btn': 'start_interview',
+            'click #end-interview-btn': 'end_interview',
         },
 
         initialize: function(){
@@ -146,16 +147,31 @@ var app = app || {};
         },
 
         start_interview: function(){
-            $('.remark-btn').removeAttr('disabled').on('click', function(){
-                var modal = Backbone.$('#remark');
-                app.showInputModal(modal);
-            });
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
             $('#set-interview-menu').hide();
-            $('#start-interview-button').hide();
+            $('#start-interview-btn').hide();
             $('.interviewee-img').on('click', function(){
-                window.location.href = '#interviewee/'+this.itv.name;
+                window.location.href = '#interviewee/interview!';
             });
+            $('#set-round-btn').on('click', function(){
+                var modal = Backbone.$('#set-interviewee');
+                app.showInputModal(modal);
+                modal.on('hide', function () {
+                    cnfm.off('click');
+                    modal.off('hide');
+                });
+                $('#set-round-interviewee-btn').on('click',function(){
+                    modal.modal('hide');
+                    $('.remark-btn').removeAttr('disabled').on('click', function(){
+                        var modal = Backbone.$('#remark');
+                        app.showInputModal(modal);
+                    });
+                })
+            });
+        },
+
+        end_interview: function(){
+            $('#interviewer-item-name').text(this.itv.name+'(已结束)');
         },
 
         addOneInterviewee: function(model){
