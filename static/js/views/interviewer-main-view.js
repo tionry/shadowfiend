@@ -11,7 +11,7 @@ var app = app || {};
             'click #set-interviewee-btn': 'add_interviewee',
             'click #set-interviewer-btn': 'add_interviewer',
             'click #set-problem-btn': 'add_problem',
-            'click #start-interview': 'start_interview'
+            'click #start-interview-btn': 'start_interview'
         },
 
         initialize: function(){
