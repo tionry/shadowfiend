@@ -28,8 +28,14 @@ var app = app || {};
         select: function(){
             $('li').removeClass('active');
             this.$el.addClass('active');
-            var ap = $('#setproblem-add');
-            ap.removeAttr('disabled');
+
+            if (this.$el.parents('#interviewproblem-list')){
+                var dp = $('#setproblem-remove');
+                dp.removeAttr('disabled');
+            }else{
+                var ap = $('#setproblem-add');
+                ap.removeAttr('disabled');
+            }
         },
 
 

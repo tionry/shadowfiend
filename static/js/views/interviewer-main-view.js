@@ -45,7 +45,10 @@ var app = app || {};
         add_problem: function(){
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
-            var ap = modal.find('#setproblem-add');
+            var ap = modal.find('#setproblem-add'),
+                dp = modal.find('#setproblem-remove'),
+                il = $('#interviewproblem-list'),
+                al = $('#allproblem-list')
             //获取所有题目，添加在左侧
             if (app.Lock.attach({
                     error: function (data) {
@@ -62,11 +65,20 @@ var app = app || {};
                     mode: 'interview'
                 });
             }
+
             ap.attr('disabled', 'disabled').on('click', function () {
                 var l = $('#allproblem-list').find('.active');
-                $('#interviewproblem-list').append(l);
+                il.append(l);
                 l.removeClass('active');
+                ap.attr('disabled');
             });
+            dp.attr('disabled', 'disabled').on('click', function () {
+                var l = $('#interviewproblem-list').find('.active');
+                al.append(l);
+                l.removeClass('active');
+                dp.attr('disabled');
+            });
+
         },
 
         start_interview: function(){
