@@ -266,14 +266,14 @@ body{
 #file-list .span10{
 	min-height:500px !important
 }
-#chatbox .shared-character{
+#chatbox .shared-character, #interview-chatbox .shared-character{
 	margin:1px
 }
-#chatbox{
+#chatbox, #interview-chatbox{
 	overflow:hidden;
 	z-index:4
 }
-#chat-show{
+#chat-show, #interview-chat-show{
 	background-color:#fff
 }
 .popover-character{
@@ -283,18 +283,18 @@ body{
 	max-height:48px;
 	max-width:48px
 }
-#current-doc-p{
+#current-doc-p, #interview-current-doc-p{
 	font-size:16px;
 	line-height:20px;
 	margin:4px
 }
-#current-doc-state{
+#current-doc-state, #interview-current-doc-state{
 	color:#0a0
 }
-#current-doc-state.red{
+#current-doc-state.red, #interview-current-doc-state.red{
 	color:#a00
 }
-#current-doc{
+#current-doc, #interview-current-doc{
 	color:rgb(44,62,80)
 }
 #delete-name,#rename-name,#share-name{
@@ -328,23 +328,23 @@ body{
 	margin: 10px;
 	text-align: center;
 }
-#member-list{
+#member-list, #interview-member-list{
 	margin-top:5px
 }
-#member-list-doc{
+#member-list-doc, #interview-member-list-doc{
 	margin-top:5px;
 	overflow:auto
 }
-#chatbox{
+#chatbox, #interview-chatbox{
 	overflow:visible;
 	position:relative;
 	min-width:200px
 }
-#editormain{
+#editormain, #interview-editormain{
 	min-width:600px;
 	position:relative
 }
-#editormain-inner{
+#editormain-inner, #interview-editormain-inner{
 	position:relative
 }
 #problemmain{
@@ -354,7 +354,7 @@ body{
 #problemmain-inner{
 	position:relative
 }
-#chat-show{
+#chat-show, #interview-chat-show{
 	overflow:auto;
 	margin:4px 0;
 	padding:5px 10px;
@@ -363,10 +363,10 @@ body{
 	-moz-border-radius:4px;
 	border-radius:4px
 }
-#chat-show.red{
+#chat-show.red, #interview-chat-show.red{
 	border:1px solid #f88
 }
-#chat-show-inner{
+#chat-show-inner, #interview-chat-show-inner{
 	width:100%;
 	cursor:text;
 	overflow:hidden
@@ -409,10 +409,10 @@ textarea{
 .CodeMirror-linenumber{
 	width:32px
 }
-.CodeMirror *,#varlist-table *,#console-input,#console-inner,#console-inner *{
+.CodeMirror *,#varlist-table *,#console-input,#console-inner,#console-inner *, #interview-varlist-table *, #interview-console-input, #interview-console-inner, #interview-console-inner *{
 	font-family:"monaco","consolas","Mono"
 }
-#console span.message{
+#console span.message, #interview-console span.message{
 	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif
 }
 .cursor{
@@ -448,7 +448,7 @@ textarea{
 .running{
 	background:#ffb
 }
-#console{
+#console, #interview-console{
 	float:left;
 	border:1px solid #ccc;
 	border-right:none;
@@ -459,26 +459,26 @@ textarea{
 	margin:10px 0 0 0;
 	background-color:white
 }
-#console .stdin{
+#console .stdin, #interview-console .stdin{
 	color:blue
 }
-#console .stderr{
+#console .stderr, #interview-console .stderr{
 	color:red
 }
-#console .message{
+#console .message, #interview-console .message{
 	color:#0a0
 }
-#console-inner{
+#console-inner, #interview-console-inner{
 	overflow:auto;
 	padding:5px 10px
 }
-#console-input{
+#console-input, #interview-console-input{
 	height:35px;
 	border:none;
 	border-radius:0;
 	border-top:1px solid #ddd
 }
-#varlist{
+#varlist, #interview-varlist{
 	position:relative;
 	float:left;
 	border:1px solid #ccc;
@@ -489,40 +489,40 @@ textarea{
 	margin:10px 0 0 0;
 	background-color:white
 }
-#under-editor{
+#under-editor, #interview-under-editor{
 	height:212px
 }
-#varlistreal{
+#varlistreal, #interview-varlistreal{
 	overflow:auto
 }
-#varlist .btn{
+#varlist .btn, #interview-varlist .btn{
 	height:31px;
 	padding-top:5px
 }
-#varlist-table #adde{
+#varlist-table #adde, #interview-varlist-table #interview-adde{
 	font-size:24px
 }
-#varlist-table{
+#varlist-table, #interview-varlist-table{
 	margin:0;
 	border-bottom:1px solid #ddd;
 	font-size:14px
 }
-#varlist-table td{
+#varlist-table td, #interview-varlist-table td{
 	padding:0
 }
-#varlist-table .col1{
+#varlist-table .col1, #interview-varlist-table .col1{
 	width:24px
 }
-#varlist-table .col2 span{
+#varlist-table .col2 span, #interview-varlist-table .col2 span{
 	display:block;
 	color:#008
 }
-#varlist-table .col3{
+#varlist-table .col3, #interview-varlist-table .col3{
 	padding-left:4px;
 	width:66%;
 	border-left:1px solid #ddd
 }
-#varlist-table input[type=text]{
+#varlist-table input[type=text],#interview-varlist-table input[type=text]{
 	margin:-5px 0 -1px 0;
 	padding:0;
 	width:100%
@@ -536,7 +536,7 @@ textarea{
 	-moz-border-radius:0;
 	border-radius:0
 }
-#fullscreentip{
+#fullscreentip,#interview-fullscreentip{
 	display:none;
 	position:absolute;
 	z-index:10000;
