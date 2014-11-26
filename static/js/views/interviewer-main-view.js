@@ -31,6 +31,7 @@ var app = app || {};
 
         renewList: function(){
             $('.remark-btn').attr('disabled', 'disabled');
+            $('#set-round-btn').attr('disabled', 'disabled');
             $('#interviewer-item-name').text(this.itv.name);
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
@@ -137,8 +138,8 @@ var app = app || {};
             $('.interviewee-img').on('click', function(){
                 window.location.href = '#interviewee/interview!';
             });
-            $('#set-round-btn').on('click', function(){
-                var modal = Backbone.$('#set-interviewee');
+            $('#set-round-btn').removeAttr('disabled').on('click', function(){
+                var modal = Backbone.$('#set-round');
                 app.showInputModal(modal);
                 modal.on('hide', function () {
                     cnfm.off('click');
