@@ -29,8 +29,8 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                 }
                 var intervieweelist = [];
                 var i = 0
-                interviewee.forEach(name,i,function(){
-                    intervieweelist[i] = {name:name,status:wating};
+                interviewee.forEach(function(iname,i){
+                    intervieweelist[i] = {name:iname,status:"waiting"};
                     i++;
                 });
                 db.interview.insert({
