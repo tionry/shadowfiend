@@ -24,7 +24,8 @@ var app = app || {};
                     app.collections.allproblems.fetch({
                         all: true,
                         name: '',
-                        virtual: true
+                        virtual: true,
+                        reset: true
                     });
                     break;
                 case 'problemset':
@@ -38,7 +39,8 @@ var app = app || {};
                     app.collections.problemList.fetch({
                         all: true,
                         name: '',
-                        virtual: true
+                        virtual: true,
+                        reset: true
                     });
                     break;
             }
