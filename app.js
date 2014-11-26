@@ -1035,7 +1035,7 @@ io.sockets.on('connection', function(socket){
 					return socket.emit('read-problem', {err: err});
 				}
 				socket.emit('read-problem', {
-					problem: interview.problemlist,
+					problem: problems,
 					mode: 'update-interview'
 				});
 			});
