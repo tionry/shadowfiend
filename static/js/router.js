@@ -127,7 +127,7 @@ var app = app || {};
       }),
 
       interviewee:new Page({
-        el:'#interviewee-item',
+        el:'#interview-editor',
         depend:['_head2','_footer'],
         logined: true,
         show: Page.prototype.fadeIn,
