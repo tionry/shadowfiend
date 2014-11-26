@@ -122,15 +122,15 @@ var app = app || {};
         },
 
         addAllInterviewee: function(){
-            this.intervieweeList.each(this.add_interviewee);
+            this.options.intervieweeList.each(this.add_interviewee);
         },
 
         addAllProblem: function(){
-            this.problemList.each(this.addOneProblem);
+            this.options.problemList.each(this.addOneProblem);
         },
 
         addAllProblem2: function(){
-            app.collections.problems.each(this.addOneProblem2);
+            this.options.allproblems.each(this.addOneProblem2);
         },
     });
 
