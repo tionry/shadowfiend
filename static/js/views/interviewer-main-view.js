@@ -19,10 +19,10 @@ var app = app || {};
             this.itv = this.model.attributes;
             ////this.listenTo(this.options.intervieweeList, 'add', this.addOneInterviewee);
             //this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
-            this.listenTo(this.options.problemList, 'add', this.addOneProblem);
-            this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
-            this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
+            this.listenTo(app.collections.problemList, 'add', this.addOneProblem);
+            this.listenTo(app.collections.problemList, 'reset', this.addAllProblem);
+            this.listenTo(app.collections.allproblems, 'add', this.addOneProblem2);
+            this.listenTo(app.collections.allproblems, 'reset', this.addAllProblem2);
             //初始化界面显示
 
             this.renewList();
@@ -235,4 +235,4 @@ var app = app || {};
         }
     });
 
-})()
+})();
