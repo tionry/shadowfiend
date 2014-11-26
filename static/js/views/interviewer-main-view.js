@@ -171,7 +171,16 @@ var app = app || {};
         },
 
         end_interview: function(){
-            $('#interviewer-item-name').text(this.itv.name+'(已结束)');
+            var modal = Backbone.$('#endinterview-cfm');
+            app.showInputModal(modal);
+            modal.on('hide', function () {
+                cnfm.off('click');
+                modal.off('hide');
+            });
+            $('endinterview-cnfm').on('click', function(){
+                modal.modal('hide');
+                $('#interviewer-item-name').text(this.itv.name+'(已结束)');
+            });
         },
 
         addOneInterviewee: function(model){
