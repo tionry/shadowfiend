@@ -173,7 +173,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
         var i = 0,index = -1;
         interv.interviewee.forEach(function(iname,i){
             if(iname == intervieweename){
-                index = ;
+                index = i;
             }
             i++;
         })
