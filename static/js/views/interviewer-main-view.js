@@ -73,12 +73,19 @@ var app = app || {};
             il.html('');
             al.html('');
             //获取所有题目，添加在左侧
-            app.socket.emit('read-problem', {
-                all: true,
-                name: '',
-                virtual: true,
-                mode: 'all-problem'
-            });
+            if (app.Lock.attach({
+                    error: function (data) {
+                    },
+                    success: function () {
+                    }
+                })) {
+                app.socket.emit('read-problem', {
+                    all: true,
+                    name: '',
+                    virtual: true,
+                    mode: 'all-problem'
+                });
+            }
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
