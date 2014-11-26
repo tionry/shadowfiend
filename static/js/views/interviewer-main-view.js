@@ -126,6 +126,12 @@ var app = app || {};
                             //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
                         },
                         success: function () {
+                            app.socket.emit('read-problem', {
+                                all: true,
+                                name: itvname,
+                                virtual: true,
+                                mode: 'problem-in-interview'
+                            });
                             modal.modal('hide');
                         }
                     })) {
