@@ -27,10 +27,16 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                     lock.release(name);
                     return callback("inner error");
                 }
+                var intervieweelist = [];
+                var i = 0
+                interviewee.forEach(function(iname,i){
+                    intervieweelist[i] = {name:iname,status:"waiting"};
+                    i++;
+                });
                 db.interview.insert({
                         name: name,
                         interviewer:interviewers,
-                        interviewee:interviewees,
+                        interviewee:intervieweelist,
                         problemlist:problems,
                         status:"waiting",
                         createTime: new Date().getTime()
