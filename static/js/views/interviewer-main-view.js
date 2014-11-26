@@ -144,14 +144,14 @@ var app = app || {};
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
-                    $('#interviewer-problem-control').append(v.el);
+                    $('#interviewer-problem-list').append(v.el);
                     v.delegateEvents();
                 }
             } else {
                 model.view = new app.TestProblemView({
                     model: model
                 });
-                $('#interviewer-problem-control').append(model.view.render().el);
+                $('#interviewer-problem-list').append(model.view.render().el);
             }
             return this;
         },
