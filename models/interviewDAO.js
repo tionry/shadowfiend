@@ -39,6 +39,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                         interviewee:intervieweelist,
                         problemlist:problems,
                         status:"waiting",
+                        ord: interviews.length + 1,
                         createTime: new Date().getTime()
                     },
                     function (err, newInterview) {
@@ -169,24 +170,11 @@ InterviewDAO.prototype.changestatus = function(name, status){
 
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     lock.acquire(name, function() {
-        var interv = db.interview.find({name:interviewname});
-        var i = 0,index = -1;
-        interv.interviewee.forEach(function(iname,i){
-            if(iname == intervieweename){
-                index = i;
-            }
-            i++;
-        })
-        if(index == -1){
-            lock.release(name);
-            return callback("inner error");
-        }
-        var toeditinterviewee = "interviewee." + index.toString();
         db.interview.update(
             {name: interviewname},
             {
                 $set:{
-                    toeditinterviewee :{name:name,status:status}
+                    //interviewee.name.status:status
                 }
 
         }, function(err, interview) {
@@ -201,29 +189,5 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             lock.release(name);
             return callback(null, interview);
         });
-    });
-};
-
-InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, callback) {
-    lock.acquire(name, function() {
-        db.interview.update(
-            {name: interviewname},
-            {
-                $set:{
-                    status:status
-                }
-
-            }, function(err, interview) {
-                if (err) {
-                    lock.release(name);
-                    return callback("inner error");
-                }
-                if (!interview) {
-                    lock.release(name);
-                    return callback("interview not found");
-                }
-                lock.release(name);
-                return callback(null, interview);
-            });
     });
 };
