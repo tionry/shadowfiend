@@ -18,7 +18,6 @@ var app = app || {};
                 return;
             }
 
-            app.Lock.detach(data);
             switch (data.mode) {
                 case 'all-problem':
                     app.collections.allproblems.fetch({
