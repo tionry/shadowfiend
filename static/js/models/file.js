@@ -45,6 +45,8 @@ var app = app || {};
         name: '',
       },
       members: [],
+      interviewmemberlist:[],
+      interviewstatus:"waiting",
       createTime: null, /* it must be null, so that model.isNew() === true */
       modifyTime: new Date().getTime(),
       permission: 'private',

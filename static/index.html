@@ -374,10 +374,10 @@
             <table class="table table-hover" id="interviewers-control-table">
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>state</th>
-                  <th>Date</th>
+                  <th localization>id</th>
+                  <th localization>name</th>
+                  <th localization>state</th>
+                  <th localization>Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -400,12 +400,26 @@
 
       <div id="interviewer-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
-          <div class="btn-group pull-right">
-            <button id="set-interviewer-btn" type="button" class="btn btn-primary" localization>Set Interviewers</button>
-            <button id="set-interviewee-btn" type="button" class="btn btn-primary" localization>Set Interviewees</button>
-            <button id="set-problem-btn" type="button" class="btn btn-primary" localization>Set Problems</button>
-            <button id="start-interview-btn" type="button" class="btn btn-primary" localization>Start interview</button>
-            <button id="end-interview-btn" type="button" class="btn btn-primary" localization>End interview</button>
+          <div class="navbar navbar-default pull-right" style="min-height:40px;margin:0px;">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="set-interview-menu" data-toggle="dropdown" aria-expanded="true">
+                  Set Interview
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="set-interview-menu">
+                  <li role="presentation"><a id="set-interviewer-btn" role="menuitem" tabindex="-1" href="#" localization>Set Interviewers</a></li>
+                  <li role="presentation"><a id="set-interviewee-btn" role="menuitem" tabindex="-1" href="#" localization>Set Interviewees</a></li>
+                  <li role="presentation"><a id="set-problem-btn" role="menuitem" tabindex="-1" href="#" localization>Set Problems</a></li>
+                </ul>
+              </li>
+              <li>
+                <button id="start-interview-btn" type="button" class="btn btn-primary" localization>Start interview</button>
+              </li>
+              <li>
+                <button id="end-interview-btn" type="button" class="btn btn-primary" localization>End interview</button>
+              </li>
+            </ul>
           </div>
           <div class="btn-group pull-left" style="margin-left:0">
             <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
@@ -490,10 +504,10 @@
             <table class="table table-hover" id="interviewees-control-table">
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>status</th>
-                  <th>Date</th>
+                  <th localization>id</th>
+                  <th localization>name</th>
+                  <th localization>state</th>
+                  <th localization>Date</th>
                 </tr>
               </thead>
             </table>

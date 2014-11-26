@@ -1399,3 +1399,19 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 		});
 	});
 };
+
+DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
+	memberlist.forEach(function(member){
+		var mem = userDAO.prototype.getUserByName(member);
+		addMember(mem._id,path,member,callback);
+		var doc = getDocByPath(mem.id,path,callback);
+		doc.status = "running";
+	});
+};
+
+DocDAO.prototype.interviewdone = function(path,memberlist,callback){
+	memberlist.forEach(function(member){
+		var doc = getDocByPath(mem.id,path);
+		var mem = userDAO.prototype.getUserByName(member);
+	});
+};
