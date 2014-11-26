@@ -64,7 +64,8 @@ var app = app || {};
             }
             ap.attr('disabled', 'disabled').on('click', function () {
                 var l = $('#allproblem-list').find('.active');
-                $('#setprobleminterview-box').append(l);
+                $('#interviewproblem-list').append(l);
+                l.removeClass('active');
             });
         },
 
