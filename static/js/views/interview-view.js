@@ -31,11 +31,13 @@ var app = app || {};
         interviewer_go:function(e){
             var v = this.model.v;
             if (!v) {
+                app.collections['interviewerList'] || (app.collections['interviewerList'] = new app.Members());
                 app.collections['intervieweeList'] || (app.collections['intervieweeList'] = new app.Members());
                 app.collections['problemList'] || (app.collections['problemList'] = new app.Problems());
                 app.collections['allproblems'] || (app.collections['allproblems'] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
+                    interviewerList: app.collections['interviewerList'],
                     intervieweeList: app.collections['intervieweeList'],
                     problemList: app.collections['problemList'],
                     allproblems: app.collections['allproblems'],

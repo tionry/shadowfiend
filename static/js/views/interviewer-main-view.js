@@ -40,6 +40,12 @@ var app = app || {};
         add_interviewer: function(){
             var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
+            var add_interviewer = modal.find("#setinterviewer-confirm");
+
+            add_interviewer.on('click', function(){
+                var name = Backbone.$.trim(modal.find('#setinterviewer-inputName').val());
+            })
+
         },
 
         add_problem: function(){
@@ -96,8 +102,9 @@ var app = app || {};
                             modal.modal('hide');
                         }
                     })) {
-                    app.socket.emit('add-problems', {
-
+                    app.socket.emit('update-problem-in-interview', {
+                        name: this.itv.name,
+                        problemlist: problemArr,
                     });
                 }
             })
