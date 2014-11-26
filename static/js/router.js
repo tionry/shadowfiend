@@ -143,7 +143,7 @@ var app = app || {};
       }),
 
       interviewees: new Page({
-        el: '#interview-editor',
+        el: '#interviewees-control',
         depend: ['_head2', '_footer'],
         logined: true,
         show: Page.prototype.fadeIn,
