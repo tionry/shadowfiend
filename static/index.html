@@ -250,6 +250,7 @@
                 </div>
                 <div style="clear:both;"></div>
               </div>
+              <textarea id="editor-textarea" ></textarea>
               <div id="under-editor" class="hide">
                 <div id="console">
                   <div id="console-title" class="well well-top" style="border-bottom:1px solid #ddd;padding:4px 0 5px 10px;" localization>console</div>
@@ -449,6 +450,9 @@
                 </ul>
               </div>
             </div>
+            <button id="start-interview-btn" type="button" class="btn btn-primary" localization>Start interview</button>
+            <button id="set-round-btn" type="button" class="btn btn-primary" localization>Set round</button>
+            <button id="end-interview-btn" type="button" class="btn btn-primary" localization>End interview</button>
             <script type="text/template" id="interviewer-interviewee-template">
               <div class="interviewer-interviewee">
                 <div class="interviewee-img-div">
@@ -493,31 +497,7 @@
       </div>
 
       <div id="interviewee-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
-        <div class="btn-toolbar" style="margin:0 0 5px 0;">
-          <div class="btn-group pull-left" style="margin-left:0">
-            <a class="btn btn-white" id="interviewee-item-back" href="#interviewees"><span class="glyphicon glyphicon-home"></span></a>
-          </div>
-          <div class="btn-group">
-            <h2 id="interviewee-item-name" style="margin-top: 7px;">Interview name</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="panel panel-default">
-            <div class="panel-heading">Interview Problem Set</div>
-            <table class="table table-hover" id="interviewee-problemset-table">
-              <thead>
-              <tr>
-                <th>id</th>
-                <th>Name</th>
-                <th>Date</th>
-              </tr>
-              </thead>
-              <tbody>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
+删除这个页面，直接跳到interview-editor
       </div>
 
       <div id="interview-editor" class="row hide">
@@ -554,6 +534,7 @@
                 </div>
                 <div style="clear:both;"></div>
               </div>
+              <textarea id="interview-editor-textarea" style="display:none"></textarea>
 <!-- The codeMirror next is just an example. Use Backbone to add it to this div. -->
 <div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div style="position: relative; min-height: 100%;"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter runat"></div><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div><div class="CodeMirror-gutter breakpoints"></div></div></div></div></div>
               <div id="interview-under-editor" class="hide">
@@ -851,11 +832,66 @@
           <a href="#">
             <ii><%= model.name %></ii>
           </a>
-
         </script>
         <div class="modal-footer">
           <div class="modal-buttons">
             <button class="btn btn-primary modal-confirm" id ="setinterviewproblem-cnfm" localization>ok</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <div id="set-round" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="setproblem-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="setround-label" localization>Set round</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-inline">
+            <div class="row">
+              <div class="col-sm-5">
+                <p>
+                  <span localization>All users</span>
+                </p>
+              </div>
+              <div class="col-sm-2">
+              </div>
+              <div class="col-sm-5">
+                <p>
+                  <span localization>This round users</span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <div id="setuserall-box">
+                  <ul class="nav nav-pills nav-stacked" id="alluser-list"></ul>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-white add-problem" type="button" title="add" id="setround-add"><span class="glyphicon glyphicon-forward"></span></button>
+                <button class="btn btn-white remove-problem" type="button" title="remove" id="setround-remove"><span class="glyphicon glyphicon-backward"></span></button>
+              </div>
+              <div class="col-sm-5">
+                <div id="setuserround-box">
+                  <ul class="nav nav-pills nav-stacked" id="rounduser-list"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/template" id="alluser-template">
+          <a href="#">
+            <ii><%= model.name %></ii>
+          </a>
+        </script>
+        <div class="modal-footer">
+          <div class="modal-buttons">
+            <button class="btn btn-primary modal-confirm" id ="setrounduser-cnfm" localization>ok</button>
             <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
           </div>
         </div>
