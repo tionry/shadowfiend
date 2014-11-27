@@ -29,7 +29,7 @@ var app = app || {};
     };
 
     var syncProblems = function(method, collection, options) {
-        if (m != 'read') {
+        if (method != 'read') {
             return;
         }
         if (!options.data) {
