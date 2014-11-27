@@ -28,7 +28,18 @@ var app = app || {};
         app.socket.emit(m, d);
     };
 
-    var syncProblems = (function() {
+    var syncProblems = function(method, collection, options) {
+        if (m != 'read') {
+            return;
+        }
+        if (!options.data) {
+            return;
+        }
+        options.success(options.data);
+    };
+
+
+        /*(function() {
         var method = 'reset', success = null, dealProblem = function(data) {
             if (!data || !data.problem) {
                 return;
@@ -57,7 +68,7 @@ var app = app || {};
                 all: c.all
             });
         };
-    })();
+    })();*/
 
     app.init || (app.init = {});
     app.init.problemSync = function() {
@@ -65,7 +76,7 @@ var app = app || {};
         app.Problems.prototype.sync = syncProblems;
     };
 
-    app.init_suf || (app.init_suf = {});
+    /*app.init_suf || (app.init_suf = {});
     (function() {
         var _init = false;
         app.init_suf.problemSync = function() {
@@ -76,5 +87,5 @@ var app = app || {};
 
             var detach = app.Lock.detach;
         };
-    })();
+    })();*/
 })();

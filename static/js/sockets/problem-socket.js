@@ -24,14 +24,16 @@ var app = app || {};
                         all: true,
                         name: '',
                         virtual: true,
-                        reset: true
+                        reset: true,
+                        data: data.problem
                     });
                     break;
                 case 'problemset':
                     app.collections.problems.fetch({
                         all: true,
                         name: '',
-                        virtual: true
+                        virtual: true,
+                        data: data.problem
                     });
                     break;
                 case 'problem-in-interview':
@@ -39,11 +41,12 @@ var app = app || {};
                         all: true,
                         name: '',
                         virtual: true,
-                        reset: true
+                        reset: true,
+                        data: data.problem
                     });
                     break;
             }
-            app.Lock.detach(data);
+            //app.Lock.detach(data);
             delete data.problem;
         }
 
