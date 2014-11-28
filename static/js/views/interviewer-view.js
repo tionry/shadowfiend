@@ -35,10 +35,10 @@ var app = app || {};
         }
     });
 
+    var newinterviewers = [];
+    var newinterviewees = [];
+    var newinterviewproblems = [];
     var newinterview = function(){
-        var newinterviewers = new Array();
-        var newinterviewees = new Array();
-        var newinterviewproblems = new Array();
         var modal = Backbone.$('#new-interview');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
@@ -78,7 +78,7 @@ var app = app || {};
                     }
                 p.remove();
             });
-        }
+        };
         modal.on('hide', function () {
             input.off('input');
             cnfm.off('click');
@@ -179,7 +179,7 @@ var app = app || {};
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
-            var newinterviewproblems = new Array();
+            var newinterviewproblems = [];
             if (app.Lock.attach({
                     loading: '#newinterview-buttons',
                     error: function (data) {
@@ -198,7 +198,7 @@ var app = app || {};
 
             }
         });
-    }
+    };
 
     app.init || (app.init = {});
     app.init.interviewerView = function () {
