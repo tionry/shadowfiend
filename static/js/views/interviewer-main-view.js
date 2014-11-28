@@ -105,6 +105,7 @@ var app = app || {};
         },
 
         add_problem: function(){
+            var itvname = $('#interviewer-item-name').text();
             app.socket.emit('read-problem', {
                 all: true,
                 name: itvname,
@@ -112,7 +113,6 @@ var app = app || {};
                 mode: 'all-problem'
             });
             var modal = Backbone.$('#set-problem');
-            var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
