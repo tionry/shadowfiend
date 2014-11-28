@@ -12,7 +12,8 @@ var app = app || {};
             'click #set-interviewer-btn': 'add_interviewer',
             'click #set-problem-btn': 'add_problem',
             'click #start-interview-btn': 'start_interview',
-            'click #end-interview-btn': 'end_interview'
+            'click #end-interview-btn': 'end_interview',
+            'click #set-round-btn': 'set_round_interviewee',
         },
 
         initialize: function(){
@@ -49,16 +50,57 @@ var app = app || {};
         add_interviewee: function(){
             var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
+            //fetch intervieweeList here...
+            //show
+
+            var that = this;
+            var input = modal.find('#setinterviewee-inputName');
+            var cnfm = modal.find('#setinterviewee-confirm');
+            modal.on('hide', function () {
+                input.off('input');
+                cnfm.off('click');
+                modal.off('hide');
+            });
+            input.on('input', function(){
+                var name = Backbone.$.trim(input.val()),
+                    err = false;
+                if (!name) {
+                    err = 'inputproblemname';
+                }
+                if (err) {
+                    app.showMessageBar('#setinterviewee-message', err, 'error');
+                    cnfm.attr('disabled', 'disabled');
+                } else {
+                    modal.find('.help-inline').text('');
+                    modal.find('.form-group').removeClass('error');
+                    cnfm.removeAttr('disabled');
+                }
+            });
+
+            cnfm.attr('disabled', 'disabled').on('click', function () {
+                var name = Backbone.$.trim(modal.find('#setinterviewee-inputName').val());
+                if (app.Lock.attach({
+                        loading: modal.find('.modal-buttons'),
+                        error: function (data) {
+                            app.showMessageBar('#setinterviewee-message', data.err, 'error');
+                        },
+                        success: function () {
+                            modal.modal('hide');
+                            app.showMessageBox('newinterviewee', 'addintervieweesuccess');
+                        }
+                    })) {
+                    app.socket.emit('add-interviewee', {
+                        name: name,
+                        itvname: that.itv.name
+                    });
+
+                }
+            });
         },
 
         add_interviewer: function(){
             var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
-            var add_interviewer = modal.find("#setinterviewer-confirm");
-
-            add_interviewer.on('click', function(){
-                var name = Backbone.$.trim(modal.find('#setinterviewer-inputName').val());
-            })
 
         },
 
@@ -130,29 +172,76 @@ var app = app || {};
 
         },
 
+        set_round_interviewee: function(){
+            //fetch all interviewee in the interview here.. and show.
+
+            var modal = Backbone.$('#set-round');
+            var ap = modal.find('#setround-add'),
+                dp = modal.find('#setround-remove'),
+                il = $('#rounduser-list'),
+                al = $('#alluser-list'),
+                cnfm = $('#setinterviewproblem-cnfm');
+            app.showInputModal(modal);
+            modal.on('hide', function () {
+                cnfm.off('click');
+                modal.off('hide');
+            });
+            al.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            il.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            ap.on('click', function () {
+                var l = al.find('.active');
+                il.append(l);
+                l.removeClass('active');
+            });
+            dp.on('click', function () {
+                var l = il.find('.active');
+                al.append(l);
+                l.removeClass('active');
+            });
+            cnfm.on('click',function(){
+                var roundArr = function(){
+                    var result = [];
+                    il.children().each(function(){
+                        result.push($(this).text().trim());
+                    });
+                    return result;
+                };
+                if (app.Lock.attach({
+                        error: function (data) {
+                            //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
+                        },
+                        success: function () {
+                            modal.modal('hide');
+                        }
+                    })) {
+                    app.socket.emit('update-problem-in-interview', {
+                        name: itvname,
+                        problemlist: roundArr()
+                    });
+                }
+                $('.remark-btn').removeAttr('disabled');
+            })
+        },
+
         start_interview: function(){
+            // change the interview state here..
             $('#end-interview-btn').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
-            $('#set-interview-menu').hide();
-            $('#start-interview-btn').hide();
-            $('.interviewee-img').on('click', function(){
-                window.location.href = '#interviewee/interview!';
-            });
-            $('#set-round-btn').removeAttr('disabled').on('click', function(){
-                var modal = Backbone.$('#set-round');
-                app.showInputModal(modal);
-                modal.on('hide', function () {
-                    cnfm.off('click');
-                    modal.off('hide');
-                });
-                $('#setrounduser-cnfm').on('click',function(){
-                    modal.modal('hide');
-                    $('.remark-btn').removeAttr('disabled').on('click', function(){
-                        var modal = Backbone.$('#remark');
-                        app.showInputModal(modal);
-                    });
-                })
-            });
+            $('#set-interview-menu').fadeOut('fast');
+            $('#start-interview-btn').fadeOut('fast');
+            $('#set-round-btn').removeAttr('disabled');
         },
 
         end_interview: function(){
@@ -164,7 +253,7 @@ var app = app || {};
             });
             $('#endinterview-cnfm').on('click', function(){
                 modal.modal('hide');
-                $('#interviewer-item-name').text($('#interviewer-item-name').text()+'(已结束)');
+                $('#interviewer-item-name').text(this.itv.name+'(已结束)');
             });
         },
 

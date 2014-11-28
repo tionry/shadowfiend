@@ -232,6 +232,15 @@ body{
 	width:24px;
 	text-align:left
 }
+#interviewers-control-table .col5 .opreation{
+	background-image:url(../images/remove.png);
+	min-width:18px;
+	min-height:23px;
+	width:18px;
+	height:23px;
+	display:block;
+	text-decoration:none
+}
 #file-list-table .col5 .opreation{
 	background-image:url(../images/set.png);
 	min-width:24px;
