@@ -232,7 +232,7 @@ body{
 	width:24px;
 	text-align:left
 }
-#interviewers-control-table .col5 .opreation{
+#problemset-table .col4 .opreation ,#interviewers-control-table .col5 .opreation{
 	background-image:url(../images/remove.png);
 	min-width:18px;
 	min-height:23px;

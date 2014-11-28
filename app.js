@@ -959,7 +959,7 @@ io.sockets.on('connection', function(socket){
 					});
 				});
 				break;
-			case 'problemset:
+			case 'problemset':
 				if (data.all == true) {
 					problemDAO.getAllProblems(function(err, problem) {
 						if (err) {
