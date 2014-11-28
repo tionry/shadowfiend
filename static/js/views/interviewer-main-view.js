@@ -52,6 +52,7 @@ var app = app || {};
                 virtual: true,
                 mode: 'all-problem'
             });
+            this.addAllProblem();
         },
 
         add_interviewee: function(){
