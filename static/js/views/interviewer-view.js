@@ -35,12 +35,12 @@ var app = app || {};
         }
     });
 
+    var newinterviewers = [];
+    var newinterviewees = [];
+    var newinterviewproblems = [];
 
     var newinterview = function(){
         var modal = Backbone.$('#new-interview');
-        var newinterviewers = [];
-        var newinterviewees = [];
-        var newinterviewproblems = [];
         $("#interviewer-list").html('');
         $("#interviewee-list").html('');
         app.showInputModal(modal);
@@ -83,6 +83,9 @@ var app = app || {};
             });
         };
         modal.on('hide', function () {
+            newinterviewers = [];
+            newinterviewees = [];
+            newinterviewproblems = [];
             input.off('input');
             cnfm.off('click');
             modal.off('hide');
