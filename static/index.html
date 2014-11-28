@@ -378,6 +378,7 @@
                   <th localization>name</th>
                   <th localization>state</th>
                   <th localization>Date</th>
+                  <th>&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
@@ -391,6 +392,14 @@
 
                   <td class="col3"><%= model.status %></td>
                   <td class="col4"><%= model.time %></td>
+                  <td class="col5">
+                    <div class="dropdown">
+                       <a href="#" class="dropdown-toggle  opreation" data-toggle="dropdown">&nbsp;</a>
+                       <ul class="dropdown-menu">
+                         <li><a href="#" class="interview-delete" localization>删除</a></li>
+                       </ul>
+                    </div>
+                  </td>
                 </script>
               </tbody>
             </table>
