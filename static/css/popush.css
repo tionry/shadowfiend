@@ -228,7 +228,7 @@ body{
 	width:220px;
 	text-align:center
 }
-#file-list-table .col5{
+#file-list-table .col5, #interview-delete .col5{
 	width:24px;
 	text-align:left
 }
