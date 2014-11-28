@@ -35,11 +35,14 @@ var app = app || {};
         }
     });
 
-    var newinterviewers = [];
-    var newinterviewees = [];
-    var newinterviewproblems = [];
+
     var newinterview = function(){
         var modal = Backbone.$('#new-interview');
+        var newinterviewers = [];
+        var newinterviewees = [];
+        var newinterviewproblems = [];
+        $("#interviewer-list").html('');
+        $("#interviewee-list").html('');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
         var add_interviewer = modal.find("#interviewer-confirm");
