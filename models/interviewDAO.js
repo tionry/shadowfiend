@@ -25,7 +25,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
             }
             if(validateName(name)){
                 lock.release(name);
-                return callback("interview name error")
+                return callback("interview name error");
             }
             if (interview) {
                 lock.release(name);
