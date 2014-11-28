@@ -109,6 +109,7 @@ var app = app || {};
             var modal = Backbone.$('#set-problem');
             var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
+            var that = this;
             var ap = modal.find('#setproblem-add'),
                 dp = modal.find('#setproblem-remove'),
                 il = $('#interviewproblem-list'),
@@ -123,7 +124,7 @@ var app = app || {};
                 virtual: true,
                 mode: 'all-problem'
             });}, function(){
-                var c = app.collections['allproblems-' + this.itv.name];
+                var c = app.collections['allproblems-' + that.itv.name];
                 for (var i = 0; i < c.length; i++){
                     var l = $('<li></li>');
                     l.html('<a href="#">'+ c.models[i].id +'</a>');
