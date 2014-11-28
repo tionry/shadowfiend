@@ -114,7 +114,7 @@ var app = app || {};
             var c = app.collections['allproblems-' + this.itv.name];
             for (var i = 0; i < c.length; i++){
                 var l = $('<li></li>');
-                l.html('<a href="#">'+ c.models[i].id +'</a>>');
+                l.html('<a href="#">'+ c.models[i].id +'</a>');
             }
             var modal = Backbone.$('#set-problem');
             var itvname = $('#interviewer-item-name').text();
