@@ -132,4 +132,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'problem name error'      : '题目名称长度不能大于40且不能包含非法字符',
   'newinterviewee'          : '添加面试者',
   'addintervieweesuccess'   : '成功添加面试者',
+  'setroundintervieweesuccess': '成功设置本轮面试者',
+  'roundinterviewstart'     : '本轮开始',
 };

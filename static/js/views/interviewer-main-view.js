@@ -224,6 +224,7 @@ var app = app || {};
                         },
                         success: function () {
                             modal.modal('hide');
+                            app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {

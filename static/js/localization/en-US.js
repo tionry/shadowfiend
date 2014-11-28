@@ -132,4 +132,6 @@ app.languages['en-US'] = { Name :'English Version',
   'problem name error'      : 'problem name length must be less than 40 and contain no illegal chars',
   'newinterviewee'          : 'New Interviewee',
   'addintervieweesuccess'   : 'Add interviewee successfully',
+  'setroundintervieweesuccess': 'Set this round successfully',
+  'roundinterviewstart'     : 'ROUND START',
 };
