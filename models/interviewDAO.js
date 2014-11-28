@@ -11,12 +11,21 @@ function InterviewDAO() {
     this.innerError = false;
 }
 
+function validateName(str){
+    var re = /[\*\\\|:\"\'\/\<\>\?\@]/;
+    return str.length <= 40 && re.test(str);
+};
+
 InterviewDAO.prototype.createInterview = function (name,interviewers,interviewees,problems,callback) {
     lock.acquire(name, function() {
         db.interview.findOne({name:name}, {_id:1}, function(err, interview) {
             if (err) {
                 lock.release(name);
                 return callback("inner error");
+            }
+            if(validateName(name)){
+                lock.release(name);
+                return callback("interview name error")
             }
             if (interview) {
                 lock.release(name);

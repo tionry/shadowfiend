@@ -128,4 +128,5 @@ app.languages['en-US'] = { Name :'English Version',
   'interview not found'     : 'interview not found',
   'isInterviewee'           : 'The user has been selected as an interviewee',
   'isInterviewer'           : 'The user has been selected as an interviewer',
+  'interview name error'    : 'inteview name length must be less than 40 and contain no illegal chars',
 };
