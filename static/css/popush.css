@@ -234,10 +234,10 @@ body{
 }
 #interviewers-control-table .col5 .opreation{
 	background-image:url(../images/remove.png);
-	min-width:24px;
-	min-height:24px;
-	width:24px;
-	height:24px;
+	min-width:18px;
+	min-height:23px;
+	width:18px;
+	height:23px;
 	display:block;
 	text-decoration:none
 }
