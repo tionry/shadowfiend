@@ -232,7 +232,16 @@ body{
 	width:24px;
 	text-align:left
 }
-#file-list-table .col5 .opreation, #interviewers-control-table .col5 .opreation{
+#interviewers-control-table .col5 .opreation{
+	background-image:url(../images/remove.png);
+	min-width:24px;
+	min-height:24px;
+	width:24px;
+	height:24px;
+	display:block;
+	text-decoration:none
+}
+#file-list-table .col5 .opreation{
 	background-image:url(../images/set.png);
 	min-width:24px;
 	min-height:24px;
@@ -241,7 +250,7 @@ body{
 	display:block;
 	text-decoration:none
 }
-#file-list-table .col5 .opreation:hover, #interviewers-control-table .col5 .opreation:hover{
+#file-list-table .col5 .opreation:hover{
 	background-image:url(../images/set-hover.png);
 	text-decoration:none
 }
