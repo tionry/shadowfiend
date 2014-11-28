@@ -953,12 +953,13 @@ io.sockets.on('connection', function(socket){
 						}
 						socket.emit('read-problem', {
 							problem: problems,
-							mode: 'problem-in-interview'
+							mode: 'problem-in-interview',
+							name: data.name
 						});
 					});
 				});
 				break;
-			default:
+			case 'problemset':
 				if (data.all == true) {
 					problemDAO.getAllProblems(function(err, problem) {
 						if (err) {
@@ -966,7 +967,21 @@ io.sockets.on('connection', function(socket){
 						}
 						socket.emit('read-problem', {
 							problem: problem,
-							mode : data.mode
+							mode: data.mode
+						});
+					});
+				}
+				break;
+			case 'all-problem':
+				if (data.all == true) {
+					problemDAO.getAllProblems(function(err, problem) {
+						if (err) {
+							return socket.emit('read-problem', {err: err});
+						}
+						socket.emit('read-problem', {
+							problem: problem,
+							mode: data.mode,
+							name: data.name
 						});
 					});
 				}

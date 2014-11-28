@@ -130,4 +130,6 @@ app.languages['en-US'] = { Name :'English Version',
   'isInterviewer'           : 'The user has been selected as an interviewer',
   'interview name error'    : 'interview name length must be less than 40 and contain no illegal chars',
   'problem name error'      : 'problem name length must be less than 40 and contain no illegal chars',
+  'newinterviewee'          : 'New Interviewee',
+  'addintervieweesuccess'   : 'Add interviewee successfully',
 };
