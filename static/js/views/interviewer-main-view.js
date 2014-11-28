@@ -134,18 +134,29 @@ var app = app || {};
                 cnfm.off('click');
                 modal.off('hide');
             });
-
-            ap.attr('disabled', 'disabled').on('click', function () {
+            al.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            il.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            ap.on('click', function () {
                 var l = al.find('.active');
                 il.append(l);
                 l.removeClass('active');
-                ap.attr('disabled', 'disabled');
             });
-            dp.attr('disabled', 'disabled').on('click', function () {
+            dp.on('click', function () {
                 var l = il.find('.active');
                 al.append(l);
                 l.removeClass('active');
-                dp.attr('disabled', 'disabled');
             });
             cnfm.on('click', function(){
                 var problemArr = function(){
