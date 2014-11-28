@@ -9,30 +9,17 @@ var app = app || {};
 
         // Refresh interview collection
         "read-interview": function(data) {
-            if (data == null) {
-                app.Lock.remove();
-                return;
-            }
-            app.Lock.removeLoading();
-            if (data.err) {
-                app.Lock.detach(data);
-                return;
-            }
-
-            app.Lock.detach(data);
             if (data.mode == 1) {
                 app.collections['interviewer-interviews'].fetch({
                     username: data.username,
-                    virtual: true
+                    interviews: data.interview
                 });
             } else {
                 app.collections['interviewee-interviews'].fetch({
                     username: data.username,
-                    virtual: true
+                    interviews: data.interview
                 });
             }
-            app.Lock.detach(data);
-            delete data.interview;
         },
 
         // Check the user exists
@@ -42,6 +29,19 @@ var app = app || {};
                 return;
             }
             app.Lock.removeLoading();
+            app.Lock.detach(data);
+        },
+
+        "after-add-interview": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
+            }
+            app.Lock.removeLoading();
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
             app.Lock.detach(data);
         }
 

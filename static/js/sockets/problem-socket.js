@@ -8,6 +8,34 @@ var app = app || {};
 
         // Refresh problem collection
         "read-problem": function(data) {
+            switch (data.mode) {
+                case 'all-problem':
+                    app.collections.allproblems.fetch({
+                        all: true,
+                        name: '',
+                        reset: true,
+                        data: data.problem
+                    });
+                    break;
+                case 'problemset':
+                    app.collections.problems.fetch({
+                        all: true,
+                        name: '',
+                        data: data.problem
+                    });
+                    break;
+                case 'problem-in-interview':
+                    app.collections.problemList.fetch({
+                        all: true,
+                        name: '',
+                        reset: true,
+                        data: data.problem
+                    });
+                    break;
+            }
+        },
+
+        "after-add-problem": function(data) {
             if (data == null) {
                 app.Lock.remove();
                 return;
@@ -17,37 +45,31 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
+            app.collections.problems.fetch({
+                all: true,
+                name: '',
+                data: data.problem
+            });
+            app.Lock.detach(data);
+        },
 
-            switch (data.mode) {
-                case 'all-problem':
-                    app.collections.allproblems.fetch({
-                        all: true,
-                        name: '',
-                        virtual: true,
-                        reset: true,
-                        data: data.problem
-                    });
-                    break;
-                case 'problemset':
-                    app.collections.problems.fetch({
-                        all: true,
-                        name: '',
-                        virtual: true,
-                        data: data.problem
-                    });
-                    break;
-                case 'problem-in-interview':
-                    app.collections.problemList.fetch({
-                        all: true,
-                        name: '',
-                        virtual: true,
-                        reset: true,
-                        data: data.problem
-                    });
-                    break;
+        "after-update-problem": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
             }
-            //app.Lock.detach(data);
-            delete data.problem;
+            app.Lock.removeLoading();
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
+            app.collections.problemList.fetch({
+                all: true,
+                name: '',
+                data: data.problem,
+                reset: true
+            });
+            app.Lock.detach(data);
         }
 
     };

@@ -908,13 +908,13 @@ io.sockets.on('connection', function(socket){
 		}
 		problemDAO.createProblem(data.name, data.description, function(err) {
 			if (err) {
-				return socket.emit('read-problem', {err: err});
+				return socket.emit('after-read-problem', {err: err});
 			}
 			problemDAO.getAllProblems(function(err, problem) {
 				if (err) {
-					return socket.emit('read-problem', {err: err});
+					return socket.emit('after-read-problem', {err: err});
 				}
-				socket.emit('read-problem', {
+				socket.emit('after-read-problem', {
 					problem: problem,
 					mode: 'problemset'
 				});
@@ -983,13 +983,13 @@ io.sockets.on('connection', function(socket){
 		}
 		interviewDAO.createInterview(data.name, data.interviewer, data.interviewee, data.problem, function(err) {
 			if (err) {
-				return socket.emit('read-interview', {err: err});
+				return socket.emit('after-add-interview', {err: err});
 			}
 			interviewDAO.getInterviews(socket.session.user.name, 1, function(err, interview) {
 				if (err) {
-					return socket.emit('read-interview', {err: err});
+					return socket.emit('after-add-interview', {err: err});
 				}
-				socket.emit('read-interview', {
+				socket.emit('after-add-interview', {
 					interview: interview,
 					mode: 1,
 					username: socket.session.user.name
@@ -1048,16 +1048,13 @@ io.sockets.on('connection', function(socket){
 		}
 		interviewDAO.updateProblem(data.name, data.problemlist, function(err, interview) {
 			if (err) {
-				return socket.emit('read-problem', {err: err});
+				return socket.emit('after-update-problem', {err: err});
 			}
 			problemDAO.getProblemByNameList(interview.problemlist, function(err, problems) {
 				if (err) {
-					return socket.emit('read-problem', {err: err});
+					return socket.emit('after-update-problem', {err: err});
 				}
-				socket.emit('read-problem', {
-					problem: problems,
-					mode: 'update-interview'
-				});
+				socket.emit('after-update-interview', {problem: problems});
 			});
 		});
 	});
