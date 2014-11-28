@@ -26,7 +26,6 @@ var app = app || {};
         },
 
         select: function(){
-            $('li').removeClass('active');
             this.$el.addClass('active');
 
             if (this.$el.parents('#interviewproblem-list').length > 0){
