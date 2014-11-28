@@ -10,7 +10,7 @@ var app = app || {};
         "read-problem": function(data) {
             switch (data.mode) {
                 case 'all-problem':
-                    app.collections.allproblems.fetch({
+                    app.collections['allproblems-' + data.name].fetch({
                         all: true,
                         name: '',
                         reset: true,
@@ -25,7 +25,7 @@ var app = app || {};
                     });
                     break;
                 case 'problem-in-interview':
-                    app.collections.problemList.fetch({
+                    app.collections['problemList-' + data.name].fetch({
                         all: true,
                         name: '',
                         reset: true,

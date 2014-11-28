@@ -30,12 +30,14 @@ var app = app || {};
         interviewer_go:function(e){
             var v = this.model.v;
             if (!v) {
+                app.collections['problemList-' + this.model.name] || (app.collections['problemList-' + this.model.name] = new app.Problems());
+                app.collections['allproblems-' + this.model.name] || (app.collections['allproblems-' + this.model.name] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     interviewerList: app.collections['interviewerList'],
                     intervieweeList: app.collections['intervieweeList'],
-                    problemList: app.collections['problemList'],
-                    allproblems: app.collections['allproblems'],
+                    problemList: app.collections['problemList-' + this.model.name],
+                    allproblems: app.collections['allproblems-' + this.model.name]
                 });
             }else{
                 this.model.v.renewList();
