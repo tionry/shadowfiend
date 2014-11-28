@@ -53,7 +53,7 @@ var app = app || {};
             app.Lock.detach(data);
         },
 
-        "after-update-problem": function(data) {
+        "'after-update-interview-problem'": function(data) {
             if (data == null) {
                 app.Lock.remove();
                 return;
