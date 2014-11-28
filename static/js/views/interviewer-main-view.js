@@ -45,6 +45,13 @@ var app = app || {};
                 virtual: true,
                 mode: 'problem-in-interview'
             });
+            var itvname = $('#interviewer-item-name').text();
+            app.socket.emit('read-problem', {
+                all: true,
+                name: itvname,
+                virtual: true,
+                mode: 'all-problem'
+            });
         },
 
         add_interviewee: function(){
@@ -117,19 +124,12 @@ var app = app || {};
             al.html('');
 
             //获取所有题目，添加在左侧
-            var itvname = $('#interviewer-item-name').text();
-            app.socket.emit('read-problem', {
-                all: true,
-                name: itvname,
-                virtual: true,
-                mode: 'all-problem'
-            }, function(){
-                for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
-                    var l = $('<li></li>');
-                    l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
-                    al.append(l);
-                }
-            });
+
+            for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
+                var l = $('<li></li>');
+                l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
+                al.append(l);
+            }
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
