@@ -105,7 +105,6 @@ var app = app || {};
         },
 
         add_problem: function(){
-
             var modal = Backbone.$('#set-problem');
             var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
@@ -116,20 +115,18 @@ var app = app || {};
                 cnfm = $('#setinterviewproblem-cnfm');
             il.html('');
             al.html('');
-            (function (){
             app.socket.emit('read-problem', {
                 all: true,
                 name: itvname,
                 virtual: true,
                 mode: 'all-problem'
-            });}, function(){
-                var c = app.collections['allproblems-' + this.itv.name];
-                for (var i = 0; i < c.length; i++){
-                    var l = $('<li></li>');
-                    l.html('<a href="#">'+ c.models[i].id +'</a>');
-                    al.append(l);
-                }
-            })();
+            });
+            var c = app.collections['allproblems-' + this.itv.name];
+            for (var i = 0; i < c.length; i++){
+                var l = $('<li></li>');
+                l.html('<a href="#">'+ c.models[i].id +'</a>');
+                al.append(l);
+            }
             //获取所有题目，添加在左侧
             modal.on('hide', function () {
                 cnfm.off('click');
