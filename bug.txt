@@ -1,0 +1,4 @@
+新建面试的对话框：
+每次重新打开这个对话框，应当初始化对话框的内容。
+并记得把当前用户加到interviewer-list，以及执行newInterviewer.push(currentUser);
+
