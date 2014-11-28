@@ -112,7 +112,7 @@ var app = app || {};
         },
 
         add_problem: function(){
-
+            var itvname = this.itv.name;
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
