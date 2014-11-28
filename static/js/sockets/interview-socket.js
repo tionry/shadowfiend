@@ -42,6 +42,10 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
+            app.collections['interviewer-interviews'].fetch({
+                username: data.username,
+                interviews: data.interview
+            });
             app.Lock.detach(data);
         }
 
