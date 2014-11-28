@@ -193,7 +193,7 @@ var app = app || {};
             model.set({"eid": 'CrazyOutput'});
             if (v) {
                 v.render();
-                if (v.el.is(':hidden')) {
+                if (v.$el.is(':hidden')) {
                     $('#interviewer-problem-list').append(v.el);
                     v.delegateEvents();
                 }
@@ -212,7 +212,7 @@ var app = app || {};
             model.set({"eid": 'CrazyOutput'});
             if (v) {
                 v.render();
-                if (v.el.is(':hidden')) {
+                if (v.$el.is(':hidden')) {
                     $('#allproblem-list').append(v.el);
                     v.delegateEvents();
                 }
