@@ -204,13 +204,11 @@ var app = app || {};
                 var l = al.find('.active');
                 il.append(l);
                 l.removeClass('active');
-                ap.attr('disabled', 'disabled');
             });
             dp.on('click', function () {
                 var l = il.find('.active');
                 al.append(l);
                 l.removeClass('active');
-                dp.attr('disabled', 'disabled');
             });
             cnfm.on('click',function(){
                 var roundArr = function(){
