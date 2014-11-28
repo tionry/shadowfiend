@@ -29,15 +29,16 @@ var app = app || {};
         //enter an interview
         interviewer_go:function(e){
             var v = this.model.v;
+            var name = this.model.id;
             if (!v) {
-                app.collections['problemList-' + this.model.name] || (app.collections['problemList-' + this.model.name] = new app.Problems());
-                app.collections['allproblems-' + this.model.name] || (app.collections['allproblems-' + this.model.name] = new app.Problems());
+                app.collections['problemList-' + name] || (app.collections['problemList-' + name] = new app.Problems());
+                app.collections['allproblems-' + name] || (app.collections['allproblems-' + name] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     interviewerList: app.collections['interviewerList'],
                     intervieweeList: app.collections['intervieweeList'],
-                    problemList: app.collections['problemList-' + this.model.name],
-                    allproblems: app.collections['allproblems-' + this.model.name]
+                    problemList: app.collections['problemList-' + name],
+                    allproblems: app.collections['allproblems-' + name]
                 });
             }else{
                 this.model.v.renewList();
@@ -67,7 +68,7 @@ var app = app || {};
                     },
                     error: function (m, data) {
                         app.showMessageBox('delete', data.err);
-                    },
+                    }
                 });
             });
             modal.modal('show');
@@ -81,7 +82,7 @@ var app = app || {};
         // Toggle the `"done"` state of the model.
         toggleDone: function() {
             this.model.toggle();
-        },
+        }
 
     });
 })();
