@@ -129,5 +129,7 @@ app.languages['zh-CN'] = { Name : '中文版',
   'isInterviewee'           : '该用户已在面试者列表中',
   'isInterviewer'           : '该用户已在面试官列表中',
   'interview name error'    : '面试名称长度不能大于40且不能包含非法字符',
-  'problem name error'      : '题目名称长度不能大于40且不能包含非法字符'
+  'problem name error'      : '题目名称长度不能大于40且不能包含非法字符',
+  'newinterviewee'          : '添加面试者',
+  'addintervieweesuccess'   : '成功添加面试者',
 };
