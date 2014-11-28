@@ -22,8 +22,8 @@ var app = app || {};
             //this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
-            this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
+            //this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
+            //this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
             //初始化界面显示
 
             this.renewList();
@@ -105,6 +105,17 @@ var app = app || {};
         },
 
         add_problem: function(){
+            app.socket.emit('read-problem', {
+                all: true,
+                name: this.itv.name,
+                virtual: true,
+                mode: 'problem-in-interview'
+            });
+            var c = app.collections['allproblems-' + this.itv.name];
+            for (var i = 0; i < c.length; i++){
+                var l = $('<li></li>');
+                l.html('<a href="#">'+ c.models[i].id +'</a>>');
+            }
             var modal = Backbone.$('#set-problem');
             var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
