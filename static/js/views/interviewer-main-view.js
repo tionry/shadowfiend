@@ -73,13 +73,13 @@ var app = app || {};
                 cnfm = $('#setinterviewproblem-cnfm');
             il.html('');
             al.html('');
-            //获取所有题目，添加在左侧
-            app.socket.emit('read-problem', {
+            setTimeout(app.socket.emit('read-problem', {
                 all: true,
                 name: '',
                 virtual: true,
                 mode: 'all-problem'
-            });
+            }), 1000);
+            //获取所有题目，添加在左侧
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
