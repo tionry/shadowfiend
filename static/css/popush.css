@@ -241,7 +241,7 @@ body{
 	display:block;
 	text-decoration:none
 }
-#file-list-table .col5 .opreation:hover{
+#file-list-table .col5 .opreation:hover, #interviewers-control-table .col5 .opreation:hover{
 	background-image:url(../images/set-hover.png);
 	text-decoration:none
 }
