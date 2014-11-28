@@ -78,7 +78,7 @@ var app = app || {};
                 name: '',
                 virtual: true,
                 mode: 'all-problem'
-            }), 100);
+            }), 1000);
             //获取所有题目，添加在左侧
             modal.on('hide', function () {
                 cnfm.off('click');
