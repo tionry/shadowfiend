@@ -105,13 +105,7 @@ var app = app || {};
         },
 
         add_problem: function(){
-            var itvname = $('#interviewer-item-name').text();
-            app.socket.emit('read-problem', {
-                all: true,
-                name: itvname,
-                virtual: true,
-                mode: 'all-problem'
-            });
+
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
@@ -121,12 +115,21 @@ var app = app || {};
                 cnfm = $('#setinterviewproblem-cnfm');
             il.html('');
             al.html('');
-            for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
-                var l = $('<li></li>');
-                l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
-                al.append(l);
-            }
+
             //获取所有题目，添加在左侧
+            var itvname = $('#interviewer-item-name').text();
+            app.socket.emit('read-problem', {
+                all: true,
+                name: itvname,
+                virtual: true,
+                mode: 'all-problem'
+            }, function(){
+                for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
+                    var l = $('<li></li>');
+                    l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
+                    al.append(l);
+                }
+            });
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
