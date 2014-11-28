@@ -116,17 +116,20 @@ var app = app || {};
                 cnfm = $('#setinterviewproblem-cnfm');
             il.html('');
             al.html('');
+            (function (){
             app.socket.emit('read-problem', {
                 all: true,
                 name: itvname,
                 virtual: true,
                 mode: 'all-problem'
-            });
-            var c = app.collections['allproblems-' + this.itv.name];
-            for (var i = 0; i < c.length; i++){
-                var l = $('<li></li>');
-                l.html('<a href="#">'+ c.models[i].id +'</a>');
-            }
+            });}, function(){
+                var c = app.collections['allproblems-' + this.itv.name];
+                for (var i = 0; i < c.length; i++){
+                    var l = $('<li></li>');
+                    l.html('<a href="#">'+ c.models[i].id +'</a>');
+                    al.append(l);
+                }
+            })();
             //获取所有题目，添加在左侧
             modal.on('hide', function () {
                 cnfm.off('click');
