@@ -105,6 +105,12 @@ var app = app || {};
         },
 
         add_problem: function(){
+            app.socket.emit('read-problem', {
+                all: true,
+                name: itvname,
+                virtual: true,
+                mode: 'all-problem'
+            });
             var modal = Backbone.$('#set-problem');
             var itvname = $('#interviewer-item-name').text();
             app.showInputModal(modal);
@@ -115,16 +121,9 @@ var app = app || {};
                 cnfm = $('#setinterviewproblem-cnfm');
             il.html('');
             al.html('');
-            app.socket.emit('read-problem', {
-                all: true,
-                name: itvname,
-                virtual: true,
-                mode: 'all-problem'
-            });
-            var c = app.collections['allproblems-' + this.itv.name];
-            for (var i = 0; i < c.length; i++){
+            for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
                 var l = $('<li></li>');
-                l.html('<a href="#">'+ c.models[i].id +'</a>');
+                l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
                 al.append(l);
             }
             //获取所有题目，添加在左侧
