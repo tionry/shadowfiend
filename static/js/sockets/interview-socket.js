@@ -53,14 +53,14 @@ var app = app || {};
             if (data == null || data.err) {
                 return;
             }
-            app.collections['interviewerList-' + data.interviewName].updateInterview(data.interviewers);
+            app.collections['interviewerList-' + data.interviewName].update(data.interviewers);
         },
 
         "read-interviewee-in-interview": function(data) {
             if (data == null || data.err) {
                 return;
             }
-            app.collections['intervieweeList-' + data.interviewName].updateInterview(data.interviewees);
+            app.collections['intervieweeList-' + data.interviewName].update(data.interviewees);
         },
 
         "after-update-interviewer": function(data) {
@@ -73,7 +73,7 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
-            app.collections['interviewerList' + data.interviewName].updateInterview(data.interviewers);
+            app.collections['interviewerList' + data.interviewName].update(data.interviewers);
             app.Lock.detach(data);
         },
 
@@ -87,7 +87,7 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
-            app.collections['intervieweeList' + data.interviewName].updateInterview(data.interviewees);
+            app.collections['intervieweeList' + data.interviewName].update(data.interviewees);
             app.Lock.detach(data);
         }
 
