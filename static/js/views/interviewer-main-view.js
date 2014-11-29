@@ -59,6 +59,7 @@ var app = app || {};
         },
 
         add_interviewee: function(){
+            $('#setinterviewee-list').html('');
             var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
             //fetch intervieweeList here...
@@ -104,6 +105,7 @@ var app = app || {};
             modal.on('hide', function () {
                 input.off('input');
                 add_cnfm.off('click');
+                cnfm.off('click');
                 modal.off('hide');
             });
 
