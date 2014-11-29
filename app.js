@@ -1073,4 +1073,111 @@ io.sockets.on('connection', function(socket){
 			});
 		});
 	});
+
+	socket.on('read-interviewer-in-interview', function(data) {
+		if (!check(data, 'name')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getInterviewByName(data.name, function(err, interview) {
+			if (err) {
+				return socket.emit('read-interviewer-in-interview', {err: err});
+			}
+			userDAO.getUserListByName(interview.interviewer, function(err, users) {
+				if (err) {
+					return socket.emit('read-interviewer-in-interview', {err: err});
+				}
+				socket.emit('read-interviewer-in-interview', {
+					interviewers: users,
+					interviewName: data.name
+				});
+			});
+		});
+	});
+
+	socket.on('read-interviewee-in-interview', function(data) {
+		if (!check(data, 'name')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getInterviewByName(data.name, function(err, interview) {
+			if (err) {
+				return socket.emit('read-interviewee-in-interview', {err: err});
+			}
+			var intervieweeList = [];
+			interview.interviewee.forEach(function(interviewee) {
+				userDAO.getUserByName(interviewee.name, function(err, user) {
+					if (err) {
+						return socket.emit('read-interviewee-in-interview', {err: err});
+					}
+					interviewee.avatar = user.avatar;
+					intervieweeList.push(interviewee);
+					if (intervieweeList.length == interview.interviewee.length) {
+						return socket.emit('read-interviewee-in-interview', {
+							interviewees: intervieweeList,
+							interviewName: data.name
+						});
+					}
+				});
+			});
+		});
+	});
+
+	socket.on('update-interviewer-in-interview', function(data) {
+		if (!check(data, 'name', 'interviewer')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.modifyinterviewers(data.name, data.interviewer, function(err, interview) {
+			if (err) {
+				return socekt.emit('after-update-interviewer', {err: err});
+			}
+			userDAO.getUserListByName(interview.interviewer, function(err, users) {
+				if (err) {
+					return socket.emit('after-update-interviewer', {err: err});
+				}
+				socket.emit('after-update-interviewer', {
+					interviewers: users,
+					interviewName: data.name
+				});
+			});
+		});
+	});
+
+	socket.on('update-interviewee-in-interview', function(data) {
+		if (!check(data, 'name', 'interviewee')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.modifyinterviewees(data.name, data.interviewee, function(err, interview) {
+			if (err) {
+				return socket.emit('after-update-interviewee', {err: err});
+			}
+			var intervieweeList = [];
+			interview.interviewee.forEach(function(interviewee) {
+				userDAO.getUserByName(user.name, function(err, user) {
+					if (err) {
+						return socket.emit('after-update-interviewee', {err: err});
+					}
+					interviewee.avatar = user.avatar;
+					intervieweeList.push(interviewee);
+					if (intervieweeList.length == interview.interviewee.length) {
+						socket.emit('after-update-interviewee', {
+							interviewees: intervieweeList,
+							interviewName: data.name
+						});
+					}
+				});
+			});
+		});
+	});
+
 });

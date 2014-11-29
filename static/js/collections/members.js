@@ -32,7 +32,8 @@ var app = app || {};
 					name: d.name,
 					avatar: d.avatar,
 					online: d.online || false,
-					owner: d.owner || false
+					owner: d.owner || false,
+					status: d.status || 'waiting'
 				});
 			}
 		},
@@ -43,7 +44,8 @@ var app = app || {};
 				name: doc.owner.name,
 				avatar: doc.owner.name == app.currentUser.name ? app.currentUser.avatar: doc.owner.avatar,
 				online: doc.owner.online || false,
-				owner: true
+				owner: true,
+				status: 'waiting'
 			});
 			for (var i = 0; i < doc.members.length; i++) {
 				var user = doc.members[i];
@@ -51,10 +53,12 @@ var app = app || {};
 					name: user.name,
 					avatar: user.avatar,
 					online: user.online || false,
-					owner: false
+					owner: false,
+					status: 'waiting'
 				});
 			}
 		}
+
 	});
 
 	app.init || (app.init = {});
