@@ -117,7 +117,6 @@ var app = app || {};
                     err = 'inputproblemname';
                 }
                 if (err) {
-                    app.showMessageBar('#setinterviewee-message', err, 'error');
                     add_cnfm.attr('disabled', 'disabled');
                 } else {
                     modal.find('.help-inline').text('');
@@ -172,7 +171,7 @@ var app = app || {};
                         },
                         success: function () {
                             modal.modal('hide');
-                            app.showMessageBox('newinterviewee', 'addintervieweesuccess');
+                            //app.showMessageBox('newinterviewee', 'addintervieweesuccess');
                         }
                     })) {
                     app.socket.emit('update-interviewee-in-interview', {
