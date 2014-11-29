@@ -33,10 +33,12 @@ var app = app || {};
             if (!v) {
                 app.collections['problemList-' + name] || (app.collections['problemList-' + name] = new app.Problems());
                 app.collections['allproblems-' + name] || (app.collections['allproblems-' + name] = new app.Problems());
+                app.collections['interviewerList-' + name] || (app.collections['interviewerList-' + name] = new app.Members());
+                app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
-                    interviewerList: app.collections['interviewerList'],
-                    intervieweeList: app.collections['intervieweeList'],
+                    interviewerList: app.collections['interviewerList' + name],
+                    intervieweeList: app.collections['intervieweeList' + name],
                     problemList: app.collections['problemList-' + name],
                     allproblems: app.collections['allproblems-' + name]
                 });
