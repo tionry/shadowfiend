@@ -282,7 +282,7 @@ var app = app || {};
         addOneInterviewee: function(model){
             if (!model) return;
             var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
+            model.set({"eid": model.get("eid")});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
