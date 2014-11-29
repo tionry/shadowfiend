@@ -1099,19 +1099,16 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('read-interviewee-in-interview', function(data) {
 		if (!check(data, 'name')) {
-			socket.emit('read-interviewee-in-interview', {log: 'return in check'});
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		socket.emit('read-interviewee-in-interview', {log: 'check successfully'});
 		interviewDAO.getInterviewByName(data.name, function(err, interview) {
 			if (err) {
 				return socket.emit('read-interviewee-in-interview', {err: err});
 			}
 			var intervieweeList = [];
-			socket.emit('read-interviewee-in-interview', {log: interview.interview.length});
 			interview.interviewee.forEach(function(interviewee) {
 				userDAO.getUserByName(interviewee.name, function(err, user) {
 					if (err) {
