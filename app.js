@@ -1109,6 +1109,7 @@ io.sockets.on('connection', function(socket){
 				return socket.emit('read-interviewee-in-interview', {err: err});
 			}
 			var intervieweeList = [];
+			socket.emit('read-interviewee-in-interview', {log: interview.interviee.length});
 			interview.interviewee.forEach(function(interviewee) {
 				userDAO.getUserByName(interviewee.name, function(err, user) {
 					if (err) {
