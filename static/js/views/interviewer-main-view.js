@@ -162,7 +162,6 @@ var app = app || {};
             });
 
             cnfm.on('click', function () {
-                var name = Backbone.$.trim(modal.find('#setinterviewee-inputName').val());
                 if (app.Lock.attach({
                         loading: modal.find('.modal-buttons'),
                         error: function (data) {
@@ -173,9 +172,9 @@ var app = app || {};
                             app.showMessageBox('newinterviewee', 'addintervieweesuccess');
                         }
                     })) {
-                    app.socket.emit('add-interviewee', {
-                        intervieweeList: newinterviewees,
-                        itvname: that.itv.name
+                    app.socket.emit('update-interviewee-in-interview', {
+                        name: that.itv.name,
+                        interviewee: newinterviewees,
                     });
 
                 }
