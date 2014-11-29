@@ -45,12 +45,14 @@ var app = app || {};
                 virtual: true,
                 mode: 'problem-in-interview'
             });
-            var itvname = $('#interviewer-item-name').text();
             app.socket.emit('read-problem', {
                 all: true,
-                name: itvname,
+                name: this.itv.name,
                 virtual: true,
                 mode: 'all-problem'
+            });
+            app.socket.emit('read-interviewee-in-interview', {
+                name: this.itv.name
             });
         },
 
