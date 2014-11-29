@@ -31,6 +31,7 @@ var app = app || {};
             var v = this.model.v;
             var name = this.model.id;
             if (!v) {
+                app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
                 app.collections['problemList-' + name] || (app.collections['problemList-' + name] = new app.Problems());
                 app.collections['allproblems-' + name] || (app.collections['allproblems-' + name] = new app.Problems());
                 this.model.v = new app.InterviewerMainView({

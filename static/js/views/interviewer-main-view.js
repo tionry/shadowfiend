@@ -18,7 +18,7 @@ var app = app || {};
 
         initialize: function(){
             this.itv = this.model.attributes;
-            ////this.listenTo(this.options.intervieweeList, 'add', this.addOneInterviewee);
+            //this.listenTo(this.options.intervieweeList, 'add', this.addOneInterviewee);
             //this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
@@ -39,13 +39,14 @@ var app = app || {};
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
 
+            var itvname = $('#interviewer-item-name').text();
             app.socket.emit('read-problem', {
                 all: true,
-                name: this.itv.name,
+                name: itvname,
                 virtual: true,
                 mode: 'problem-in-interview'
             });
-            var itvname = $('#interviewer-item-name').text();
+
             app.socket.emit('read-problem', {
                 all: true,
                 name: itvname,
@@ -61,13 +62,44 @@ var app = app || {};
             //show
 
             var that = this;
-            var input = modal.find('#setinterviewee-inputName');
-            var cnfm = modal.find('#setinterviewee-confirm');
+            var input = modal.find('#setinterviewee-inputName'),
+                add_cnfm = modal.find('#setinterviewee-confirm'),
+                cnfm = modal.find('#set-round-interviewee-btn'),
+                newinterviewees = [],
+                newinterviewers = [],
+                al = $('#setinterviewee-list');
+            app.collections['intervieweeList-'+that.itv.name].each(function(model){
+                newinterviewees.push(model.name);
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.SharerView({
+                    model: m
+                });
+                var text = view.render().el;
+                al.append(text);
+            });
             modal.on('hide', function () {
                 input.off('input');
-                cnfm.off('click');
+                add_cnfm.off('click');
                 modal.off('hide');
             });
+
+            var deleteUserInList = function(){
+                $(".sharer-delete").click(function(){
+                    var l = $(this).prev();
+                    var p = $(this).parent().parent();
+                    var Mname = l[0].text();
+                    for (var i = 0; i < newinterviewees.length; i++)
+                        if (newinterviewees[i] == Mname){
+                            newinterviewees.splice(i,1);
+                            break;
+                        }
+                    p.remove();
+                });
+            };
+
             input.on('input', function(){
                 var name = Backbone.$.trim(input.val()),
                     err = false;
@@ -84,8 +116,45 @@ var app = app || {};
                 }
             });
 
-            cnfm.attr('disabled', 'disabled').on('click', function () {
+            add_cnfm.attr('disabled', 'disabled').on('click', function(){
                 var name = Backbone.$.trim(modal.find('#setinterviewee-inputName').val());
+                if (app.Lock.attach({
+                        error: function (data){
+                            app.showMessageBar('#setinterviewee-message', data.err, 'error');
+                        },
+                        success: function (model){
+                            for (var i = 0; i < newinterviewees.length; i++)
+                                if (newinterviewees[i] == model.name){
+                                    app.showMessageBar('#setinterviewee-message', 'name exists', 'error');
+                                    return;
+                                }
+                            for (var i = 0; i < newinterviewers.length; i++)
+                                if (newinterviewers[i] == model.name){
+                                    app.showMessageBar('#setinterviewee-message', 'isInterviewer', 'error');
+                                    return;
+                                }
+                            $('#setinterviewee-message').hide();
+                            $('#setinterviewee-inputName').val('');
+                            newinterviewees.push(model.name);
+                            var m = new app.User({
+                                name: model.name,
+                                avatar: model.avatar
+                            });
+                            var view = new app.SharerView({
+                                model: m
+                            });
+                            var text = view.render().el;
+                            $("#interviewee-list").append(text);
+                            deleteUserInList();
+                        }
+                    })) {
+                    app.socket.emit('check-user', {
+                        name: name
+                    })
+                }
+            });
+
+            cnfm.on('click', function () {
                 if (app.Lock.attach({
                         loading: modal.find('.modal-buttons'),
                         error: function (data) {
@@ -96,8 +165,8 @@ var app = app || {};
                             app.showMessageBox('newinterviewee', 'addintervieweesuccess');
                         }
                     })) {
-                    app.socket.emit('add-interviewee', {
-                        name: name,
+                    app.socket.emit('add-interviewees', {
+                        intervieweeList: newinterviewees,
                         itvname: that.itv.name
                     });
 
@@ -315,24 +384,6 @@ var app = app || {};
             return this;
         },
 
-        addOneProblem2: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.$el.is(':hidden')) {
-                    $('#allproblem-list').append(v.el);
-                    v.delegateEvents();
-                }
-            } else {
-                model.view = new app.PickProblemView({
-                    model: model
-                });
-                $('#allproblem-list').append(model.view.render().el);
-            }
-            return this;
-        },
 
         addAllInterviewee: function(){
             this.options.intervieweeList.each(this.add_interviewee);
@@ -342,9 +393,6 @@ var app = app || {};
             this.options.problemList.each(this.addOneProblem);
         },
 
-        addAllProblem2: function(){
-            this.options.allproblems.each(this.addOneProblem2);
-        }
     });
 
 })();
