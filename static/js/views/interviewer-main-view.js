@@ -154,7 +154,7 @@ var app = app || {};
                                 model: m
                             });
                             var text = view.render().el;
-                            $("#interviewee-list").append(text);
+                            al.append(text);
                             deleteUserInList();
                         }
                     })) {
