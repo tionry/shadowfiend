@@ -47,6 +47,48 @@ var app = app || {};
                 interviews: data.interview
             });
             app.Lock.detach(data);
+        },
+
+        "read-interviewer-in-interview": function(data) {
+            if (data == null || data.err) {
+                return;
+            }
+            app.collections['interviewerList-' + data.interviewName].updateInterview(data.interviewers);
+        },
+
+        "read-interviewee-in-interview": function(data) {
+            if (data == null || data.err) {
+                return;
+            }
+            app.collections['intervieweeList-' + data.interviewName].updateInterview(data.interviewees);
+        },
+
+        "after-update-interviewer": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
+            }
+            app.Lock.removeLoading();
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
+            app.collections['interviewerList' + data.interviewName].updateInterview(data.interviewers);
+            app.Lock.detach(data);
+        },
+
+        "after-update-interviewee": function(data) {
+            if (data == null) {
+                app.Lock.remove();
+                return;
+            }
+            app.Lock.removeLoading();
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
+            app.collections['intervieweeList' + data.interviewName].updateInterview(data.interviewees);
+            app.Lock.detach(data);
         }
 
     };

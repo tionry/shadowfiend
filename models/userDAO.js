@@ -13,7 +13,7 @@ function UserDAO(){
 
 function md5(str){
 	return crypto.createHash('md5').update(str).digest('hex');
-};
+}
 
 function xor(str1, str2){
 	var buf1 = new Buffer(str1, 'hex');
@@ -22,17 +22,17 @@ function xor(str1, str2){
 	for(var i = 0; i < 16; i++)
 		buf[i] = buf1[i] ^ buf2[i];
 	return buf.toString('hex');
-};
+}
 
 function validateEmail(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-};
+}
 
 function validateName(str){
 	var re = /^[A-Za-z0-9]*$/;
 	return str.length >= 6 && str.length <= 20 && re.test(str);
-};
+}
 
 UserDAO.prototype.register = function(name, password, avatar, group, callback){
 	
@@ -216,5 +216,20 @@ UserDAO.prototype.updatePassword = function(userId, password, newPassword, callb
 				return callback("password incorrect");
 			}
 		});
+	});
+};
+
+UserDAO.prototype.getUserListByName = function(name, callback) {
+	db.user.find({name: {$in: name}}, {
+		name: 1,
+		avatar: 1
+	}, function(err, users) {
+		if (err) {
+			return callback("inner error");
+		}
+		if (!users) {
+			return callback("member doesn't exists")
+		}
+		return callback(null, users);
 	});
 };

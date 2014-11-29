@@ -54,7 +54,16 @@ var app = app || {};
 					owner: false
 				});
 			}
+		},
+
+		updateInterview: function(data) {
+			var col = this;
+			col.reset();
+			for (var i in data) {
+				col.add(data[i]);
+			}
 		}
+
 	});
 
 	app.init || (app.init = {});
