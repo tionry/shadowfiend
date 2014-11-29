@@ -203,7 +203,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                 lock.release(interviewname);
                 return callback("inner error");
             }
-            db.interview.find({name:interviewname},{name:1,interviewee:1},function(err,interview){
+            db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
                 if (err) {
                     lock.release(interviewname);
                     return callback("inner error");
@@ -233,7 +233,7 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
                     lock.release(interviewname);
                     return callback("inner error");
                 }
-                db.interview.find({name:interviewname},{name:1,status:1},function(err,interview){
+                db.interview.findOne({name:interviewname},{name:1,status:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
                         return callback("inner error");
@@ -263,7 +263,7 @@ InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,
                     lock.release(interviewname);
                     return callback("inner error");
                 }
-                db.interview.find({name:interviewname},{name:1,interviewer:1},function(err,interview){
+                db.interview.findOne({name:interviewname},{name:1,interviewer:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
                         return callback("inner error");
@@ -299,7 +299,7 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
                     lock.release(interviewname);
                     return callback("inner error");
                 }
-                db.interview.find({name:interviewname},{name:1,interviewee:1},function(err,interview){
+                db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
                         return callback("inner error");
