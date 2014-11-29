@@ -1116,7 +1116,7 @@ io.sockets.on('connection', function(socket){
 					}
 					interviewee.avatar = user.avatar;
 					intervieweeList.push(interviewee);
-					if (interviewee.length == interview.interviewee.length) {
+					if (intervieweeList.length == interview.interviewee.length) {
 						return socket.emit('read-interviewee-in-interview', {
 							interviewees: intervieweeList,
 							interviewName: data.name
