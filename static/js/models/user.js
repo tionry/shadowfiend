@@ -19,7 +19,8 @@ var app = app || {};
 			avatar: 'images/character.png',
 			online: false,
 			owner: false,
-		},
+			status: 'waiting'
+		}
     
 	});
   
