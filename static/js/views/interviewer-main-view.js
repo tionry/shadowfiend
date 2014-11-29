@@ -275,14 +275,14 @@ var app = app || {};
             });
             $('#endinterview-cnfm').on('click', function(){
                 modal.modal('hide');
-                $('#interviewer-item-name').text(this.itv.name+'(已结束)');
+                $('#interviewer-item-name').text($('#interviewer-item-name').text()+'(已结束)');
             });
         },
 
         addOneInterviewee: function(model){
             if (!model) return;
             var v = model.view;
-            model.set({"eid": model.get("eid")});
+            model.set({"eid": model.get("eid") || app.collections['intervieweeList-' + $('#interviewer-item-name').text()].length});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
