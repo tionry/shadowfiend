@@ -1162,7 +1162,6 @@ io.sockets.on('connection', function(socket){
 				return socket.emit('after-update-interviewee', {err: err});
 			}
 			var intervieweeList = [];
-			socket.emit('after-update-interviewee', {log: interview});
 			interview.interviewee.forEach(function(interviewee) {
 				userDAO.getUserByName(interviewee.name, function(err, user) {
 					if (err) {
