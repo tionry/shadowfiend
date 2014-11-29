@@ -71,24 +71,6 @@ var app = app || {};
                 newinterviewers = [],
                 al = $('#setinterviewee-list');
             var c = app.collections['intervieweeList-'+that.itv.name];
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
-                newinterviewees.push(model.name);
-                var m = new app.User({
-                    name: model.name,
-                    avatar: model.avatar
-                });
-                var view = new app.SharerView({
-                    model: m
-                });
-                var text = view.render().el;
-                al.append(text);
-            }
-            modal.on('hide', function () {
-                input.off('input');
-                add_cnfm.off('click');
-                modal.off('hide');
-            });
 
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
@@ -104,6 +86,27 @@ var app = app || {};
                 });
             };
 
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                newinterviewees.push(model.name);
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.SharerView({
+                    model: m
+                });
+                var text = view.render().el;
+                al.append(text);
+                deleteUserInList();
+            }
+            modal.on('hide', function () {
+                input.off('input');
+                add_cnfm.off('click');
+                modal.off('hide');
+            });
+
+
             input.on('input', function(){
                 var name = Backbone.$.trim(input.val()),
                     err = false;
@@ -112,11 +115,11 @@ var app = app || {};
                 }
                 if (err) {
                     app.showMessageBar('#setinterviewee-message', err, 'error');
-                    cnfm.attr('disabled', 'disabled');
+                    add_cnfm.attr('disabled', 'disabled');
                 } else {
                     modal.find('.help-inline').text('');
                     modal.find('.form-group').removeClass('error');
-                    cnfm.removeAttr('disabled');
+                    add_cnfm.removeAttr('disabled');
                 }
             });
 
