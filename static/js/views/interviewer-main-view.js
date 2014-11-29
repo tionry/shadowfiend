@@ -38,6 +38,7 @@ var app = app || {};
             $('#interviewer-problem-list').html('');
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
+            $('#setinterviewee-list').html('');
 
             app.socket.emit('read-problem', {
                 all: true,
