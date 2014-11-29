@@ -59,7 +59,7 @@ var app = app || {};
 		updateInterview: function(data) {
 			var col = this;
 			col.reset();
-			for (var i in data) {
+			for (var i = 0; i < data.length; i++) {
 				col.add(data[i]);
 			}
 		}
