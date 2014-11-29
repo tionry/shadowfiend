@@ -72,7 +72,7 @@ var app = app || {};
                 al = $('#setinterviewee-list');
             var c = app.collections['intervieweeList-'+that.itv.name];
             for (var i = 0; i < c.length; i++){
-                var model = c.models[i];
+                var model = c.models[i].attributes;
                 newinterviewees.push(model.name);
                 var m = new app.User({
                     name: model.name,
