@@ -77,7 +77,7 @@ var app = app || {};
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
                     var p = $(this).parent().parent();
-                    var Mname = l[0].text();
+                    var Mname = l.text();
                     for (var i = 0; i < newinterviewees.length; i++)
                         if (newinterviewees[i] == Mname){
                             newinterviewees.splice(i,1);
