@@ -70,7 +70,9 @@ var app = app || {};
                 newinterviewees = [],
                 newinterviewers = [],
                 al = $('#setinterviewee-list');
-            app.collections['intervieweeList-'+that.itv.name].each(function(model){
+            var c = app.collections['intervieweeList-'+that.itv.name];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i];
                 newinterviewees.push(model.name);
                 var m = new app.User({
                     name: model.name,
@@ -81,7 +83,7 @@ var app = app || {};
                 });
                 var text = view.render().el;
                 al.append(text);
-            });
+            }
             modal.on('hide', function () {
                 input.off('input');
                 add_cnfm.off('click');
