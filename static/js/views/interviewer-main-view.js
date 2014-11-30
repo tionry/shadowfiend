@@ -275,7 +275,7 @@ var app = app || {};
                 dp = modal.find('#setround-remove'),
                 il = $('#rounduser-list'),
                 al = $('#alluser-list'),
-                sl = $('interviewer-interviewee-control'),
+                sl = $('#interviewer-interviewee-control'),
                 cnfm = $('#setrounduser-cnfm'),
                 that = this;
 
