@@ -328,10 +328,10 @@ var app = app || {};
             });
             cnfm.on('click',function(){
                 sl.html('');
-                //il.children().each(function(){
+                il.children().each(function(){
                     for (var i = 0; i < c.length; i++){
                         var model = c.models[i].attributes;
-                        //if (model.name == $(this).text().trim()){
+                        if (model.name == $(this).text().trim()){
                             var m = new app.User({
                                 name: model.name,
                                 avatar: model.avatar
@@ -341,9 +341,9 @@ var app = app || {};
                             });
                             var text = view.render().el;
                             sl.append(text);
-                        //}
+                        }
                     }
-                //});
+                });
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 $('.remark-btn').removeAttr('disabled');
