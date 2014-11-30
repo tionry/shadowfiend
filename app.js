@@ -1163,7 +1163,7 @@ io.sockets.on('connection', function(socket){
 			}
 			var intervieweeList = [];
 			interview.interviewee.forEach(function(interviewee) {
-				userDAO.getUserByName(user.name, function(err, user) {
+				userDAO.getUserByName(interviewee.name, function(err, user) {
 					if (err) {
 						return socket.emit('after-update-interviewee', {err: err});
 					}
@@ -1179,5 +1179,22 @@ io.sockets.on('connection', function(socket){
 			});
 		});
 	});
+
+	socket.on('change-interview-status', function(data) {
+		if (!check(data, 'name', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.updateInterviewstatus(data.name, data.status, function(err, interview) {
+			if (err) {
+				return socket.emit('change-interview-status', {err: err});
+			}
+			socket.emit('change-interview-status', {interview: interview});
+		});
+	});
+
+
 
 });

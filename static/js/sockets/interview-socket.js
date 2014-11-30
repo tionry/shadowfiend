@@ -73,7 +73,7 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
-            app.collections['interviewerList' + data.interviewName].update(data.interviewers);
+            app.collections['interviewerList-' + data.interviewName].update(data.interviewers);
             app.Lock.detach(data);
         },
 
@@ -87,7 +87,7 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
-            app.collections['intervieweeList' + data.interviewName].update(data.interviewees);
+            app.collections['intervieweeList-' + data.interviewName].update(data.interviewees);
             app.Lock.detach(data);
         }
 
