@@ -6,7 +6,9 @@ var app = app || {};
     app.IntervieweeInfoView = Backbone.View.extend({
         tagName: 'div',
         className: 'interviewer-interviewee',
-        template: _.template($('#interviewer-interviewee-template').html()),
+        template: _.template($('#interviewer-interviewee-template').html(), null, {
+            variable: 'model'
+        }),
         events: {
             'click a': 'select'
         },
