@@ -12,7 +12,7 @@ var app = app || {};
         events:{
             'click a.problem-go':'go',
             'click a.problem-modify':'modify',
-            'click a.problem-delete':'delete',
+            'click a.operation':'delete',
             'click a.problem-toggle':'toggleDone',
         },
         initialize: function(){

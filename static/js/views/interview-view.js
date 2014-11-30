@@ -10,9 +10,9 @@ var app = app || {};
 
         events:{
             'click a.interviewer-go':'interviewer_go',
-            'click a.interviewee-go':'interviewee_go'
+            'click a.interviewee-go':'interviewee_go',
         //    'click a.problem-modify':'modify',
-        //    'click a.problem-delete':'delete',
+            'click a.operation':'delete',
         //    'click a.problem-toggle':'toggleDone',
         },
         initialize: function(){

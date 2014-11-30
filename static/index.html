@@ -200,7 +200,7 @@
                 <td class="col4"><%=model.time%></td>
                 <td class="col5">
                 <div class="dropdown">
-                  <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> opreation" data-toggle="dropdown">&nbsp;</a>
+                  <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> operation" data-toggle="dropdown">&nbsp;</a>
                   <ul class="dropdown-menu">
                     <% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>
                     <li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>
@@ -336,7 +336,7 @@
                   <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
                   <td class="col3"><%=model.time%></td>
                   <td class="col4">
-                    <a href="#" class="opreation">&nbsp;</a>
+                    <a href="#" class="operation">&nbsp;</a>
                   </td>
                 </script>
               </tbody>
@@ -397,7 +397,7 @@
                   <td class="col3"><%= model.status %></td>
                   <td class="col4"><%= model.time %></td>
                   <td class="col5">
-                    <a href="#" class="opreation">&nbsp;</a>
+                    <a href="#" class="operation">&nbsp;</a>
                   </td>
                 </script>
               </tbody>
