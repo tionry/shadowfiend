@@ -14,6 +14,8 @@ var app = app || {};
             'click #start-interview-btn': 'start_interview',
             'click #end-interview-btn': 'end_interview',
             'click #set-round-btn': 'set_round_interviewee',
+            'click #end-round-btn': 'end_round',
+            'click .remark-btn' : 'show_remark'
         },
 
         initialize: function(){
@@ -33,6 +35,7 @@ var app = app || {};
         renewList: function(){
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
+            $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').attr('disabled', 'disabled');
             $('#interviewer-item-name').text(this.itv.name);
             $('#interviewer-problem-list').html('');
@@ -347,7 +350,13 @@ var app = app || {};
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 $('.remark-btn').removeAttr('disabled');
+                $('#set-round-btn').attr('disabled', 'disabled');
+                $('#end-round-btn').removeAttr('disabled');
             })
+        },
+
+        end_round: function(){
+
         },
 
         start_interview: function(){
@@ -357,6 +366,7 @@ var app = app || {};
             $('#set-interview-menu').fadeOut('fast');
             $('#start-interview-btn').fadeOut('fast');
             $('#set-round-btn').removeAttr('disabled');
+            app.showMessageBox('setintervieweesuccess', 'interviewstart');
         },
 
         end_interview: function(){
@@ -370,6 +380,11 @@ var app = app || {};
                 modal.modal('hide');
                 $('#interviewer-item-name').text(this.itv.name+'(已结束)');
             });
+        },
+
+        show_remark: function(){
+            var modal = Backbone.$('#remark');
+            app.showInputModal(modal);
         },
 
         addOneInterviewee: function(model){

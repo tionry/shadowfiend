@@ -134,4 +134,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'addintervieweesuccess'   : '成功添加面试者',
   'setroundintervieweesuccess': '成功设置本轮面试者',
   'roundinterviewstart'     : '本轮开始',
+  'interviewstart'          : '面试开始。请选择第一轮参与者。',
 };

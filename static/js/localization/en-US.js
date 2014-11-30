@@ -133,5 +133,6 @@ app.languages['en-US'] = { Name :'English Version',
   'newinterviewee'          : 'New Interviewee',
   'addintervieweesuccess'   : 'Add interviewee successfully',
   'setroundintervieweesuccess': 'Set this round successfully',
-  'roundinterviewstart'     : 'ROUND START',
+  'roundinterviewstart'     : 'Round START',
+  'interviewstart'          : 'Interview START',
 };
