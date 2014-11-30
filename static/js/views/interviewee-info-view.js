@@ -4,7 +4,8 @@
 var app = app || {};
 (function () {
     app.IntervieweeInfoView = Backbone.View.extend({
-        tagName: 'li',
+        tagName: 'div',
+        className: 'interviewer-interviewee',
         template: _.template($('#interviewer-interviewee-template').html()),
         events: {
             'click a': 'select'

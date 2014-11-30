@@ -171,7 +171,7 @@ var app = app || {};
                         },
                         success: function () {
                             modal.modal('hide');
-                            //app.showMessageBox('newinterviewee', 'addintervieweesuccess');
+                            app.showMessageBox('newinterviewee', 'addintervieweesuccess');
                         }
                     })) {
                     app.socket.emit('update-interviewee-in-interview', {
@@ -270,14 +270,30 @@ var app = app || {};
         },
 
         set_round_interviewee: function(){
-            //fetch all interviewee in the interview here.. and show.
-
             var modal = Backbone.$('#set-round');
             var ap = modal.find('#setround-add'),
                 dp = modal.find('#setround-remove'),
                 il = $('#rounduser-list'),
                 al = $('#alluser-list'),
-                cnfm = $('#setinterviewproblem-cnfm');
+                sl = $('interviewer-interviewee-control'),
+                cnfm = $('#setinterviewproblem-cnfm'),
+                that = this;
+            //获取所有面试者，添加在左侧
+            al.html('');
+            var c = app.collections['intervieweeList-'+that.itv.name];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.SharerView({
+                    model: m
+                });
+                var text = view.render().el;
+                al.append(text);
+            }
+
             app.showInputModal(modal);
             modal.on('hide', function () {
                 cnfm.off('click');
@@ -308,27 +324,25 @@ var app = app || {};
                 l.removeClass('active');
             });
             cnfm.on('click',function(){
-                var roundArr = function(){
-                    var result = [];
-                    il.children().each(function(){
-                        result.push($(this).text().trim());
-                    });
-                    return result;
-                };
-                if (app.Lock.attach({
-                        error: function (data) {
-                            //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
-                        },
-                        success: function () {
-                            modal.modal('hide');
-                            app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
+                sl.html('');
+                il.children().each(function(){
+                    for (var i = 0; i < c.length; i++){
+                        var model = c.models[i].attributes;
+                        if (model.name == $(this).text().trim()){
+                            var m = new app.User({
+                                name: model.name,
+                                avatar: model.avatar
+                            });
+                            var view = new app.IntervieweeInfoView({
+                                model: m
+                            });
+                            var text = view.render().el;
+                            sl.append(text);
                         }
-                    })) {
-                    app.socket.emit('update-problem-in-interview', {
-                        name: itvname,
-                        problemlist: roundArr()
-                    });
-                }
+                    }
+                });
+                modal.modal('hide');
+                app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 $('.remark-btn').removeAttr('disabled');
             })
         },
