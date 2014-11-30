@@ -295,7 +295,7 @@ var app = app || {};
                 var text = view.render().el;
                 al.append(text);
             }
-            modal.find('.sharer-delete').hide();
+            modal.find('.sharer-delete').remove();
 
             app.showInputModal(modal);
             modal.on('hide', function () {
