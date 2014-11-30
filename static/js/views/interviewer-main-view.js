@@ -278,9 +278,10 @@ var app = app || {};
                 sl = $('interviewer-interviewee-control'),
                 cnfm = $('#setrounduser-cnfm'),
                 that = this;
-            modal.find('.sharer-delete').hide();
+
             //获取所有面试者，添加在左侧
             al.html('');
+            il.html('');
             var c = app.collections['intervieweeList-'+that.itv.name];
             for (var i = 0; i < c.length; i++){
                 var model = c.models[i].attributes;
@@ -294,6 +295,7 @@ var app = app || {};
                 var text = view.render().el;
                 al.append(text);
             }
+            modal.find('.sharer-delete').hide();
 
             app.showInputModal(modal);
             modal.on('hide', function () {
