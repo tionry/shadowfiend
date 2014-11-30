@@ -276,8 +276,9 @@ var app = app || {};
                 il = $('#rounduser-list'),
                 al = $('#alluser-list'),
                 sl = $('interviewer-interviewee-control'),
-                cnfm = $('#setinterviewproblem-cnfm'),
+                cnfm = $('#setrounduser-cnfm'),
                 that = this;
+            modal.find('.sharer-delete').hide();
             //获取所有面试者，添加在左侧
             al.html('');
             var c = app.collections['intervieweeList-'+that.itv.name];
