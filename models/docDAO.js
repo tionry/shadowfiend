@@ -1420,7 +1420,7 @@ DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
 		});
 
 	});
-	return callback(null,callback);
+	return callback(null,memberlist);
 };
 
 DocDAO.prototype.interviewdone = function(path,memberlist,callback){
