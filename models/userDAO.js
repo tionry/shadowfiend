@@ -233,3 +233,4 @@ UserDAO.prototype.getUserListByName = function(name, callback) {
 		return callback(null, users);
 	});
 };
+

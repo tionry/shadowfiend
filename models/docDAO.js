@@ -222,6 +222,11 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 	});
 };
 
+DocDAO.prototype.createDocByname = function(username,path,type,callback){
+	var user = db.user.findOne({name:username},{_id:1});
+	createDoc(user._id,path,type,callback);
+}
+
 DocDAO.prototype.deleteDoc = function(userId, path, callback){
 	var that = this;
 	function _deleteDocFromMember(idArr, docId, deleteMemberCallback){
@@ -1402,7 +1407,7 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 
 DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
 	memberlist.forEach(function(member){
-		var mem = userDAO.prototype.getUserByName(member);
+		var mem = db.user.findOne({name:member},{_id:1});
 		addMember(mem._id,path,member,callback);
 		var doc = getDocByPath(mem.id,path,callback);
 		doc.status = "running";
