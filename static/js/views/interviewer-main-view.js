@@ -272,6 +272,34 @@ var app = app || {};
         },
 
         set_round_interviewee: function(){
+            var pushProblem = function(){
+                var that = this;
+                $('.push-problem-btn').on('click', function(){
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).children().removeClass('glyphicon-play');
+                    $(this).children().addClass('glyphicon-stop');
+                    $(this).removeAttr('disabled');
+                    $('.glyphicon-stop').on('click', function(){
+                        stopProblem();
+                    })
+                    var name = $(this).text();
+                    if (app.Lock.attach({
+
+                        })) {
+                        app.socket.emit('push-problem', {
+                            name: name,
+                        });
+                    }
+                });
+            }
+
+            var stopProblem = function(){
+                var that = $('.glyphicon-stop');
+                that.parent().addClass('done');
+                $('.push-problem-btn').removeClass('disabled');
+                $('.done').attr('disabled', 'disabled');
+            }
+
             var modal = Backbone.$('#set-round');
             var ap = modal.find('#setround-add'),
                 dp = modal.find('#setround-remove'),
@@ -353,7 +381,7 @@ var app = app || {};
                 $('#set-round-btn').attr('disabled', 'disabled');
                 $('#end-round-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeAttr('disabled');
-                this.pushProblem();
+                pushProblem();
             })
         },
 
@@ -361,34 +389,6 @@ var app = app || {};
             $('#end-round-btn').attr('disabled','disabled');
             $('#set-round-btn').removeAttr('disabled');
             app.showMessageBox('info', 'roundend');
-        },
-
-        pushProblem: function(){
-            var that = this;
-            $('.push-problem-btn').on('click', function(){
-                $('.push-problem-btn').attr('disabled', 'disabled');
-                $(this).removeClass('glyphicon-play');
-                $(this).addClass('glyphicon-stop');
-                $(this).parent().removeAttr('disabled');
-                $('.glyphicon-stop').on('click', function(){
-                    that.stopProblem();
-                })
-                var name = $(this).text();
-                if (app.Lock.attach({
-
-                    })) {
-                    app.socket.emit('push-problem', {
-                        name: name,
-                    });
-                }
-            });
-        },
-
-        stopProblem: function(){
-            var that = $('.glyphicon-stop');
-            that.parent().addClass('done');
-            $('.push-problem-btn').removeClass('disabled');
-            $('.done').attr('disabled', 'disabled');
         },
 
         start_interview: function(){
