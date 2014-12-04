@@ -1410,13 +1410,13 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
 	memberlist.forEach(function(member){
 		db.user.findOne({name:member},{_id:1},function(err,mem){
-			DocDAO.prototype.createDoc.getDocByPath(mem.id,path,function(err,doc){
+			DocDAO.prototype.getDocByPath(mem.id,path,function(err,doc){
 				if (err) {
 					return callback("inner error");
 				}
 				doc.status = "running";
 			});
-			addMember(mem._id,path,member,callback);
+			DocDAO.prototype.addMember(mem._id,path,member,callback);
 		});
 
 	});
@@ -1425,14 +1425,14 @@ DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
 
 DocDAO.prototype.interviewdone = function(path,memberlist,callback){
 	memberlist.forEach(function(member){
-		var doc = DocDAO.prototype.getDocByPath(member.id,path,function(err,doc){
+		DocDAO.prototype.getDocByPath(member.id,path,function(err,doc){
 			if(err){
 				return callback("inner error");
 			}
 			doc.status = "done";
 		});
 
-		var mem = userDAO.prototype.getUserByName(member,function(err,mem){
+		userDAO.prototype.getUserByName(member,function(err,mem){
 			if(err){
 				return callback("inner error");
 			}
