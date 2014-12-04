@@ -15,17 +15,13 @@ var app = app || {};
             'click #end-interview-btn': 'end_interview',
             'click #set-round-btn': 'set_round_interviewee',
             'click #end-round-btn': 'end_round',
-            'click .remark-btn' : 'show_remark'
+            'click .remark-btn' : 'show_remark',
         },
 
         initialize: function(){
             this.itv = this.model.attributes;
-            //this.listenTo(this.options.intervieweeList, 'add', this.addOneInterviewee);
-            //this.listenTo(this.options.intervieweeList, 'reset', this.addAllInterviewee);
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            //this.listenTo(this.options.allproblems, 'add', this.addOneProblem2);
-            //this.listenTo(this.options.allproblems, 'reset', this.addAllProblem2);
             //初始化界面显示
 
             this.renewList();
@@ -33,6 +29,8 @@ var app = app || {};
         },
 
         renewList: function(){
+            $('#set-interview-menu').show();
+            $('#start-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
@@ -261,6 +259,7 @@ var app = app || {};
                                 mode: 'problem-in-interview'
                             });
                             modal.modal('hide');
+                            $('.push-problem-btn').attr('disabled', 'disabled');
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {
@@ -281,7 +280,7 @@ var app = app || {};
                 sl = $('#interviewer-interviewee-control'),
                 cnfm = $('#setrounduser-cnfm'),
                 that = this;
-
+            that.viewees = [];
             //获取所有面试者，添加在左侧
             al.html('');
             il.html('');
@@ -335,6 +334,7 @@ var app = app || {};
                     for (var i = 0; i < c.length; i++){
                         var model = c.models[i].attributes;
                         if (model.name == $(this).text().trim()){
+                            that.viewees.push(model.name);
                             var m = new app.User({
                                 name: model.name,
                                 avatar: model.avatar
@@ -352,11 +352,43 @@ var app = app || {};
                 $('.remark-btn').removeAttr('disabled');
                 $('#set-round-btn').attr('disabled', 'disabled');
                 $('#end-round-btn').removeAttr('disabled');
+                $('.push-problem-btn').removeAttr('disabled');
+                this.pushProblem();
             })
         },
 
         end_round: function(){
+            $('#end-round-btn').attr('disabled','disabled');
+            $('#set-round-btn').removeAttr('disabled');
+            app.showMessageBox('info', 'roundend');
+        },
 
+        pushProblem: function(){
+            var that = this;
+            $('.push-problem-btn').on('click', function(){
+                $('.push-problem-btn').attr('disabled', 'disabled');
+                $(this).removeClass('glyphicon-play');
+                $(this).addClass('glyphicon-stop');
+                $(this).parent().removeAttr('disabled');
+                $('.glyphicon-stop').on('click', function(){
+                    that.stopProblem();
+                })
+                var name = $(this).text();
+                if (app.Lock.attach({
+
+                    })) {
+                    app.socket.emit('push-problem', {
+                        name: name,
+                    });
+                }
+            });
+        },
+
+        stopProblem: function(){
+            var that = $('.glyphicon-stop');
+            that.parent().addClass('done');
+            $('.push-problem-btn').removeClass('disabled');
+            $('.done').attr('disabled', 'disabled');
         },
 
         start_interview: function(){
@@ -387,25 +419,6 @@ var app = app || {};
             app.showInputModal(modal);
         },
 
-        addOneInterviewee: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.el.is(':hidden')) {
-                    $('#interviewer-interviewee-control').append(v.el);
-                    v.delegateEvents();
-                }
-            } else {
-                model.view = new app.IntervieweeInfoView({
-                    model: model
-                });
-                $('#interviewer-interviewee-control').append(model.view.render().el);
-            }
-            return this;
-        },
-
         addOneProblem: function(model){
             if (!model) return;
             var v = model.view;
@@ -423,11 +436,6 @@ var app = app || {};
                 $('#interviewer-problem-list').append(model.view.render().el);
             }
             return this;
-        },
-
-
-        addAllInterviewee: function(){
-            this.options.intervieweeList.each(this.add_interviewee);
         },
 
         addAllProblem: function(){

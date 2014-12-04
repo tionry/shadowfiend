@@ -135,4 +135,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'setroundintervieweesuccess': '成功设置本轮面试者',
   'roundinterviewstart'     : '本轮开始',
   'interviewstart'          : '面试开始。请选择第一轮参与者。',
+  'roundend'                : '本轮结束。可以开始下轮面试，或者直接结束本场面试。',
 };
