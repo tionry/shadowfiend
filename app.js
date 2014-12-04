@@ -1195,6 +1195,35 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	function _callCreateDocByName(interviewee, interviewName, problemName, times) {
+		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName, 'doc', function(err, doc) {
+			if (err) {
+				if (err != 'file exists') {
+					return 'null';
+				}
+				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1);
+			}
+			return '/' + interviewee + '/' + interviewName + '-' + problemName;
+		});
+	}
 
+
+	socket.on('add-interviewee-doc', function(data) {
+		if (!check(data, 'interviewName', 'intervieweeList', 'interviewerList', 'problemName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		data.intervieweeList.forEach(function(interviewee) {
+			var n = 0;
+			var path = _callCreateDocByName(interviewee, data.interviewName, data.problemName, n);
+			docDAO.setinterviewmember(path, data.interviewerList, function(err) {
+				if (err) {
+					return;
+				}
+			});
+		});
+	});
 
 });
