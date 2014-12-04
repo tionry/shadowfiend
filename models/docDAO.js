@@ -1416,7 +1416,9 @@ DocDAO.prototype.setinterviewmember = function(path,memberlist,callback){
 
 DocDAO.prototype.interviewdone = function(path,memberlist,callback){
 	memberlist.forEach(function(member){
-		var doc = getDocByPath(mem.id,path);
+		var doc = getDocByPath(member.id,path);
+		doc.status = "done";
 		var mem = userDAO.prototype.getUserByName(member);
+		mem.status = "done";
 	});
 };
