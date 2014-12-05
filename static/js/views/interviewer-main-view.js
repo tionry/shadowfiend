@@ -273,6 +273,7 @@ var app = app || {};
 
         set_round_interviewee: function(){
             var resetRound = function(){
+                $('.push-problem-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeClass('done');
                 $('.push-problem-btn').children().removeClass('glyphicon-stop');
                 $('.push-problem-btn').children().addClass('glyphicon-play');
@@ -396,10 +397,12 @@ var app = app || {};
             $('#end-round-btn').attr('disabled','disabled');
             $('#set-round-btn').removeAttr('disabled');
             app.showMessageBox('info', 'roundend');
+            $('.push-problem-btn').attr('disabled', 'disabled');
         },
 
         start_interview: function(){
             // change the interview state here..
+            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
             $('#set-interview-menu').fadeOut('fast');
