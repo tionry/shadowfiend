@@ -58,6 +58,12 @@ var app = app || {};
             app.socket.emit('read-interviewee-in-interview',{
                 name: itvname,
             });
+            app.socket.emit('read-interviewer-in-interview',{
+                name: itvname,
+            });
+            if (this.itv.status == 'Ongoing'){
+                this.start_interview();
+            }
         },
 
         add_interviewee: function(){
@@ -292,10 +298,18 @@ var app = app || {};
                     })
                     var name = $(this).text();
                     if (app.Lock.attach({
-
+                            error: function(){
+                                alert('error');
+                            },
+                            success: function(){
+                                alert('success');
+                            }
                         })) {
-                        app.socket.emit('push-problem', {
-                            name: name,
+                        app.socket.emit('add-interviewee-doc', {
+                            interviewName: name,
+                            intervieweeList: that.viewees,
+                            interviewerList: that.viewers,
+                            problemName: '还没写好题目名字',
                         });
                     }
                 });
@@ -316,6 +330,12 @@ var app = app || {};
                 sl = $('#interviewer-interviewee-control'),
                 cnfm = $('#setrounduser-cnfm'),
                 that = this;
+            that.viewers = [];
+            var d = app.collections['interviewerList-'+that.itv.name].models;
+            for (var i = 0; i < d.length; i++){
+                var model = d.models[i].attributes;
+                that.viewers.push(model.name);
+            }
             that.viewees = [];
             //获取所有面试者，添加在左侧
             al.html('');
@@ -403,6 +423,14 @@ var app = app || {};
 
         start_interview: function(){
             // change the interview state here..
+            //change-interview-status
+            var name = this.itv.name;
+            if (this.itv.status != 'Ongoing') {
+                app.socket.emit('change-interview-status', {
+                    name: name,
+                    status: 'Ongoing',
+                });
+            }
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
