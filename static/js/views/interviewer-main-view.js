@@ -272,6 +272,12 @@ var app = app || {};
         },
 
         set_round_interviewee: function(){
+            var resetRound = function(){
+                $('.push-problem-btn').removeClass('done');
+                $('.push-problem-btn').children().removeClass('glyphicon-stop');
+                $('.push-problem-btn').children().removeClass('glyphicon-play');
+            }
+
             var pushProblem = function(){
                 var that = this;
                 $('.push-problem-btn').on('click', function(){
@@ -381,6 +387,7 @@ var app = app || {};
                 $('#set-round-btn').attr('disabled', 'disabled');
                 $('#end-round-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeAttr('disabled');
+                resetRound();
                 pushProblem();
             })
         },
