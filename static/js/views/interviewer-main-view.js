@@ -331,7 +331,7 @@ var app = app || {};
                 cnfm = $('#setrounduser-cnfm'),
                 that = this;
             that.viewers = [];
-            var d = app.collections['interviewerList-'+that.itv.name].models;
+            var d = app.collections['interviewerList-'+that.itv.name];
             for (var i = 0; i < d.length; i++){
                 var model = d.models[i].attributes;
                 that.viewers.push(model.name);
