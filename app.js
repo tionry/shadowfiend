@@ -1196,14 +1196,14 @@ io.sockets.on('connection', function(socket){
 	});
 
 	function _callCreateDocByName(interviewee, interviewName, problemName, times) {
-		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName, 'doc', function(err, doc) {
+		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName + times, 'doc', function(err, doc) {
 			if (err) {
 				if (err != 'file exists') {
 					return 'null';
 				}
 				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1);
 			}
-			return '/' + interviewee + '/' + interviewName + '-' + problemName;
+			return '/' + interviewee + '/' + interviewName + '-' + problemName + times;
 		});
 	}
 
@@ -1222,6 +1222,7 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('after-update-interviewee', {log: err});
 				}
+				return socket.emit('after-update-interviewee', {log: 'success'});
 			});
 		});
 	});
