@@ -32,6 +32,7 @@ var app = app || {};
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
+            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').attr('disabled', 'disabled');
@@ -273,6 +274,7 @@ var app = app || {};
 
         set_round_interviewee: function(){
             var resetRound = function(){
+                $('.push-problem-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeClass('done');
                 $('.push-problem-btn').children().removeClass('glyphicon-stop');
                 $('.push-problem-btn').children().addClass('glyphicon-play');
@@ -396,6 +398,7 @@ var app = app || {};
             $('#end-round-btn').attr('disabled','disabled');
             $('#set-round-btn').removeAttr('disabled');
             app.showMessageBox('info', 'roundend');
+            $('.push-problem-btn').attr('disabled', 'disabled');
         },
 
         start_interview: function(){
