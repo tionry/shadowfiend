@@ -1414,12 +1414,12 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 		}
 		memberlist.forEach(function(member){
 			db.user.findOne({name:member},{_id:1},function(err,mem){
-				DocDAO.prototype.getDocByPath(mem._id,path,function(err,doc){
+				/*DocDAO.prototype.getDocByPath(mem._id,path,function(err,doc){
 					if (err) {
 						return callback("inner error");
 					}
 					doc.status = "running";
-				});
+				});*/
 
 				DocDAO.prototype.addMember(member._id,path,member,function(err,admem){
 					if(err){
