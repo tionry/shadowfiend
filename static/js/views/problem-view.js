@@ -39,7 +39,7 @@ var app = app || {};
                 model = this.model;
             modal.find('#delete-name').text(model.json.name);
             var cnfm = modal.find('.modal-confirm');
-            var name = model.name;
+            var name = model.json.name;
             var that = this;
             modal.on('hide', function () {
                 cnfm.off('click');
