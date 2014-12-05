@@ -1408,7 +1408,7 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 };
 
 DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callback){
-	userDAO.prototype.getUserByName(ownername,function(err,mem){
+	db.user.findOne({name:ownername},{_id:1},function(err,mem){
 		if(err){
 			return callback("inner error");
 		}
