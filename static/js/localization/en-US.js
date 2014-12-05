@@ -135,4 +135,5 @@ app.languages['en-US'] = { Name :'English Version',
   'setroundintervieweesuccess': 'Set this round successfully',
   'roundinterviewstart'     : 'Round START',
   'interviewstart'          : 'Interview START',
+  'roundend'                : 'This round has ended. Please start next round, or you can end this interview now!',
 };
