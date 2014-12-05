@@ -1416,7 +1416,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 			lock.release(rootPath);
 			return callback("file doesn't exists");
 		}
-		var idlist = null;
+		var idlist = [];
 		var i = 0;
 		memberlist.forEach(function(memname,i){
 			db.user.findOne({name:memname},{_id:1},function(err,user){
