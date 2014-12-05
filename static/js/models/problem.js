@@ -30,7 +30,7 @@ var app = app || {};
 		setShow: function() {
 			var a = this.attributes;
 			var o = {
-				ord: a.eid,
+				ord: a.ord,
 				name: a.name,
 				time: new Date(a.createTime).toLocaleJSON(),
 			}
