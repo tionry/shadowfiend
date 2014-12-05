@@ -296,7 +296,7 @@ var app = app || {};
             var stopProblem = function(){
                 var that = $('.glyphicon-stop');
                 that.parent().addClass('done');
-                $('.push-problem-btn').removeClass('disabled');
+                $('.push-problem-btn').removeAttr('disabled');
                 $('.done').attr('disabled', 'disabled');
             }
 
