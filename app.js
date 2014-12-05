@@ -1195,15 +1195,16 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
-	function _callCreateDocByName(interviewee, interviewName, problemName, times) {
-		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName + '-' + times, 'doc', function(err) {
+	function _callCreateDocByName(interviewee, interviewName, problemName, times, callback) {
+		var path = '/' + interviewee + '/' + interviewName + '-' + problemName + '-' + times;
+		docDAO.createDocByname(interviewee, path, 'doc', function(err) {
 			if (err) {
 				if (err != 'file exists') {
-					return null;
+					return callback(err);
 				}
-				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1);
+				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1, callback);
 			}
-			return '/' + interviewee + '/' + interviewName + '-' + problemName + '-' + times;
+			return callback(null, path);
 		});
 	}
 
@@ -1216,11 +1217,15 @@ io.sockets.on('connection', function(socket){
 		}
 		data.intervieweeList.forEach(function(interviewee) {
 			var n = 0;
-			var path = _callCreateDocByName(interviewee, data.interviewName, data.problemName, n);
-			docDAO.setinterviewmember(path, data.interviewerList, function(err) {
+			_callCreateDocByName(interviewee, data.interviewName, data.problemName, n, function(err, path) {
 				if (err) {
 					return;
 				}
+				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
+					if (err) {
+						return;
+					}
+				});
 			});
 		});
 	});
