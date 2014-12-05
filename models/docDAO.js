@@ -1418,7 +1418,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 		}
 		var idlist = null;
 		var i = 0;
-		memberlist.forEach(function(memname){
+		memberlist.forEach(function(memname,i){
 			db.user.findOne({name:memname},{_id:1},function(err,user){
 				if(err){
 					return callback("inner error");
