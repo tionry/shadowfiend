@@ -1220,7 +1220,8 @@ io.sockets.on('connection', function(socket){
 			var path = _callCreateDocByName(interviewee, data.interviewName, data.problemName, n);
 			docDAO.setinterviewmember(path, data.interviewerList, function(err) {
 				if (err) {
-					return socket.emit('after-update-interviewee', {log: err});
+
+					return;
 				}
 			});
 		});
