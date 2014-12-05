@@ -307,10 +307,10 @@ var app = app || {};
                             }
                         })) {
                         app.socket.emit('add-interviewee-doc', {
-                            interviewName: name,
+                            interviewName: that.itv.name,
                             intervieweeList: that.viewees,
                             interviewerList: that.viewers,
-                            problemName: '还没写好题目名字',
+                            problemName: name,
                         });
                     }
                 });
