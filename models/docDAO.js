@@ -226,7 +226,6 @@ DocDAO.prototype.createDocByname = function(username,path,type,callback){
 	db.user.findOne({name:username},{_id:1},function(err,user){
 		DocDAO.prototype.createDoc(user._id,path,type,callback);
 	});
-
 }
 
 DocDAO.prototype.deleteDoc = function(userId, path, callback){
@@ -1408,20 +1407,38 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 };
 
 DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callback){
-	db.user.findOne({name:ownername},{_id:1},function(err,mem){
+	db.doc.findOne({path:path}, {_id:1, members:1}, function(err, doc){
 		if(err){
+			lock.release(rootPath);
 			return callback("inner error");
 		}
-		memberlist.forEach(function(member){
-			DocDAO.prototype.addMember(mem._id,path,member,function(err,admem){
+		else if(!doc){
+			lock.release(rootPath);
+			return callback("file doesn't exists");
+		}
+		var idlist = null;
+		var i = 0;
+		memberlist.forEach(function(memname){
+			db.user.findOne({name:memname},{_id:1},function(err,user){
 				if(err){
 					return callback("inner error");
 				}
-			});
+				idlist[i] = user._id;
+				i++;
+			})
 
 		});
-		return callback(null,memberlist);
-	})
+		db.doc.update({_id:doc._id}, {$set:{members:idlist}}, function(err, reply){
+			if(err){
+				lock.release(rootPath);
+				return callback("inner error");
+			}
+			else{
+				lock.release(rootPath);
+				return callback(null);
+			}
+		});
+	});
 
 };
 
