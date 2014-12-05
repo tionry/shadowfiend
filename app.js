@@ -1221,7 +1221,7 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return;
 				}
-				docDAO.setinterviewmember(path, data.interviewerList, function(err) {
+				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 					if (err) {
 						return;
 					}
