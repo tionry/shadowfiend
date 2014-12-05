@@ -1223,8 +1223,9 @@ io.sockets.on('connection', function(socket){
 				}
 				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 					if (err) {
-						return;
+						return socket.emit('check-user', {log: err});
 					}
+					return socket.emit('check-user', {log: 'success'});
 				});
 			});
 		});
