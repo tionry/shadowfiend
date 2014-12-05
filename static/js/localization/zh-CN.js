@@ -160,4 +160,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'Set Problems'			: '设置问题',
   'Set Round'				: '设置本轮',
   'End Round'				: '结束本轮',
+  'All problems'			: '所有问题',
+  'Interview problems'			: '面试问题',
 };

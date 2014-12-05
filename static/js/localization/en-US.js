@@ -162,4 +162,6 @@ app.languages['en-US'] = { Name :'English Version',
   'Set Problems'			: 'Set Problems',
   'Set Round'				: 'Set Round',
   'End Round'				: 'End Round',
+  'All problems'			: 'All problems',
+  'Interview problems'			: 'Interview problems',
 };
