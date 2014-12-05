@@ -1407,39 +1407,41 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 };
 
 DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callback){
-	db.doc.findOne({path:path}, {_id:1, members:1}, function(err, doc){
-		if(err){
-			lock.release(rootPath);
-			return callback("inner error");
-		}
-		else if(!doc){
-			lock.release(rootPath);
-			return callback("file doesn't exists");
-		}
-		var idlist = [];
-		var i = 0;
-		memberlist.forEach(function(memname,i){
-			db.user.findOne({name:memname},{_id:1},function(err,user){
-				if(err){
-					return callback("inner error");
-				}
-				idlist[i] = user._id;
-				i++;
-			})
+	var that = this;
+	var paths = path.split("/");
+	var rootPath = "/" + paths[1] + "/" + paths[2];
 
-		});
-		db.doc.update({_id:doc._id}, {$set:{members:idlist}}, function(err, reply){
-			if(err){
+	if(paths.length != 3){
+		return callback("isn't root file");
+	}
+	lock.acquire(rootPath, function() {
+		db.doc.findOne({path: path}, {_id: 1, members: 1}, function (err, doc) {
+			if (err) {
 				lock.release(rootPath);
 				return callback("inner error");
 			}
-			else{
+			else if (!doc) {
 				lock.release(rootPath);
-				return callback(null);
+				return callback("file doesn't exists");
 			}
+			var idlist = [];
+			var i = 0;
+			memberlist.forEach(function (memname, i) {
+				idlist[i] = mename;
+				i++;
+			});
+			db.doc.update({_id: doc._id}, {$set: {members: idlist}}, function (err, reply) {
+				if (err) {
+					lock.release(rootPath);
+					return callback("inner error");
+				}
+				else {
+					lock.release(rootPath);
+					return callback(null);
+				}
+			});
 		});
 	});
-
 };
 
 DocDAO.prototype.interviewdone = function(path,memberlist,callback){
