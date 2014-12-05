@@ -1426,7 +1426,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 			}
 			var idlist = [];
 			var i = 0;
-			memberlist.forEach(function(memname,i){
+			memberlist.forEach(function(memname){
 				db.user.findOne({name:memname},{_id:1},function(err,user){
 					if(err){
 						return callback("inner error");
@@ -1434,24 +1434,26 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 					idlist[i] = user._id;
 					i++;
 				})
+				if(i == memberlist.length){
+					db.doc.update(
+						{_id: doc._id},
+						{
+							$set: {
+								members: idlist
+							}
+						}, function (err, reply) {
+							if (err) {
+								lock.release(rootPath);
+								return callback("inner error");
+							}
+							else {
+								lock.release(rootPath);
+								return callback(null);
+							}
+						});
+				}
+			});
 
-			});
-			db.doc.update(
-				{_id: doc._id},
-				{
-					$set: {
-						members: idlist
-					}
-				}, function (err, reply) {
-				if (err) {
-					lock.release(rootPath);
-					return callback("inner error");
-				}
-				else {
-					lock.release(rootPath);
-					return callback(null);
-				}
-			});
 		});
 	});
 };

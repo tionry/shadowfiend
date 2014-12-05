@@ -1219,13 +1219,13 @@ io.sockets.on('connection', function(socket){
 			var n = 0;
 			_callCreateDocByName(interviewee, data.interviewName, data.problemName, n, function(err, path) {
 				if (err) {
-					return socket.emit('check-user', {log: err});
+					return;
 				}
 				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 					if (err) {
-						return socket.emit('check-user', {log: err});
+						return;
 					}
-					return socket.emit('check-user', {log: 'success'});
+
 				});
 			});
 		});
