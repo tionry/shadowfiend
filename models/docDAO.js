@@ -1426,11 +1426,23 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 			}
 			var idlist = [];
 			var i = 0;
-			memberlist.forEach(function (memname, i) {
-				idlist[i] = mename;
-				i++;
+			memberlist.forEach(function(memname,i){
+				db.user.findOne({name:memname},{_id:1},function(err,user){
+					if(err){
+						return callback("inner error");
+					}
+					idlist[i] = user._id;
+					i++;
+				})
+
 			});
-			db.doc.update({_id: doc._id}, {$set: {members: idlist}}, function (err, reply) {
+			db.doc.update(
+				{_id: doc._id},
+				{
+					$set: {
+						members: idlist
+					}
+				}, function (err, reply) {
 				if (err) {
 					lock.release(rootPath);
 					return callback("inner error");
