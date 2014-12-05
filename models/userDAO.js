@@ -82,7 +82,7 @@ UserDAO.prototype.register = function(name, password, avatar, group, callback){
 };
 
 UserDAO.prototype.getUserByName = function(name,callback){
-	db.user.findOne({name:name}, {name:1, avatar:1, _id:0}, function(err,user){
+	db.user.findOne({name:name}, {name:1, avatar:1, _id:1}, function(err,user){
 		if (err){
 			return callback("innerError");
 		}
