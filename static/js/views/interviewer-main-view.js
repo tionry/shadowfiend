@@ -272,6 +272,12 @@ var app = app || {};
         },
 
         set_round_interviewee: function(){
+            var resetRound = function(){
+                $('.push-problem-btn').removeClass('done');
+                $('.push-problem-btn').children().removeClass('glyphicon-stop');
+                $('.push-problem-btn').children().addClass('glyphicon-play');
+            }
+
             var pushProblem = function(){
                 var that = this;
                 $('.push-problem-btn').on('click', function(){
@@ -296,7 +302,7 @@ var app = app || {};
             var stopProblem = function(){
                 var that = $('.glyphicon-stop');
                 that.parent().addClass('done');
-                $('.push-problem-btn').removeClass('disabled');
+                $('.push-problem-btn').removeAttr('disabled');
                 $('.done').attr('disabled', 'disabled');
             }
 
@@ -381,6 +387,7 @@ var app = app || {};
                 $('#set-round-btn').attr('disabled', 'disabled');
                 $('#end-round-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeAttr('disabled');
+                resetRound();
                 pushProblem();
             })
         },
