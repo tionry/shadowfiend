@@ -1420,6 +1420,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 					}
 					doc.status = "running";
 				});
+
 				DocDAO.prototype.addMember(member._id,path,member,callback);
 			});
 
