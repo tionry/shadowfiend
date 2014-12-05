@@ -41,7 +41,8 @@ var app = app || {};
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
             $('#setinterviewee-list').html('');
-
+            this.viewees = [];
+            this.viewers = [];
             app.socket.emit('read-problem', {
                 all: true,
                 name: this.itv.name,
