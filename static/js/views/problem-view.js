@@ -47,20 +47,11 @@ var app = app || {};
                 modal.off('hide');
             });
             cnfm.on('click', function () {
-                if (app.Lock.attach({
-                        loading: modal.find('.modal-buttons'),
-                        error: function (m, data) {
-                            app.showMessageBox('delete', data.err);
-                        },
-                        success: function (){
-                            that.$el.hide();
-                            modal.modal('hide');
-                        }
-                    })) {
-                    app.socket.emit('delete-problem', {
-                        name: name,
-                    });
-                }
+                app.socket.emit('delete-problem', {
+                    name: name,
+                });
+                that.$el.hide();
+                modal.modal('hide');
             });
             modal.modal('show');
         },
