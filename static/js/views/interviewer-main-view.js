@@ -32,7 +32,6 @@ var app = app || {};
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
-            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').attr('disabled', 'disabled');
@@ -403,6 +402,7 @@ var app = app || {};
 
         start_interview: function(){
             // change the interview state here..
+            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(进行中)');
             $('#set-interview-menu').fadeOut('fast');
