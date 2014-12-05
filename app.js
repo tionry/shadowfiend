@@ -1196,17 +1196,18 @@ io.sockets.on('connection', function(socket){
 	});
 
 	function _callCreateDocByName(interviewee, interviewName, problemName, times) {
-		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName + times, 'doc', function(err, doc) {
+		docDAO.createDocByname(interviewee, '/' + interviewee + '/' + interviewName + '-' + problemName + times, 'doc', function(err) {
 			if (err) {
 				if (err != 'file exists') {
-					return 'null';
+					socket.emit('after-update-interviewee', {log: err});
+					return null;
 				}
 				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1);
 			}
+			socket.emit('after-update-interviewee', {log: '/' + interviewee + '/' + interviewName + '-' + problemName + times});
 			return '/' + interviewee + '/' + interviewName + '-' + problemName + times;
 		});
 	}
-
 
 	socket.on('add-interviewee-doc', function(data) {
 		if (!check(data, 'interviewName', 'intervieweeList', 'interviewerList', 'problemName')) {
