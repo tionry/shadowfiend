@@ -164,4 +164,7 @@ app.languages['zh-CN'] = { Name : '中文版',
   'Interview problems'			: '面试问题',
   'All interviewees'			: '所有面试者',
   'This round interviewees'		: '本轮面试者',
+  'Confirm'				: '确认',
+  'startinterview-confirm'		: '本面试已开始，请设置第一轮。',
+  'endinterview-confirm'		: '您真的要结束本面试吗？',
 };

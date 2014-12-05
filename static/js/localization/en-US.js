@@ -166,4 +166,7 @@ app.languages['en-US'] = { Name :'English Version',
   'Interview problems'			: 'Interview problems',
   'All interviewees'			: 'All interviewees',
   'This round interviewees'		: 'This round interviewees',
+  'Confirm'				: 'Confirm',
+  'startinterview-confirm'		: 'This interview is started. Please set the first round.',
+  'endinterview-confirm'		: 'Are you really going to end this interview?',
 };
