@@ -265,7 +265,7 @@ body{
 	background-image:url(../images/set-hover.png);
 	text-decoration:none
 }
-#file-list-table .head,#file-list-table .head:hover{
+#file-list-table .head,#file-list-table .head:hover, #interviewers-control-table .head, #interviewers-control-table .head:hover, #interviewees-control-table .head, #interviewees-control-table .head:hover, #problemset-table .head, #problemset-table .head:hover{
 	background:#eee
 }
 #file-list .shared-character{
