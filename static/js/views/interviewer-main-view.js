@@ -275,7 +275,7 @@ var app = app || {};
             var resetRound = function(){
                 $('.push-problem-btn').removeClass('done');
                 $('.push-problem-btn').children().removeClass('glyphicon-stop');
-                $('.push-problem-btn').children().removeClass('glyphicon-play');
+                $('.push-problem-btn').children().addClass('glyphicon-play');
             }
 
             var pushProblem = function(){
