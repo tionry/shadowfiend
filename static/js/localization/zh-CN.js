@@ -162,4 +162,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'End Round'				: '结束本轮',
   'All problems'			: '所有问题',
   'Interview problems'			: '面试问题',
+  'All interviewees'			: '所有面试者',
+  'This round interviewees'		: '本轮面试者',
 };
