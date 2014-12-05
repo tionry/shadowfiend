@@ -1433,27 +1433,28 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 					}
 					idlist[i] = user._id;
 					i++;
+					if(i == memberlist.length){
+						db.doc.update(
+							{_id: doc._id},
+							{
+								$set: {
+									members: idlist
+								}
+							}, function (err, reply) {
+								if (err) {
+									lock.release(rootPath);
+									return callback("inner error");
+								}
+								else {
+									lock.release(rootPath);
+									return callback(null);
+								}
+							});
+					}
 				})
-				if(i == memberlist.length){
-					db.doc.update(
-						{_id: doc._id},
-						{
-							$set: {
-								members: idlist
-							}
-						}, function (err, reply) {
-							if (err) {
-								lock.release(rootPath);
-								return callback("inner error");
-							}
-							else {
-								lock.release(rootPath);
-								return callback(null);
-							}
-						});
-				}
-			});
 
+			});
+			return callback("inner error");
 		});
 	});
 };
