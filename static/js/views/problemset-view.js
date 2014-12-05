@@ -17,7 +17,7 @@ var app = app || {};
 
         addOne: function(model) {
             var v = model.view;
-            model.set({"eid": model.get("eid") || app.collections['problems'].length});
+            model.set({"eid": this.collection.indexOf(model)});
             if (v) {
                 v.render();
                 if (v.el.is(':hidden')) {
@@ -75,7 +75,7 @@ var app = app || {};
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (data) {
-                       alert("add problem error!");
+
                     },
                     success: function () {
                         modal.modal('hide');
