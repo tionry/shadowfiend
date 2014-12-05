@@ -280,6 +280,7 @@ var app = app || {};
         },
 
         set_round_interviewee: function(){
+            var that = this;
             var resetRound = function(){
                 $('.push-problem-btn').removeAttr('disabled');
                 $('.push-problem-btn').removeClass('done');
@@ -288,7 +289,6 @@ var app = app || {};
             }
 
             var pushProblem = function(){
-                var that = this;
                 $('.push-problem-btn').on('click', function(){
                     $('.push-problem-btn').attr('disabled', 'disabled');
                     $(this).children().removeClass('glyphicon-play');
@@ -329,8 +329,8 @@ var app = app || {};
                 il = $('#rounduser-list'),
                 al = $('#alluser-list'),
                 sl = $('#interviewer-interviewee-control'),
-                cnfm = $('#setrounduser-cnfm'),
-                that = this;
+                cnfm = $('#setrounduser-cnfm');
+
             that.viewers = [];
             var d = app.collections['interviewerList-'+that.itv.name];
             for (var i = 0; i < d.length; i++){
