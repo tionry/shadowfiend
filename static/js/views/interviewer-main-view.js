@@ -297,7 +297,7 @@ var app = app || {};
                     $('.glyphicon-stop').on('click', function(){
                         stopProblem();
                     })
-                    var name = $(this).text();
+                    var name = $(this).parent().text();
                     if (app.Lock.attach({
                             error: function(){
                                 alert('error');
