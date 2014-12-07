@@ -404,8 +404,8 @@ var app = app || {};
                     name: name,
                     status: 'running',
                 });
-                this.renew_running_interview();
-                this.pushProblem();
+                that.renew_running_interview();
+                that.pushProblem();
             })
         },
 
