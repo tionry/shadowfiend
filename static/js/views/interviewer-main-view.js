@@ -33,6 +33,7 @@ var app = app || {};
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
+            $('end-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
@@ -411,10 +412,13 @@ var app = app || {};
                 });
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
-                app.socket.emit('change-interview-status', {
-                    name: that.itv.name,
-                    status: 'running',
-                });
+                if (app.Lock.attach({
+                    })) {
+                    app.socket.emit('change-interview-status', {
+                        name: that.itv.name,
+                        status: 'running',
+                    });
+                }
                 that.renew_running_interview();
                 that.pushProblem();
             })
@@ -457,19 +461,25 @@ var app = app || {};
             this.renew_ready_interview();
             app.showMessageBox('info', 'roundend');
             var name = this.itv.name;
-            app.socket.emit('change-interview-status', {
-                name: name,
-                status: 'ready',
-            });
+            if (app.Lock.attach({
+                })) {
+                app.socket.emit('change-interview-status', {
+                    name: name,
+                    status: 'ready',
+                });
+            }
         },
 
         //开始整场面试
         start_interview: function(){
             var name = this.itv.name;
-            app.socket.emit('change-interview-status', {
-                name: name,
-                status: 'ready',
-            });
+            if (app.Lock.attach({
+                })) {
+                app.socket.emit('change-interview-status', {
+                    name: name,
+                    status: 'ready',
+                });
+            }
             this.renew_ready_interview();
             app.showMessageBox('setintervieweesuccess', 'interviewstart');
         },
