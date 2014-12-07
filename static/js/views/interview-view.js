@@ -37,7 +37,6 @@ var app = app || {};
                 app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
-                    iname: name,
                     interviewerList: app.collections['interviewerList-' + name],
                     intervieweeList: app.collections['intervieweeList-' + name],
                     problemList: app.collections['problemList-' + name],

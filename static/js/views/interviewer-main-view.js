@@ -20,7 +20,6 @@ var app = app || {};
 
         initialize: function(){
             this.itv = this.model.attributes;
-            this.iname = this.options.iname;
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             //初始化界面显示
@@ -48,21 +47,21 @@ var app = app || {};
             this.viewers = [];
             app.socket.emit('read-problem', {
                 all: true,
-                name: this.iname,
+                name: this.itv.name,
                 virtual: true,
                 mode: 'problem-in-interview'
             });
             app.socket.emit('read-problem', {
                 all: true,
-                name: this.iname,
+                name: this.itv.name,
                 virtual: true,
                 mode: 'all-problem'
             });
             app.socket.emit('read-interviewee-in-interview',{
-                name: this.iname,
+                name: this.itv.name,
             });
             app.socket.emit('read-interviewer-in-interview',{
-                name: this.iname,
+                name: this.itv.name,
             });
             switch (this.itv.status){
                 case 'ready':
@@ -109,7 +108,7 @@ var app = app || {};
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').hide();
-            $('#interviewer-item-name').text(this.iname+'(已结束)');
+            $('#interviewer-item-name').text(this.itv.name+'(已结束)');
         },
 
         //添加面试者
@@ -416,7 +415,7 @@ var app = app || {};
                 if (app.Lock.attach({
                     })) {
                     app.socket.emit('change-interview-status', {
-                        name: that.iname,
+                        name: that.itv.name,
                         status: 'running',
                     });
                 }
@@ -461,7 +460,7 @@ var app = app || {};
         end_round: function(){
             this.renew_ready_interview();
             app.showMessageBox('info', 'roundend');
-            var name = this.iname;
+            var name = this.itv.name;
             if (app.Lock.attach({
                 })) {
                 app.socket.emit('change-interview-status', {
@@ -473,7 +472,7 @@ var app = app || {};
 
         //开始整场面试
         start_interview: function(){
-            var name = this.iname;
+            var name = this.itv.name;
             if (app.Lock.attach({
                 })) {
                 app.socket.emit('change-interview-status', {
@@ -498,7 +497,7 @@ var app = app || {};
             cnfm.on('click', function(){
                 modal.modal('hide');
                 app.socket.emit('change-interview-status', {
-                    name: that.iname,
+                    name: that.itv.name,
                     status: 'completed',
                 });
                 that.renew_completed_interview();
