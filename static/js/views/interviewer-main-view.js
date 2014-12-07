@@ -29,6 +29,7 @@ var app = app || {};
         },
 
         renewList: function(){
+            $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
@@ -425,7 +426,7 @@ var app = app || {};
                 $(this).children().addClass('glyphicon-stop');
                 $(this).removeAttr('disabled');
                 $('.glyphicon-stop').on('click', function(){
-                    this.stopProblem();
+                    that.stopProblem();
                 })
                 var name = $(this).parent().text().trim();
                 if (app.Lock.attach({
