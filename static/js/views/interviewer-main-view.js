@@ -75,18 +75,19 @@ var app = app || {};
         },
 
         renew_ready_interview: function(){
+            $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
             $('#interviewer-item-name').text(this.itv.name+'(候场中)');
-            $('#set-interview-menu').fadeOut('fast');
-            $('#start-interview-btn').fadeOut('fast');
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
             $('#set-round-btn').removeAttr('disabled');
             $('#end-round-btn').attr('disabled','disabled');
         },
 
         renew_running_interview: function(){
-            $('#set-interview-menu').fadeOut('fast');
-            $('#start-interview-btn').fadeOut('fast');
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
             $('#end-interview-btn').removeAttr('disabled');
             $('.remark-btn').removeAttr('disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
@@ -99,6 +100,9 @@ var app = app || {};
         },
 
         renew_completed_interview: function(){
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
+            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#interviewer-item-name').text(this.itv.name+'(已结束)');
         },
 
