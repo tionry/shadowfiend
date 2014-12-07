@@ -57,21 +57,19 @@ var app = app || {};
                 model = this.model;
             modal.find('#delete-name').text(model.json.name);
             var cnfm = modal.find('.modal-confirm');
+            var name = model.json.name;
+            var that = this;
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('shown');
                 modal.off('hide');
             });
             cnfm.on('click', function () {
-                model.destroy({
-                    loading: modal.find('.modal-buttons'),
-                    success: function () {
-                        modal.modal('hide');
-                    },
-                    error: function (m, data) {
-                        app.showMessageBox('delete', data.err);
-                    }
+                app.socket.emit('delete-interview', {
+                    name: name,
                 });
+                that.$el.hide();
+                modal.modal('hide');
             });
             modal.modal('show');
         },

@@ -104,6 +104,9 @@ var app = app || {};
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');
+            $('#set-round-btn').attr('disabled', 'disabled');
+            $('#end-round-btn').attr('disabled', 'disabled');
+            $('#end-interview-btn').hide();
             $('#interviewer-item-name').text(this.itv.name+'(已结束)');
         },
 
