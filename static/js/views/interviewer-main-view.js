@@ -404,7 +404,7 @@ var app = app || {};
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 app.socket.emit('change-interview-status', {
-                    name: name,
+                    name: that.itv.name,
                     status: 'running',
                 });
                 that.renew_running_interview();
