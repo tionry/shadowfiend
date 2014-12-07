@@ -235,7 +235,6 @@ var app = app || {};
                         name: that.itv.name,
                         interviewee: newinterviewees,
                     });
-
                 }
             });
         },
