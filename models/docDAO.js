@@ -226,7 +226,6 @@ DocDAO.prototype.createDocByname = function(username,path,type,callback){
 	db.user.findOne({name:username},{_id:1},function(err,user){
 		DocDAO.prototype.createDoc(user._id,path,type,callback);
 	});
-
 }
 
 DocDAO.prototype.deleteDoc = function(userId, path, callback){
@@ -1408,21 +1407,56 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 };
 
 DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callback){
-	db.user.findOne({name:ownername},{_id:1},function(err,mem){
-		if(err){
-			return callback("inner error");
-		}
-		memberlist.forEach(function(member){
-			DocDAO.prototype.addMember(mem._id,path,member,function(err,admem){
-				if(err){
-					return callback("inner error");
-				}
+	var that = this;
+	var paths = path.split("/");
+	var rootPath = "/" + paths[1] + "/" + paths[2];
+
+	if(paths.length != 3){
+		return callback("isn't root file");
+	}
+	lock.acquire(rootPath, function() {
+		db.doc.findOne({path: path}, {_id: 1, members: 1}, function (err, doc) {
+			if (err) {
+				lock.release(rootPath);
+				return callback("inner error");
+			}
+			else if (!doc) {
+				lock.release(rootPath);
+				return callback("file doesn't exists");
+			}
+			var idlist = [];
+			var i = 0;
+			memberlist.forEach(function(memname){
+				db.user.findOne({name:memname},{_id:1},function(err,user){
+					if(err){
+						return callback("inner error");
+					}
+					idlist[i] = user._id;
+					i++;
+					if(i == memberlist.length){
+						db.doc.update(
+							{_id: doc._id},
+							{
+								$set: {
+									members: idlist
+								}
+							}, function (err, reply) {
+								if (err) {
+									lock.release(rootPath);
+									return callback("inner error");
+								}
+								else {
+									lock.release(rootPath);
+									return callback(null);
+								}
+							});
+					}
+				})
+
 			});
-
+			return callback("inner error");
 		});
-		return callback(null,memberlist);
-	})
-
+	});
 };
 
 DocDAO.prototype.interviewdone = function(path,memberlist,callback){

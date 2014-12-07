@@ -38,7 +38,7 @@ app.Room && _.extend(app.Room.prototype, {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
-				var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
+				//var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
 				var that = this;
 				dataRef.once('value',function(snapShot){
 					delete dataRef;
