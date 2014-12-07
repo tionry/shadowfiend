@@ -411,6 +411,7 @@ var app = app || {};
 
         //推送题目
         pushProblem : function(){
+            var that = this;
             $('.push-problem-btn').on('click', function(){
                 $('.push-problem-btn').attr('disabled', 'disabled');
                 $(this).children().removeClass('glyphicon-play');
