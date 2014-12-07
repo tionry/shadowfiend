@@ -29,6 +29,7 @@ var app = app || {};
         },
 
         renewList: function(){
+            this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
