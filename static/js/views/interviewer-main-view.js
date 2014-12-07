@@ -34,7 +34,7 @@ var app = app || {};
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
-            $('end-interview-btn').show();
+            $('#end-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
