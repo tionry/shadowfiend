@@ -99,7 +99,7 @@ var app = app || {};
         },
 
         renew_completed_interview: function(){
-            $('#interviewer-item-name').text(that.itv.name+'(已结束)');
+            $('#interviewer-item-name').text(this.itv.name+'(已结束)');
         },
 
         //添加面试者
@@ -479,7 +479,7 @@ var app = app || {};
             cnfm.on('click', function(){
                 modal.modal('hide');
                 app.socket.emit('change-interview-status', {
-                    name: name,
+                    name: that.itv.name,
                     status: 'completed',
                 });
                 that.renew_completed_interview();
