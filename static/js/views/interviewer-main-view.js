@@ -85,6 +85,9 @@ var app = app || {};
         },
 
         renew_running_interview: function(){
+            $('#set-interview-menu').fadeOut('fast');
+            $('#start-interview-btn').fadeOut('fast');
+            $('#end-interview-btn').removeAttr('disabled');
             $('.remark-btn').removeAttr('disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').removeAttr('disabled');
@@ -475,6 +478,10 @@ var app = app || {};
             });
             cnfm.on('click', function(){
                 modal.modal('hide');
+                app.socket.emit('change-interview-status', {
+                    name: name,
+                    status: 'completed',
+                });
                 that.renew_completed_interview();
             });
         },
