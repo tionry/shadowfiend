@@ -20,6 +20,7 @@ var app = app || {};
 
         initialize: function(){
             this.itv = this.model.attributes;
+            this.iname = this.options.iname;
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             //初始化界面显示
