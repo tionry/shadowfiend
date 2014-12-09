@@ -181,6 +181,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                         lock.release(interviewname);
                         return callback("inner error");
                     }
+
                     var toeditinterviewee = '"interviewee.' + index.toString()+'"';
                     db.interview.update(
                         {
