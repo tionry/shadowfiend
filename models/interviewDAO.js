@@ -172,46 +172,42 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
         db.interview.find({name:interviewname},{interviewee:1},function(err,interv){
             var i = 0,index = -1;
             interv.interviewee.forEach(function(interviewee){
+                var intervieweelist = [];
                 if(interviewee.name == intervieweename){
-                    index = i;
+                    intervieweelist[i] = {name:intervieweename,status:status};
+                }
+                else{
+                    intervieweelist[i] = interviewee;
                 }
                 i++;
-                if(i == interv.interviewee.length){
-                    if(index == -1){
-                        lock.release(interviewname);
-                        return callback("inner error");
-                    }
+                db.interview.update(
+                    {
+                        name: interviewname
+                    },
+                    {
+                        $set:{
+                            interviewee:intervieweelist
+                        }
 
-                    var toeditinterviewee = '"interviewee.' + index.toString()+'"';
-                    db.interview.update(
-                        {
-                            name: interviewname,
-                            interviewee:{ $elemMatch:{name:intervieweename}}
-                        },
-                        {
-                            $set:{
-                                "interviewee.$.status":status
-                            }
-
-                        }, function(err, interview) {
+                    }, function(err, interview) {
+                        if (err) {
+                            lock.release(interviewname);
+                            return callback("inner error");
+                        }
+                        db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
                             if (err) {
                                 lock.release(interviewname);
                                 return callback("inner error");
                             }
-                            db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
-                                if (err) {
-                                    lock.release(interviewname);
-                                    return callback("inner error");
-                                }
-                                if (!interview) {
-                                    lock.release(interviewname);
-                                    return callback("interview not found");
-                                }
+                            if (!interview) {
                                 lock.release(interviewname);
-                                return callback(null, interview);
-                            });
+                                return callback("interview not found");
+                            }
+                            lock.release(interviewname);
+                            return callback(null, interview);
                         });
-                }
+                    });
+
             })
 
         });
