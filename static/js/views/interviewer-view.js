@@ -10,6 +10,7 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
+            $('#interviewer-control').html('');
         },
 
         addOne: function(model) {
