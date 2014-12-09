@@ -75,7 +75,7 @@ var app = app || {};
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (data) {
-
+                        app.showMessageBox('info', 'inner error');
                     },
                     success: function () {
                         modal.modal('hide');
