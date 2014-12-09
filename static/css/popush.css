@@ -304,8 +304,7 @@ body{
 }
 #current-doc, #interviewer-item-name{
 	color:rgb(44,62,80);
-	margin-top:17px;
-	margin-bottom:7px;
+	padding-top:17px;
 	font-size:28px
 }
 #delete-name,#rename-name,#share-name{
