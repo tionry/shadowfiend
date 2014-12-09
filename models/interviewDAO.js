@@ -177,6 +177,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                 lock.release(interviewname);
                 return callback("inner error");
             }
+
             var i = 0;
             var intervieweelist = [];
             interv.interviewee.forEach(function(interviewee){
