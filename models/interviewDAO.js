@@ -42,11 +42,17 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                     intervieweelist[i] = {name:iname,status:"waiting"};
                     i++;
                 });
+                var problemlist = [];
+                var j = 0;
+                problems.forEach(function(iname,j){
+                    problemlist[j] = {name:iname,status:"waiting"};
+                    j++;
+                });
                 db.interview.insert({
                         name: name,
                         interviewer:interviewers,
                         interviewee:intervieweelist,
-                        problemlist:problems,
+                        problemlist:problemlist,
                         status:"waiting",
                         createTime: new Date().getTime()
                     },
