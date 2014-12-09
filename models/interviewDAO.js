@@ -285,7 +285,7 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
     });
 };
 
-InterviewDAO.prototype.gestatusinterviewees = function(interviewname,status,callback){
+InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,callback){
     lock.acquire(interviewname,function(){
         db.interview.find({name:interviewname},{interviewee:1},function(err,inter){
             if(err){
