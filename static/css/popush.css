@@ -292,9 +292,9 @@ body{
 	max-width:48px
 }
 #current-doc-p, #interview-current-doc-p{
-	font-size:16px;
 	line-height:20px;
-	margin:4px
+	margin-left:4px;
+	margin-top:10px;
 }
 #current-doc-state{
 	color:#0a0
@@ -316,7 +316,6 @@ body{
 }
 #current-doc, #interviewer-item-name{
 	color:rgb(44,62,80);
-	padding-top:17px;
 	font-size:28px
 }
 #delete-name,#rename-name,#share-name{
