@@ -308,7 +308,7 @@ var app = app || {};
                 var text = view.render().el;
                 al.append(text);
                 if (model.name == app.currentUser.name){
-                    text.find('.sharer-delete').remove();
+                    $(text).find('.sharer-delete').remove();
                 }else{
                     deleteUserInList();
                 }
