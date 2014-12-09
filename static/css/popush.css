@@ -296,13 +296,13 @@ body{
 	line-height:20px;
 	margin:4px
 }
-#current-doc-state, #interview-current-doc-state{
+#current-doc-state, #interviewer-item-status{
 	color:#0a0
 }
-#current-doc-state.red, #interview-current-doc-state.red{
+#current-doc-state.red, #interviewer-item-status.red{
 	color:#a00
 }
-#current-doc, #interview-current-doc{
+#current-doc, #interviewer-item-name{
 	color:rgb(44,62,80)
 }
 #delete-name,#rename-name,#share-name{
