@@ -433,15 +433,7 @@
             <p id="interview-current-doc-p">
               <span id="interviewer-item-name" style="margin-top: 7px;">Interview name</span>
               &nbsp;&nbsp;
-<% if (model.status == "waiting") { %>
-<span id="interviewer-item-status" class="red" style="margin-top: 7px;" localization>(Status)</span>
-<% } else if (model.status == "ready") { %>
-<span id="interviewer-item-status" class="yellow" style="margin-top: 7px;" localization>(Status)</span>
-<% } else if (model.status == "running") { %>
-<span id="interviewer-item-status" class="green" style="margin-top: 7px;" localization>(Status)</span>
-<% } else { %>
-<span id="interviewer-item-status" class="blue" style="margin-top: 7px;" localization>(Status)</span>
-<% } %>
+              <span id="interviewer-item-status" class="green" style="margin-top: 7px;" localization>(Status)</span>
             </p>
           </div>
         </div>
