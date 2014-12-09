@@ -433,7 +433,16 @@
             <p id="interview-current-doc-p">
               <span id="interviewer-item-name" style="margin-top: 7px;">Interview name</span>
               &nbsp;&nbsp;
-              <span id="interviewer-item-status" class="green" style="margin-top: 7px;" localization>(Status)</span>
+              <span id="interviewer-item-status" class=
+<% if model.status == "waiting" %>
+"red"
+<% else if model.status == "ready" %>
+"yellow"
+<% else if model.status == "running" %>
+"green"
+<% else %>
+"blue"
+ style="margin-top: 7px;" localization>(Status)</span>
             </p>
           </div>
         </div>
