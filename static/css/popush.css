@@ -18,6 +18,18 @@ body{
 	font-family:'Microsoft YaHei','Microsoft Sans Serif';
 	background-image:url("../images/background.gif") !important
 }
+.red{
+	color:#a00
+}
+.green{
+	color:#0a0
+}
+.yellow{
+	color:#aa0
+}
+.blue{
+	color:#00a
+}
 #current-dir>a{
 	margin-left:5px;
 	margin-right:5px
@@ -298,21 +310,6 @@ body{
 }
 #current-doc-state{
 	color:#0a0
-}
-#current-doc-state.red{
-	color:#a00
-}
-#interviewer-item-status.red{
-	color:#a00
-}
-#interviewer-item-status.green{
-	color:#0a0
-}
-#interviewer-item-status.yellow{
-	color:#aa0
-}
-#interviewer-item-status.blue{
-	color:#00a
 }
 #current-doc, #interviewer-item-name{
 	color:rgb(44,62,80);
