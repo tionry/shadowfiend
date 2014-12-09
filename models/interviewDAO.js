@@ -182,6 +182,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                     $set:{
                         toeditinterviewee :{name:intervieweename,status:status}
                     }
+
                 }, function(err, interview) {
                     if (err) {
                         lock.release(interviewname);
