@@ -1294,7 +1294,35 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		interviewDAO.getstatusproblems()
+		interviewDAO.getstatusproblems(data.interviewName, data.status, function(err, problemList) {
+			if (err) {
+				return;
+			}
+			problemDAO.getProblemByNameList(problemList, function(err, problems) {
+				if (err) {
+					return;
+				}
+			});
+		});
+	});
+
+	socket.on('get-status-interviewees-interview', function(data) {
+		if (!check(data, 'interviewName', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
+			if (err) {
+				return;
+			}
+			userDAO.getUserListByName(intervieweeList, function(err, users) {
+				if (err) {
+					return;
+				}
+			});
+		});
 	});
 
 });
