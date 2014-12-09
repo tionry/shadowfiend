@@ -145,24 +145,27 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
         problems.forEach(function(problemname,i){
             probleml[i] = {name:problemname,status:"waiting"};
             i++;
-        });
-        db.interview.findAndModify({
-            query: {name: name},
-            update: {$set: {problemlist: probleml}},
-            new: true,
-            fields: {problemlist: 1}
-        }, function(err, interview) {
-            if (err) {
-                lock.release(name);
-                return callback("inner error");
+            if(i == problems.length){
+                db.interview.findAndModify({
+                    query: {name: name},
+                    update: {$set: {problemlist: probleml}},
+                    new: true,
+                    fields: {problemlist: 1}
+                }, function(err, interview) {
+                    if (err) {
+                        lock.release(name);
+                        return callback("inner error");
+                    }
+                    if (!interview) {
+                        lock.release(name);
+                        return callback("interview not found");
+                    }
+                    lock.release(name);
+                    return callback(null, interview);
+                });
             }
-            if (!interview) {
-                lock.release(name);
-                return callback("interview not found");
-            }
-            lock.release(name);
-            return callback(null, interview);
         });
+
     });
 };
 
