@@ -198,6 +198,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                                 lock.release(interviewname);
                                 return callback("inner error");
                             }
+
                             db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
                                 if (err) {
                                     lock.release(interviewname);
