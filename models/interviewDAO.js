@@ -171,8 +171,8 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
     lock.acquire(interviewname, function() {
         db.interview.find({name:interviewname},{interviewee:1},function(err,interv){
             var i = 0,index = -1;
+            var intervieweelist = [];
             interv.interviewee.forEach(function(interviewee){
-                var intervieweelist = [];
                 if(interviewee.name == intervieweename){
                     intervieweelist[i] = {name:intervieweename,status:status};
                 }
