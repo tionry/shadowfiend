@@ -177,7 +177,6 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                 lock.release(interviewname);
                 return callback("inner error");
             }
-
             var i = 0;
             var intervieweelist = [];
             interv.interviewee.forEach(function(interviewee){
@@ -226,44 +225,52 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
 
 InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname,status, callback) {
     lock.acquire(interviewname, function() {
-        db.interview.find({name:interviewname},{interviewee:1},function(err,interv){
-            var i = 0,index = -1;
-            interv.problemlist.forEach(function(ipro,i){
-                if(ipro.name == problemname){
-                    index = i;
-                }
-                i++;
-            })
-            if(index == -1){
+        db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+            if(err){
                 lock.release(interviewname);
                 return callback("inner error");
             }
-            var toeditproblem = "problemlist." + index.toString();
-            db.interview.update(
-                {name: interviewname},
-                {
-                    $set:{
-                        toeditproblem:{name:problemname,status:status}
-                    }
+            var i = 0;
+            var problemlist = [];
+            interv.problemlist.forEach(function(problem){
+                if(problem.name == problemname){
+                    problemlist[i] = {name:problemname,status:status};
+                }
+                else{
+                    problemlist[i] = problem;
+                }
+                i++;
+                if(i == interv.problem.length){
+                    db.interview.update(
+                        {
+                            name: interviewname
+                        },
+                        {
+                            $set:{
+                                problemlist:problemlist
+                            }
+                        }, function(err, interview) {
+                            if (err) {
+                                lock.release(interviewname);
+                                return callback("inner error");
+                            }
 
-                }, function(err, interview) {
-                    if (err) {
-                        lock.release(interviewname);
-                        return callback("inner error");
-                    }
-                    db.interview.findOne({name:interviewname},{name:1,problemlist:1},function(err,interview){
-                        if (err) {
-                            lock.release(interviewname);
-                            return callback("inner error");
-                        }
-                        if (!interview) {
-                            lock.release(interviewname);
-                            return callback("interview not found");
-                        }
-                        lock.release(interviewname);
-                        return callback(null, interview);
-                    });
-                });
+                            db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
+                                if (err) {
+                                    lock.release(interviewname);
+                                    return callback("inner error");
+                                }
+                                if (!interview) {
+                                    lock.release(interviewname);
+                                    return callback("interview not found");
+                                }
+                                lock.release(interviewname);
+                                return callback(null, interview);
+                            });
+                        });
+                }
+            })
+
         });
     });
 };
@@ -300,7 +307,7 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
 
 InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,callback){
     lock.acquire(interviewname,function(){
-        db.interview.find({name:interviewname},{interviewee:1},function(err,inter){
+        db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
             if(err){
                 return callback("inner error");
             }
@@ -325,7 +332,7 @@ InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,cal
 
 InterviewDAO.prototype.getstatusproblems = function(interviewname,status,callback){
     lock.acquire(interviewname,function(){
-        db.interview.find({name:interviewname},{problemlist:1},function(err,inter){
+        db.interview.findOne({name:interviewname},{problemlist:1},function(err,inter){
             if(err){
                 return callback("inner error");
             }
