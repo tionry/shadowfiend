@@ -1142,6 +1142,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socekt.emit('after-update-interviewer', {err: err});
 			}
+			socket.emit('after-update-interviewer', {log: 'interviewDAO success'});
 			userDAO.getUserListByName(interview.interviewer, function(err, users) {
 				if (err) {
 					return socket.emit('after-update-interviewer', {err: err});
