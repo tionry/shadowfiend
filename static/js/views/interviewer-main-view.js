@@ -69,6 +69,7 @@ var app = app || {};
             switch (this.itv.status){
                 case 'waiting':
                     $('#interviewer-item-status').addClass('red');
+                    break;
                 case 'ready':
                     $('#interviewer-item-status').addClass('yellow');
                     this.renew_ready_interview();
