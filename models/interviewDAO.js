@@ -212,7 +212,6 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                             });
                         });
                 }
-
             })
 
         });
