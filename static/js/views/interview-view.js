@@ -66,7 +66,7 @@ var app = app || {};
             });
             cnfm.on('click', function () {
                 app.socket.emit('delete-interview', {
-                    name: name,
+                    interviewName: name,
                 });
                 that.$el.hide();
                 modal.modal('hide');
