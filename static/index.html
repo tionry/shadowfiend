@@ -430,20 +430,11 @@
             <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
           </div>
           <div class="btn-group id=interview-current-doc-outer">
-            <p id="interview-current-doc-p">
+            <div id="interview-current-doc-p">
               <span id="interviewer-item-name" style="margin-top: 7px;">Interview name</span>
               &nbsp;&nbsp;
-              <span id="interviewer-item-status" class=
-<% if model.status == "waiting" %>
-"red"
-<% else if model.status == "ready" %>
-"yellow"
-<% else if model.status == "running" %>
-"green"
-<% else %>
-"blue"
- style="margin-top: 7px;" localization>(Status)</span>
-            </p>
+              <span id="interviewer-item-status" class="green" style="margin-top: 7px;" localization>(Status)</span>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -726,7 +717,7 @@
         </div>
         <div class="modal-footer">
           <div class="modal-buttons">
-            <button class="btn btn-primary modal-confirm" localization>ok</button>
+            <button class="btn btn-primary modal-confirm" id="set-round-interviewer-btn" localization>ok</button>
             <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
           </div>
         </div>
@@ -766,7 +757,7 @@
         </div>
         <div class="modal-footer">
           <div class="modal-buttons">
-            <button class="btn btn-primary modal-confirm" id="set-round-interviewee-btn"localization>ok</button>
+            <button class="btn btn-primary modal-confirm" id="set-round-interviewee-btn" localization>ok</button>
             <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
           </div>
         </div>
