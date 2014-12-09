@@ -1231,4 +1231,28 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('delete-interview', function(data) {
+		if (!check(data, 'interviewName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.deleteInterview(data.interviewName, function(err) {
+			if (err) {
+				return socket.emit('read-interview', {err: err});
+			}
+			interviewDAO.getInterviews(socket.session.user.name, 1, function(err, interviews) {
+				if (err) {
+					return socket.emit('read-interview', {err: err});
+				}
+				socket.emit('read-interview', {
+					interview: interviews,
+					mode: 1,
+					username: socket.session.user.name
+				});
+			});
+		});
+	})
+
 });
