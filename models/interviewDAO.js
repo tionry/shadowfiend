@@ -42,11 +42,17 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                     intervieweelist[i] = {name:iname,status:"waiting"};
                     i++;
                 });
+                var problemlist = [];
+                var j = 0;
+                problems.forEach(function(iname,j){
+                    problemlist[j] = {name:iname,status:"waiting"};
+                    j++;
+                });
                 db.interview.insert({
                         name: name,
                         interviewer:interviewers,
                         interviewee:intervieweelist,
-                        problemlist:problems,
+                        problemlist:problemlist,
                         status:"waiting",
                         createTime: new Date().getTime()
                     },
@@ -132,11 +138,17 @@ InterviewDAO.prototype.deleteInterview = function (name,callback) {
     });
 };
 
-InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
+InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
     lock.acquire(name, function() {
+        var probleml = [];
+        var i = 0;
+        problems.forEach(function(problemname,i){
+            probleml[i] = {name:problemname,status:"waiting"};
+            i++;
+        });
         db.interview.findAndModify({
             query: {name: name},
-            update: {$set: {problemlist: problem}},
+            update: {$set: {problemlist: probleml}},
             new: true,
             fields: {problemlist: 1}
         }, function(err, interview) {
@@ -154,67 +166,91 @@ InterviewDAO.prototype.updateProblem = function(name, problem, callback) {
     });
 };
 
-InterviewDAO.prototype.changestatus = function(name, status){
-    lock.acquire(name, function() {
-       db.interview.findAndModify({
-        query:{name:name},
-        update:{$set:{status:status}},
-        fields:{status:1},
-        new:true
-    },function(err,interview){
-           if (err) {
-               lock.release(name);
-               return callback("inner error");
-           }
-           if (!interview) {
-               lock.release(name);
-               return callback("interview not found");
-           }
-           lock.release(name);
-           return callback(null, interview);
+//change interviewee's status.
+InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
+    lock.acquire(interviewname, function() {
+        db.interview.find({name:interviewname},{interviewee:1},function(err,interv){
+            var i = 0,index = -1;
+            interv.interviewee.forEach(function(interviewee,i){
+                if(interviewee.name == intervieweename){
+                    index = i;
+                }
+                i++;
+            })
+            if(index == -1){
+                lock.release(interviewname);
+                return callback("inner error");
+            }
+            var toeditinterviewee = "interviewee." + index.toString();
+            db.interview.update(
+                {name: interviewname},
+                {
+                    $set:{
+                        toeditinterviewee :{name:intervieweename,status:status}
+                    }
+
+                }, function(err, interview) {
+                    if (err) {
+                        lock.release(interviewname);
+                        return callback("inner error");
+                    }
+                    db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
+                        if (err) {
+                            lock.release(interviewname);
+                            return callback("inner error");
+                        }
+                        if (!interview) {
+                            lock.release(interviewname);
+                            return callback("interview not found");
+                        }
+                        lock.release(interviewname);
+                        return callback(null, interview);
+                    });
+                });
         });
     });
 };
 
-InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
+InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname,status, callback) {
     lock.acquire(interviewname, function() {
-        var interv = db.interview.find({name:interviewname});
-        var i = 0,index = -1;
-        interv.interviewee.forEach(function(iname,i){
-            if(iname == intervieweename){
-                index = i;
-            }
-            i++;
-        })
-        if(index == -1){
-            lock.release(name);
-            return callback("inner error");
-        }
-        var toeditinterviewee = "interviewee." + index.toString();
-        db.interview.update(
-            {name: interviewname},
-            {
-                $set:{
-                    toeditinterviewee :{name:name,status:status}
+        db.interview.find({name:interviewname},{interviewee:1},function(err,interv){
+            var i = 0,index = -1;
+            interv.problemlist.forEach(function(ipro,i){
+                if(ipro.name == problemname){
+                    index = i;
                 }
-
-        }, function(err, interview) {
-            if (err) {
+                i++;
+            })
+            if(index == -1){
                 lock.release(interviewname);
                 return callback("inner error");
             }
-            db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
-                if (err) {
-                    lock.release(interviewname);
-                    return callback("inner error");
-                }
-                if (!interview) {
-                    lock.release(interviewname);
-                    return callback("interview not found");
-                }
-                lock.release(interviewname);
-                return callback(null, interview);
-            });
+            var toeditproblem = "problemlist." + index.toString();
+            db.interview.update(
+                {name: interviewname},
+                {
+                    $set:{
+                        toeditproblem:{name:problemname,status:status}
+                    }
+
+                }, function(err, interview) {
+                    if (err) {
+                        lock.release(interviewname);
+                        return callback("inner error");
+                    }
+                    db.interview.findOne({name:interviewname},{name:1,problemlist:1},function(err,interview){
+                        if (err) {
+                            lock.release(interviewname);
+                            return callback("inner error");
+                        }
+                        if (!interview) {
+                            lock.release(interviewname);
+                            return callback("interview not found");
+                        }
+                        lock.release(interviewname);
+                        return callback(null, interview);
+                    });
+                });
         });
     });
 };
@@ -249,6 +285,54 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
     });
 };
 
+InterviewDAO.prototype.gestatusinterviewees = function(interviewname,status,callback){
+    lock.acquire(interviewname,function(){
+        db.interview.find({name:interviewname},{interviewee:1},function(err,inter){
+            if(err){
+                return callback("inner error");
+            }
+            var intervieweelist = [];
+            var i,j;
+            i = 0;
+            j = 0;
+            inter.interviewee.forEach(function(interviewee){
+                if(interviewee.status == status){
+                    intervieweelist[i] = interviewee.name;
+                    i++;
+                }
+                j++;
+                if(j == inter.interviewee.length){
+                    return callback(null,intervieweelist);
+                }
+            });
+        })
+    })
+}
+
+InterviewDAO.prototype.getstatusproblems = function(interviewname,status,callback){
+    lock.acquire(interviewname,function(){
+        db.interview.find({name:interviewname},{problemlist:1},function(err,inter){
+            if(err){
+                return callback("inner error");
+            }
+            var problemlist = [];
+            var i,j;
+            i = 0;
+            j = 0;
+            inter.problemlist.forEach(function(problem){
+                if(problem.status == status){
+                    problemlist[i] = problem.name;
+                    i++;
+                }
+                j++;
+                if(j == inter.problemlist.length){
+                    return callback(null,problemlist);
+                }
+            });
+        })
+    })
+}
+
 InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,callback){
     lock.acquire(interviewname, function() {
         db.interview.update(
@@ -263,6 +347,7 @@ InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,
                     lock.release(interviewname);
                     return callback("inner error");
                 }
+
                 db.interview.findOne({name:interviewname},{name:1,interviewer:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
