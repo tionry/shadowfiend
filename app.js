@@ -1267,10 +1267,11 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		socket.emit('check-user', {log: 'before db'});
 		data.intervieweeList.forEach(function(interviewee) {
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
-					return;
+					return socket.emit('check-user', {log: 'error in db'});;
 				}
 				socket.emit('check-user', {log: 'in db'});
 			});
