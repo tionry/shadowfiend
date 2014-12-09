@@ -45,9 +45,11 @@ var app = app || {};
             $('#allproblem-list').html('');
             $('#interviewproblem-list').html('');
             $('#setinterviewee-list').html('');
+            var name = $('#interviewer-item-name').text().trim();
+            var c = app.collections['intervieweeList-'+name];
+            var maininterviewer = c.models[0].name;
             this.viewees = [];
             this.viewers = [];
-            var name = $('#interviewer-item-name').text();
             app.socket.emit('read-problem', {
                 all: true,
                 name: name,
@@ -68,17 +70,21 @@ var app = app || {};
             });
             switch (this.itv.status){
                 case 'waiting':
+                    $('#interviewer-item-status').removeClass();
                     $('#interviewer-item-status').addClass('red');
                     break;
                 case 'ready':
+                    $('#interviewer-item-status').removeClass();
                     $('#interviewer-item-status').addClass('yellow');
                     this.renew_ready_interview();
                     break;
                 case 'running':
+                    $('#interviewer-item-status').removeClass();
                     $('#interviewer-item-status').addClass('green');
                     this.renew_running_interview();
                     break;
                 case 'completed':
+                    $('#interviewer-item-status').removeClass();
                     $('#interviewer-item-status').addClass('blue');
                     this.renew_completed_interview();
                     break;
@@ -94,6 +100,7 @@ var app = app || {};
             $('#set-round-btn').removeAttr('disabled');
             $('#end-round-btn').attr('disabled','disabled');
             $('#interviewer-item-status').text('ready');
+            $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('yellow');
         },
 
@@ -105,6 +112,7 @@ var app = app || {};
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').removeAttr('disabled');
             $('#interviewer-item-status').text('running');
+            $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
 
             //更新当前轮次面试者列表
@@ -120,7 +128,6 @@ var app = app || {};
             //    });
             //    var text = view.render().el;
             //    sl.append(text);
-            //
             //}
             //更新当前题目推送状态
             $('.push-problem-btn').removeAttr('disabled');
@@ -146,6 +153,7 @@ var app = app || {};
             $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').hide();
             $('#interviewer-item-status').text('completed');
+            $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('blue');
         },
 

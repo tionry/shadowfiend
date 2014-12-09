@@ -1261,16 +1261,19 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('change-interviewee-status', function(data) {
-		if (!check(data, 'interviewName', 'intervieweeName', 'status')) {
+		if (!check(data, 'interviewName', 'intervieweeList', 'status')) {
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		interviewDAO.updateIntervieweestatus(data.interviewName, data.intervieweeName, data.status, function(err, interview) {
-			if (err) {
-				return;
-			}
+		data.intervieweeList.forEach(function(interviewee) {
+			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
+				if (err) {
+					return socket.emit('check-user', {log: 'error in db'});;
+				}
+				socket.emit('check-user', {log: 'in db'});
+			});
 		});
 	});
 
@@ -1298,6 +1301,10 @@ io.sockets.on('connection', function(socket){
 		interviewDAO.getstatusproblems(data.interviewName, data.status, function(err, problemList) {
 			if (err) {
 				return;
+			}
+			switch(status) {
+				case '':
+
 			}
 			problemDAO.getProblemByNameList(problemList, function(err, problems) {
 				if (err) {
