@@ -341,6 +341,7 @@ InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,
                     lock.release(interviewname);
                     return callback("inner error");
                 }
+
                 db.interview.findOne({name:interviewname},{name:1,interviewer:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
