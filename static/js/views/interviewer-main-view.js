@@ -307,7 +307,11 @@ var app = app || {};
                 });
                 var text = view.render().el;
                 al.append(text);
-                deleteUserInList();
+                if (model.name == app.currentUser.name){
+                    text.find('.sharer-delete').remove();
+                }else{
+                    deleteUserInList();
+                }
             }
             for (var i = 0; i < cc.length; i++){
                 var model = cc.models[i].attributes;
