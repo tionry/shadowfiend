@@ -391,7 +391,15 @@
                   <% } else {  %>
                   <td class="col2"><a href="/#interviewee/<%=encodeURI(model.name)%>" class="interviewee-go"><%= model.name %></a></td>
                   <% } %>
-                  <td class="col3" localization><%= model.status %></td>
+                  <% if (model.status == "waiting") { %>
+                  <td class="col3 red" localization><%= model.status %></td>
+                  <% } else if (model.status == "ready") { %>
+                  <td class="col3 yellow" localization><%= model.status %></td>
+                  <% } else if (model.status == "running") { %>
+                  <td class="col3 green" localization><%= model.status %></td>
+                  <% } else if (model.status == "completed") { %>
+                  <td class="col3 blue" localization><%= model.status %></td>
+                  <% } %>
                   <td class="col4"><%= model.time %></td>
                   <td class="col5">
                     <a href="#" class="operation">&nbsp;</a>
@@ -433,7 +441,7 @@
             <div id="interview-current-doc-p">
               <span id="interviewer-item-name" style="margin-top: 7px;">Interview name</span>
               &nbsp;&nbsp;
-              <span id="interviewer-item-status" class="green" style="margin-top: 7px;" localization>(Status)</span>
+              <span id="interviewer-item-status" style="margin-top: 7px;" localization>(Status)</span>
             </div>
           </div>
         </div>
