@@ -240,7 +240,7 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                     problemlist[i] = problem;
                 }
                 i++;
-                if(i == interv.problem.length){
+                if(i == interv.problemlist.length){
                     db.interview.update(
                         {
                             name: interviewname
@@ -255,7 +255,7 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                                 return callback("inner error");
                             }
 
-                            db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
+                            db.interview.findOne({name:interviewname},{name:1,problemlist:1},function(err,interview){
                                 if (err) {
                                     lock.release(interviewname);
                                     return callback("inner error");
