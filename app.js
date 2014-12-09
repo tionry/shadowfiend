@@ -947,7 +947,11 @@ io.sockets.on('connection', function(socket){
 					if (err) {
 						return socket.emit('read-problem', {err: err});
 					}
-					problemDAO.getProblemByNameList(interview.problemlist, function(err, problems) {
+					var problemList = [];
+					interview.problemlist.forEach(function(problem) {
+						problemList.push(problem.name);
+					});
+					problemDAO.getProblemByNameList(problemList, function(err, problems) {
 						if (err) {
 							return socket.emit('read-problem', {err: err});
 						}
@@ -1253,6 +1257,44 @@ io.sockets.on('connection', function(socket){
 				});
 			});
 		});
-	})
+	});
+
+	socket.on('change-interviewee-status', function(data) {
+		if (!check(data, 'interviewName', 'intervieweeName', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.updateIntervieweestatus(data.interviewName, data.intervieweeName, data.status, function(err, interview) {
+			if (err) {
+				return;
+			}
+		});
+	});
+
+	socket.on('change-problem-status-interview', function(data) {
+		if (!check(data, 'interviewName', 'problemName', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, data.status, function(err, interview) {
+			if (err) {
+				return;
+			}
+		});
+	});
+
+	socket.on('get-status-problems-interview', function(data) {
+		if (!check(data, 'interviewName', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getstatusproblems()
+	});
 
 });
