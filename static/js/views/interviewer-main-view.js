@@ -67,13 +67,19 @@ var app = app || {};
                 name: name,
             });
             switch (this.itv.status){
+                case 'waiting':
+                    $('#interviewer-item-status').addClass('red');
+                    break;
                 case 'ready':
+                    $('#interviewer-item-status').addClass('yellow');
                     this.renew_ready_interview();
                     break;
                 case 'running':
+                    $('#interviewer-item-status').addClass('green');
                     this.renew_running_interview();
                     break;
                 case 'completed':
+                    $('#interviewer-item-status').addClass('blue');
                     this.renew_completed_interview();
                     break;
             }
@@ -88,6 +94,7 @@ var app = app || {};
             $('#set-round-btn').removeAttr('disabled');
             $('#end-round-btn').attr('disabled','disabled');
             $('#interviewer-item-status').text('ready');
+            $('#interviewer-item-status').addClass('yellow');
         },
 
         renew_running_interview: function(){
@@ -98,6 +105,7 @@ var app = app || {};
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').removeAttr('disabled');
             $('#interviewer-item-status').text('running');
+            $('#interviewer-item-status').addClass('green');
 
             //更新当前轮次面试者列表
             //var that = this,
@@ -138,6 +146,7 @@ var app = app || {};
             $('#end-round-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').hide();
             $('#interviewer-item-status').text('completed');
+            $('#interviewer-item-status').addClass('blue');
         },
 
         //添加面试者
@@ -307,7 +316,11 @@ var app = app || {};
                 });
                 var text = view.render().el;
                 al.append(text);
-                deleteUserInList();
+                if (model.name == app.currentUser.name){
+                    $(text).find('.sharer-delete').remove();
+                }else{
+                    deleteUserInList();
+                }
             }
             for (var i = 0; i < cc.length; i++){
                 var model = cc.models[i].attributes;
@@ -387,7 +400,7 @@ var app = app || {};
                     })) {
                     app.socket.emit('update-interviewer-in-interview', {
                         name: that.itv.name,
-                        interviewee: newinterviewers,
+                        interviewer: newinterviewers,
                     });
                 }
             });
