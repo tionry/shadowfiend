@@ -89,6 +89,13 @@ var app = app || {};
             }
             app.collections['intervieweeList-' + data.interviewName].update(data.interviewees);
             app.Lock.detach(data);
+        },
+
+        "after-get-status-interviewees": function(data) {
+            if (data == null || data.err) {
+                return;
+            }
+            app.collections['round-intervieweeList-' + data.interviewName].update(data.users);
         }
 
     };

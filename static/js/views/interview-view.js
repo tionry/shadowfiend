@@ -35,12 +35,14 @@ var app = app || {};
                 app.collections['allproblems-' + name] || (app.collections['allproblems-' + name] = new app.Problems());
                 app.collections['interviewerList-' + name] || (app.collections['interviewerList-' + name] = new app.Members());
                 app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
+                app.collections['roundIntervieweeList-' + name] || (app.collections['round-intervieweeList' + name] = new app.Members());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     interviewerList: app.collections['interviewerList-' + name],
                     intervieweeList: app.collections['intervieweeList-' + name],
                     problemList: app.collections['problemList-' + name],
-                    allproblems: app.collections['allproblems-' + name]
+                    allproblems: app.collections['allproblems-' + name],
+                    roundIntervieweeList: app.collections['roundIntervieweeList' + name]
                 });
             }else{
                 this.model.v.renewList();

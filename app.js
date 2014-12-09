@@ -1270,9 +1270,8 @@ io.sockets.on('connection', function(socket){
 		data.intervieweeList.forEach(function(interviewee) {
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
-					return socket.emit('check-user', {log: 'error in db'});;
+					return;
 				}
-				socket.emit('check-user', {log: 'in db'});
 			});
 		});
 	});
@@ -1303,14 +1302,28 @@ io.sockets.on('connection', function(socket){
 				return;
 			}
 			switch(status) {
-				case '':
-
+				case 'waiting':
+					problemDAO.getProblemByNameList(problemList, function(err, problems) {
+						if (err) {
+							return;
+						}
+					});
+					break;
+				case 'running':
+					problemDAO.getProblemByName(problemList[0], function(err, problem) {
+						if (err) {
+							return;
+						}
+					});
+					break;
+				case 'complete':
+					problemDAO.getProblemByNameList(problemList, function(err, problems) {
+						if (err) {
+							return;
+						}
+					});
+					break;
 			}
-			problemDAO.getProblemByNameList(problemList, function(err, problems) {
-				if (err) {
-					return;
-				}
-			});
 		});
 	});
 
@@ -1329,6 +1342,10 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return;
 				}
+				socket.emit('after-get-status-interviewees', {
+					users: users,
+					interviewName: data.interviewName
+				});
 			});
 		});
 	});
