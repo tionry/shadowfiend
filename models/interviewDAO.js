@@ -295,6 +295,7 @@ InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,cal
             var i,j;
             i = 0;
             j = 0;
+
             inter.interviewee.forEach(function(interviewee){
                 if(interviewee.status == status){
                     intervieweelist[i] = interviewee.name;
