@@ -97,11 +97,37 @@ var app = app || {};
             $('.remark-btn').removeAttr('disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').removeAttr('disabled');
+            $('#interviewer-item-status').text('running');
+
+            //更新当前轮次面试者列表
+            //var that = this,
+            //    itvname = $('#interviewer-item-name').text().trim(),
+            //    c = app.collections['intervieweeList-'+itvname],
+            //    sl = $('#interviewer-interviewee-control');
+            //that.viewees = [];
+            //for (var i = 0; i < c.length; i++){
+            //    var m = c.models[i].attributes;
+            //    var view = new app.IntervieweeInfoView({
+            //        model: m
+            //    });
+            //    var text = view.render().el;
+            //    sl.append(text);
+            //
+            //}
+            //更新当前题目推送状态
             $('.push-problem-btn').removeAttr('disabled');
             $('.push-problem-btn').removeClass('done');
             $('.push-problem-btn').children().removeClass('glyphicon-stop');
             $('.push-problem-btn').children().addClass('glyphicon-play');
-            $('#interviewer-item-status').text('running');
+            var problemname = getproblemNameHere;
+            var al = $('#interviewer-problem-list');
+            al.find('li').each(function(){
+                if (problemname == $(this).text().trim()){
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).removeAttr('disabled');
+                    $('.push-problem-btn').children().removeClass('glyphicon-stop');
+                }
+            })
         },
 
         renew_completed_interview: function(){
@@ -119,8 +145,6 @@ var app = app || {};
             $('#setinterviewee-list').html('');
             var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
-            //fetch intervieweeList here...
-            //show
 
             var that = this;
             var input = modal.find('#setinterviewee-inputName'),
@@ -130,7 +154,7 @@ var app = app || {};
                 newinterviewers = [],
                 al = $('#setinterviewee-list');
             var c = app.collections['intervieweeList-'+that.itv.name];
-
+            var cc = app.collections['interviewerList-'+that.itv.name];
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
@@ -159,6 +183,10 @@ var app = app || {};
                 al.append(text);
                 deleteUserInList();
             }
+            for (var i = 0; i < cc.length; i++){
+                var model = cc.models[i].attributes;
+                newinterviewers.push(model.name);
+            }
             modal.on('hide', function () {
                 input.off('input');
                 add_cnfm.off('click');
@@ -166,12 +194,11 @@ var app = app || {};
                 modal.off('hide');
             });
 
-
             input.on('input', function(){
                 var name = Backbone.$.trim(input.val()),
                     err = false;
                 if (!name) {
-                    err = 'inputproblemname';
+                    err = 'inputnull';
                 }
                 if (err) {
                     add_cnfm.attr('disabled', 'disabled');
@@ -241,9 +268,129 @@ var app = app || {};
 
         //添加面试官
         add_interviewer: function(){
+            $('#setinterviewer-list').html('');
             var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
 
+            var that = this;
+            var input = modal.find('#setinterviewer-inputName'),
+                add_cnfm = modal.find('#setinterviewer-confirm'),
+                cnfm = modal.find('#set-round-interviewer-btn'),
+                newinterviewees = [],
+                newinterviewers = [],
+                al = $('#setinterviewer-list');
+            var c = app.collections['interviewerList-'+that.itv.name];
+            var cc = app.collections['intervieweeList-'+that.itv.name];
+            var deleteUserInList = function(){
+                $(".sharer-delete").click(function(){
+                    var l = $(this).prev();
+                    var p = $(this).parent().parent();
+                    var Mname = l.text();
+                    for (var i = 0; i < newinterviewers.length; i++)
+                        if (newinterviewers[i] == Mname){
+                            newinterviewers.splice(i,1);
+                            break;
+                        }
+                    p.remove();
+                });
+            };
+
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                newinterviewers.push(model.name);
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.SharerView({
+                    model: m
+                });
+                var text = view.render().el;
+                al.append(text);
+                deleteUserInList();
+            }
+            for (var i = 0; i < cc.length; i++){
+                var model = cc.models[i].attributes;
+                newinterviewees.push(model.name);
+            }
+            modal.on('hide', function () {
+                input.off('input');
+                add_cnfm.off('click');
+                cnfm.off('click');
+                modal.off('hide');
+            });
+
+            input.on('input', function(){
+                var name = Backbone.$.trim(input.val()),
+                    err = false;
+                if (!name) {
+                    err = 'inputnull';
+                }
+                if (err) {
+                    add_cnfm.attr('disabled', 'disabled');
+                } else {
+                    modal.find('.help-inline').text('');
+                    modal.find('.form-group').removeClass('error');
+                    add_cnfm.removeAttr('disabled');
+                }
+            });
+
+            add_cnfm.attr('disabled', 'disabled').on('click', function(){
+                var name = Backbone.$.trim(modal.find('#setinterviewer-inputName').val());
+                if (app.Lock.attach({
+                        error: function (data){
+                            app.showMessageBar('#setinterviewer-message', data.err, 'error');
+                        },
+                        success: function (model){
+
+                            for (var i = 0; i < newinterviewers.length; i++)
+                                if (newinterviewers[i] == model.name){
+                                    app.showMessageBar('#setinterviewer-message', 'name exists', 'error');
+                                    return;
+                                }
+                            for (var i = 0; i < newinterviewees.length; i++)
+                                if (newinterviewees[i] == model.name){
+                                    app.showMessageBar('#setinterviewer-message', 'isInterviewee', 'error');
+                                    return;
+                                }
+                            $('#setinterviewer-message').hide();
+                            $('#setinterviewer-inputName').val('');
+                            newinterviewers.push(model.name);
+                            var m = new app.User({
+                                name: model.name,
+                                avatar: model.avatar
+                            });
+                            var view = new app.SharerView({
+                                model: m
+                            });
+                            var text = view.render().el;
+                            al.append(text);
+                            deleteUserInList();
+                        }
+                    })) {
+                    app.socket.emit('check-user', {
+                        name: name
+                    })
+                }
+            });
+
+            cnfm.on('click', function () {
+                if (app.Lock.attach({
+                        loading: modal.find('.modal-buttons'),
+                        error: function (data) {
+                            app.showMessageBar('#setinterviewer-message', data.err, 'error');
+                        },
+                        success: function () {
+                            modal.modal('hide');
+                            app.showMessageBox('newinterviewer', 'addinterviewersuccess');
+                        }
+                    })) {
+                    app.socket.emit('update-interviewer-in-interview', {
+                        name: that.itv.name,
+                        interviewee: newinterviewers,
+                    });
+                }
+            });
         },
 
         //添加题目
@@ -417,6 +564,9 @@ var app = app || {};
                 var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
+                    app.socket.emit('update-round-interviewee-list-in-round',{
+                       intervieweeList:that.viewees,
+                    });
                     app.socket.emit('change-interview-status', {
                         name: name,
                         status: 'running',
@@ -439,10 +589,20 @@ var app = app || {};
                     that.stopProblem();
                 })
                 var name = $(this).parent().text().trim();
+                var itvname = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
+                        error: function(data){
+                            app.showMessageBox('info', 'inner error');
+                        },
+                        success:function() {
+                            //app.socket.emit('update-problem-in-interview', {
+                            // interviewName: itvname.
+                            // problemName: name,
+                            // })
+                        }
                     })) {
                     app.socket.emit('add-interviewee-doc', {
-                        interviewName: that.itv.name,
+                        interviewName: itvname,
                         intervieweeList: that.viewees,
                         interviewerList: that.viewers,
                         problemName: name,
