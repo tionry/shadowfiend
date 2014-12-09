@@ -296,11 +296,23 @@ body{
 	line-height:20px;
 	margin:4px
 }
-#current-doc-state, #interviewer-item-status{
+#current-doc-state{
 	color:#0a0
 }
-#current-doc-state.red, #interviewer-item-status.red{
+#current-doc-state.red{
 	color:#a00
+}
+#interviewer-item-status.red{
+	color:#a00
+}
+#interviewer-item-status.green{
+	color:#0a0
+}
+#interviewer-item-status.yellow{
+	color:#aa0
+}
+#interviewer-item-status.blue{
+	color:#00a
 }
 #current-doc, #interviewer-item-name{
 	color:rgb(44,62,80);
