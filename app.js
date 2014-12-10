@@ -1268,9 +1268,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
-		socket.emit('after-update-status-interviewees', {log: data.intervieweeList});
 		data.intervieweeList.forEach(function(interviewee) {
-			socket.emit('after-update-status-interviewees', {log: 'in foreach'});
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
 					return socket.emit('after-update-status-interviewees', {err: err});
