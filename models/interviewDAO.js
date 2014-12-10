@@ -207,6 +207,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                                     lock.release(interviewname);
                                     return callback("inner error");
                                 }
+                                return callback("last findOne");
                                 if (!interview) {
                                     lock.release(interviewname);
                                     return callback("interview not found");
