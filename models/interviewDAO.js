@@ -172,8 +172,8 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
 //change interviewee's status.
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     lock.acquire(interviewname, function() {
-        return callback("before db");
         db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+            return callback("before checking err");
             if(err){
                 lock.release(interviewname);
                 return callback("inner error");
