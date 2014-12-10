@@ -186,6 +186,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                 else{
                     intervieweelist[i] = interviewee;
                 }
+                return callback("before update");
                 i++;
                 if(i == interv.interviewee.length){
                     db.interview.update(
