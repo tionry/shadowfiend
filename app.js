@@ -1277,7 +1277,7 @@ io.sockets.on('connection', function(socket){
 				if (i == data.intervieweeList.length) {
 					interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
 						if (err) {
-							return;
+							return socket.emit('after-update-status-interviewees', {err: err});
 						}
 						userDAO.getUserListByName(intervieweeList, function(err, users) {
 							if (err) {
@@ -1290,6 +1290,29 @@ io.sockets.on('connection', function(socket){
 						});
 					});
 				}
+			});
+		});
+	});
+
+	socket.on('get-status-interviewees', function(data) {
+		if (!check(data, 'interviewName', 'status')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
+			if (err) {
+				return socket.emit('after-get-status-interviewees', {err: err});
+			}
+			userDAO.getUserListByName(intervieweeList, function(err, users) {
+				if (err) {
+					return socket.emit('after-get-status-interviewees', {err: err});
+				}
+				socket.emit('after-get-status-interviewees', {
+					users: users,
+					interviewName: data.interviewName
+				});
 			});
 		});
 	});
