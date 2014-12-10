@@ -66,6 +66,10 @@ var app = app || {};
             app.socket.emit('read-interviewer-in-interview',{
                 name: name,
             });
+            app.socket.emit('get-status-interviewees',{
+                interviewName:name,
+                status: 'onRound',
+            });
             switch (this.itv.status){
                 case 'waiting':
                     $('#interviewer-item-status').removeClass();
@@ -113,20 +117,18 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
 
-            //更新当前轮次面试者列表
-            //var that = this,
-            //    itvname = $('#interviewer-item-name').text().trim(),
-            //    c = app.collections['intervieweeList-'+itvname],
-            //    sl = $('#interviewer-interviewee-control');
-            //that.viewees = [];
-            //for (var i = 0; i < c.length; i++){
-            //    var m = c.models[i].attributes;
-            //    var view = new app.IntervieweeInfoView({
-            //        model: m
-            //    });
-            //    var text = view.render().el;
-            //    sl.append(text);
-            //}
+            更新当前轮次面试者列表
+            var itvname = $('#interviewer-item-name').text().trim(),
+                c = app.collections['round-intervieweeList-'+itvname],
+                sl = $('#interviewer-interviewee-control');
+            for (var i = 0; i < c.length; i++){
+                var m = c.models[i].attributes;
+                var view = new app.IntervieweeInfoView({
+                    model: m
+                });
+                var text = view.render().el;
+                sl.append(text);
+            }
             //更新当前题目推送状态
             $('.push-problem-btn').removeAttr('disabled');
             $('.push-problem-btn').removeClass('done');
@@ -590,6 +592,11 @@ var app = app || {};
                         name: name,
                         status: 'running',
                     });
+                    app.socket.emit('change-interviewee-status',{
+                        interviewName: name,
+                        intervieweeList: that.viewees,
+                        status: 'onRound'
+                    })
                 }
                 that.renew_running_interview();
                 that.pushProblem();
@@ -643,12 +650,22 @@ var app = app || {};
             this.renew_ready_interview();
             app.showMessageBox('info', 'roundend');
             var name = $('#interviewer-item-name').text();
+            var that = this;
+            that.viewees = [];
+            $('.interviewer-interviewee').find('p').each(function(){
+                that.viewees.push($(this).text().trim());
+            })
             if (app.Lock.attach({
                 })) {
                 app.socket.emit('change-interview-status', {
                     name: name,
                     status: 'ready',
                 });
+                app.socket.emit('change-interviewee-status',{
+                    interviewName: name,
+                    intervieweeList: that.viewees,
+                    status: 'endRound'
+                })
             }
         },
 
