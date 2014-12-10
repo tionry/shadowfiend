@@ -66,10 +66,7 @@ var app = app || {};
             app.socket.emit('read-interviewer-in-interview',{
                 name: name,
             });
-            app.socket.emit('get-status-interviewees',{
-                interviewName:name,
-                status: 'onRound',
-            });
+
             switch (this.itv.status){
                 case 'waiting':
                     $('#interviewer-item-status').removeClass();
@@ -116,7 +113,11 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
-
+            var name = $('#interviewer-item-name').text().trim();
+            app.socket.emit('get-status-interviewees',{
+                interviewName:name,
+                status: 'onRound',
+            });
             //更新当前轮次面试者列表
             var itvname = $('#interviewer-item-name').text().trim(),
                 c = app.collections['round-intervieweeList-'+itvname],
