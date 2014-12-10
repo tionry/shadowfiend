@@ -46,8 +46,6 @@ var app = app || {};
             $('#interviewproblem-list').html('');
             $('#setinterviewee-list').html('');
             var name = $('#interviewer-item-name').text().trim();
-            var c = app.collections['intervieweeList-'+name];
-            var maininterviewer = c.models[0].name;
             this.viewees = [];
             this.viewers = [];
             app.socket.emit('read-problem', {
