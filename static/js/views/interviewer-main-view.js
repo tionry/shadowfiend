@@ -132,15 +132,15 @@ var app = app || {};
             $('.push-problem-btn').removeClass('done');
             $('.push-problem-btn').children().removeClass('glyphicon-stop');
             $('.push-problem-btn').children().addClass('glyphicon-play');
-            var problemname = getproblemNameHere;
-            var al = $('#interviewer-problem-list');
-            al.find('li').each(function(){
-                if (problemname == $(this).text().trim()){
-                    $('.push-problem-btn').attr('disabled', 'disabled');
-                    $(this).removeAttr('disabled');
-                    $('.push-problem-btn').children().removeClass('glyphicon-stop');
-                }
-            })
+            //var problemname = getproblemNameHere;
+            //var al = $('#interviewer-problem-list');
+            //al.find('li').each(function(){
+            //    if (problemname == $(this).text().trim()){
+            //        $('.push-problem-btn').attr('disabled', 'disabled');
+            //        $(this).removeAttr('disabled');
+            //        $('.push-problem-btn').children().removeClass('glyphicon-stop');
+            //    }
+            //})
         },
 
         renew_completed_interview: function(){
