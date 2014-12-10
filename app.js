@@ -1268,15 +1268,14 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
-		socket.emit('after-update-status-interviewees', {log: data.intervieweeList.length});
 		data.intervieweeList.forEach(function(interviewee) {
+			socket.emit('after-update-status-interviewees', {log: interviewee});
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
 					return socket.emit('after-update-status-interviewees', {err: err});
 				}
 				i++;
 				if (i == data.intervieweeList.length) {
-					socket.emit('after-update-status-interviewees', {log: 'before get'});
 					interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
 						if (err) {
 							return socket.emit('after-update-status-interviewees', {err: err});
