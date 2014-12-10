@@ -1142,7 +1142,6 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socekt.emit('after-update-interviewer', {err: err});
 			}
-			socket.emit('after-update-interviewer', {log: 'interviewDAO success'});
 			userDAO.getUserListByName(interview.interviewer, function(err, users) {
 				if (err) {
 					return socket.emit('after-update-interviewer', {err: err});
@@ -1268,13 +1267,13 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
+		return socket.emit('after-update-status-interviewees', {err: err});
 		data.intervieweeList.forEach(function(interviewee) {
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
 					return socket.emit('after-update-status-interviewees', {err: err});
 				}
 				i++;
-				socket.emit('after-update-status-interviewees', {log: interviewee});
 				if (i == data.intervieweeList.length) {
 					interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
 						if (err) {
