@@ -1267,10 +1267,28 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		var i = 0;
 		data.intervieweeList.forEach(function(interviewee) {
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
-					return;
+					return socket.emit('after-update-status-interviewees', {err: err});
+				}
+				i++;
+				if (i == data.intervieweeList.length) {
+					interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
+						if (err) {
+							return;
+						}
+						userDAO.getUserListByName(intervieweeList, function(err, users) {
+							if (err) {
+								return socket.emit('after-update-status-interviewees', {err: err});
+							}
+							socket.emit('after-update-status-interviewees', {
+								users: users,
+								interviewName: data.interviewName
+							});
+						});
+					});
 				}
 			});
 		});
@@ -1299,7 +1317,7 @@ io.sockets.on('connection', function(socket){
 		}
 		interviewDAO.getstatusproblems(data.interviewName, data.status, function(err, problemList) {
 			if (err) {
-				return;
+				return socket.emit('after-get-status-problem', {err: err});
 			}
 			switch(status) {
 				case 'waiting':
@@ -1312,8 +1330,13 @@ io.sockets.on('connection', function(socket){
 				case 'running':
 					problemDAO.getProblemByName(problemList[0], function(err, problem) {
 						if (err) {
-							return;
+							return socket.emit('after-get-status-problem', {err: err});
 						}
+						socket.emit('after-get-status-problem', {
+							status: data.status,
+							interviewName: data.interviewName,
+							problem: problem
+						});
 					});
 					break;
 				case 'complete':
