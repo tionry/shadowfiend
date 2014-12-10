@@ -117,7 +117,7 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
 
-            更新当前轮次面试者列表
+            //更新当前轮次面试者列表
             var itvname = $('#interviewer-item-name').text().trim(),
                 c = app.collections['round-intervieweeList-'+itvname],
                 sl = $('#interviewer-interviewee-control');
