@@ -1267,7 +1267,6 @@ io.sockets.on('connection', function(socket){
 		}
 		var i = 0;
 		data.intervieweeList.forEach(function(interviewee) {
-			socket.emit('after-update-status-interviewees', {i: i, list: data.intervieweeList, interviewee: interviewee});
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
 					return socket.emit('after-update-status-interviewees', {err: err});
