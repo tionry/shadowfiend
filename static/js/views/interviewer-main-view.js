@@ -136,8 +136,6 @@ var app = app || {};
             }
             //更新当前题目推送状态
             $('.push-problem-btn').removeAttr('disabled');
-            app.models || (app.models = []);
-            app.models['running-problem-' + data.interviewName] || (app.models['running-problem' + data.interviewName] = new app.Problem());
             var p = app.models['running-problem-'+itvname];
             if (p.length > 0){
                 var problemname = p[0].name;
@@ -610,8 +608,8 @@ var app = app || {};
                         status: 'onRound',
                     })
                 }
-                that.renew_running_interview();
-                that.pushProblem();
+                //that.renew_running_interview();
+                //that.pushProblem();
             })
         },
 
