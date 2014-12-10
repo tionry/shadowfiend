@@ -223,6 +223,12 @@ body{
 	text-align:right;
 	padding-left:16px
 }
+
+#interviewers-control-table .col2{
+	width: 600px;
+	text-align:center
+}
+
 #file-list-table .col3,#interviewers-control-table .col3{
 	width:80px;
 	text-align:center
