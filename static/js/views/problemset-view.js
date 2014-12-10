@@ -47,7 +47,7 @@ var app = app || {};
         var modal = Backbone.$('#newproblem');
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
-        var cnfm = modal.find('.modal-confirm');
+        var cnfm = modal.find('#btn_newproblemconfirm');
         modal.on('hide', function () {
             input.off('input');
             cnfm.off('click');

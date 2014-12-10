@@ -48,7 +48,7 @@ var app = app || {};
         var add_interviewer = modal.find("#interviewer-confirm");
         var add_interviewee = modal.find("#interviewee-confirm");
         var add_problem = modal.find("#interviewproblem-confirm");
-        var cnfm = modal.find('.modal-confirm');
+        var cnfm = modal.find('#newinterview-confirm');
         if (!($("#interviewer-list").text())) {
             var cur = app.currentUser;
             var m = new app.User({
