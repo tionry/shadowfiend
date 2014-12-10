@@ -1373,27 +1373,4 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
-	socket.on('get-status-interviewees-interview', function(data) {
-		if (!check(data, 'interviewName', 'status')) {
-			return;
-		}
-		if (!socket.session) {
-			return socket.emit('unauthorized');
-		}
-		interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
-			if (err) {
-				return;
-			}
-			userDAO.getUserListByName(intervieweeList, function(err, users) {
-				if (err) {
-					return;
-				}
-				socket.emit('after-get-status-interviewees', {
-					users: users,
-					interviewName: data.interviewName
-				});
-			});
-		});
-	});
-
 });
