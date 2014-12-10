@@ -218,18 +218,13 @@ body{
 #file-list-table .col2,#file-list-table .col3,#file-list-table .col4,#file-list-table .col5{
 	vertical-align:middle
 }
-#file-list-table .col1, #interviewers-control-table .col1{
+#file-list-table .col1{
 	width:32px;
 	text-align:right;
 	padding-left:16px
 }
 
-#interviewers-control-table .col2{
-	width: 600px;
-	text-align:center
-}
-
-#file-list-table .col3,#interviewers-control-table .col3{
+#file-list-table .col3{
 	width:80px;
 	text-align:center
 }
@@ -242,11 +237,11 @@ body{
 	max-height:32px;
 	margin-right:7px
 }
-#file-list-table .col4, #interviewers-control-table .col4{
+#file-list-table .col4{
 	width:220px;
 	text-align:center
 }
-#file-list-table .col5, #interviewers-control-table .col5{
+#file-list-table .col5{
 	width:24px;
 	text-align:left
 }
