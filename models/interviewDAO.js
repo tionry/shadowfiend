@@ -221,6 +221,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
 
         });
     });
+    callback("lock error")
 };
 
 InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname,status, callback) {
