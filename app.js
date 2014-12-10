@@ -1261,13 +1261,12 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('change-interviewee-status', function(data) {
 		if (!check(data, 'interviewName', 'intervieweeList', 'status')) {
-			return socket.emit('after-update-status-interviewees', {err: 'format'});
+			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
-		return socket.emit('after-update-status-interviewees', {err: 'before foreach'});
 		data.intervieweeList.forEach(function(interviewee) {
 			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
 				if (err) {
