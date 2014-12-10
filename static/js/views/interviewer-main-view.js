@@ -595,13 +595,13 @@ var app = app || {};
                 var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
-                    app.socket.emit('update-round-interviewee-list-in-round',{
+                    /*app.socket.emit('update-round-interviewee-list-in-round',{
                        intervieweeList:that.viewees,
-                    });
-                    app.socket.emit('change-interview-status', {
+                    });*/
+                    /*app.socket.emit('change-interview-status', {
                         name: name,
                         status: 'running',
-                    });
+                    });*/
                     app.socket.emit('change-interviewee-status',{
                         interviewName: name,
                         intervieweeList: that.viewees,
