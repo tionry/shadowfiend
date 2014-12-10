@@ -1193,9 +1193,8 @@ io.sockets.on('connection', function(socket){
 		}
 		interviewDAO.updateInterviewstatus(data.name, data.status, function(err, interview) {
 			if (err) {
-				return socket.emit('change-interview-status', {err: err});
+				return;
 			}
-			socket.emit('change-interview-status', {interview: interview});
 		});
 	});
 
