@@ -172,6 +172,7 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
 //change interviewee's status.
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     lock.acquire(interviewname, function() {
+        return callback("before db");
         db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
             if(err){
                 lock.release(interviewname);
@@ -179,7 +180,6 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             }
             var i = 0;
             var intervieweelist = [];
-            return callback("before foreach");
             interv.interviewee.forEach(function(interviewee){
                 if(interviewee.name == intervieweename){
                     intervieweelist[i] = {name:intervieweename,status:status};
