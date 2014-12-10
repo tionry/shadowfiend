@@ -118,6 +118,10 @@ var app = app || {};
                 interviewName:name,
                 status: 'onRound',
             });
+            app.socket.emit('get-status-problems-interview',{
+                interviewName:name,
+                status: 'pushing',
+            });
             //更新当前轮次面试者列表
             var itvname = $('#interviewer-item-name').text().trim(),
                 c = app.collections['round-intervieweeList-'+itvname],
@@ -132,18 +136,23 @@ var app = app || {};
             }
             //更新当前题目推送状态
             $('.push-problem-btn').removeAttr('disabled');
-            $('.push-problem-btn').removeClass('done');
-            $('.push-problem-btn').children().removeClass('glyphicon-stop');
-            $('.push-problem-btn').children().addClass('glyphicon-play');
-            //var problemname = getproblemNameHere;
-            //var al = $('#interviewer-problem-list');
-            //al.find('li').each(function(){
-            //    if (problemname == $(this).text().trim()){
-            //        $('.push-problem-btn').attr('disabled', 'disabled');
-            //        $(this).removeAttr('disabled');
-            //        $('.push-problem-btn').children().removeClass('glyphicon-stop');
-            //    }
-            //})
+            var p = app.models['running-problem-'+itvname];
+            if (p.length > 0){
+                var problemname = p[0].name;
+                var al = $('#interviewer-problem-list');
+                al.find('li').each(function(){
+                    if (problemname == $(this).text().trim()){
+                        $('.push-problem-btn').attr('disabled', 'disabled');
+                        $(this).removeAttr('disabled');
+                        $('.push-problem-btn').children().removeClass('glyphicon-play');
+                        $('.push-problem-btn').children().addClass('glyphicon-stop');
+                        $('.glyphicon-stop').on('click', function(){
+                            that.stopProblem();
+                        })
+                    }
+                })
+            }
+
         },
 
         renew_completed_interview: function(){
@@ -596,7 +605,7 @@ var app = app || {};
                     app.socket.emit('change-interviewee-status',{
                         interviewName: name,
                         intervieweeList: that.viewees,
-                        status: 'onRound'
+                        status: 'onRound',
                     })
                 }
                 that.renew_running_interview();
@@ -612,9 +621,6 @@ var app = app || {};
                 $(this).children().removeClass('glyphicon-play');
                 $(this).children().addClass('glyphicon-stop');
                 $(this).removeAttr('disabled');
-                $('.glyphicon-stop').on('click', function(){
-                    that.stopProblem();
-                })
                 var name = $(this).parent().text().trim();
                 var itvname = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
@@ -622,10 +628,11 @@ var app = app || {};
                             app.showMessageBox('info', 'inner error');
                         },
                         success:function() {
-                            //app.socket.emit('update-problem-in-interview', {
-                            // interviewName: itvname.
-                            // problemName: name,
-                            // })
+                            app.socket.emit('update-problem-in-interview', {
+                                interviewName: itvname,
+                                problemName: name,
+                                status: 'pushing'
+                            })
                         }
                     })) {
                     app.socket.emit('add-interviewee-doc', {
@@ -635,15 +642,31 @@ var app = app || {};
                         problemName: name,
                     });
                 }
+                $('.glyphicon-stop').on('click', function(){
+                    that.stopProblem();
+                })
             });
         },
 
         //结束答题
         stopProblem : function(){
-            var that = $('.glyphicon-stop');
-            that.parent().addClass('done');
+            var itvname = $('#interviewer-item-name').text();
+            var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
+            if (app.Lock.attach({
+                    error: function(){
+                        app.showMessageBox('info', 'inner error');
+                    },
+                    success:function() {
+                    }
+                })) {
+                app.socket.emit('change-problem-status-interview', {
+                    interviewName: itvname,
+                    problemName: problemName,
+                    status: '',
+                });
+            }
+            $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
             $('.push-problem-btn').removeAttr('disabled');
-            $('.done').attr('disabled', 'disabled');
         },
 
         //结束本轮
