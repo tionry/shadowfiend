@@ -179,7 +179,6 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             }
             var i = 0;
             var intervieweelist = [];
-            return callback("before foreach");
             interv.interviewee.forEach(function(interviewee){
                 if(interviewee.name == intervieweename){
                     intervieweelist[i] = {name:intervieweename,status:status};
@@ -188,7 +187,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                     intervieweelist[i] = interviewee;
                 }
                 i++;
-
+                return callback("in foreach");
                 if(i == interv.interviewee.length){
                     db.interview.update(
                         {
