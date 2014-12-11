@@ -7,7 +7,7 @@ function Lock(){
 
 Lock.prototype.acquire = function(id, callback){
     if(!this.lockTable[id]){
-        this.lockTable[id] = new Array();
+        this.lockTable[id] = [];
         callback();
     }
     else{
