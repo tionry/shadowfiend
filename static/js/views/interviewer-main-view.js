@@ -127,7 +127,11 @@ var app = app || {};
                 c = app.collections['round-intervieweeList-'+itvname],
                 sl = $('#interviewer-interviewee-control');
             for (var i = 0; i < c.length; i++){
-                var m = c.models[i].attributes;
+                var model = c.models[i].attributes;
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
                 var view = new app.IntervieweeInfoView({
                     model: m
                 });
@@ -578,15 +582,6 @@ var app = app || {};
                         var model = c.models[i].attributes;
                         if (model.name == $(this).text().trim()){
                             that.viewees.push(model.name);
-                            var m = new app.User({
-                                name: model.name,
-                                avatar: model.avatar
-                            });
-                            var view = new app.IntervieweeInfoView({
-                                model: m
-                            });
-                            var text = view.render().el;
-                            sl.append(text);
                         }
                     }
                 });
