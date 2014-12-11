@@ -684,11 +684,11 @@ var app = app || {};
                     name: name,
                     status: 'ready',
                 });
-                app.socket.emit('change-interviewee-status',{
-                    interviewName: name,
-                    intervieweeList: that.viewees,
-                    status: 'endRound'
-                })
+                //app.socket.emit('change-interviewee-status',{
+                //    interviewName: name,
+                //    intervieweeList: that.viewees,
+                //    status: 'endRound'
+                //})
             }
             this.renew_ready_interview();
         },
