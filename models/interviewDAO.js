@@ -172,42 +172,35 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
 //change interviewee's status.
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     lock.acquire(interviewname, function() {
-        db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
-            if(err){
-                lock.release(interviewname);
-                return callback("inner error");
-            }
+        db.interview.update(
+            {
+                name: interviewname,
+                interviewee:{$elemMatch:{name:{$in:intervieweename}}}
+            },
+            {
+                $set:{
+                    "interviewee.$.status":status
+                }
 
-            db.interview.update(
-                {
-                    name: interviewname,
-                    interviewee:{$elemMatch:{name:{$in:intervieweename}}}
-                },
-                {
-                    $set:{
-                        "interviewee.$.status":status
-                    }
+            }, function(err, interview) {
+                if (err) {
+                    lock.release(interviewname);
+                    return callback("inner error");
+                }
 
-                }, function(err, interview) {
+                db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
                     if (err) {
                         lock.release(interviewname);
                         return callback("inner error");
                     }
-
-                    db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
-                        if (err) {
-                            lock.release(interviewname);
-                            return callback("inner error");
-                        }
-                        if (!interview) {
-                            lock.release(interviewname);
-                            return callback("interview not found");
-                        }
+                    if (!interview) {
                         lock.release(interviewname);
-                        return callback(null, interview);
-                    });
+                        return callback("interview not found");
+                    }
+                    lock.release(interviewname);
+                    return callback(null, interview);
                 });
-        });
+            });
     });
 };
 
