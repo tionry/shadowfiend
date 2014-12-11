@@ -677,11 +677,6 @@ var app = app || {};
                         app.showMessageBox('info', 'inner error')
                     },
                     success: function(){
-                        app.socket.emit('change-interview-status', {
-                            name: name,
-                            status: 'ready',
-                        });
-                        this.renew_ready_interview();
                     }
                 })) {
                 app.socket.emit('change-interviewee-status',{
@@ -690,6 +685,11 @@ var app = app || {};
                     status: 'endRound'
                 })
             }
+            app.socket.emit('change-interview-status', {
+                name: name,
+                status: 'ready',
+            });
+            this.renew_ready_interview();
         },
 
         //开始整场面试
