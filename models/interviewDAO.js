@@ -204,7 +204,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                             },
                             {
                                 $set:{
-                                    intervieweelist:intervieweelist
+                                    interviewee:intervieweelist
                                 }
                             }, function(err, interview) {
                                 if (err) {
@@ -214,7 +214,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
 
                                 db.interview.findOne({name: interviewname}, {
                                     name: 1,
-                                    problemlist: 1
+                                    interviewee: 1
                                 }, function (err, interview) {
                                     if (err) {
                                         lock.release(interviewname);
