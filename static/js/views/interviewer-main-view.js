@@ -113,10 +113,10 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
             var name = $('#interviewer-item-name').text().trim();
-            //app.socket.emit('get-status-interviewees',{
-            //    interviewName:name,
-            //    status: 'onRound',
-            //});
+            app.socket.emit('get-status-interviewees',{
+                interviewName:name,
+                status: 'onRound',
+            });
             //app.socket.emit('get-status-problems-interview',{
             //    interviewName:name,
             //    status: 'pushing',
