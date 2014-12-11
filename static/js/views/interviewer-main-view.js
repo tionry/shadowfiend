@@ -113,30 +113,34 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
             var name = $('#interviewer-item-name').text().trim();
+            var getNew = function(){
+                var itvname = $('#interviewer-item-name').text().trim(),
+                    c = app.collections['round-intervieweeList-'+itvname],
+                    sl = $('#interviewer-interviewee-control');
+                for (var i = 0; i < c.length; i++){
+                    var model = c.models[i].attributes;
+                    var m = new app.User({
+                        name: model.name,
+                        avatar: model.avatar
+                    });
+                    var view = new app.IntervieweeInfoView({
+                        model: m
+                    });
+                    var text = view.render().el;
+                    sl.append(text);
+                }
+            }
             app.socket.emit('get-status-interviewees',{
                 interviewName:name,
                 status:'onRound',
+                wtf: getNew,
             });
             //app.socket.emit('get-status-problems-interview',{
             //    interviewName:name,
             //    status: 'pushing',
             //});
             //更新当前轮次面试者列表
-            var itvname = $('#interviewer-item-name').text().trim(),
-                c = app.collections['round-intervieweeList-'+itvname],
-                sl = $('#interviewer-interviewee-control');
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
-                var m = new app.User({
-                    name: model.name,
-                    avatar: model.avatar
-                });
-                var view = new app.IntervieweeInfoView({
-                    model: m
-                });
-                var text = view.render().el;
-                sl.append(text);
-            }
+
             //更新当前题目推送状态
             //$('.push-problem-btn').removeAttr('disabled');
             //var p = app.models['running-problem-'+itvname];
