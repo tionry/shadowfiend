@@ -591,15 +591,18 @@ var app = app || {};
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 if (app.Lock.attach({
                     })) {
-                    app.socket.emit('change-interview-status', {
-                        name: itvname,
-                        status: 'running',
-                    });
                     app.socket.emit('change-interviewee-status',{
                         interviewName: itvname,
                         intervieweeList: that.viewees,
                         status: 'onRound'
                     })
+                }
+                if (app.Lock.attach({
+                    })) {
+                    app.socket.emit('change-interview-status', {
+                        name: itvname,
+                        status: 'running',
+                    });
                 }
                 that.renew_running_interview();
                 that.pushProblem();
