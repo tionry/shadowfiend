@@ -1266,6 +1266,9 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		if (data.intervieweeList.length == 0) {
+			return socket.emit('after-update-status-interviewees', {err: 'empty list'});
+		}
 		interviewDAO.updateIntervieweestatus(data.interviewName, data.intervieweeList, data.status, function(err) {
 			if (err) {
 				return socket.emit('after-update-status-interviewees', {err: err});
