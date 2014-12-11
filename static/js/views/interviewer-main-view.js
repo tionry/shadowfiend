@@ -590,6 +590,15 @@ var app = app || {};
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 if (app.Lock.attach({
+                        success: function(){
+                            if (app.Lock.attach({
+                                })) {
+                                app.socket.emit('change-interview-status', {
+                                    name: itvname,
+                                    status: 'running',
+                                });
+                            }
+                        }
                     })) {
                     app.socket.emit('change-interviewee-status',{
                         interviewName: itvname,
@@ -597,13 +606,7 @@ var app = app || {};
                         status: 'onRound'
                     })
                 }
-                if (app.Lock.attach({
-                    })) {
-                    app.socket.emit('change-interview-status', {
-                        name: itvname,
-                        status: 'running',
-                    });
-                }
+
                 that.renew_running_interview();
                 that.pushProblem();
             })
@@ -680,6 +683,13 @@ var app = app || {};
                         app.showMessageBox('info', 'inner error')
                     },
                     success: function(){
+                        if (app.Lock.attach({
+                            })) {
+                            app.socket.emit('change-interview-status', {
+                                name: itvname,
+                                status: 'ready',
+                            });
+                        }
                     }
                 })) {
                 app.socket.emit('change-interviewee-status',{
@@ -688,10 +698,6 @@ var app = app || {};
                     status: 'endRound'
                 })
             }
-            app.socket.emit('change-interview-status', {
-                name: name,
-                status: 'ready',
-            });
             this.renew_ready_interview();
         },
 
