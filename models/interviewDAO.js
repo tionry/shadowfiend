@@ -172,35 +172,67 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
 //change interviewee's status.
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     lock.acquire(interviewname, function() {
-        db.interview.update(
-            {
-                name: interviewname,
-                interviewee:{$elemMatch:{name:{$in:intervieweename}}}
-            },
-            {
-                $set:{
-                    "interviewee.$.status":status
-                }
-
-            }, function(err, interview) {
-                if (err) {
-                    lock.release(interviewname);
-                    return callback("inner error");
-                }
-
-                db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
-                    if (err) {
-                        lock.release(interviewname);
-                        return callback("inner error");
+        db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+            if(err){
+                lock.release(interviewname);
+                return callback("inner error");
+            }
+            var intervieweelist=[];
+            var i = 0,j = 0;
+            var flag = 0;
+            interv.interviewee.forEach(function(viewee){
+                intervieweename.forEach(function(vieweename){
+                    if(viewee.name == vieweename){
+                        intervieweelist[i] = {name:vieweename,status:status}
+                        i++;
+                        flag = 1;
                     }
-                    if (!interview) {
-                        lock.release(interviewname);
-                        return callback("interview not found");
+                    j++;
+                    if(j == intervieweename.length){
+                        j = 0;
+                        if(flag == 0){
+                            intervieweelist[i] = viewee;
+                            i++;
+                        }
+                        flag = 0;
                     }
-                    lock.release(interviewname);
-                    return callback(null, interview);
-                });
-            });
+                    if(i == interv.interviewee.length)
+                    {
+                        db.interview.update(
+                            {
+                                name:interviewname
+                            },
+                            {
+                                $set:{
+                                    intervieweelist:intervieweelist
+                                }
+                            }, function(err, interview) {
+                                if (err) {
+                                    lock.release(interviewname);
+                                    return callback("inner error");
+                                }
+
+                                db.interview.findOne({name: interviewname}, {
+                                    name: 1,
+                                    problemlist: 1
+                                }, function (err, interview) {
+                                    if (err) {
+                                        lock.release(interviewname);
+                                        return callback("inner error");
+                                    }
+                                    if (!interview) {
+                                        lock.release(interviewname);
+                                        return callback("interview not found");
+                                    }
+                                    lock.release(interviewname);
+                                    return callback(null, interview);
+
+                                });
+                            });
+                    }
+                })
+            })
+        })
     });
 };
 
