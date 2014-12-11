@@ -123,6 +123,10 @@ var app = app || {};
                     app.models['running-problem-' + data.interviewName].set(data.problem);
                     break;
             }
+        },
+
+        "after-change-interview-status": function(data) {
+            app.Lock.detach(data);
         }
     };
 
