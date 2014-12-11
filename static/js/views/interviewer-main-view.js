@@ -664,7 +664,7 @@ var app = app || {};
 
         //结束本轮
         end_round: function(){
-            this.renew_ready_interview();
+
             app.showMessageBox('info', 'roundend');
             var name = $('#interviewer-item-name').text();
             var that = this;
@@ -673,11 +673,17 @@ var app = app || {};
                 that.viewees.push($(this).text().trim());
             })
             if (app.Lock.attach({
+                    error: function(){
+                        app.showMessageBox('info', 'inner error')
+                    },
+                    success: function(){
+                        app.socket.emit('change-interview-status', {
+                            name: name,
+                            status: 'ready',
+                        });
+                        this.renew_ready_interview();
+                    }
                 })) {
-                app.socket.emit('change-interview-status', {
-                    name: name,
-                    status: 'ready',
-                });
                 app.socket.emit('change-interviewee-status',{
                     interviewName: name,
                     intervieweeList: that.viewees,
