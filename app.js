@@ -1191,6 +1191,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		socket.emit('check-user', {log: 'beforeupdate'});
 		interviewDAO.updateInterviewstatus(data.name, data.status, function(err, interview) {
 			if (err) {
 				return socket.emit('check-user', {err: err});
