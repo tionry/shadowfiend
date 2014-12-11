@@ -721,11 +721,6 @@ var app = app || {};
             cnfm.on('click', function(){
                 modal.modal('hide');
                 if (app.Lock.attach({
-                        error: function(){
-                            app.showMessageBox('info', 'inner error')
-                        },
-                        success: function(){
-                        }
                     })) {
                     app.socket.emit('change-interview-status', {
                         name: name,
