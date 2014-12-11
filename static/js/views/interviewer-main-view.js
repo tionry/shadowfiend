@@ -590,20 +590,21 @@ var app = app || {};
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 if (app.Lock.attach({
+                        success: function(){
+                            app.socket.emit('change-interviewee-status',{
+                                interviewName: itvname,
+                                intervieweeList: that.viewees,
+                                status: 'onRound'
+                            });
+                            that.renew_running_interview();
+                            that.pushProblem();
+                        }
                     })) {
-                    //app.socket.emit('change-interviewee-status',{
-                    //    interviewName: itvname,
-                    //    intervieweeList: that.viewees,
-                    //    status: 'onRound'
-                    //})
                     app.socket.emit('change-interview-status', {
                         name: itvname,
                         status: 'running',
                     });
                 }
-
-                that.renew_running_interview();
-                that.pushProblem();
             })
         },
 
