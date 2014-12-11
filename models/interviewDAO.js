@@ -177,51 +177,36 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
                 lock.release(interviewname);
                 return callback("inner error");
             }
-            var i = 0;
-            var intervieweelist = [];
-            interv.interviewee.forEach(function(interviewee){
-                intervieweename.forEach(function(vieweename){
-                    if(interviewee.name == vieweename){
-                        intervieweelist[i] = {name:vieweename,status:status};
+
+            db.interview.update(
+                {
+                    name: interviewname,
+                    interviewee:{$elemMatch:{name:{$in:intervieweename}}}
+                },
+                {
+                    $set:{
+                        "interviewee.$.status":status,
                     }
-                    else{
-                        intervieweelist[i] = interviewee;
+
+                }, function(err, interview) {
+                    if (err) {
+                        lock.release(interviewname);
+                        return callback("inner error");
                     }
-                    i++;
-                    if(i == interv.interviewee.length){
-                        db.interview.update(
-                            {
-                                name: interviewname
-                            },
-                            {
-                                $set:{
-                                    interviewee:intervieweelist
-                                }
 
-                            }, function(err, interview) {
-                                if (err) {
-                                    lock.release(interviewname);
-                                    return callback("inner error");
-                                }
-
-                                db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
-                                    if (err) {
-                                        lock.release(interviewname);
-                                        return callback("inner error");
-                                    }
-                                    if (!interview) {
-                                        lock.release(interviewname);
-                                        return callback("interview not found");
-                                    }
-                                    lock.release(interviewname);
-                                    return callback(null, interview);
-                                });
-                            });
-                    }
-                })
-
-            })
-
+                    db.interview.findOne({name:interviewname},{name:1,interviewee:1},function(err,interview){
+                        if (err) {
+                            lock.release(interviewname);
+                            return callback("inner error");
+                        }
+                        if (!interview) {
+                            lock.release(interviewname);
+                            return callback("interview not found");
+                        }
+                        lock.release(interviewname);
+                        return callback(null, interview);
+                    });
+                });
         });
     });
 };
@@ -236,7 +221,7 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
             var i = 0;
             var problemlist = [];
             interv.problemlist.forEach(function(problem){
-                if(problem.name == problemname){
+                problemname.forEach()(problem.name == problemname){
                     problemlist[i] = {name:problemname,status:status};
                 }
                 else{
