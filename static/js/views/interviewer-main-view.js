@@ -577,34 +577,34 @@ var app = app || {};
                 al.append(l);
                 l.removeClass('active');
             });
-            //cnfm.on('click',function(){
-            //    sl.html('');
-            //    il.children().each(function(){
-            //        for (var i = 0; i < c.length; i++){
-            //            var model = c.models[i].attributes;
-            //            if (model.name == $(this).text().trim()){
-            //                that.viewees.push(model.name);
-            //            }
-            //        }
-            //    });
-            //    modal.modal('hide');
-            //    app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
-            //    //if (app.Lock.attach({
-            //    //    })) {
-            //    //    app.socket.emit('change-interviewee-status',{
-            //    //        interviewName: itvname,
-            //    //        intervieweeList: that.viewees,
-            //    //        status: 'onRound'
-            //    //    })
-            //    //    app.socket.emit('change-interview-status', {
-            //    //        name: itvname,
-            //    //        status: 'running',
-            //    //    });
-            //    //}
-            //
-            //    that.renew_running_interview();
-            //    that.pushProblem();
-            //})
+            cnfm.on('click',function(){
+                sl.html('');
+                il.children().each(function(){
+                    for (var i = 0; i < c.length; i++){
+                        var model = c.models[i].attributes;
+                        if (model.name == $(this).text().trim()){
+                            that.viewees.push(model.name);
+                        }
+                    }
+                });
+                modal.modal('hide');
+                app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
+                if (app.Lock.attach({
+                    })) {
+                    //app.socket.emit('change-interviewee-status',{
+                    //    interviewName: itvname,
+                    //    intervieweeList: that.viewees,
+                    //    status: 'onRound'
+                    //})
+                    app.socket.emit('change-interview-status', {
+                        name: itvname,
+                        status: 'running',
+                    });
+                }
+
+                that.renew_running_interview();
+                that.pushProblem();
+            })
         },
 
         //推送题目
@@ -721,11 +721,6 @@ var app = app || {};
             cnfm.on('click', function(){
                 modal.modal('hide');
                 if (app.Lock.attach({
-                        error: function(){
-                            app.showMessageBox('info', 'inner error')
-                        },
-                        success: function(){
-                        }
                     })) {
                     app.socket.emit('change-interview-status', {
                         name: name,
