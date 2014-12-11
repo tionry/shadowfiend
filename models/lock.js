@@ -3,7 +3,7 @@ module.exports = Lock;
 function Lock(){
     if (!(this instanceof Lock)) return new Lock();
     this.lockTable = {};
-};
+}
 
 Lock.prototype.acquire = function(id, callback){
     if(!this.lockTable[id]){
@@ -21,7 +21,7 @@ Lock.prototype.release = function(id){
             delete this.lockTable[id];
         }
         else{
-            this.LockTable[id].shift()();
+            this.lockTable[id].shift()();
         }
     }else{
         console.log("release unexisted lock: " + id);
