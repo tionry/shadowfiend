@@ -19,7 +19,6 @@ var app = app || {};
         },
 
         initialize: function(){
-            this.itv = this.model.attributes;
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             //初始化界面显示
@@ -183,9 +182,10 @@ var app = app || {};
                 cnfm = modal.find('#set-round-interviewee-btn'),
                 newinterviewees = [],
                 newinterviewers = [],
-                al = $('#setinterviewee-list');
-            var c = app.collections['intervieweeList-'+that.itv.name];
-            var cc = app.collections['interviewerList-'+that.itv.name];
+                al = $('#setinterviewee-list'),
+                itvname = $('#interviewer-item-name').text().trim();
+            var c = app.collections['intervieweeList-'+itvname];
+            var cc = app.collections['interviewerList-'+itvname];
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
@@ -290,7 +290,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-interviewee-in-interview', {
-                        name: that.itv.name,
+                        name: itvname,
                         interviewee: newinterviewees,
                     });
                 }
@@ -309,9 +309,10 @@ var app = app || {};
                 cnfm = modal.find('#set-round-interviewer-btn'),
                 newinterviewees = [],
                 newinterviewers = [],
-                al = $('#setinterviewer-list');
-            var c = app.collections['interviewerList-'+that.itv.name];
-            var cc = app.collections['intervieweeList-'+that.itv.name];
+                al = $('#setinterviewer-list'),
+                itvname = $('#interviewer-item-name').text().trim();
+            var c = app.collections['interviewerList-'+itvname];
+            var cc = app.collections['intervieweeList-'+itvname];
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
@@ -421,7 +422,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-interviewer-in-interview', {
-                        name: that.itv.name,
+                        name: itvname,
                         interviewer: newinterviewers,
                     });
                 }
@@ -430,7 +431,7 @@ var app = app || {};
 
         //添加题目
         add_problem: function(){
-            var itvname = $('#interviewer-item-name').text();
+            var itvname = $('#interviewer-item-name').text().trim();
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
@@ -443,9 +444,9 @@ var app = app || {};
 
             //获取所有题目，添加在左侧
 
-            for (var i = 0; i < app.collections['allproblems-' + this.itv.name].length; i++){
+            for (var i = 0; i < app.collections['allproblems-' + itvname].length; i++){
                 var l = $('<li></li>');
-                l.html('<a href="#">'+ app.collections['allproblems-' + this.itv.name].models[i].id +'</a>');
+                l.html('<a href="#">'+ app.collections['allproblems-' + itvname].models[i].id +'</a>');
                 al.append(l);
             }
             modal.on('hide', function () {
@@ -519,11 +520,12 @@ var app = app || {};
                 il = $('#rounduser-list'),
                 al = $('#alluser-list'),
                 sl = $('#interviewer-interviewee-control'),
-                cnfm = $('#setrounduser-cnfm');
+                cnfm = $('#setrounduser-cnfm'),
+                itvname = $('#interviewer-item-name').text().trim();
 
             that.viewers = [];
             that.viewees = [];
-            var d = app.collections['interviewerList-'+that.itv.name];
+            var d = app.collections['interviewerList-'+itvname];
             for (var i = 0; i < d.length; i++){
                 var model = d.models[i].attributes;
                 that.viewers.push(model.name);
@@ -531,7 +533,7 @@ var app = app || {};
             //获取所有面试者，添加在左侧
             al.html('');
             il.html('');
-            var c = app.collections['intervieweeList-'+that.itv.name];
+            var c = app.collections['intervieweeList-'+itvname];
             for (var i = 0; i < c.length; i++){
                 var model = c.models[i].attributes;
                 var m = new app.User({
@@ -587,15 +589,14 @@ var app = app || {};
                 });
                 modal.modal('hide');
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
-                var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
                     app.socket.emit('change-interview-status', {
-                        name: name,
+                        name: itvname,
                         status: 'running',
                     });
                     app.socket.emit('change-interviewee-status',{
-                        interviewName: name,
+                        interviewName: itvname,
                         intervieweeList: that.viewees,
                         status: 'onRound'
                     })
