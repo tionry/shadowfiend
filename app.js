@@ -1286,7 +1286,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('get-status-interviewees', function(data) {
-		if (!check(data, 'interviewName', 'status', 'callback')) {
+		if (!check(data, 'interviewName', 'status')) {
 			return;
 		}
 		if (!socket.session) {
