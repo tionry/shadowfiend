@@ -113,14 +113,14 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
             var name = $('#interviewer-item-name').text().trim();
-            app.socket.emit('get-status-interviewees',{
-                interviewName:name,
-                status: 'onRound',
-            });
-            app.socket.emit('get-status-problems-interview',{
-                interviewName:name,
-                status: 'pushing',
-            });
+            //app.socket.emit('get-status-interviewees',{
+            //    interviewName:name,
+            //    status: 'onRound',
+            //});
+            //app.socket.emit('get-status-problems-interview',{
+            //    interviewName:name,
+            //    status: 'pushing',
+            //});
             //更新当前轮次面试者列表
             var itvname = $('#interviewer-item-name').text().trim(),
                 c = app.collections['round-intervieweeList-'+itvname],
