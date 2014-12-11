@@ -135,23 +135,23 @@ var app = app || {};
                 sl.append(text);
             }
             //更新当前题目推送状态
-            $('.push-problem-btn').removeAttr('disabled');
-            var p = app.models['running-problem-'+itvname];
-            if (p.length > 0){
-                var problemname = p[0].name;
-                var al = $('#interviewer-problem-list');
-                al.find('li').each(function(){
-                    if (problemname == $(this).text().trim()){
-                        $('.push-problem-btn').attr('disabled', 'disabled');
-                        $(this).removeAttr('disabled');
-                        $('.push-problem-btn').children().removeClass('glyphicon-play');
-                        $('.push-problem-btn').children().addClass('glyphicon-stop');
-                        $('.glyphicon-stop').on('click', function(){
-                            that.stopProblem();
-                        })
-                    }
-                })
-            }
+            //$('.push-problem-btn').removeAttr('disabled');
+            //var p = app.models['running-problem-'+itvname];
+            //if (p.length > 0){
+            //    var problemname = p[0].name;
+            //    var al = $('#interviewer-problem-list');
+            //    al.find('li').each(function(){
+            //        if (problemname == $(this).text().trim()){
+            //            $('.push-problem-btn').attr('disabled', 'disabled');
+            //            $(this).removeAttr('disabled');
+            //            $('.push-problem-btn').children().removeClass('glyphicon-play');
+            //            $('.push-problem-btn').children().addClass('glyphicon-stop');
+            //            $('.glyphicon-stop').on('click', function(){
+            //                that.stopProblem();
+            //            })
+            //        }
+            //    })
+            //}
 
         },
 
@@ -605,8 +605,8 @@ var app = app || {};
                         status: 'onRound'
                     })
                 }
-                //that.renew_running_interview();
-                //that.pushProblem();
+                that.renew_running_interview();
+                that.pushProblem();
             })
         },
 
