@@ -96,7 +96,7 @@ var app = app || {};
                 return;
             }
             app.collections['round-intervieweeList-' + data.interviewName].update(data.users);
-            data.callback();
+            data.wta();
         },
 
         "after-update-status-interviewees": function(data) {

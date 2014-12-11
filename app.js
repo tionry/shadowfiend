@@ -1303,7 +1303,7 @@ io.sockets.on('connection', function(socket){
 				socket.emit('after-get-status-interviewees', {
 					users: users,
 					interviewName: data.interviewName,
-					callback: data.wtf
+					wta: data.wtf
 				});
 			});
 		});
