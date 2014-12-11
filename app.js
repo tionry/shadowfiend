@@ -1191,10 +1191,12 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		socket.emit('check-user', {log: 'beforeupdate'});
 		interviewDAO.updateInterviewstatus(data.name, data.status, function(err, interview) {
 			if (err) {
-				return;
+				return socket.emit('check-user', {err: err});
 			}
+			socket.emit('check-user', {log: interview});
 		});
 	});
 
@@ -1265,29 +1267,18 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		var i = 0;
-		data.intervieweeList.forEach(function(interviewee) {
-			interviewDAO.updateIntervieweestatus(data.interviewName, interviewee, data.status, function(err, interview) {
+		interviewDAO.updateIntervieweestatus(data.interviewName, data.intervieweeList, data.status, function(err) {
+			if (err) {
+				return socket.emit('after-update-status-interviewees', {err: err});
+			}
+			userDAO.getUserListByName(data.intervieweeList, function(err, users) {
 				if (err) {
 					return socket.emit('after-update-status-interviewees', {err: err});
 				}
-				i++;
-				if (i == data.intervieweeList.length) {
-					interviewDAO.getstatusinterviewees(data.interviewName, data.status, function(err, intervieweeList) {
-						if (err) {
-							return socket.emit('after-update-status-interviewees', {err: err});
-						}
-						userDAO.getUserListByName(intervieweeList, function(err, users) {
-							if (err) {
-								return socket.emit('after-update-status-interviewees', {err: err});
-							}
-							socket.emit('after-update-status-interviewees', {
-								users: users,
-								interviewName: data.interviewName
-							});
-						});
-					});
-				}
+				socket.emit('after-update-status-interviewees', {
+					users: users,
+					interviewName: data.interviewName
+				});
 			});
 		});
 	});
