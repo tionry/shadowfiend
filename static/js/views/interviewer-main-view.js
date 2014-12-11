@@ -591,11 +591,11 @@ var app = app || {};
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 if (app.Lock.attach({
                     })) {
-                    app.socket.emit('change-interviewee-status',{
-                        interviewName: itvname,
-                        intervieweeList: that.viewees,
-                        status: 'onRound'
-                    })
+                    //app.socket.emit('change-interviewee-status',{
+                    //    interviewName: itvname,
+                    //    intervieweeList: that.viewees,
+                    //    status: 'onRound'
+                    //})
                     app.socket.emit('change-interview-status', {
                         name: itvname,
                         status: 'running',
@@ -684,11 +684,11 @@ var app = app || {};
                     name: name,
                     status: 'ready',
                 });
-                app.socket.emit('change-interviewee-status',{
-                    interviewName: name,
-                    intervieweeList: that.viewees,
-                    status: 'endRound'
-                })
+                //app.socket.emit('change-interviewee-status',{
+                //    interviewName: name,
+                //    intervieweeList: that.viewees,
+                //    status: 'endRound'
+                //})
             }
             this.renew_ready_interview();
         },
