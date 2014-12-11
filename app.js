@@ -1286,7 +1286,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('get-status-interviewees', function(data) {
-		if (!check(data, 'interviewName', 'status')) {
+		if (!check(data, 'interviewName', 'status', 'callback')) {
 			return;
 		}
 		if (!socket.session) {
@@ -1302,7 +1302,8 @@ io.sockets.on('connection', function(socket){
 				}
 				socket.emit('after-get-status-interviewees', {
 					users: users,
-					interviewName: data.interviewName
+					interviewName: data.interviewName,
+					callback: data.callback
 				});
 			});
 		});
