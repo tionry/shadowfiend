@@ -127,6 +127,10 @@ var app = app || {};
 
         "after-change-interview-status": function(data) {
             app.Lock.detach(data);
+        },
+
+        "after-change-problem-status-interview": function(data) {
+            app.Lock.detach(data);
         }
     };
 

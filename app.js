@@ -1314,8 +1314,9 @@ io.sockets.on('connection', function(socket){
 		}
 		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, data.status, function(err, interview) {
 			if (err) {
-				return;
+				return socket.emit('after-change-problem-status-interview', {err: err});
 			}
+			socket.emit('after-change-problem-status-interview', {interview: interview});
 		});
 	});
 
@@ -1334,8 +1335,13 @@ io.sockets.on('connection', function(socket){
 				case 'waiting':
 					problemDAO.getProblemByNameList(problemList, function(err, problems) {
 						if (err) {
-							return;
+							return socket.emit('after-get-status-problem', {err: err});
 						}
+						socket.emit('after-get-status-problem', {
+							status: data.status,
+							interviewName: data.interviewName,
+							problems: problems
+						});
 					});
 					break;
 				case 'running':
@@ -1353,8 +1359,13 @@ io.sockets.on('connection', function(socket){
 				case 'complete':
 					problemDAO.getProblemByNameList(problemList, function(err, problems) {
 						if (err) {
-							return;
+							return socket.emit('after-get-status-problem', {err: err});
 						}
+						socket.emit('after-get-status-problem', {
+							status: data.status,
+							interviewName: data.interviewName,
+							problems: problems
+						});
 					});
 					break;
 			}
