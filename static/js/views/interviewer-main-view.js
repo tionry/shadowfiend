@@ -513,70 +513,70 @@ var app = app || {};
 
         //设置每轮面试者
         set_round_interviewee: function(){
-            //var that = this;
-            //var modal = Backbone.$('#set-round');
-            //var ap = modal.find('#setround-add'),
-            //    dp = modal.find('#setround-remove'),
-            //    il = $('#rounduser-list'),
-            //    al = $('#alluser-list'),
-            //    sl = $('#interviewer-interviewee-control'),
-            //    cnfm = $('#setrounduser-cnfm'),
-            //    itvname = $('#interviewer-item-name').text().trim();
-            //
-            //that.viewers = [];
-            //that.viewees = [];
-            //var d = app.collections['interviewerList-'+itvname];
-            //for (var i = 0; i < d.length; i++){
-            //    var model = d.models[i].attributes;
-            //    that.viewers.push(model.name);
-            //}
-            ////获取所有面试者，添加在左侧
-            //al.html('');
-            //il.html('');
-            //var c = app.collections['intervieweeList-'+itvname];
-            //for (var i = 0; i < c.length; i++){
-            //    var model = c.models[i].attributes;
-            //    var m = new app.User({
-            //        name: model.name,
-            //        avatar: model.avatar
-            //    });
-            //    var view = new app.SharerView({
-            //        model: m
-            //    });
-            //    var text = view.render().el;
-            //    al.append(text);
-            //}
-            //modal.find('.sharer-delete').remove();
-            //
-            //app.showInputModal(modal);
-            //modal.on('hide', function () {
-            //    cnfm.off('click');
-            //    modal.off('hide');
-            //});
-            //al.find('li').on('click', function(){
-            //    if ($(this).hasClass('active')){
-            //        $(this).removeClass('active');
-            //    }else{
-            //        $(this).addClass('active');
-            //    }
-            //});
-            //il.find('li').on('click', function(){
-            //    if ($(this).hasClass('active')){
-            //        $(this).removeClass('active');
-            //    }else{
-            //        $(this).addClass('active');
-            //    }
-            //});
-            //ap.on('click', function () {
-            //    var l = al.find('.active');
-            //    il.append(l);
-            //    l.removeClass('active');
-            //});
-            //dp.on('click', function () {
-            //    var l = il.find('.active');
-            //    al.append(l);
-            //    l.removeClass('active');
-            //});
+            var that = this;
+            var modal = Backbone.$('#set-round');
+            var ap = modal.find('#setround-add'),
+                dp = modal.find('#setround-remove'),
+                il = $('#rounduser-list'),
+                al = $('#alluser-list'),
+                sl = $('#interviewer-interviewee-control'),
+                cnfm = $('#setrounduser-cnfm'),
+                itvname = $('#interviewer-item-name').text().trim();
+
+            that.viewers = [];
+            that.viewees = [];
+            var d = app.collections['interviewerList-'+itvname];
+            for (var i = 0; i < d.length; i++){
+                var model = d.models[i].attributes;
+                that.viewers.push(model.name);
+            }
+            //获取所有面试者，添加在左侧
+            al.html('');
+            il.html('');
+            var c = app.collections['intervieweeList-'+itvname];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.SharerView({
+                    model: m
+                });
+                var text = view.render().el;
+                al.append(text);
+            }
+            modal.find('.sharer-delete').remove();
+
+            app.showInputModal(modal);
+            modal.on('hide', function () {
+                cnfm.off('click');
+                modal.off('hide');
+            });
+            al.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            il.find('li').on('click', function(){
+                if ($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+            });
+            ap.on('click', function () {
+                var l = al.find('.active');
+                il.append(l);
+                l.removeClass('active');
+            });
+            dp.on('click', function () {
+                var l = il.find('.active');
+                al.append(l);
+                l.removeClass('active');
+            });
             //cnfm.on('click',function(){
             //    sl.html('');
             //    il.children().each(function(){
