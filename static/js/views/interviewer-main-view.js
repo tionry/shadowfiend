@@ -127,7 +127,7 @@ var app = app || {};
         },
 
         resetProblem : function(){
-            this.option.pushedProblem(this.renewProblem);
+            this.options.pushedProblem(this.renewProblem);
         },
 
         renew_running_interview: function(){
