@@ -605,7 +605,7 @@ var app = app || {};
                 var model = c.models[i].attributes;
                 that.viewers.push(model.name);
             }
-            $('.push-problem-btn').on('click', function(){
+            $('.glyphicon-play').on('click', function(){
                 $('.push-problem-btn').attr('disabled', 'disabled');
                 $(this).children().removeClass('glyphicon-play');
                 $(this).children().addClass('glyphicon-stop');
@@ -632,32 +632,32 @@ var app = app || {};
                         status: 'pushing'
                     })
                 }
-                $('.glyphicon-stop').on('click', function(){
-                    that.stopProblem();
-                })
+                that.stopProblem();
             });
         },
 
         //结束答题
         stopProblem : function(){
-            var itvname = $('#interviewer-item-name').text().trim();
-            var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
-            if (app.Lock.attach({
-                    error: function(){
-                        app.showMessageBox('info', 'inner error');
-                    },
-                    success:function() {
-                    }
-                })) {
-                app.socket.emit('change-problem-status-interview', {
-                    interviewName: itvname,
-                    problemName: problemName,
-                    status: 'waiting',
-                });
-            }
-            $('.glyphicon-stop').off('click');
-            $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
-            $('.push-problem-btn').removeAttr('disabled');
+            $('.glyphicon-stop').on('click', function() {
+                var itvname = $('#interviewer-item-name').text().trim();
+                var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
+                if (app.Lock.attach({
+                        error: function () {
+                            app.showMessageBox('info', 'inner error');
+                        },
+                        success: function () {
+                        }
+                    })) {
+                    app.socket.emit('change-problem-status-interview', {
+                        interviewName: itvname,
+                        problemName: problemName,
+                        status: 'waiting',
+                    });
+                }
+                $('.glyphicon-stop').off('click');
+                $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
+                $('.push-problem-btn').removeAttr('disabled');
+            });
         },
 
         //结束本轮
