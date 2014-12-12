@@ -1210,11 +1210,11 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return userDAO.getUserByName(interviewee, function(err, user) {
 					if (err) {
-						return socket.emit('after-add-interviewee-doc', {err: err});
+						return callback(err);
 					}
 					docDAO.deleteDoc(user._id, path, function(err) {
 						if (err) {
-							return socket.emit('after-add-interviewee-doc', {err:err});
+							return callback(err);
 						}
 						return _callCreateDocByName(interviewee, interviewName, problemName, callback);
 					});
@@ -1235,7 +1235,7 @@ io.sockets.on('connection', function(socket){
 		data.intervieweeList.forEach(function(interviewee) {
 			_callCreateDocByName(interviewee, data.interviewName, data.problemName, function(err, path) {
 				if (err) {
-					return;
+					return socket.emit('after-add-interviewee-doc', {err: err});
 				}
 				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 					if (err) {
@@ -1362,7 +1362,7 @@ io.sockets.on('connection', function(socket){
 						});
 					});
 					break;
-				case 'running':
+				case 'pushing':
 					problemDAO.getProblemByName(problemList[0], function(err, problem) {
 						if (err) {
 							return socket.emit('after-get-status-problem', {err: err});
