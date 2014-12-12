@@ -23,6 +23,7 @@ var app = app || {};
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
+            this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
             //初始化界面显示
 
             this.renewList();
@@ -31,8 +32,7 @@ var app = app || {};
 
         renewList: function(){
             this.itv = this.model.attributes;
-
-            $('.push-problem-btn').attr('disabled', 'disabled');
+            $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
             $('#end-interview-btn').show();
@@ -71,6 +71,10 @@ var app = app || {};
                 interviewName:name,
                 status:'onRound',
             });
+            app.socket.emit('get-status-problems-interview',{
+                interviewName:name,
+                status: 'pushing',
+            });
 
             switch (this.itv.status){
                 case 'waiting':
@@ -108,46 +112,21 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        //addRoundInterviewee: function(){
-        //    var itvname = $('#interviewer-item-name').text().trim(),
-        //        c = app.collections['round-intervieweeList-'+itvname],
-        //        sl = $('#interviewer-interviewee-control');
-        //    for (var i = 0; i < c.length; i++){
-        //        var model = c.models[i].attributes;
-        //        var m = new app.User({
-        //            name: model.name,
-        //            avatar: model.avatar
-        //        });
-        //        var view = new app.IntervieweeInfoView({
-        //            model: m
-        //        });
-        //        var text = view.render().el;
-        //        sl.append(text);
-        //    }
-        //},
-
-        addOneRoundInterviewee: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.$el.is(':hidden')) {
-                    $('#interviewer-interviewee-control').append(v.el);
-                    v.delegateEvents();
+        renewProblem : function(model){
+            $('.push-problem-btn').removeAttr('disabled');
+            var al = $('#interviewer-problem-list');
+            var that = this;
+            al.find('li').each(function(){
+                if (model.name == $(this).text().trim()){
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).removeAttr('disabled');
+                    $('.push-problem-btn').children().removeClass('glyphicon-play');
+                    $('.push-problem-btn').children().addClass('glyphicon-stop');
+                    $('.glyphicon-stop').on('click', function(){
+                        that.stopProblem();
+                    })
                 }
-            } else {
-                model.view = new app.IntervieweeInfoView({
-                    model: model
-                });
-                $('#interviewer-interviewee-control').append(model.view.render().el);
-            }
-            return this;
-        },
-
-        addAllRoundInterviewee: function(){
-            $('#interviewer-interviewee-control').html('');
-            //this.options.roundList.each(this.addOneRoundInterviewee);
+            })
         },
 
         renew_running_interview: function(){
@@ -160,37 +139,8 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
-            var name = $('#interviewer-item-name').text().trim();
-
-
-
-
-
-            //app.socket.emit('get-status-problems-interview',{
-            //    interviewName:name,
-            //    status: 'pushing',
-            //});
-            //更新当前轮次面试者列表
-
-            //更新当前题目推送状态
-            //$('.push-problem-btn').removeAttr('disabled');
-            //var p = app.models['running-problem-'+itvname];
-            //if (p.length > 0){
-            //    var problemname = p[0].name;
-            //    var al = $('#interviewer-problem-list');
-            //    al.find('li').each(function(){
-            //        if (problemname == $(this).text().trim()){
-            //            $('.push-problem-btn').attr('disabled', 'disabled');
-            //            $(this).removeAttr('disabled');
-            //            $('.push-problem-btn').children().removeClass('glyphicon-play');
-            //            $('.push-problem-btn').children().addClass('glyphicon-stop');
-            //            $('.glyphicon-stop').on('click', function(){
-            //                that.stopProblem();
-            //            })
-            //        }
-            //    })
-            //}
-
+            $('.push-problem-btn').removeAttr('disabled');
+            this.pushProblem();
         },
 
         renew_completed_interview: function(){
@@ -211,7 +161,6 @@ var app = app || {};
             var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
 
-            var that = this;
             var input = modal.find('#setinterviewee-inputName'),
                 add_cnfm = modal.find('#setinterviewee-confirm'),
                 cnfm = modal.find('#set-round-interviewee-btn'),
@@ -338,7 +287,6 @@ var app = app || {};
             var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
 
-            var that = this;
             var input = modal.find('#setinterviewer-inputName'),
                 add_cnfm = modal.find('#setinterviewer-confirm'),
                 cnfm = modal.find('#set-round-interviewer-btn'),
@@ -533,7 +481,6 @@ var app = app || {};
                                 mode: 'problem-in-interview'
                             });
                             modal.modal('hide');
-                            $('.push-problem-btn').attr('disabled', 'disabled');
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {
@@ -631,7 +578,6 @@ var app = app || {};
                                 status: 'onRound'
                             });
                             that.renew_running_interview();
-                            that.pushProblem();
                         }
                     })) {
                     app.socket.emit('change-interview-status', {
@@ -679,7 +625,7 @@ var app = app || {};
 
         //结束答题
         stopProblem : function(){
-            var itvname = $('#interviewer-item-name').text();
+            var itvname = $('#interviewer-item-name').text().trim();
             var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
             if (app.Lock.attach({
                     error: function(){
@@ -694,6 +640,7 @@ var app = app || {};
                     status: '',
                 });
             }
+            $('.glyphicon-stop').off('click');
             $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
             $('.push-problem-btn').removeAttr('disabled');
         },
@@ -770,6 +717,29 @@ var app = app || {};
             app.showInputModal(modal);
         },
 
+        addOneRoundInterviewee: function(model){
+            if (!model) return;
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-interviewee-control').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.IntervieweeInfoView({
+                    model: model
+                });
+                $('#interviewer-interviewee-control').append(model.view.render().el);
+            }
+            return this;
+        },
+
+        addAllRoundInterviewee: function(){
+            $('#interviewer-interviewee-control').html('');
+        },
+
         addOneProblem: function(model){
             if (!model) return;
             var v = model.view;
@@ -791,8 +761,11 @@ var app = app || {};
 
         addAllProblem: function(){
             this.options.problemList.each(this.addOneProblem);
+            if (this.itv.status == 'running'){
+                $('.push-problem-btn').removeAttr('disabled');
+                this.pushProblem();
+            }else
+                $('.push-problem-btn').attr('disabled', 'disabled');
         },
-
     });
-
 })();

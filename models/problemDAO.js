@@ -22,6 +22,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 				lock.release(name);
 				return callback("inner error");
 			}
+
 			if (problem) {
 				lock.release(name);
 				return callback("problem exists");
@@ -50,7 +51,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 						lock.release(name);
 						return callback("inner error");
 					}
-					lock.release(name);
+					//lock.release(name);
 					return callback(null);
 				});
 			});
