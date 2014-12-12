@@ -591,31 +591,45 @@ var app = app || {};
         //推送题目
         pushProblem : function(){
             var that = this;
+            var itvname = $('#interviewer-item-name').text();
+            that.viewers = [];
+            that.viewees = [];
+            var cc = app.collections['interviewerList-'+itvname];
+            for (var i = 0; i < cc.length; i++){
+                var model = cc.models[i].attributes;
+                that.viewers.push(model.name);
+            }
+            var c = app.collections['round-intervieweeList-'+itvname];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                that.viewers.push(model.name);
+            }
             $('.push-problem-btn').on('click', function(){
                 $('.push-problem-btn').attr('disabled', 'disabled');
                 $(this).children().removeClass('glyphicon-play');
                 $(this).children().addClass('glyphicon-stop');
                 $(this).removeAttr('disabled');
                 var name = $(this).parent().text().trim();
-                var itvname = $('#interviewer-item-name').text();
+
                 if (app.Lock.attach({
-                        error: function(data){
+                        error: function(){
                             app.showMessageBox('info', 'inner error');
                         },
                         success:function() {
-                            app.socket.emit('update-problem-in-interview', {
-                                interviewName: itvname,
-                                problemName: name,
-                                status: 'pushing'
-                            })
+
                         }
                     })) {
-                    app.socket.emit('add-interviewee-doc', {
+                    //app.socket.emit('add-interviewee-doc', {
+                    //    interviewName: itvname,
+                    //    intervieweeList: that.viewees,
+                    //    interviewerList: that.viewers,
+                    //    problemName: name,
+                    //});
+                    app.socket.emit('change-problem-status-interview', {
                         interviewName: itvname,
-                        intervieweeList: that.viewees,
-                        interviewerList: that.viewers,
                         problemName: name,
-                    });
+                        status: 'pushing'
+                    })
                 }
                 $('.glyphicon-stop').on('click', function(){
                     that.stopProblem();
