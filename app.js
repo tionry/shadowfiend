@@ -1118,8 +1118,7 @@ io.sockets.on('connection', function(socket){
 					if (err) {
 						return socket.emit('read-interviewee-in-interview', {err: err});
 					}
-					interviewee.avatar = user.avatar;
-					intervieweeList.push(interviewee);
+					intervieweeList.push(user);
 					if (intervieweeList.length == interview.interviewee.length) {
 						return socket.emit('read-interviewee-in-interview', {
 							interviewees: intervieweeList,
@@ -1302,7 +1301,7 @@ io.sockets.on('connection', function(socket){
 				}
 				socket.emit('after-get-status-interviewees', {
 					users: users,
-					interviewName: data.interviewName,
+					interviewName: data.interviewName
 				});
 			});
 		});
