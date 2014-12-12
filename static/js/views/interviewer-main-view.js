@@ -591,13 +591,26 @@ var app = app || {};
         //推送题目
         pushProblem : function(){
             var that = this;
+            var itvname = $('#interviewer-item-name').text();
+            that.viewers = [];
+            that.viewees = [];
+            var cc = app.collections['interviewerList-'+itvname];
+            for (var i = 0; i < cc.length; i++){
+                var model = cc.models[i].attributes;
+                that.viewers.push(model.name);
+            }
+            var c = app.collections['round-intervieweeList-'+itvname];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                that.viewers.push(model.name);
+            }
             $('.push-problem-btn').on('click', function(){
                 $('.push-problem-btn').attr('disabled', 'disabled');
                 $(this).children().removeClass('glyphicon-play');
                 $(this).children().addClass('glyphicon-stop');
                 $(this).removeAttr('disabled');
                 var name = $(this).parent().text().trim();
-                var itvname = $('#interviewer-item-name').text();
+
                 if (app.Lock.attach({
                         error: function(data){
                             app.showMessageBox('info', 'inner error');
