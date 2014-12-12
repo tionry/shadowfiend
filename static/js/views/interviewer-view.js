@@ -186,6 +186,10 @@ var app = app || {};
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
             var newinterviewproblems = [];
+            if (newinterviewees == []) {
+                app.showMessageBar('#interview-message', 'interviewee list is empty', 'error');
+                return;
+            }
             if (app.Lock.attach({
                     loading: '#newinterview-buttons',
                     error: function (data) {
