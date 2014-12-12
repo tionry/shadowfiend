@@ -186,7 +186,7 @@ var app = app || {};
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newinterview-name').val());
             var newinterviewproblems = [];
-            if (newinterviewees == []) {
+            if (newinterviewees.length == 0) {
                 app.showMessageBar('#interview-message', 'interviewee list is empty', 'error');
                 return;
             }
