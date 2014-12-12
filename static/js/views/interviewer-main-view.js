@@ -21,7 +21,7 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            this.listenTo(this.options.roundList, 'reset', this.addRoundInterviewee);
+            this.listenTo(this.options.roundList, 'add', this.addRoundInterviewee);
 
             //初始化界面显示
 
