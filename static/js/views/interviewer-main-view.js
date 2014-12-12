@@ -634,6 +634,7 @@ var app = app || {};
                         status: 'pushing'
                     })
                 }
+                $('.glyphicon-play').off('click');
                 that.stopProblem();
             });
         },
