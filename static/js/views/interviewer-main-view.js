@@ -609,7 +609,7 @@ var app = app || {};
                 $('.push-problem-btn').attr('disabled', 'disabled');
                 $(this).children().removeClass('glyphicon-play');
                 $(this).children().addClass('glyphicon-stop');
-                $(this).removeAttr('disabled');
+                $(this).parent().removeAttr('disabled');
                 var name = $(this).parent().text().trim();
 
                 if (app.Lock.attach({
