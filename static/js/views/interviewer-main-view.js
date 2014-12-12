@@ -118,7 +118,7 @@ var app = app || {};
                 model.view = new app.IntervieweeInfoView({
                     model: model
                 });
-                $('#interviewer-problem-list').append(model.view.render().el);
+                $('#interviewer-interviewee-control').append(model.view.render().el);
             }
             return this;
         },
