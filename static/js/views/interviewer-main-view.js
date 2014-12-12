@@ -621,14 +621,18 @@ var app = app || {};
                 app.showMessageBox('setroundintervieweesuccess', 'roundinterviewstart');
                 if (app.Lock.attach({
                         success: function(){
-                            app.socket.emit('change-interviewee-status',{
-                                interviewName: itvname,
-                                intervieweeList: that.viewees,
-                                status: 'onRound'
-                            });
-                            that.renewList();
-                            //that.renew_running_interview();
-                            that.pushProblem();
+                            if (app.Lock.attach({
+                                    success: function(){
+                                        that.renew_running_interview();
+                                        that.pushProblem();
+                                    }
+                                })){
+                                app.socket.emit('change-interviewee-status',{
+                                    interviewName: itvname,
+                                    intervieweeList: that.viewees,
+                                    status: 'onRound'
+                                });
+                            }
                         }
                     })) {
                     app.socket.emit('change-interview-status', {
@@ -709,12 +713,17 @@ var app = app || {};
                         app.showMessageBox('info', 'inner error')
                     },
                     success: function(){
-                        app.socket.emit('change-interviewee-status',{
-                            interviewName: name,
-                            intervieweeList: that.viewees,
-                            status: 'waiting'
-                        });
-                        that.renew_ready_interview();
+                        if (app.Lock.attach({
+                                success: function(){
+                                    that.renew_ready_interview();
+                                }
+                            })){
+                            app.socket.emit('change-interviewee-status',{
+                                interviewName: name,
+                                intervieweeList: that.viewees,
+                                status: 'waiting'
+                            });
+                        }
                     }
                 })) {
                 app.socket.emit('change-interview-status', {
