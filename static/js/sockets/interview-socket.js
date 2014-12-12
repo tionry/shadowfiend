@@ -131,6 +131,10 @@ var app = app || {};
 
         "after-change-problem-status-interview": function(data) {
             app.Lock.detach(data);
+        },
+
+        "add-interviewee-doc": function(data) {
+            app.Lock.detach(data);
         }
     };
 
