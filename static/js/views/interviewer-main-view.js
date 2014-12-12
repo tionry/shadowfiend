@@ -71,10 +71,6 @@ var app = app || {};
                 interviewName:name,
                 status:'onRound',
             });
-            app.socket.emit('get-status-problems-interview',{
-                interviewName:name,
-                status: 'pushing',
-            });
 
             switch (this.itv.status){
                 case 'waiting':
@@ -140,6 +136,11 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
             $('.push-problem-btn').removeAttr('disabled');
+            var name = $('#interviewer-item-name').text().trim();
+            app.socket.emit('get-status-problems-interview',{
+                interviewName:name,
+                status: 'pushing',
+            });
             this.pushProblem();
         },
 
@@ -489,7 +490,6 @@ var app = app || {};
                     });
                 }
             })
-
         },
 
         //设置每轮面试者
@@ -637,7 +637,7 @@ var app = app || {};
                 app.socket.emit('change-problem-status-interview', {
                     interviewName: itvname,
                     problemName: problemName,
-                    status: '',
+                    status: 'waiting',
                 });
             }
             $('.glyphicon-stop').off('click');

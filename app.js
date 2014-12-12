@@ -1137,9 +1137,12 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		if (data.interviewer.length == 0) {
+			return socket.emit('after-update-interviewer', {err: 'interviewer list is empty'});
+		}
 		interviewDAO.modifyinterviewers(data.name, data.interviewer, function(err, interview) {
 			if (err) {
-				return socekt.emit('after-update-interviewer', {err: err});
+				return socket.emit('after-update-interviewer', {err: err});
 			}
 			userDAO.getUserListByName(interview.interviewer, function(err, users) {
 				if (err) {
@@ -1159,6 +1162,9 @@ io.sockets.on('connection', function(socket){
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
+		}
+		if (data.interviewee.length == 0) {
+			return socket.emit('after-update-interviewer', {err: 'interviewee list is empty'});
 		}
 		interviewDAO.modifyinterviewees(data.name, data.interviewee, function(err, interview) {
 			if (err) {
@@ -1218,6 +1224,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		var i = 0;
 		data.intervieweeList.forEach(function(interviewee) {
 			var n = 0;
 			_callCreateDocByName(interviewee, data.interviewName, data.problemName, n, function(err, path) {
@@ -1226,9 +1233,12 @@ io.sockets.on('connection', function(socket){
 				}
 				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 					if (err) {
-						return;
+						return socket.emit('after-add-interviewee-doc', {err: err});
 					}
-
+					i++;
+					if (i == data.intervieweeList.length) {
+						socket.emit('after-add-interviewee-doc', {success: 'success'});
+					}
 				});
 			});
 		});
@@ -1333,7 +1343,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-get-status-problem', {err: err});
 			}
-			switch(status) {
+			switch (status) {
 				case 'waiting':
 					problemDAO.getProblemByNameList(problemList, function(err, problems) {
 						if (err) {
