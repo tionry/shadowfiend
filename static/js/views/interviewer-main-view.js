@@ -139,6 +139,7 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
+            $('.push-problem-btn').removeAttr('disabled');
             this.pushProblem();
         },
 
