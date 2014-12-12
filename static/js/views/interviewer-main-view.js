@@ -108,7 +108,8 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        renewProblem : function(model){
+        renewProblem : function(){
+            var model = this.options.pushedProblem;
             $('.push-problem-btn').removeAttr('disabled');
             var al = $('#interviewer-problem-list');
             var that = this;
