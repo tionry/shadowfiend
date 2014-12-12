@@ -1286,7 +1286,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('get-status-interviewees', function(data) {
-		if (!check(data, 'interviewName', 'status', 'wtf')) {
+		if (!check(data, 'interviewName', 'status')) {
 			return;
 		}
 		if (!socket.session) {
@@ -1303,7 +1303,6 @@ io.sockets.on('connection', function(socket){
 				socket.emit('after-get-status-interviewees', {
 					users: users,
 					interviewName: data.interviewName,
-					wta: data.wtf
 				});
 			});
 		});
