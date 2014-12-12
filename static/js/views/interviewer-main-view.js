@@ -699,9 +699,8 @@ var app = app || {};
 
         //结束本轮
         end_round: function(){
-
             app.showMessageBox('info', 'roundend');
-            var name = $('#interviewer-item-name').text();
+            var name = $('#interviewer-item-name').text().trim();
             var that = this;
             that.viewees = [];
             $('.interviewer-interviewee').find('p').each(function(){
@@ -712,19 +711,19 @@ var app = app || {};
                         app.showMessageBox('info', 'inner error')
                     },
                     success: function(){
+                        app.socket.emit('change-interviewee-status',{
+                            interviewName: name,
+                            intervieweeList: that.viewees,
+                            status: 'waiting'
+                        });
+                        that.renew_ready_interview();
                     }
                 })) {
                 app.socket.emit('change-interview-status', {
                     name: name,
                     status: 'ready',
                 });
-                //app.socket.emit('change-interviewee-status',{
-                //    interviewName: name,
-                //    intervieweeList: that.viewees,
-                //    status: 'endRound'
-                //})
             }
-            this.renew_ready_interview();
         },
 
         //开始整场面试
