@@ -118,9 +118,12 @@ var app = app || {};
             }
             switch (data.status) {
                 case 'pushing':
-                    app.models || (app.models = []);
-                    app.models['running-problem-' + data.interviewName] || (app.models['running-problem' + data.interviewName] = new app.Problem());
-                    app.models['running-problem-' + data.interviewName].set(data.problem);
+                    app.collections['running-problem-' + data.interviewName].fetch({
+                        reset: true,
+                        all: true,
+                        name: '',
+                        data: data.problem
+                    });
                     break;
             }
         },
