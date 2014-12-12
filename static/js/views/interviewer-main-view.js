@@ -23,7 +23,7 @@ var app = app || {};
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
-            this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
+            //this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
             //初始化界面显示
 
             this.renewList();
