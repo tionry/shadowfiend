@@ -119,9 +119,7 @@ var app = app || {};
                     $(this).find('button').removeAttr('disabled');
                     $(this).find('button').children().removeClass('glyphicon-play');
                     $(this).find('button').children().addClass('glyphicon-stop');
-                    $('.glyphicon-stop').on('click', function(){
-                        that.stopProblem();
-                    })
+                    that.stopProblem();
                 }
             })
         },
