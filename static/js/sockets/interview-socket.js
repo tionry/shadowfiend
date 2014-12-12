@@ -133,7 +133,7 @@ var app = app || {};
             app.Lock.detach(data);
         },
 
-        "add-interviewee-doc": function(data) {
+        "after-add-interviewee-doc": function(data) {
             app.Lock.detach(data);
         },
 
