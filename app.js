@@ -1000,7 +1000,6 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		if ()
 		interviewDAO.createInterview(data.name, data.interviewer, data.interviewee, data.problem, function(err) {
 			if (err) {
 				return socket.emit('after-add-interview', {err: err});
@@ -1205,14 +1204,21 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
-	function _callCreateDocByName(interviewee, interviewName, problemName, times, callback) {
-		var path = '/' + interviewee + '/' + interviewName + '-' + problemName + '-' + times;
+	function _callCreateDocByName(interviewee, interviewName, problemName, callback) {
+		var path = '/' + interviewee + '/' + problemName + '@' + interviewName;
 		docDAO.createDocByname(interviewee, path, 'doc', function(err) {
 			if (err) {
-				if (err != 'file exists') {
-					return callback(err);
-				}
-				return _callCreateDocByName(interviewee, interviewName, problemName, times + 1, callback);
+				return userDAO.getUserByName(interviewee, function(err, user) {
+					if (err) {
+						return socket.emit('after-add-interviewee-doc', {err: err});
+					}
+					return docDAO.deleteDoc(user._id, path, function(err) {
+						if (err) {
+							return socket.emit('after-add-interviewee-doc', {err:err});
+						}
+						return _callCreateDocByName(interviewee, interviewName, problemName, callback);
+					});
+				});
 			}
 			return callback(null, path);
 		});
@@ -1227,8 +1233,7 @@ io.sockets.on('connection', function(socket){
 		}
 		var i = 0;
 		data.intervieweeList.forEach(function(interviewee) {
-			var n = 0;
-			_callCreateDocByName(interviewee, data.interviewName, data.problemName, n, function(err, path) {
+			_callCreateDocByName(interviewee, data.interviewName, data.problemName, function(err, path) {
 				if (err) {
 					return;
 				}
