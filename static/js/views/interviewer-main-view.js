@@ -23,7 +23,8 @@ var app = app || {};
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
-            this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
+            this.listenTo(this.options.pushedProblem, 'add', this.renewProblem);
+            this.listenTo(this.options.pushedProblem, 'reset', this.resetProblem);
             //初始化界面显示
 
             this.renewList();
@@ -108,8 +109,7 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        renewProblem : function(){
-            var model = this.options.pushedProblem;
+        renewProblem : function(model){
             $('.push-problem-btn').removeAttr('disabled');
             var al = $('#interviewer-problem-list');
             var that = this;
@@ -124,6 +124,10 @@ var app = app || {};
                     })
                 }
             })
+        },
+
+        resetProblem : function(){
+            this.option.pushedProblem(this.renewProblem);
         },
 
         renew_running_interview: function(){
