@@ -21,6 +21,8 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
+            this.listenTo(this.options.roundList, 'reset', this.addRoundInterviewee);
+
             //初始化界面显示
 
             this.renewList();
@@ -102,6 +104,24 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
+        addRoundInterviewee: function(){
+            var itvname = $('#interviewer-item-name').text().trim(),
+                c = app.collections['round-intervieweeList-'+itvname],
+                sl = $('#interviewer-interviewee-control');
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                var m = new app.User({
+                    name: model.name,
+                    avatar: model.avatar
+                });
+                var view = new app.IntervieweeInfoView({
+                    model: m
+                });
+                var text = view.render().el;
+                sl.append(text);
+            }
+        },
+
         renew_running_interview: function(){
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
@@ -113,28 +133,14 @@ var app = app || {};
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
             var name = $('#interviewer-item-name').text().trim();
-            var getNew = function(){
-                var itvname = $('#interviewer-item-name').text().trim(),
-                    c = app.collections['round-intervieweeList-'+itvname],
-                    sl = $('#interviewer-interviewee-control');
-                for (var i = 0; i < c.length; i++){
-                    var model = c.models[i].attributes;
-                    var m = new app.User({
-                        name: model.name,
-                        avatar: model.avatar
-                    });
-                    var view = new app.IntervieweeInfoView({
-                        model: m
-                    });
-                    var text = view.render().el;
-                    sl.append(text);
-                }
-            }
+
             app.socket.emit('get-status-interviewees',{
                 interviewName:name,
                 status:'onRound',
-                wtf: getNew,
             });
+
+
+
             //app.socket.emit('get-status-problems-interview',{
             //    interviewName:name,
             //    status: 'pushing',

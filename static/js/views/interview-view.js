@@ -40,6 +40,7 @@ var app = app || {};
                     model: this.model,
                     interviewerList: app.collections['interviewerList-' + name],
                     intervieweeList: app.collections['intervieweeList-' + name],
+                    roundList:  app.collections['round-intervieweeList-' + name],
                     problemList: app.collections['problemList-' + name],
                     allproblems: app.collections['allproblems-' + name],
                 });
