@@ -21,8 +21,6 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            //this.listenTo(this.options.roundList, 'reset', this.addRoundInterviewee);
-
             //初始化界面显示
 
             this.renewList();
@@ -518,7 +516,6 @@ var app = app || {};
                     });
                     return result;
                 };
-                //
                 if (app.Lock.attach({
                         error: function (data) {
                             //app.showMessageBar('#interview-message', 'isInterviewer', 'error');
@@ -629,7 +626,8 @@ var app = app || {};
                                 intervieweeList: that.viewees,
                                 status: 'onRound'
                             });
-                            that.renew_running_interview();
+                            that.renewList();
+                            //that.renew_running_interview();
                             that.pushProblem();
                         }
                     })) {
