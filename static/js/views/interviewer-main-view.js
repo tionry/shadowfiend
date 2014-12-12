@@ -32,7 +32,7 @@ var app = app || {};
 
         renewList: function(){
             this.itv = this.model.attributes;
-
+            $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
@@ -182,9 +182,8 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
-            var name = $('#interviewer-item-name').text().trim(),
-                that = this;
-
+            $('.push-problem-btn').removeAttr('disabled');
+            this.pushProblem();
             //更新当前题目推送状态
 
 
@@ -208,7 +207,6 @@ var app = app || {};
             var modal = Backbone.$('#set-interviewee');
             app.showInputModal(modal);
 
-            var that = this;
             var input = modal.find('#setinterviewee-inputName'),
                 add_cnfm = modal.find('#setinterviewee-confirm'),
                 cnfm = modal.find('#set-round-interviewee-btn'),
@@ -335,7 +333,6 @@ var app = app || {};
             var modal = Backbone.$('#set-interviewer');
             app.showInputModal(modal);
 
-            var that = this;
             var input = modal.find('#setinterviewer-inputName'),
                 add_cnfm = modal.find('#setinterviewer-confirm'),
                 cnfm = modal.find('#set-round-interviewer-btn'),
@@ -530,7 +527,6 @@ var app = app || {};
                                 mode: 'problem-in-interview'
                             });
                             modal.modal('hide');
-                            $('.push-problem-btn').attr('disabled', 'disabled');
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {
@@ -628,7 +624,6 @@ var app = app || {};
                                 status: 'onRound'
                             });
                             that.renew_running_interview();
-                            that.pushProblem();
                         }
                     })) {
                     app.socket.emit('change-interview-status', {
@@ -783,6 +778,7 @@ var app = app || {};
                     model: model
                 });
                 $('#interviewer-problem-list').append(model.view.render().el);
+                $('.push-problem-btn').attr('disabled', 'disabled');
             }
             return this;
         },
@@ -790,7 +786,5 @@ var app = app || {};
         addAllProblem: function(){
             this.options.problemList.each(this.addOneProblem);
         },
-
     });
-
 })();
