@@ -176,4 +176,5 @@ app.languages['en-US'] = { Name :'English Version',
   'score'				: 'score',
   'startinterview-confirm'		: 'This interview is started. Please set the first round.',
   'endinterview-confirm'		: 'Are you really going to end this interview?',
+  'interviewee list is empty': 'interviewee list is empty',
 };

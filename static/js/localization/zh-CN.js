@@ -174,4 +174,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'score'				: '分数',
   'startinterview-confirm'		: '本面试已开始，请设置第一轮。',
   'endinterview-confirm'		: '您真的要结束本面试吗？',
+  'interviewee list is empty' : '面试者列表不能为空',
 };
