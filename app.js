@@ -1349,7 +1349,7 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-get-status-problem', {err: err});
 			}
-			switch (status) {
+			switch (data.status) {
 				case 'waiting':
 					problemDAO.getProblemByNameList(problemList, function(err, problems) {
 						if (err) {
