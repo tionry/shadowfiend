@@ -308,53 +308,49 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
 };
 
 InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,callback){
-    lock.acquire(interviewname,function(){
-        db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
-            if(err){
-                return callback("inner error");
-            }
-            var intervieweelist = [];
-            var i,j;
-            i = 0;
-            j = 0;
+    db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
+        if(err){
+            return callback("inner error");
+        }
+        var intervieweelist = [];
+        var i,j;
+        i = 0;
+        j = 0;
 
-            inter.interviewee.forEach(function(interviewee){
-                if(interviewee.status == status){
-                    intervieweelist[i] = interviewee.name;
-                    i++;
-                }
-                j++;
-                if(j == inter.interviewee.length){
-                    return callback(null,intervieweelist);
-                }
-            });
-        })
+        inter.interviewee.forEach(function(interviewee){
+            if(interviewee.status == status){
+                intervieweelist[i] = interviewee.name;
+                i++;
+            }
+            j++;
+            if(j == inter.interviewee.length){
+                return callback(null,intervieweelist);
+            }
+        });
     })
-}
+};
 
 InterviewDAO.prototype.getstatusproblems = function(interviewname,status,callback){
-    lock.acquire(interviewname,function(){
-        db.interview.findOne({name:interviewname},{problemlist:1},function(err,inter){
-            if(err){
-                return callback("inner error");
+    db.interview.findOne({name:interviewname},{problemlist:1},function(err,inter){
+        if(err){
+            return callback("inner error");
+        }
+        var problemlist = [];
+        var i,j;
+        i = 0;
+        j = 0;
+        inter.problemlist.forEach(function(problem){
+            if(problem.status == status){
+                problemlist[i] = problem.name;
+                i++;
             }
-            var problemlist = [];
-            var i,j;
-            i = 0;
-            j = 0;
-            inter.problemlist.forEach(function(problem){
-                if(problem.status == status){
-                    problemlist[i] = problem.name;
-                    i++;
-                }
-                j++;
-                if(j == inter.problemlist.length){
-                    return callback(null,problemlist);
-                }
-            });
-        })
-    })
-}
+            j++;
+            if(j == inter.problemlist.length){
+                return callback(null,problemlist);
+            }
+        });
+    });
+};
 
 InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,callback){
     lock.acquire(interviewname, function() {
