@@ -32,7 +32,7 @@ function DocDAO(){
 
 DocDAO.prototype.createDoc = function(userId, path, type, callback){
 	var that = this;
-	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/@\\]+[^@\/\\]*[^.\/@\\]+)|(\/[^.\/@\\]))+$/
+	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/
 	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 33))){
 		return callback("illegal file name");
 	}

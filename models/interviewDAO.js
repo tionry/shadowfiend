@@ -246,7 +246,6 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
             }
             var problemlist=[];
             var i = 0;
-            var flag = 0;
             interv.problemlist.forEach(function(problem){
                     if(problemname == problem.name){
                         problemlist[i] = {name:problemname,status:status}
