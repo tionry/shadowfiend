@@ -23,7 +23,7 @@ var app = app || {};
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
-            //this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
+            this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
             //初始化界面显示
 
             this.renewList();
@@ -115,9 +115,9 @@ var app = app || {};
             al.find('li').each(function(){
                 if (model.name == $(this).text().trim()){
                     $('.push-problem-btn').attr('disabled', 'disabled');
-                    $(this).removeAttr('disabled');
-                    $('.push-problem-btn').children().removeClass('glyphicon-play');
-                    $('.push-problem-btn').children().addClass('glyphicon-stop');
+                    $(this).find('button').removeAttr('disabled');
+                    $(this).find('button').removeClass('glyphicon-play');
+                    $(this).find('button').children().addClass('glyphicon-stop');
                     $('.glyphicon-stop').on('click', function(){
                         that.stopProblem();
                     })
