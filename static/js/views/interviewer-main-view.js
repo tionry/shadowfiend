@@ -33,7 +33,6 @@ var app = app || {};
         renewList: function(){
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
-            $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
             $('#end-interview-btn').show();
@@ -113,48 +112,6 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        //addRoundInterviewee: function(){
-        //    var itvname = $('#interviewer-item-name').text().trim(),
-        //        c = app.collections['round-intervieweeList-'+itvname],
-        //        sl = $('#interviewer-interviewee-control');
-        //    for (var i = 0; i < c.length; i++){
-        //        var model = c.models[i].attributes;
-        //        var m = new app.User({
-        //            name: model.name,
-        //            avatar: model.avatar
-        //        });
-        //        var view = new app.IntervieweeInfoView({
-        //            model: m
-        //        });
-        //        var text = view.render().el;
-        //        sl.append(text);
-        //    }
-        //},
-
-        addOneRoundInterviewee: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.$el.is(':hidden')) {
-                    $('#interviewer-interviewee-control').append(v.el);
-                    v.delegateEvents();
-                }
-            } else {
-                model.view = new app.IntervieweeInfoView({
-                    model: model
-                });
-                $('#interviewer-interviewee-control').append(model.view.render().el);
-              }
-            return this;
-        },
-
-        addAllRoundInterviewee: function(){
-            $('#interviewer-interviewee-control').html('');
-            //this.options.roundList.each(this.addOneRoundInterviewee);
-        },
-
         renewProblem : function(model){
             $('.push-problem-btn').removeAttr('disabled');
             var al = $('#interviewer-problem-list');
@@ -182,11 +139,7 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
-            $('.push-problem-btn').removeAttr('disabled');
             this.pushProblem();
-            //更新当前题目推送状态
-
-
         },
 
         renew_completed_interview: function(){
@@ -763,6 +716,29 @@ var app = app || {};
             app.showInputModal(modal);
         },
 
+        addOneRoundInterviewee: function(model){
+            if (!model) return;
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-interviewee-control').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.IntervieweeInfoView({
+                    model: model
+                });
+                $('#interviewer-interviewee-control').append(model.view.render().el);
+            }
+            return this;
+        },
+
+        addAllRoundInterviewee: function(){
+            $('#interviewer-interviewee-control').html('');
+        },
+
         addOneProblem: function(model){
             if (!model) return;
             var v = model.view;
@@ -778,13 +754,16 @@ var app = app || {};
                     model: model
                 });
                 $('#interviewer-problem-list').append(model.view.render().el);
-                $('.push-problem-btn').attr('disabled', 'disabled');
             }
             return this;
         },
 
         addAllProblem: function(){
             this.options.problemList.each(this.addOneProblem);
+            if (this.itv.status == 'running'){
+                $('.push-problem-btn').removeAttr('disabled');
+            }else
+                $('.push-problem-btn').attr('disabled', 'disabled');
         },
     });
 })();
