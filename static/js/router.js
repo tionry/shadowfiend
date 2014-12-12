@@ -7,8 +7,8 @@ var app = app || {};
     _.extend(this, opts);
     return this;
   };
-  Page.prototype.show = function() { this.el.fadeIn('fast'); };
-  Page.prototype.hide = function() { this.el.fadeOut('fast'); };
+  Page.prototype.show = function() { this.el.show(); };
+  Page.prototype.hide = function() { this.el.hide(); };
   Page.prototype.fadeIn = function() { this.el.fadeIn('fast'); };
   Page.prototype.fadeOut = function() { this.el.fadeOut('fast'); };
   
@@ -47,12 +47,12 @@ var app = app || {};
         logined: 0,
         force: true,
         show: function() {
-          this.el.fadeIn('fast');
+          this.el.show();
           app.views.login.show();
         },
         hide: function() {
           this.el.find('#login-padding').slideDown();
-          this.el.fadeOut('fast');
+          this.el.hide();
         },
       }),
 
@@ -61,12 +61,12 @@ var app = app || {};
         depend: ['_head1', '_footer', '_ads'],
         force: true,
         show: function() {
-          this.el.fadeIn('fast');
-          app.views.register.fadeIn('fast');
+          this.el.show();
+          app.views.register.show();
         },
         hide: function() {
           this.el.find('#register-padding').slideUp();
-          this.el.fadeOut('fast');
+          this.el.hide();
         },
       }),
 
@@ -98,7 +98,7 @@ var app = app || {};
         show: Page.prototype.fadeIn,
         hide: function() {
           app.views.room.closeeditor();
-          this.el.fadeOut('fast');
+          this.el.hide();
         },
       }),
 
@@ -172,7 +172,7 @@ var app = app || {};
           return;
         }
         if (! (page.shown) || page.force) {
-          page.fadeIn('fast');
+          page.show();
         }
       };
       var pages = this.pages, arr1 = [];
@@ -202,7 +202,7 @@ var app = app || {};
       } else {
       for (var h in pages) {
         if (pages[h].shown && (arr1.indexOf(h) == -1)) {
-          pages[h].fadeOut('fast');
+          pages[h].hide();
           pages[h].shown = false;
         }
       }
