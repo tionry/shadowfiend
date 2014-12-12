@@ -48,7 +48,7 @@ var app = app || {};
         force: true,
         show: function() {
           this.el.fadeIn('fast');
-          app.views.login.fadeIn('fast');
+          app.views.login.show();
         },
         hide: function() {
           this.el.find('#login-padding').slideDown();
