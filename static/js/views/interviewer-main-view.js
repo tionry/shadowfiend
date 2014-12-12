@@ -21,6 +21,8 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
+            this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
+            this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
             //初始化界面显示
 
             this.renewList();
@@ -29,7 +31,7 @@ var app = app || {};
 
         renewList: function(){
             this.itv = this.model.attributes;
-            $('#interviewer-interviewee-control').html('');
+
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
@@ -64,6 +66,10 @@ var app = app || {};
             });
             app.socket.emit('read-interviewer-in-interview',{
                 name: name,
+            });
+            app.socket.emit('get-status-interviewees',{
+                interviewName:name,
+                status:'onRound',
             });
 
             switch (this.itv.status){
@@ -102,46 +108,47 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        addRoundInterviewee: function(){
-            var itvname = $('#interviewer-item-name').text().trim(),
-                c = app.collections['round-intervieweeList-'+itvname],
-                sl = $('#interviewer-interviewee-control');
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
-                var m = new app.User({
-                    name: model.name,
-                    avatar: model.avatar
+        //addRoundInterviewee: function(){
+        //    var itvname = $('#interviewer-item-name').text().trim(),
+        //        c = app.collections['round-intervieweeList-'+itvname],
+        //        sl = $('#interviewer-interviewee-control');
+        //    for (var i = 0; i < c.length; i++){
+        //        var model = c.models[i].attributes;
+        //        var m = new app.User({
+        //            name: model.name,
+        //            avatar: model.avatar
+        //        });
+        //        var view = new app.IntervieweeInfoView({
+        //            model: m
+        //        });
+        //        var text = view.render().el;
+        //        sl.append(text);
+        //    }
+        //},
+
+        addOneRoundInterviewee: function(model){
+            if (!model) return;
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-interviewee-control').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.IntervieweeInfoView({
+                    model: model
                 });
-                var view = new app.IntervieweeInfoView({
-                    model: m
-                });
-                var text = view.render().el;
-                sl.append(text);
+                $('#interviewer-interviewee-control').append(model.view.render().el);
             }
+            return this;
         },
 
-        //addOneRoundInterviewee: function(model){
-            //    if (!model) return;
-            //    var v = model.view;
-            //    model.set({"eid": 'CrazyOutput'});
-            //    if (v) {
-            //        v.render();
-            //        if (v.$el.is(':hidden')) {
-            //            $('#interviewer-interviewee-control').append(v.el);
-            //            v.delegateEvents();
-            //        }
-            //    } else {
-            //        model.view = new app.IntervieweeInfoView({
-            //            model: model
-            //        });
-            //        $('#interviewer-interviewee-control').append(model.view.render().el);
-            //    }
-            //    return this;
-            //},
-            //
-            //addAllRoundInterviewee: function(){
-            //    this.options.roundList.each(this.addOneRoundInterviewee);
-            //},
+        addAllRoundInterviewee: function(){
+            $('#interviewer-interviewee-control').html('');
+            //this.options.roundList.each(this.addOneRoundInterviewee);
+        },
 
         renew_running_interview: function(){
             $('#set-interview-menu').hide();
@@ -155,10 +162,7 @@ var app = app || {};
             $('#interviewer-item-status').addClass('green');
             var name = $('#interviewer-item-name').text().trim();
 
-            //app.socket.emit('get-status-interviewees',{
-            //    interviewName:name,
-            //    status:'onRound',
-            //});
+
 
 
 
