@@ -614,7 +614,7 @@ var app = app || {};
                 $(this).removeClass('glyphicon-play');
                 $(this).addClass('glyphicon-stop');
                 $(this).parent().removeAttr('disabled');
-                var name = $(this).parent().text().trim();
+                var name = $(this).parent().parent().text().trim();
 
                 if (app.Lock.attach({
                         error: function(){
