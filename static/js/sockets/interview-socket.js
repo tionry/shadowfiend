@@ -121,16 +121,16 @@ var app = app || {};
                     app.models || (app.models = []);
                     app.models['running-problem-' + data.interviewName] || (app.models['running-problem' + data.interviewName] = new app.Problem());
                     app.models['running-problem-' + data.interviewName].set(data.problem);
-                    //$('.push-problem-btn').removeAttr('disabled');
-                    //var al = $('#interviewer-problem-list');
-                    //al.find('li').each(function(){
-                    //    if (data.problem.name == $(this).text().trim()){
-                    //        $('.push-problem-btn').attr('disabled', 'disabled');
-                    //        $(this).find('button').removeAttr('disabled');
-                    //        $(this).find('button').removeClass('glyphicon-play');
-                    //        $(this).find('button').children().addClass('glyphicon-stop');
-                    //    }
-                    //})
+                    $('.push-problem-btn').removeAttr('disabled');
+                    var al = $('#interviewer-problem-list');
+                    al.find('li').each(function(){
+                        if (data.problem.name == $(this).text().trim()){
+                            $('.push-problem-btn').attr('disabled', 'disabled');
+                            $(this).find('button').removeAttr('disabled');
+                            $(this).find('button').removeClass('glyphicon-play');
+                            $(this).find('button').children().addClass('glyphicon-stop');
+                        }
+                    })
                     break;
             }
         },
