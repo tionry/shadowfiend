@@ -51,7 +51,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 						lock.release(name);
 						return callback("inner error");
 					}
-					//lock.release(name);
+					lock.release(name);
 					return callback(null);
 				});
 			});
