@@ -763,6 +763,7 @@ var app = app || {};
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
                 $('.push-problem-btn').removeAttr('disabled');
+                this.pushProblem();
             }else
                 $('.push-problem-btn').attr('disabled', 'disabled');
         },
