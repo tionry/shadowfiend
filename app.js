@@ -1212,7 +1212,7 @@ io.sockets.on('connection', function(socket){
 					if (err) {
 						return socket.emit('after-add-interviewee-doc', {err: err});
 					}
-					return docDAO.deleteDoc(user._id, path, function(err) {
+					docDAO.deleteDoc(user._id, path, function(err) {
 						if (err) {
 							return socket.emit('after-add-interviewee-doc', {err:err});
 						}
@@ -1390,4 +1390,22 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('get-doc-in-interview', function(data) {
+		if (!check(data, 'interviewName', 'intervieweeName', 'problemName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		var path = '/' + data.intervieweeName + '/' + data.problemName + '@' + data.interviewName;
+		docDAO.getDocByPath(path, function(err, doc) {
+			if (err) {
+				return socket.emit('get-doc-in-interview', {err: err});
+			}
+			socket.emit('get-doc-in-interview', {
+				doc: doc,
+				interviewName: data.interviewName
+			});
+		});
+	});
 });

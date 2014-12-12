@@ -135,6 +135,15 @@ var app = app || {};
 
         "add-interviewee-doc": function(data) {
             app.Lock.detach(data);
+        },
+
+        "get-doc-in-interview": function(data) {
+            if (data == null || data.err) {
+                return;
+            }
+            app.models || (app.models = []);
+            app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
+            app.models['doc-' + data.interviewName].set(data.doc);
         }
     };
 
