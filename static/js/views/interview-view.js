@@ -36,13 +36,13 @@ var app = app || {};
                 app.collections['interviewerList-' + name] || (app.collections['interviewerList-' + name] = new app.Members());
                 app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
                 app.collections['round-intervieweeList-' + name] || (app.collections['round-intervieweeList-' + name] = new app.Members());
+                app.models || (app.models = {});
+                app.models['running-problem-'+name] || (app.models['running-problem-'+name] = new app.Problem());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
-                    interviewerList: app.collections['interviewerList-' + name],
-                    intervieweeList: app.collections['intervieweeList-' + name],
                     roundList:  app.collections['round-intervieweeList-' + name],
                     problemList: app.collections['problemList-' + name],
-                    allproblems: app.collections['allproblems-' + name],
+                    pushedProblem: app.models['running-problem-'+name],
                 });
             }else{
                 this.model.v.renewList();

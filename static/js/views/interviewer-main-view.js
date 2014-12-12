@@ -23,6 +23,7 @@ var app = app || {};
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
             this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
+            this.listenTo(this.options.pushedProblem, 'set', this.renewProblem);
             //初始化界面显示
 
             this.renewList();
@@ -70,6 +71,10 @@ var app = app || {};
             app.socket.emit('get-status-interviewees',{
                 interviewName:name,
                 status:'onRound',
+            });
+            app.socket.emit('get-status-problems-interview',{
+                interviewName:name,
+                status: 'pushing',
             });
 
             switch (this.itv.status){
@@ -141,13 +146,30 @@ var app = app || {};
                     model: model
                 });
                 $('#interviewer-interviewee-control').append(model.view.render().el);
-            }
+              }
             return this;
         },
 
         addAllRoundInterviewee: function(){
             $('#interviewer-interviewee-control').html('');
             //this.options.roundList.each(this.addOneRoundInterviewee);
+        },
+
+        renewProblem : function(model){
+            $('.push-problem-btn').removeAttr('disabled');
+            var al = $('#interviewer-problem-list');
+            var that = this;
+            al.find('li').each(function(){
+                if (model.name == $(this).text().trim()){
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).removeAttr('disabled');
+                    $('.push-problem-btn').children().removeClass('glyphicon-play');
+                    $('.push-problem-btn').children().addClass('glyphicon-stop');
+                    $('.glyphicon-stop').on('click', function(){
+                        that.stopProblem();
+                    })
+                }
+            })
         },
 
         renew_running_interview: function(){
@@ -160,36 +182,11 @@ var app = app || {};
             $('#interviewer-item-status').text('running');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('green');
-            var name = $('#interviewer-item-name').text().trim();
-
-
-
-
-
-            //app.socket.emit('get-status-problems-interview',{
-            //    interviewName:name,
-            //    status: 'pushing',
-            //});
-            //更新当前轮次面试者列表
+            var name = $('#interviewer-item-name').text().trim(),
+                that = this;
 
             //更新当前题目推送状态
-            //$('.push-problem-btn').removeAttr('disabled');
-            //var p = app.models['running-problem-'+itvname];
-            //if (p.length > 0){
-            //    var problemname = p[0].name;
-            //    var al = $('#interviewer-problem-list');
-            //    al.find('li').each(function(){
-            //        if (problemname == $(this).text().trim()){
-            //            $('.push-problem-btn').attr('disabled', 'disabled');
-            //            $(this).removeAttr('disabled');
-            //            $('.push-problem-btn').children().removeClass('glyphicon-play');
-            //            $('.push-problem-btn').children().addClass('glyphicon-stop');
-            //            $('.glyphicon-stop').on('click', function(){
-            //                that.stopProblem();
-            //            })
-            //        }
-            //    })
-            //}
+
 
         },
 
@@ -679,7 +676,7 @@ var app = app || {};
 
         //结束答题
         stopProblem : function(){
-            var itvname = $('#interviewer-item-name').text();
+            var itvname = $('#interviewer-item-name').text().trim();
             var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
             if (app.Lock.attach({
                     error: function(){
@@ -694,6 +691,7 @@ var app = app || {};
                     status: '',
                 });
             }
+            $('.glyphicon-stop').off('click');
             $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
             $('.push-problem-btn').removeAttr('disabled');
         },
