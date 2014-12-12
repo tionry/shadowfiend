@@ -114,10 +114,10 @@ var app = app || {};
             var al = $('#interviewer-problem-list');
             var that = this;
             al.find('li').each(function(){
-                if (model.name == $(this).text().trim()){
+                if (model.attributes.name == $(this).text().trim()){
                     $('.push-problem-btn').attr('disabled', 'disabled');
                     $(this).find('button').removeAttr('disabled');
-                    $(this).find('button').removeClass('glyphicon-play');
+                    $(this).find('button').children().removeClass('glyphicon-play');
                     $(this).find('button').children().addClass('glyphicon-stop');
                     $('.glyphicon-stop').on('click', function(){
                         that.stopProblem();
