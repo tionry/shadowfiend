@@ -607,8 +607,8 @@ var app = app || {};
             }
             $('.glyphicon-play').on('click', function(){
                 $('.push-problem-btn').attr('disabled', 'disabled');
-                $(this).children().removeClass('glyphicon-play');
-                $(this).children().addClass('glyphicon-stop');
+                $(this).removeClass('glyphicon-play');
+                $(this).addClass('glyphicon-stop');
                 $(this).parent().removeAttr('disabled');
                 var name = $(this).parent().text().trim();
 
