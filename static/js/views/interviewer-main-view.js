@@ -638,6 +638,7 @@ var app = app || {};
 
         //结束答题
         stopProblem : function(){
+            var that = this;
             $('.glyphicon-stop').on('click', function() {
                 var itvname = $('#interviewer-item-name').text().trim();
                 var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
@@ -657,6 +658,7 @@ var app = app || {};
                 $('.glyphicon-stop').off('click');
                 $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
                 $('.push-problem-btn').removeAttr('disabled');
+                that.pushProblem();
             });
         },
 
