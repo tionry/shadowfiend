@@ -21,8 +21,8 @@ var app = app || {};
         initialize: function(){
             this.listenTo(this.options.problemList, 'add', this.addOneProblem);
             this.listenTo(this.options.problemList, 'reset', this.addAllProblem);
-            this.listenTo(this.options.roundList, 'add', this.addRoundInterviewee);
-
+            this.listenTo(this.options.roundList, 'add', this.addOneRoundInterviewee);
+            this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
             //初始化界面显示
 
             this.renewList();
@@ -104,22 +104,27 @@ var app = app || {};
             $('#interviewer-item-status').addClass('yellow');
         },
 
-        addRoundInterviewee: function(){
-            var itvname = $('#interviewer-item-name').text().trim(),
-                c = app.collections['round-intervieweeList-'+itvname],
-                sl = $('#interviewer-interviewee-control');
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
-                var m = new app.User({
-                    name: model.name,
-                    avatar: model.avatar
+        addOneRoundInterviewee: function(model){
+            if (!model) return;
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-interviewee-control').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.IntervieweeInfoView({
+                    model: model
                 });
-                var view = new app.IntervieweeInfoView({
-                    model: m
-                });
-                var text = view.render().el;
-                sl.append(text);
+                $('#interviewer-problem-list').append(model.view.render().el);
             }
+            return this;
+        },
+
+        addAllRoundInterviewee: function(){
+            this.options.roundList.each(this.addOneRoundInterviewee);
         },
 
         renew_running_interview: function(){
