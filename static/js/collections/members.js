@@ -35,6 +35,19 @@ var app = app || {};
 					owner: d.owner || false,
 					status: d.status || 'waiting'
 				});
+
+				var sl = $('#interviewer-interviewee-control');
+
+				var m = new app.User({
+					name:d.name,
+					avatar: d.avatar
+				});
+				var view = new app.IntervieweeInfoView({
+					model: m
+				});
+				var text = view.render().el;
+				sl.append(text);
+
 			}
 		},
 
