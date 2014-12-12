@@ -612,23 +612,24 @@ var app = app || {};
                 var name = $(this).parent().text().trim();
 
                 if (app.Lock.attach({
-                        error: function(data){
+                        error: function(){
                             app.showMessageBox('info', 'inner error');
                         },
                         success:function() {
-                            app.socket.emit('update-problem-in-interview', {
-                                interviewName: itvname,
-                                problemName: name,
-                                status: 'pushing'
-                            })
+
                         }
                     })) {
-                    app.socket.emit('add-interviewee-doc', {
+                    //app.socket.emit('add-interviewee-doc', {
+                    //    interviewName: itvname,
+                    //    intervieweeList: that.viewees,
+                    //    interviewerList: that.viewers,
+                    //    problemName: name,
+                    //});
+                    app.socket.emit('update-problem-in-interview', {
                         interviewName: itvname,
-                        intervieweeList: that.viewees,
-                        interviewerList: that.viewers,
                         problemName: name,
-                    });
+                        status: 'pushing'
+                    })
                 }
                 $('.glyphicon-stop').on('click', function(){
                     that.stopProblem();
