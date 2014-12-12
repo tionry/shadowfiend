@@ -244,14 +244,14 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                 lock.release(interviewname);
                 return callback("inner error");
             }
-            var problemlist=[];
+            var problems=[];
             var i = 0;
             interv.problemlist.forEach(function(problem){
                     if(problemname == problem.name){
-                        problemlist[i] = {name:problemname,status:status}
+                        problems[i] = {name:problemname,status:status}
                     }
                     else{
-                        problemlist[i] = problem;
+                        problems[i] = problem;
                     }
                     i++;
                     if(i == interv.problemlist.length)
@@ -262,7 +262,7 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                             },
                             {
                                 $set:{
-                                    problemlist:problemlist
+                                    problemlist:problems
                                 }
                             }, function(err, interview) {
                                 if (err) {
