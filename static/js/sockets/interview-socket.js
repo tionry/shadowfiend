@@ -117,7 +117,7 @@ var app = app || {};
                 return;
             }
             switch (data.status) {
-                case 'running':
+                case 'pushing':
                     app.models || (app.models = []);
                     app.models['running-problem-' + data.interviewName] || (app.models['running-problem' + data.interviewName] = new app.Problem());
                     app.models['running-problem-' + data.interviewName].set(data.problem);
