@@ -1000,7 +1000,6 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		if ()
 		interviewDAO.createInterview(data.name, data.interviewer, data.interviewee, data.problem, function(err) {
 			if (err) {
 				return socket.emit('after-add-interview', {err: err});
