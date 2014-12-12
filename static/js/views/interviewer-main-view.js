@@ -625,7 +625,7 @@ var app = app || {};
                     //    interviewerList: that.viewers,
                     //    problemName: name,
                     //});
-                    app.socket.emit('update-problem-in-interview', {
+                    app.socket.emit('change-problem-status-interview', {
                         interviewName: itvname,
                         problemName: name,
                         status: 'pushing'
