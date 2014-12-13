@@ -142,7 +142,6 @@ var app = app || {};
                 interviewName:name,
                 status: 'pushing',
             });
-            this.pushstopProblem(); //打开问题推送事件监听
         },
 
         renew_completed_interview: function(){
@@ -664,12 +663,10 @@ var app = app || {};
         },
 
         pushstopProblem: function(){
-            var that = this;
-            var itvname = $('#interviewer-item-name').text();
-            that.viewers = [];
-            that.viewees = [];
             $('.push-problem-btn').on('click', function(){
-               if ($(this).children().hasClass('glyphicon-play')){
+                var that = this;
+                var itvname = $('#interviewer-item-name').text();
+                if ($(this).children().hasClass('glyphicon-play')){
                    that.viewers = [];
                    that.viewees = [];
                    var cc = app.collections['interviewerList-'+itvname];
@@ -700,8 +697,8 @@ var app = app || {};
                            status: 'pushing'
                        })
                    }
-               } else
-               if ($(this).children().hasClass('glyphicon-stop')){
+                } else
+                if ($(this).children().hasClass('glyphicon-stop')){
                    var problemName = $(this).parent().text().trim();
                    if (app.Lock.attach({
                            error: function () {
@@ -718,7 +715,7 @@ var app = app || {};
                    }
                    $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
                    $('.push-problem-btn').removeAttr('disabled');
-               }
+                }
             });
         },
 
@@ -840,6 +837,7 @@ var app = app || {};
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
                 $('.push-problem-btn').removeAttr('disabled');
+                this.pushstopProblem(); //打开问题推送事件监听
             }else
                 $('.push-problem-btn').attr('disabled', 'disabled');
         },
