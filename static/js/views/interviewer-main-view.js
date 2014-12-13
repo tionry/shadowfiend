@@ -16,8 +16,6 @@ var app = app || {};
             'click #set-round-btn': 'set_round_interviewee',
             'click #end-round-btn': 'end_round',
             'click .remark-btn' : 'show_remark',
-            'click .glyphicon-play' : 'pushProblem',
-            'click .glyphicon-stop' : 'stopProblem',
         },
 
         initialize: function(){
@@ -114,14 +112,12 @@ var app = app || {};
         renewProblem : function(model){
             $('.push-problem-btn').removeAttr('disabled');
             var al = $('#interviewer-problem-list');
-            var that = this;
             al.find('li').each(function(){
                 if (model.attributes.name == $(this).text().trim()){
                     $('.push-problem-btn').attr('disabled', 'disabled');
                     $(this).find('button').removeAttr('disabled');
                     $(this).find('button').children().removeClass('glyphicon-play');
                     $(this).find('button').children().addClass('glyphicon-stop');
-                    that.stopProblem();
                 }
             })
         },
@@ -146,7 +142,7 @@ var app = app || {};
                 interviewName:name,
                 status: 'pushing',
             });
-            this.pushProblem();
+            this.pushstopProblem(); //打开问题推送事件监听
         },
 
         renew_completed_interview: function(){
@@ -667,6 +663,65 @@ var app = app || {};
             });
         },
 
+        pushstopProblem: function(){
+            var that = this;
+            var itvname = $('#interviewer-item-name').text();
+            that.viewers = [];
+            that.viewees = [];
+            $('.push-problem-btn').on('click', function(){
+               if ($(this).children().hasClass('glyphicon-play')){
+                   that.viewers = [];
+                   that.viewees = [];
+                   var cc = app.collections['interviewerList-'+itvname];
+                   for (var i = 0; i < cc.length; i++){
+                       var model = cc.models[i].attributes;
+                       that.viewers.push(model.name);
+                   }
+                   var c = app.collections['round-intervieweeList-'+itvname];
+                   for (var i = 0; i < c.length; i++){
+                       var model = c.models[i].attributes;
+                       that.viewers.push(model.name);
+                   }
+                   $('.push-problem-btn').attr('disabled', 'disabled');
+                   $(this).children().removeClass('glyphicon-play');
+                   $(this).children().addClass('glyphicon-stop');
+                   $(this).removeAttr('disabled');
+                   var problemName = $(this).parent().text().trim();
+                   if (app.Lock.attach({
+                           error: function(){
+                               app.showMessageBox('info', 'inner error');
+                           },
+                           success:function() {
+                           }
+                       })) {
+                       app.socket.emit('change-problem-status-interview', {
+                           interviewName: itvname,
+                           problemName: problemName,
+                           status: 'pushing'
+                       })
+                   }
+               } else
+               if ($(this).children().hasClass('glyphicon-stop')){
+                   var problemName = $(this).parent().text().trim();
+                   if (app.Lock.attach({
+                           error: function () {
+                               app.showMessageBox('info', 'inner error');
+                           },
+                           success: function () {
+                           }
+                       })) {
+                       app.socket.emit('change-problem-status-interview', {
+                           interviewName: itvname,
+                           problemName: problemName,
+                           status: 'waiting',
+                       });
+                   }
+                   $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
+                   $('.push-problem-btn').removeAttr('disabled');
+               }
+            });
+        },
+
         //结束本轮
         end_round: function(){
             app.showMessageBox('info', 'roundend');
@@ -785,7 +840,6 @@ var app = app || {};
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
                 $('.push-problem-btn').removeAttr('disabled');
-                this.pushProblem();
             }else
                 $('.push-problem-btn').attr('disabled', 'disabled');
         },
