@@ -144,7 +144,7 @@ var app = app || {};
             if (data == null || data.err) {
                 return;
             }
-            app.models || (app.models = []);
+            app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
         }

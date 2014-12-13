@@ -1398,13 +1398,18 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var path = '/' + data.intervieweeName + '/' + data.problemName + '@' + data.interviewName;
-		docDAO.getDocByPath(path, function(err, doc) {
+		userDAO.getUserByName(data.intervieweeName, function(err, user) {
 			if (err) {
 				return socket.emit('get-doc-in-interview', {err: err});
 			}
-			socket.emit('get-doc-in-interview', {
-				doc: doc,
-				interviewName: data.interviewName
+			docDAO.getDocByPath(user._id, path, function(err, doc) {
+				if (err) {
+					return socket.emit('get-doc-in-interview', {err: err});
+				}
+				socket.emit('get-doc-in-interview', {
+					doc: doc,
+					interviewName: data.interviewName
+				});
 			});
 		});
 	});
