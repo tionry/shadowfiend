@@ -16,6 +16,8 @@ var app = app || {};
             'click #set-round-btn': 'set_round_interviewee',
             'click #end-round-btn': 'end_round',
             'click .remark-btn' : 'show_remark',
+            'click .glyphicon-play' : 'pushProblem',
+            'click .glyphicon-stop' : 'stopProblem',
         },
 
         initialize: function(){
