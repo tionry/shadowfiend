@@ -51,8 +51,8 @@ var app = app || {};
         },
 
         interviewee_go:function(){
-            var intervieweeName = this.model.id;
-            var interviewName = app.currentUser.name;
+            var interviewName = this.model.id;
+            var intervieweeName = app.currentUser.name;
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBox('info', data.err);
