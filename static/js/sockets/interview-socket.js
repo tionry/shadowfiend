@@ -105,7 +105,7 @@ var app = app || {};
             }
             app.Lock.removeLoading();
             if (data.err) {
-                app.Lock.remove();
+                app.Lock.detach(data);
                 return;
             }
             app.collections['round-intervieweeList-' + data.interviewName].update(data.users);
@@ -147,6 +147,21 @@ var app = app || {};
             app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
+        },
+
+        "try-enter-interview": function(data) {
+            if (!data) {
+                app.Lock.remove();
+                return;
+            }
+            if (data.err) {
+                app.Lock.detach(data);
+                return;
+            }
+            app.models || (app.models = {});
+            app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
+            app.models['doc-' + data.interviewName].set(data.doc);
+            app.Lock.detach(data);
         }
     };
 
