@@ -1407,29 +1407,59 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('get-doc-in-interview', function(data) {
-		if (!check(data, 'interviewName', 'intervieweeName')) {
+		if (!check(data, 'interviewName', 'intervieweeName', 'problemName')) {
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		interviewDAO.getstatusproblems(data.interviewName, 'pushing', function(err, problemList) {
+		var path = '/' + data.intervieweeName + '/' + data.problemName + '@' + data.interviewName;
+		userDAO.getUserByName(data.intervieweeName, function(err, user) {
 			if (err) {
 				return socket.emit('get-doc-in-interview', {err: err});
 			}
-			var path = '/' + data.intervieweeName + '/' + problemList[0] + '@' + data.interviewName;
-			userDAO.getUserByName(data.intervieweeName, function(err, user) {
+			docDAO.getDocByPath(user._id, path, function(err, doc) {
 				if (err) {
 					return socket.emit('get-doc-in-interview', {err: err});
 				}
-				docDAO.getDocByPath(user._id, path, function(err, doc) {
+				socket.emit('get-doc-in-interview', {
+					doc: doc,
+					interviewName: data.interviewName
+				});
+			});
+		});
+	});
+
+	socket.on('enter-interview', function(data) {
+		if (!check(data, 'interviewName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getInterviewByName(data.interviewName, function(err, interview) {
+			if (err) {
+				return socket.emit('try-enter-interview', {err: err});
+			}
+			if (interview.status != 'running') {
+				return socket.emit('try-enter-interview', {err: "not a running interview"});
+			}
+			interviewDAO.getstatusproblems(data.interviewName, 'pushing', function(err, problemList) {
+				if (err) {
+					return socket.emit('try-enter-interview', {err: err});
+				}
+				if (problemList.length == 0) {
+					return socket.emit('try-enter-interview', {err: "no pushing problem"});
+				}
+				var path = '/' + data.intervieweeName + '/' + problemList[0] + '@' + data.interviewName;
+				docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
 					if (err) {
-						return socket.emit('get-doc-in-interview', {err: err});
+						return socket.emit('try-enter-interview', {err: err});
 					}
-					socket.emit('get-doc-in-interview', {
+					socket.emit('try-enter-interview', {
 						doc: doc,
 						interviewName: data.interviewName
-					});
+					})
 				});
 			});
 		});
