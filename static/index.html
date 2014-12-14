@@ -389,7 +389,7 @@
                   <% if (model.isInterviewer) { %>
                   <td class="col2"><a href="/#interviewer/<%=encodeURI(model.name)%>" class="interviewer-go"><%= model.name %></a></td>
                   <% } else {  %>
-                  <td class="col2"><a class="interviewee-go"><%= model.name %></a></td>
+                  <td class="col2"><a href="" class="interviewee-go"><%= model.name %></a></td>
                   <% } %>
                   <% if (model.status == "waiting") { %>
                   <td class="col3 red" localization><%= model.status %></td>
