@@ -159,7 +159,6 @@ var app = app || {};
         //当前轮次面试者列表更新 & 进入文件
         addAllRoundInterviewee: function(){
             $('#interviewer-interviewee-control').html('');
-            //this.enterIntervieweeRoom();
 },
 
         addOneProblem: function(model){
@@ -700,27 +699,6 @@ var app = app || {};
                 }
             });
         },
-
-        //进入面试者做题页面
-        //enterIntervieweeRoom: function(){
-        //    $('.interviewer-interviewee').on('click', function(){
-        //        var intervieweeName = $(this).find('p').text().trim();
-        //        var interviewName = $('#interviewer-item-name').text().trim();
-        //        var problemName = $('#interviewer-problem-list').find('.glyphicon-stop').parent().parent().find('ii').text().trim();
-        //        if (problemName == "") {
-        //            app.showMessageBox('info', 'stillNoPushProblem');
-        //            return;
-        //        }
-        //        app.socket.emit('get-doc-in-interview', {
-        //            interviewName: interviewName,
-        //            intervieweeName: intervieweeName,
-        //            problemName:problemName,
-        //        })
-        //        app.models['doc-' + interviewName].on('set', function(){
-        //            app.room.tryEnter(app.models['doc-' + interviewName]);
-        //        })
-        //    })
-        //},
 
         //结束本轮
         end_round: function(){

@@ -59,7 +59,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
   
   	/* 申请进入房间处理 */
-	tryEnter: function(model, loading) {
+	tryEnter: function(model, loading, backPath) {
 	    var that = this;
     	if(app.Lock.attach({
 			loading: loading,
@@ -71,7 +71,7 @@ app.Room && _.extend(app.Room.prototype, {
       			app.showMessageBox('error', data.err); 
       		},
       		success: function(data) { 
-      			window.location.href = '#edit/'; that.onSet(data); 
+      			window.location.href = '#edit/'; that.onSet(data, backPath);
       		},
     	})) {
       		this.docModel = model;
@@ -80,12 +80,15 @@ app.Room && _.extend(app.Room.prototype, {
 	},
 	
   	/* 进入房间处理初始化 */
-	onSet: function(data) {
+	onSet: function(data, backPath) {
     	app.Lock.remove();
     	data.notRemove = true;
 		
 		//初始化视图
-    	$('#editor-back').attr('href', '#index' + app.views.files.shownPath);
+		if (backPath)
+			$('#editor-back').attr('href', backPath);
+		else
+    		$('#editor-back').attr('href', '#index' + app.views.files.shownPath);
     	this.view.enter(data);
     	this.timestamp = 1;
     	this.view.setSaved2(this.timestamp);
