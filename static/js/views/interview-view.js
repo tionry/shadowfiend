@@ -65,6 +65,8 @@ var app = app || {};
                     intervieweeName: intervieweeName,
                 })
             }
+            app.models || (app.models = {});
+            app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
             app.models['doc-' + interviewName].on('change', function(){
                 app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
             })
