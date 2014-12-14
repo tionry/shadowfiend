@@ -68,8 +68,6 @@ var app = app || {};
                     intervieweeName: intervieweeName,
                 })
             }
-
-
         },
 
         // Remove the item, destroy the model.
