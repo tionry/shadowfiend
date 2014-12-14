@@ -10,7 +10,8 @@ var app = app || {};
             variable: 'model'
         }),
         events: {
-            'click a': 'select'
+            'click a': 'select',
+            'click interviewee-img-div' : enterIntervieweeRoom,
         },
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -24,6 +25,24 @@ var app = app || {};
 
         select: function () {
 
+        },
+
+        enterIntervieweeRoom: function(){
+            var intervieweeName = $(this).find('p').text().trim();
+            var interviewName = $('#interviewer-item-name').text().trim();
+            var problemName = $('#interviewer-problem-list').find('.glyphicon-stop').parent().parent().find('ii').text().trim();
+            if (problemName == "") {
+                app.showMessageBox('info', 'stillNoPushProblem');
+                return;
+            }
+            app.socket.emit('get-doc-in-interview', {
+                interviewName: interviewName,
+                intervieweeName: intervieweeName,
+                problemName:problemName,
+            })
+            app.models['doc-' + interviewName].on('change', function(){
+                app.room.tryEnter(app.models['doc-' + interviewName]);
+            })
         },
     });
 })();
