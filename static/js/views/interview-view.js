@@ -37,6 +37,7 @@ var app = app || {};
                 app.collections['intervieweeList-' + name] || (app.collections['intervieweeList-' + name] = new app.Members());
                 app.collections['round-intervieweeList-' + name] || (app.collections['round-intervieweeList-' + name] = new app.Members());
                 app.collections['running-problem-'+name] || (app.collections['running-problem-'+name] = new app.Problems());
+                app.models['doc-' + name] || (app.models['doc-' + name] = new app.File());
                 this.model.v = new app.InterviewerMainView({
                     model: this.model,
                     roundList:  app.collections['round-intervieweeList-' + name],

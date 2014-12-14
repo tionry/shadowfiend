@@ -160,7 +160,7 @@ var app = app || {};
         addAllRoundInterviewee: function(){
             $('#interviewer-interviewee-control').html('');
             this.enterIntervieweeRoom();
-        },
+},
 
         addOneProblem: function(model){
             if (!model) return;
