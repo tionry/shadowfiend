@@ -731,11 +731,31 @@ var app = app || {};
         //结束本轮
         end_round: function(){
             app.showMessageBox('info', 'roundend');
-            var name = $('#interviewer-item-name').text().trim();
+            var interviewName = $('#interviewer-item-name').text().trim();
             var that = this;
             that.viewees = [];
             $('.interviewer-interviewee').find('p').each(function(){
                 that.viewees.push($(this).text().trim());
+            })
+            $('.push-problem-btn').each(function(){
+                if ($(this).children().hasClass('glyphicon-stop')){
+                    var problemName = $(this).parent().text().trim();
+                    if (app.Lock.attach({
+                            error: function () {
+                                app.showMessageBox('info', 'inner error');
+                            },
+                            success: function () {
+                            }
+                        })) {
+                        app.socket.emit('change-problem-status-interview', {
+                            interviewName: interviewName,
+                            problemName: problemName,
+                            status: 'waiting',
+                        });
+                    }
+                    $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
+                    $('.push-problem-btn').removeAttr('disabled');
+                }
             })
             if (app.Lock.attach({
                     error: function(){
@@ -743,7 +763,7 @@ var app = app || {};
                     },
                     success: function(){
                         app.socket.emit('change-interviewee-status',{
-                            interviewName: name,
+                            interviewName: interviewName,
                             intervieweeList: that.viewees,
                             status: 'waiting'
                         });
@@ -751,7 +771,7 @@ var app = app || {};
                     },
                 })) {
                 app.socket.emit('change-interview-status', {
-                    name: name,
+                    name: interviewName,
                     status: 'ready',
                 });
             }
