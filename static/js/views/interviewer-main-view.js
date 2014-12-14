@@ -756,6 +756,7 @@ var app = app || {};
                     status: 'ready',
                 });
             }
+            $('#interviewer-interviewee-control').html('');
         },
 
         //开始整场面试
