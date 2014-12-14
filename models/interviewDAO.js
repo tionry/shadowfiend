@@ -438,3 +438,27 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
         });
     });
 };
+
+InterviewDAO.prototype.updateAllProblemStatus = function(interviewName, status, callback) {
+    lock.acquire(interviewName, function() {
+        db.interview.findOne({name: interviewName}, {problemlist: 1}, function(err, interview) {
+            if (err) {
+                lock.release(interviewName);
+                return callback("inner error");
+            }
+            var newProblemList = [];
+            interview.problemlist.forEach(function(problem) {
+                problem.status = status;
+                newProblemList.push(problem);
+            });
+            db.interview.update({name: interviewName}, {$set: {problemlist: newProblemList}}, function(err) {
+                if (err) {
+                    lock.release(interviewName);
+                    return callback("inner error");
+                }
+                lock.release(interviewName);
+                return callback(null);
+            })
+        });
+    });
+};

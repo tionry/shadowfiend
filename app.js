@@ -1200,7 +1200,15 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-change-interview-status', {err: err});
 			}
-			socket.emit('after-change-interview-status', {log: interview});
+			if (data.status != 'ready') {
+				return socket.emit('after-change-interview-status', {interview: interview});
+			}
+			interviewDAO.updateAllProblemStatus(data.name, data.status, function(err) {
+				if (err) {
+					return socket.emit('after-change-interview-status', {err: err});
+				}
+				return socket.emit('after-change-interview-status', {log: 'success'});
+			});
 		});
 	});
 
