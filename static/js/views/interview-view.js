@@ -58,6 +58,8 @@ var app = app || {};
                         app.showMessageBox('info', data.err);
                     },
                     success: function (){
+                        app.Lock.remove();
+                        app.room.tryEnter(app.models['doc'+interviewName], null, '#interviewees');
                     }
                 })) {
                 app.socket.emit('enter-interview', {
