@@ -59,7 +59,7 @@ var app = app || {};
                     },
                     success: function (){
                         app.Lock.remove();
-                        app.room.tryEnter(app.models['doc'+interviewName], null, '#interviewees');
+                        app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
                     }
                 })) {
                 app.socket.emit('enter-interview', {
