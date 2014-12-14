@@ -666,18 +666,18 @@ var app = app || {};
                                 app.showMessageBox('info', 'inner error');
                             },
                             success:function() {
-                                if (app.Lock.attach({
-                                        success: function(){
-                                            that.enterIntervieweeRoom();
-                                        },
-                                    })){
-                                    app.socket.emit('add-interviewee-doc', {
-                                        interviewName: interviewName,
-                                        intervieweeList: that.viewees,
-                                        interviewerList: that.viewers,
-                                        problemName: problemName,
-                                    });
-                                }
+                                //if (app.Lock.attach({
+                                //        success: function(){
+                                //            that.enterIntervieweeRoom();
+                                //        },
+                                //    })){
+                                //    app.socket.emit('add-interviewee-doc', {
+                                //        interviewName: interviewName,
+                                //        intervieweeList: that.viewees,
+                                //        interviewerList: that.viewers,
+                                //        problemName: problemName,
+                                //    });
+                                //}
                             }
                         })) {
                         app.socket.emit('change-problem-status-interview', {
