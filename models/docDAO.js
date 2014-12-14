@@ -34,7 +34,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 	var that = this;
 	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/;
 	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 33))){
-		return callback("illegal file name here");
+		return callback("illegal file name");
 	}
 	var paths = path.split("/");
 	var rootPath = "/" + paths[1] + "/" + path[2];
@@ -354,7 +354,7 @@ DocDAO.prototype.deleteDoc = function(userId, path, callback){
 
 	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/;
 	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 33))){
-		return callback("illegal file name");
+		return callback("illegal file name here");
 	}
 
 	var paths = path.split("/");
