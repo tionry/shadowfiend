@@ -1203,7 +1203,7 @@ io.sockets.on('connection', function(socket){
 			if (data.status != 'ready') {
 				return socket.emit('after-change-interview-status', {interview: interview});
 			}
-			interviewDAO.updateAllProblemStatus(data.name, data.status, function(err) {
+			interviewDAO.updateAllProblemStatus(data.name, 'waiting', function(err) {
 				if (err) {
 					return socket.emit('after-change-interview-status', {err: err});
 				}
