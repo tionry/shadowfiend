@@ -32,8 +32,8 @@ function DocDAO(){
 
 DocDAO.prototype.createDoc = function(userId, path, type, callback){
 	var that = this;
-	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/@\\]+[^@\/\\]*[^.\/@\\]+)|(\/[^.\/@\\]))+$/;
-	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 33))){
+	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/;
+	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 100))){
 		return callback("illegal file name");
 	}
 	var paths = path.split("/");
@@ -352,8 +352,8 @@ DocDAO.prototype.deleteDoc = function(userId, path, callback){
 		}
 	}
 
-	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/@\\]+[^@\/\\]*[^.\/@\\]+)|(\/[^.\/@\\]))+$/
-	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 33))){
+	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/;
+	if((!reg.test(path) || (path.substring(path.lastIndexOf("/")).length > 100))){
 		return callback("illegal file name");
 	}
 
@@ -1443,7 +1443,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 							}, function (err, reply) {
 								if (err) {
 									lock.release(rootPath);
-									return callback("here");
+									return callback("inner error");
 								}
 								else {
 									lock.release(rootPath);
