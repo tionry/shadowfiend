@@ -1443,7 +1443,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 							}, function (err, reply) {
 								if (err) {
 									lock.release(rootPath);
-									return callback("inner error");
+									return callback("here");
 								}
 								else {
 									lock.release(rootPath);
