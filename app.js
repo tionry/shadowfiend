@@ -1220,6 +1220,7 @@ io.sockets.on('connection', function(socket){
 					if (err) {
 						return callback(err);
 					}
+					return socket.emit('after-push-problem', {path: path});
 					docDAO.deleteDoc(user._id, path, function(err) {
 						if (err) {
 							return callback(err);
