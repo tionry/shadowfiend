@@ -1203,7 +1203,7 @@ io.sockets.on('connection', function(socket){
 			if (data.status != 'ready') {
 				return socket.emit('after-change-interview-status', {interview: interview});
 			}
-			interviewDAO.updateAllProblemStatus(data.name, 'waiting', function(err) {
+			interviewDAO.restoreAllToWaiting(data.name, function(err) {
 				if (err) {
 					return socket.emit('after-change-interview-status', {err: err});
 				}
@@ -1240,7 +1240,10 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
-		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, 'pushing', function(err, interview) {
+		if (data.intervieweeList.length == 0) {
+			return socket.emit('after-push-problem', {log: 'no interviewee'});
+		}
+		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, 'pushing', function(err) {
 			if (err) {
 				return socket.emit('after-push-problem', {err: err});
 			}

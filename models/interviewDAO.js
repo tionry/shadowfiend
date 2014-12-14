@@ -439,19 +439,30 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
     });
 };
 
-InterviewDAO.prototype.updateAllProblemStatus = function(interviewName, status, callback) {
+InterviewDAO.prototype.restoreAllToWaiting = function(interviewName, callback) {
     lock.acquire(interviewName, function() {
-        db.interview.findOne({name: interviewName}, {problemlist: 1}, function(err, interview) {
+        db.interview.findOne({name: interviewName}, {
+            problemlist: 1,
+            interviewee: 1
+        }, function(err, interview) {
             if (err) {
                 lock.release(interviewName);
                 return callback("inner error");
             }
             var newProblemList = [];
+            var newIntervieweeList = [];
             interview.problemlist.forEach(function(problem) {
-                problem.status = status;
+                problem.status = 'waiting';
                 newProblemList.push(problem);
             });
-            db.interview.update({name: interviewName}, {$set: {problemlist: newProblemList}}, function(err) {
+            interview.interviewee.forEach(function(interviewee) {
+                interviewee.status = 'waiting';
+                newIntervieweeList.push(interviewee);
+            });
+            db.interview.update({name: interviewName}, {$set: {
+                problemlist: newProblemList,
+                interviewee: newIntervieweeList
+            }}, function(err) {
                 if (err) {
                     lock.release(interviewName);
                     return callback("inner error");
