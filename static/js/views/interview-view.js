@@ -58,9 +58,7 @@ var app = app || {};
                         app.showMessageBox('info', data.err);
                     },
                     success: function (){
-                        app.models['doc-' + interviewName].on('change', function(){
-                            app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
-                        })
+                        app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
                     }
                 })) {
                 app.socket.emit('enter-interview', {
