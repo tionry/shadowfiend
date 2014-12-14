@@ -1254,7 +1254,7 @@ io.sockets.on('connection', function(socket){
 					}
 					docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
 						if (err) {
-							return socket.emit('after-push-problem', {err: "here"});
+							return socket.emit('after-push-problem', {err: err});
 						}
 						i++;
 						if (i == data.intervieweeList.length) {
