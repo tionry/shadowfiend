@@ -1232,7 +1232,7 @@ io.sockets.on('connection', function(socket){
 		});
 	}
 
-	socket.on('add-interviewee-doc', function(data) {
+	socket.on('push-problem', function(data) {
 		if (!check(data, 'interviewName', 'intervieweeList', 'interviewerList', 'problemName')) {
 			return;
 		}
@@ -1240,19 +1240,24 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		var i = 0;
-		data.intervieweeList.forEach(function(interviewee) {
-			_callCreateDocByName(interviewee, data.interviewName, data.problemName, function(err, path) {
-				if (err) {
-					return socket.emit('after-add-interviewee-doc', {err: err});
-				}
-				docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
+		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, 'pushing', function(err, interview) {
+			if (err) {
+				return socket.emit('after-push-problem', {err: err});
+			}
+			data.intervieweeList.forEach(function(interviewee) {
+				_callCreateDocByName(interviewee, data.interviewName, data.problemName, function(err, path) {
 					if (err) {
-						return socket.emit('after-add-interviewee-doc', {err: err});
+						return socket.emit('after-push-problem', {err: err});
 					}
-					i++;
-					if (i == data.intervieweeList.length) {
-						socket.emit('after-add-interviewee-doc', {success: 'success'});
-					}
+					docDAO.setinterviewmember(path, interviewee, data.interviewerList, function(err) {
+						if (err) {
+							return socket.emit('after-push-problem', {err: err});
+						}
+						i++;
+						if (i == data.intervieweeList.length) {
+							socket.emit('after-push-problem', {log: 'success'});
+						}
+					});
 				});
 			});
 		});

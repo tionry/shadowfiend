@@ -136,7 +136,7 @@ var app = app || {};
             app.Lock.detach(data);
         },
 
-        "after-add-interviewee-doc": function(data) {
+        "after-push-problem": function(data) {
             app.Lock.detach(data);
         },
 
