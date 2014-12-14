@@ -28,7 +28,7 @@ var app = app || {};
         },
 
         enterIntervieweeRoom: function(){
-            var intervieweeName = $(this).find('p').text().trim();
+            var intervieweeName = this.$el.find('p').text().trim();
             var interviewName = $('#interviewer-item-name').text().trim();
             var problemName = $('#interviewer-problem-list').find('.glyphicon-stop').parent().parent().find('ii').text().trim();
             if (problemName == "") {
