@@ -1429,7 +1429,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 			memberlist.forEach(function(memname){
 				db.user.findOne({name:memname},{_id:1},function(err,user){
 					if(err){
-						return callback("inner error here");
+						return callback("inner error");
 					}
 					idlist[i] = user._id;
 					i++;
@@ -1454,7 +1454,6 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 				})
 
 			});
-			return callback("inner error");
 		});
 	});
 };
