@@ -737,26 +737,6 @@ var app = app || {};
             $('.interviewer-interviewee').find('p').each(function(){
                 that.viewees.push($(this).text().trim());
             })
-            $('.push-problem-btn').each(function(){
-                if ($(this).children().hasClass('glyphicon-stop')){
-                    var problemName = $(this).parent().text().trim();
-                    if (app.Lock.attach({
-                            error: function () {
-                                app.showMessageBox('info', 'inner error');
-                            },
-                            success: function () {
-                            }
-                        })) {
-                        app.socket.emit('change-problem-status-interview', {
-                            interviewName: interviewName,
-                            problemName: problemName,
-                            status: 'waiting',
-                        });
-                    }
-                    $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
-                    $('.push-problem-btn').removeAttr('disabled');
-                }
-            })
             if (app.Lock.attach({
                     error: function(){
                         app.showMessageBox('info', 'inner error')
