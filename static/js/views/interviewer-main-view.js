@@ -25,13 +25,11 @@ var app = app || {};
             this.listenTo(this.options.roundList, 'reset', this.addAllRoundInterviewee);
             this.listenTo(this.options.pushedProblem, 'add', this.renewProblem);
             this.listenTo(this.options.pushedProblem, 'reset', this.resetProblem);
-            //初始化界面显示
-
-            this.renewList();
-
+            this.renewView();
         },
 
-        renewList: function(){
+        //界面渲染
+        renewView: function(){
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').show();
@@ -110,23 +108,6 @@ var app = app || {};
             $('.push-problem-btn').find('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
         },
 
-        renewProblem : function(model){
-            $('.push-problem-btn').removeAttr('disabled');
-            var al = $('#interviewer-problem-list');
-            al.find('li').each(function(){
-                if (model.attributes.name == $(this).text().trim()){
-                    $('.push-problem-btn').attr('disabled', 'disabled');
-                    $(this).find('button').removeAttr('disabled');
-                    $(this).find('button').children().removeClass('glyphicon-play');
-                    $(this).find('button').children().addClass('glyphicon-stop');
-                }
-            })
-        },
-
-        resetProblem : function(){
-            this.options.pushedProblem.each(this.renewProblem);
-        },
-
         renew_running_interview: function(){
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
@@ -175,6 +156,7 @@ var app = app || {};
             return this;
         },
 
+        //当前轮次面试者列表更新 & 进入文件
         addAllRoundInterviewee: function(){
             $('#interviewer-interviewee-control').html('');
             this.enterIntervieweeRoom();
@@ -199,6 +181,7 @@ var app = app || {};
             return this;
         },
 
+        //所有题目列表更新 & 打开推送事件监听
         addAllProblem: function(){
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
@@ -206,6 +189,24 @@ var app = app || {};
             }else
                 $('.push-problem-btn').attr('disabled', 'disabled');
             this.pushstopProblem();
+        },
+
+        renewProblem : function(model){
+            $('.push-problem-btn').removeAttr('disabled');
+            var al = $('#interviewer-problem-list');
+            al.find('li').each(function(){
+                if (model.attributes.name == $(this).text().trim()){
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).find('button').removeAttr('disabled');
+                    $(this).find('button').children().removeClass('glyphicon-play');
+                    $(this).find('button').children().addClass('glyphicon-stop');
+                }
+            })
+        },
+
+        //推送题目状态更新
+        resetProblem : function(){
+            this.options.pushedProblem.each(this.renewProblem);
         },
 
         //添加面试者
@@ -640,6 +641,8 @@ var app = app || {};
             })
         },
 
+
+        //推送/终止题目事件监听
         pushstopProblem: function(){
             $('.push-problem-btn').on('click', function(){
                 var that = this;
@@ -655,7 +658,7 @@ var app = app || {};
                     var c = app.collections['round-intervieweeList-'+interviewName];
                     for (var i = 0; i < c.length; i++){
                         var model = c.models[i].attributes;
-                        that.viewers.push(model.name);
+                        that.viewees.push(model.name);
                     }
                     $('.push-problem-btn').attr('disabled', 'disabled');
                     $(this).children().removeClass('glyphicon-play');
@@ -698,6 +701,7 @@ var app = app || {};
             });
         },
 
+        //进入面试者做题页面
         enterIntervieweeRoom: function(){
             $('.interviewer-interviewee').on('click', function(){
                 var intervieweeName = $(this).find('p').text().trim();
@@ -732,11 +736,6 @@ var app = app || {};
                         app.showMessageBox('info', 'inner error')
                     },
                     success: function(){
-                        app.socket.emit('change-interviewee-status',{
-                            interviewName: interviewName,
-                            intervieweeList: that.viewees,
-                            status: 'waiting'
-                        });
                         that.renew_ready_interview();
                     },
                 })) {
@@ -786,6 +785,7 @@ var app = app || {};
             });
         },
 
+        //评论
         show_remark: function(){
             var modal = Backbone.$('#remark');
             app.showInputModal(modal);

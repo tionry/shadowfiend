@@ -44,7 +44,7 @@ var app = app || {};
                     pushedProblem: app.collections['running-problem-'+name],
                 });
             }else{
-                this.model.v.renewList();
+                this.model.v.renewView();
             }
         },
 
