@@ -107,7 +107,7 @@ var app = app || {};
             $('#interviewer-item-status').text('ready');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('yellow');
-            $('.push-problem-btn').find('.glyphicon-stop').removeClass('.glyphicon-stop').addClass('.glyphicon-play');
+            $('.push-problem-btn').find('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
         },
 
         renewProblem : function(model){
