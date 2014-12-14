@@ -11,7 +11,7 @@ var app = app || {};
         }),
         events: {
             'click a': 'select',
-            'click interviewee-img-div' : 'enterIntervieweeRoom',
+            'click .interviewee-img-div' : 'enterIntervieweeRoom',
         },
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
