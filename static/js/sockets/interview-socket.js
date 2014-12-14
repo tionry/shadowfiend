@@ -161,7 +161,6 @@ var app = app || {};
             app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
-            app.room.tryEnter(app.models['doc-' + data.interviewName], null, '#interviewees');
             app.Lock.detach(data);
         }
     };
