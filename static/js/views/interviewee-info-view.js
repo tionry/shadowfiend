@@ -38,7 +38,6 @@ var app = app || {};
             app.socket.emit('get-doc-in-interview', {
                 interviewName: interviewName,
                 intervieweeName: intervieweeName,
-                problemName:problemName,
             })
             app.models['doc-' + interviewName].on('change', function(){
                 app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName);

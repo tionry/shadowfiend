@@ -50,7 +50,25 @@ var app = app || {};
             }
         },
 
-        interviewee_go:function(e){
+        interviewee_go:function(){
+            var intervieweeName = this.model.id;
+            var interviewName = app.currentUser.name;
+            if (app.Lock.attach({
+                    error: function (data){
+                        app.showMessageBox('info', data.err);
+                    },
+                    success: function (){
+                        app.models['doc-' + interviewName].on('change', function(){
+                            app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
+                        })
+                    }
+                })) {
+                app.socket.emit('enter-interview', {
+                    interviewName: interviewName,
+                    intervieweeName: intervieweeName,
+                })
+            }
+
 
         },
 

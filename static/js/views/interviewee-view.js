@@ -32,6 +32,7 @@ var app = app || {};
         addAll: function(){
             this.collection.each(this.addOne);
         },
+
     });
 
     app.init || (app.init = {});
