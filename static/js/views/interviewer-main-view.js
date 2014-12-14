@@ -202,9 +202,9 @@ var app = app || {};
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
                 $('.push-problem-btn').removeAttr('disabled');
-                this.pushstopProblem(); //打开问题推送事件监听
             }else
                 $('.push-problem-btn').attr('disabled', 'disabled');
+            this.pushstopProblem();
         },
 
         //添加面试者
