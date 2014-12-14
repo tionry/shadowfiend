@@ -156,6 +156,57 @@ var app = app || {};
             $('#interviewer-item-status').addClass('blue');
         },
 
+        addOneRoundInterviewee: function(model){
+            if (!model) return;
+            var v = model.view;
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-interviewee-control').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.IntervieweeInfoView({
+                    model: model
+                });
+                $('#interviewer-interviewee-control').append(model.view.render().el);
+            }
+            return this;
+        },
+
+        addAllRoundInterviewee: function(){
+            $('#interviewer-interviewee-control').html('');
+            this.enterIntervieweeRoom();
+        },
+
+        addOneProblem: function(model){
+            if (!model) return;
+            var v = model.view;
+            model.set({"eid": 'CrazyOutput'});
+            if (v) {
+                v.render();
+                if (v.$el.is(':hidden')) {
+                    $('#interviewer-problem-list').append(v.el);
+                    v.delegateEvents();
+                }
+            } else {
+                model.view = new app.TestProblemView({
+                    model: model
+                });
+                $('#interviewer-problem-list').append(model.view.render().el);
+            }
+            return this;
+        },
+
+        addAllProblem: function(){
+            this.options.problemList.each(this.addOneProblem);
+            if (this.itv.status == 'running'){
+                $('.push-problem-btn').removeAttr('disabled');
+                this.pushstopProblem(); //打开问题推送事件监听
+            }else
+                $('.push-problem-btn').attr('disabled', 'disabled');
+        },
+
         //添加面试者
         add_interviewee: function(){
             $('#setinterviewee-list').html('');
@@ -168,9 +219,9 @@ var app = app || {};
                 newinterviewees = [],
                 newinterviewers = [],
                 al = $('#setinterviewee-list'),
-                itvname = $('#interviewer-item-name').text().trim();
-            var c = app.collections['intervieweeList-'+itvname];
-            var cc = app.collections['interviewerList-'+itvname];
+                interviewName = $('#interviewer-item-name').text().trim();
+            var c = app.collections['intervieweeList-'+interviewName];
+            var cc = app.collections['interviewerList-'+interviewName];
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
@@ -275,7 +326,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-interviewee-in-interview', {
-                        name: itvname,
+                        name: interviewName,
                         interviewee: newinterviewees,
                     });
                 }
@@ -294,9 +345,9 @@ var app = app || {};
                 newinterviewees = [],
                 newinterviewers = [],
                 al = $('#setinterviewer-list'),
-                itvname = $('#interviewer-item-name').text().trim();
-            var c = app.collections['interviewerList-'+itvname];
-            var cc = app.collections['intervieweeList-'+itvname];
+                interviewName = $('#interviewer-item-name').text().trim();
+            var c = app.collections['interviewerList-'+interviewName];
+            var cc = app.collections['intervieweeList-'+interviewName];
             var deleteUserInList = function(){
                 $(".sharer-delete").click(function(){
                     var l = $(this).prev();
@@ -406,7 +457,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-interviewer-in-interview', {
-                        name: itvname,
+                        name: interviewName,
                         interviewer: newinterviewers,
                     });
                 }
@@ -415,7 +466,7 @@ var app = app || {};
 
         //添加题目
         add_problem: function(){
-            var itvname = $('#interviewer-item-name').text().trim();
+            var interviewName = $('#interviewer-item-name').text().trim();
             var modal = Backbone.$('#set-problem');
             app.showInputModal(modal);
             var ap = modal.find('#setproblem-add'),
@@ -428,9 +479,9 @@ var app = app || {};
 
             //获取所有题目，添加在左侧
 
-            for (var i = 0; i < app.collections['allproblems-' + itvname].length; i++){
+            for (var i = 0; i < app.collections['allproblems-' + interviewName].length; i++){
                 var l = $('<li></li>');
-                l.html('<a href="#">'+ app.collections['allproblems-' + itvname].models[i].id +'</a>');
+                l.html('<a href="#">'+ app.collections['allproblems-' + interviewName].models[i].id +'</a>');
                 al.append(l);
             }
             modal.on('hide', function () {
@@ -477,7 +528,7 @@ var app = app || {};
                             $('#interviewer-problem-list').html('');
                             app.socket.emit('read-problem', {
                                 all: true,
-                                name: itvname,
+                                name: interviewName,
                                 virtual: true,
                                 mode: 'problem-in-interview'
                             });
@@ -485,7 +536,7 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('update-problem-in-interview', {
-                        name: itvname,
+                        name: interviewName,
                         problemlist: problemArr()
                     });
                 }
@@ -502,11 +553,11 @@ var app = app || {};
                 al = $('#alluser-list'),
                 sl = $('#interviewer-interviewee-control'),
                 cnfm = $('#setrounduser-cnfm'),
-                itvname = $('#interviewer-item-name').text().trim();
+                interviewName = $('#interviewer-item-name').text().trim();
 
             that.viewers = [];
             that.viewees = [];
-            var d = app.collections['interviewerList-'+itvname];
+            var d = app.collections['interviewerList-'+interviewName];
             for (var i = 0; i < d.length; i++){
                 var model = d.models[i].attributes;
                 that.viewers.push(model.name);
@@ -514,7 +565,7 @@ var app = app || {};
             //获取所有面试者，添加在左侧
             al.html('');
             il.html('');
-            var c = app.collections['intervieweeList-'+itvname];
+            var c = app.collections['intervieweeList-'+interviewName];
             for (var i = 0; i < c.length; i++){
                 var model = c.models[i].attributes;
                 var m = new app.User({
@@ -573,7 +624,7 @@ var app = app || {};
                 if (app.Lock.attach({
                         success: function(){
                             app.socket.emit('change-interviewee-status',{
-                                interviewName: itvname,
+                                interviewName: interviewName,
                                 intervieweeList: that.viewees,
                                 status: 'onRound'
                             });
@@ -581,142 +632,100 @@ var app = app || {};
                         }
                     })) {
                     app.socket.emit('change-interview-status', {
-                        name: itvname,
+                        name: interviewName,
                         status: 'running',
                     });
                 }
             })
         },
 
-        //推送题目
-        pushProblem : function(){
-            var that = this;
-            var itvname = $('#interviewer-item-name').text();
-            that.viewers = [];
-            that.viewees = [];
-            var cc = app.collections['interviewerList-'+itvname];
-            for (var i = 0; i < cc.length; i++){
-                var model = cc.models[i].attributes;
-                that.viewers.push(model.name);
-            }
-            var c = app.collections['round-intervieweeList-'+itvname];
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
-                that.viewers.push(model.name);
-            }
-            $('.glyphicon-play').on('click', function(){
-                $('.push-problem-btn').attr('disabled', 'disabled');
-                $(this).removeClass('glyphicon-play');
-                $(this).addClass('glyphicon-stop');
-                $(this).parent().removeAttr('disabled');
-                var name = $(this).parent().parent().text().trim();
-
-                if (app.Lock.attach({
-                        error: function(){
-                            app.showMessageBox('info', 'inner error');
-                        },
-                        success:function() {
-
-                        }
-                    })) {
-                    //app.socket.emit('add-interviewee-doc', {
-                    //    interviewName: itvname,
-                    //    intervieweeList: that.viewees,
-                    //    interviewerList: that.viewers,
-                    //    problemName: name,
-                    //});
-                    app.socket.emit('change-problem-status-interview', {
-                        interviewName: itvname,
-                        problemName: name,
-                        status: 'pushing'
-                    })
-                }
-                $('.glyphicon-play').off('click');
-                that.stopProblem();
-            });
-        },
-
-        //结束答题
-        stopProblem : function(){
-            var that = this;
-            $('.glyphicon-stop').on('click', function() {
-                var itvname = $('#interviewer-item-name').text().trim();
-                var problemName = $('.glyphicon-stop').parent().parent().find('ii').text().trim();
-                if (app.Lock.attach({
-                        error: function () {
-                            app.showMessageBox('info', 'inner error');
-                        },
-                        success: function () {
-                        }
-                    })) {
-                    app.socket.emit('change-problem-status-interview', {
-                        interviewName: itvname,
-                        problemName: problemName,
-                        status: 'waiting',
-                    });
-                }
-                $('.glyphicon-stop').off('click');
-                $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
-                $('.push-problem-btn').removeAttr('disabled');
-                that.pushProblem();
-            });
-        },
-
         pushstopProblem: function(){
             $('.push-problem-btn').on('click', function(){
                 var that = this;
-                var itvname = $('#interviewer-item-name').text();
+                var interviewName = $('#interviewer-item-name').text();
                 if ($(this).children().hasClass('glyphicon-play')){
-                   that.viewers = [];
-                   that.viewees = [];
-                   var cc = app.collections['interviewerList-'+itvname];
-                   for (var i = 0; i < cc.length; i++){
-                       var model = cc.models[i].attributes;
-                       that.viewers.push(model.name);
-                   }
-                   var c = app.collections['round-intervieweeList-'+itvname];
-                   for (var i = 0; i < c.length; i++){
-                       var model = c.models[i].attributes;
-                       that.viewers.push(model.name);
-                   }
-                   $('.push-problem-btn').attr('disabled', 'disabled');
-                   $(this).children().removeClass('glyphicon-play');
-                   $(this).children().addClass('glyphicon-stop');
-                   $(this).removeAttr('disabled');
-                   var problemName = $(this).parent().text().trim();
-                   if (app.Lock.attach({
-                           error: function(){
-                               app.showMessageBox('info', 'inner error');
-                           },
-                           success:function() {
-                           }
-                       })) {
-                       app.socket.emit('change-problem-status-interview', {
-                           interviewName: itvname,
-                           problemName: problemName,
-                           status: 'pushing'
-                       })
-                   }
+                    that.viewers = [];
+                    that.viewees = [];
+                    var cc = app.collections['interviewerList-'+interviewName];
+                    for (var i = 0; i < cc.length; i++){
+                        var model = cc.models[i].attributes;
+                        that.viewers.push(model.name);
+                    }
+                    var c = app.collections['round-intervieweeList-'+interviewName];
+                    for (var i = 0; i < c.length; i++){
+                        var model = c.models[i].attributes;
+                        that.viewers.push(model.name);
+                    }
+                    $('.push-problem-btn').attr('disabled', 'disabled');
+                    $(this).children().removeClass('glyphicon-play');
+                    $(this).children().addClass('glyphicon-stop');
+                    $(this).removeAttr('disabled');
+                    var problemName = $(this).parent().text().trim();
+                    if (app.Lock.attach({
+                            error: function(){
+                                app.showMessageBox('info', 'inner error');
+                            },
+                            success:function() {
+                                if (app.Lock.attach({
+                                        success: function(){
+                                            that.enterIntervieweeRoom();
+                                        },
+                                    })){
+                                    app.socket.emit('add-interviewee-doc', {
+                                        interviewName: interviewName,
+                                        intervieweeList: that.viewees,
+                                        interviewerList: that.viewers,
+                                        problemName: problemName,
+                                    });
+                                }
+                            }
+                        })) {
+                        app.socket.emit('change-problem-status-interview', {
+                            interviewName: interviewName,
+                            problemName: problemName,
+                            status: 'pushing'
+                        })
+                    }
                 } else
                 if ($(this).children().hasClass('glyphicon-stop')){
-                   var problemName = $(this).parent().text().trim();
-                   if (app.Lock.attach({
-                           error: function () {
-                               app.showMessageBox('info', 'inner error');
-                           },
-                           success: function () {
-                           }
-                       })) {
-                       app.socket.emit('change-problem-status-interview', {
-                           interviewName: itvname,
-                           problemName: problemName,
-                           status: 'waiting',
-                       });
-                   }
-                   $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
-                   $('.push-problem-btn').removeAttr('disabled');
+                    var problemName = $(this).parent().text().trim();
+                    if (app.Lock.attach({
+                            error: function () {
+                                app.showMessageBox('info', 'inner error');
+                            },
+                            success: function () {
+                            }
+                        })) {
+                        app.socket.emit('change-problem-status-interview', {
+                            interviewName: interviewName,
+                            problemName: problemName,
+                            status: 'waiting',
+                        });
+                    }
+                    $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
+                    $('.push-problem-btn').removeAttr('disabled');
                 }
             });
+        },
+
+        enterIntervieweeRoom: function(){
+            $('.interviewer-interviewee').on('click', function(){
+                var intervieweeName = $(this).find('p').text().trim();
+                var interviewName = $('#interviewer-item-name').text().trim();
+                var problemName = $('#interviewer-problem-list').find('.glyphicon-stop').parent().parent().find('ii').text().trim();
+                if (problemName == "") {
+                    app.showMessageBox('info', 'stillNoPushProblem');
+                    return;
+                }
+                app.socket.emit('get-doc-in-interview', {
+                    interviewName: interviewName,
+                    intervieweeName: intervieweeName,
+                    problemName:problemName,
+                })
+                app.models['doc-' + interviewName].on('set', function(){
+                    app.room.tryEnter(app.models['doc-' + interviewName]);
+                })
+            })
         },
 
         //结束本轮
@@ -739,7 +748,7 @@ var app = app || {};
                             status: 'waiting'
                         });
                         that.renew_ready_interview();
-                    }
+                    },
                 })) {
                 app.socket.emit('change-interview-status', {
                     name: name,
@@ -791,55 +800,5 @@ var app = app || {};
             app.showInputModal(modal);
         },
 
-        addOneRoundInterviewee: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.$el.is(':hidden')) {
-                    $('#interviewer-interviewee-control').append(v.el);
-                    v.delegateEvents();
-                }
-            } else {
-                model.view = new app.IntervieweeInfoView({
-                    model: model
-                });
-                $('#interviewer-interviewee-control').append(model.view.render().el);
-            }
-            return this;
-        },
-
-        addAllRoundInterviewee: function(){
-            $('#interviewer-interviewee-control').html('');
-        },
-
-        addOneProblem: function(model){
-            if (!model) return;
-            var v = model.view;
-            model.set({"eid": 'CrazyOutput'});
-            if (v) {
-                v.render();
-                if (v.$el.is(':hidden')) {
-                    $('#interviewer-problem-list').append(v.el);
-                    v.delegateEvents();
-                }
-            } else {
-                model.view = new app.TestProblemView({
-                    model: model
-                });
-                $('#interviewer-problem-list').append(model.view.render().el);
-            }
-            return this;
-        },
-
-        addAllProblem: function(){
-            this.options.problemList.each(this.addOneProblem);
-            if (this.itv.status == 'running'){
-                $('.push-problem-btn').removeAttr('disabled');
-                this.pushstopProblem(); //打开问题推送事件监听
-            }else
-                $('.push-problem-btn').attr('disabled', 'disabled');
-        },
     });
 })();
