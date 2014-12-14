@@ -53,6 +53,8 @@ var app = app || {};
         interviewee_go:function(){
             var interviewName = this.model.id;
             var intervieweeName = app.currentUser.name;
+            app.models || (app.models = {});
+            app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
             if (app.Lock.attach({
                     error: function (data){
                         app.showMessageBox('info', data.err);
@@ -65,8 +67,6 @@ var app = app || {};
                     intervieweeName: intervieweeName,
                 })
             }
-            app.models || (app.models = {});
-            app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
             app.models['doc-' + interviewName].on('change', function(){
                 app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
             })
