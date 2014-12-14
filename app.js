@@ -1407,24 +1407,29 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('get-doc-in-interview', function(data) {
-		if (!check(data, 'interviewName', 'intervieweeName', 'problemName')) {
+		if (!check(data, 'interviewName', 'intervieweeName')) {
 			return;
 		}
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		var path = '/' + data.intervieweeName + '/' + data.problemName + '@' + data.interviewName;
-		userDAO.getUserByName(data.intervieweeName, function(err, user) {
+		interviewDAO.getstatusproblems(data.interviewName, 'pushing', function(err, problemList) {
 			if (err) {
 				return socket.emit('get-doc-in-interview', {err: err});
 			}
-			docDAO.getDocByPath(user._id, path, function(err, doc) {
+			var path = '/' + data.intervieweeName + '/' + problemList[0] + '@' + data.interviewName;
+			userDAO.getUserByName(data.intervieweeName, function(err, user) {
 				if (err) {
 					return socket.emit('get-doc-in-interview', {err: err});
 				}
-				socket.emit('get-doc-in-interview', {
-					doc: doc,
-					interviewName: data.interviewName
+				docDAO.getDocByPath(user._id, path, function(err, doc) {
+					if (err) {
+						return socket.emit('get-doc-in-interview', {err: err});
+					}
+					socket.emit('get-doc-in-interview', {
+						doc: doc,
+						interviewName: data.interviewName
+					});
 				});
 			});
 		});
