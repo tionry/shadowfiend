@@ -159,6 +159,7 @@ var app = app || {};
 
         addOneRoundInterviewee: function(model){
             if (!model) return;
+            if (model.status != 'onRound') return;
             var v = model.view;
             if (v) {
                 v.render();
