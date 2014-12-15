@@ -727,16 +727,21 @@ var app = app || {};
 
         //开始整场面试
         start_interview: function(){
-            var name = $('#interviewer-item-name').text();
-            if (app.Lock.attach({
-                })) {
-                app.socket.emit('change-interview-status', {
-                    name: name,
-                    status: 'ready',
-                });
-            }
-            this.renew_ready_interview();
-            app.showMessageBox('setintervieweesuccess', 'interviewstart');
+            var modal = Backbone.$('#startinterview-cfm');
+            app.showInputModal(modal);
+            var cnfm = modal.find('.modal-confirm');
+            cnfm.on('click', function(){
+                var name = $('#interviewer-item-name').text();
+                if (app.Lock.attach({
+                    })) {
+                    app.socket.emit('change-interview-status', {
+                        name: name,
+                        status: 'ready',
+                    });
+                }
+                this.renew_ready_interview();
+                app.showMessageBox('info', 'interviewstart');
+            })
         },
 
         //结束整场面试
