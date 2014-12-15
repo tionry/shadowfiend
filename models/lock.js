@@ -17,7 +17,7 @@ Lock.prototype.acquire = function(id, callback){
 };
 
 Lock.prototype.release = function(id){
-    if(this.lockTable[id]){
+    /*if(this.lockTable[id]){
         if(this.lockTable[id].length == 0){
             delete this.lockTable[id];
         }
@@ -26,7 +26,7 @@ Lock.prototype.release = function(id){
         }
     }else{
         console.log("release unexisted lock: " + id);
-    }
+    }*/
 };
 
 Lock.prototype.test = function(id){
