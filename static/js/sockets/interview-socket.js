@@ -158,10 +158,10 @@ var app = app || {};
                 app.Lock.detach(data);
                 return;
             }
+            app.Lock.remove();
             app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
-            app.Lock.detach(data);
         }
     };
 

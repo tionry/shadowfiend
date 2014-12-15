@@ -12,7 +12,7 @@ var app = app || {};
             'click a.interviewer-go':'interviewer_go',
             'click a.interviewee-go':'interviewee_go',
         //    'click a.problem-modify':'modify',
-            'click a.operation':'delete',
+            'click a.operation':'delete'
         //    'click a.problem-toggle':'toggleDone',
         },
         initialize: function(){
@@ -43,7 +43,7 @@ var app = app || {};
                     model: this.model,
                     roundList:  app.collections['round-intervieweeList-' + name],
                     problemList: app.collections['problemList-' + name],
-                    pushedProblem: app.collections['running-problem-'+name],
+                    pushedProblem: app.collections['running-problem-'+name]
                 });
             }else{
                 this.model.v.renewView();
@@ -54,19 +54,18 @@ var app = app || {};
             var interviewName = this.model.id;
             var intervieweeName = app.currentUser.name;
             if (app.Lock.attach({
-                    error: function (data){
+                    error: function (data) {
                         app.showMessageBox('info', data.err);
-                    },
-                    success: function (){
-                        app.Lock.remove();
-                        app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees');
                     }
                 })) {
                 app.socket.emit('enter-interview', {
                     interviewName: interviewName,
-                    intervieweeName: intervieweeName,
+                    intervieweeName: intervieweeName
                 })
             }
+            app.models['doc-' + interviewName].on('change', function() {
+                app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer');
+            });
         },
 
         // Remove the item, destroy the model.
@@ -84,7 +83,7 @@ var app = app || {};
             });
             cnfm.on('click', function () {
                 app.socket.emit('delete-interview', {
-                    interviewName: name,
+                    interviewName: name
                 });
                 that.$el.hide();
                 modal.modal('hide');
