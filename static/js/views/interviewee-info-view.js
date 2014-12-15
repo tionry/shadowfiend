@@ -32,7 +32,7 @@ var app = app || {};
             var interviewName = $('#interviewer-item-name').text().trim();
             var problemName = $('#interviewer-problem-list').find('.glyphicon-stop').parent().parent().find('ii').text().trim();
             if (problemName == "") {
-                app.showMessageBox('info', 'stillNoPushProblem');
+                app.showMessageBox('info', 'stillNotPushProblem');
                 return;
             }
             app.socket.emit('get-doc-in-interview', {

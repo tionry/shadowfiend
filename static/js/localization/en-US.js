@@ -177,4 +177,7 @@ app.languages['en-US'] = { Name :'English Version',
   'startinterview-confirm'		: 'This interview is started. Please set the first round.',
   'endinterview-confirm'		: 'Are you really going to end this interview?',
   'interviewee list is empty': 'interviewee list is empty',
+  'stillNotPushProblem' : 'Please choose push a problem to interviewees',
+  'not a running interview' : 'Interview has not started',
+  'no pushing problem' : 'Get ready! Please wait for interviewers to push a problem...',
 };
