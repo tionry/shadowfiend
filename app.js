@@ -1463,7 +1463,7 @@ io.sockets.on('connection', function(socket){
 			if (!problem) {
 				return socket.emit('try-enter-interview', {err: "no pushing problem"});
 			}
-			var path = '/' + socket.session.user.name + '/' + problem + '@' + data.interviewName;
+			var path = '/' + socket.session.user.name + '/' + problem.name + '@' + data.interviewName;
 			docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
 				if (err) {
 					return socket.emit('try-enter-interview', {err: err});
