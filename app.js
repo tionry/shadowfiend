@@ -914,7 +914,7 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('after-add-problem', {err: err});
 				}
-				socket.emit('after-add-problem', {
+				io.emit('after-add-problem', {
 					problem: problem,
 					mode: 'problemset'
 				});
@@ -969,7 +969,7 @@ io.sockets.on('connection', function(socket){
 						if (err) {
 							return socket.emit('read-problem', {err: err});
 						}
-						io.sockets.emit('read-problem', {
+						socket.emit('read-problem', {
 							problem: problem,
 							mode: data.mode
 						});
