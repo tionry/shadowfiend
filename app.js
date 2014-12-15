@@ -969,7 +969,7 @@ io.sockets.on('connection', function(socket){
 						if (err) {
 							return socket.emit('read-problem', {err: err});
 						}
-						socket.emit('read-problem', {
+						app.socket.emit('read-problem', {
 							problem: problem,
 							mode: data.mode
 						});
@@ -1456,14 +1456,14 @@ io.sockets.on('connection', function(socket){
 			var problem = null;
 			for (i = 0; i < interview.problemlist.length; i++) {
 				if (interview.problemlist[i].status == 'pushing') {
-					problem = interview.problemlist[i];
+					problem = interview.problemlist[i].name;
 					break;
 				}
 			}
 			if (!problem) {
 				return socket.emit('try-enter-interview', {err: "no pushing problem"});
 			}
-			var path = '/' + socket.session.user.name + '/' + problem.name + '@' + data.interviewName;
+			var path = '/' + socket.session.user.name + '/' + problem + '@' + data.interviewName;
 			docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
 				if (err) {
 					return socket.emit('try-enter-interview', {err: err});
