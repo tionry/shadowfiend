@@ -1444,23 +1444,34 @@ io.sockets.on('connection', function(socket){
 			if (interview.status != 'running') {
 				return socket.emit('try-enter-interview', {err: "not a running interview"});
 			}
-			interviewDAO.getstatusproblems(data.interviewName, 'pushing', function(err, problemList) {
+			var i;
+			for (i = 0; i < interview.interviewee.length; i++) {
+				if (interview.interviewee[i].name == socket.session.user.name) {
+					if (interview.interviewee[i].status != 'onRound') {
+						return socket.emit('try-enter-interview', {err: "not an onRound interviewee"});
+					}
+					break;
+				}
+			}
+			var problem = null;
+			for (i = 0; i < interview.problemlist.length; i++) {
+				if (interview.problemlist[i].status == 'pushing') {
+					problem = interview.problemlist[i];
+					break;
+				}
+			}
+			if (!problem) {
+				return socket.emit('try-enter-interview', {err: "no pushing problem"});
+			}
+			var path = '/' + socket.session.user.name + '/' + problem + '@' + data.interviewName;
+			docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
 				if (err) {
 					return socket.emit('try-enter-interview', {err: err});
 				}
-				if (problemList.length == 0) {
-					return socket.emit('try-enter-interview', {err: "no pushing problem"});
-				}
-				var path = '/' + data.intervieweeName + '/' + problemList[0] + '@' + data.interviewName;
-				docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
-					if (err) {
-						return socket.emit('try-enter-interview', {err: err});
-					}
-					socket.emit('try-enter-interview', {
-						doc: doc,
-						interviewName: data.interviewName
-					})
-				});
+				socket.emit('try-enter-interview', {
+					doc: doc,
+					interviewName: data.interviewName
+				})
 			});
 		});
 	});
