@@ -240,7 +240,6 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
     lock.acquire(interviewname, function() {
         db.interview.findOne({name:interviewname},{problemlist:1},function(err,interv){
             if(err){
-
                 lock.release(interviewname);
                 return callback("inner error");
             }
@@ -269,7 +268,6 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                                     lock.release(interviewname);
                                     return callback("inner error");
                                 }
-
                                 db.interview.findOne({name: interviewname}, {
                                     name: 1,
                                     problemlist: 1

@@ -6,13 +6,14 @@ function Lock(){
 }
 
 Lock.prototype.acquire = function(id, callback){
-    if(!this.lockTable[id]){
+    callback();
+    /*if(!this.lockTable[id]){
         this.lockTable[id] = [];
         callback();
     }
     else{
         this.lockTable[id].push(callback);
-    }
+    }*/
 };
 
 Lock.prototype.release = function(id){
