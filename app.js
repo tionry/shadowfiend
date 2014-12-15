@@ -969,7 +969,7 @@ io.sockets.on('connection', function(socket){
 						if (err) {
 							return socket.emit('read-problem', {err: err});
 						}
-						app.socket.emit('read-problem', {
+						io.sockets.emit('read-problem', {
 							problem: problem,
 							mode: data.mode
 						});
