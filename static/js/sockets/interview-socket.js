@@ -166,7 +166,8 @@ var app = app || {};
 
         // Notify by other user
         "refresh-interview": function() {
-            app.socket.emit('read-problem', {mode: 'interviewer'});
+            app.socket.emit('read-interview', {mode: 'interviewer'});
+            app.socket.emit('read-interview', {mode: 'interviewee'});
         }
     };
 
