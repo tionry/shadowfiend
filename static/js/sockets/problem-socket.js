@@ -70,6 +70,15 @@ var app = app || {};
                 reset: true
             });
             app.Lock.detach(data);
+        },
+
+        // Notify by other user
+        "refresh-problemset": function() {
+            app.socket.emit('read-problem', {
+                all: true,
+                name: '',
+                mode: 'problemset'
+            });
         }
 
     };

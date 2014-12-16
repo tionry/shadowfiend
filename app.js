@@ -914,10 +914,11 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('after-add-problem', {err: err});
 				}
-				io.emit('after-add-problem', {
+				socket.emit('after-add-problem', {
 					problem: problem,
 					mode: 'problemset'
 				});
+				socket.broadcast.emit('refresh-problemset');
 			});
 		});
 	});
@@ -930,7 +931,10 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		problemDAO.deleteProblem(data.name, function(err) {
-			return socket.emit('delete-problem', {err: err});
+			if (err) {
+				return socket.emit('delete-problem', {err: err});
+			}
+			socket.broadcast.emit('refresh-problemset');
 		});
 	});
 
@@ -1290,6 +1294,7 @@ io.sockets.on('connection', function(socket){
 					mode: 1,
 					username: socket.session.user.name
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
