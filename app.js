@@ -1079,6 +1079,7 @@ io.sockets.on('connection', function(socket){
 					return socket.emit('after-update-interview-problem', {err: err});
 				}
 				socket.emit('after-update-interview-problem', {problem: problems});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1267,6 +1268,7 @@ io.sockets.on('connection', function(socket){
 						i++;
 						if (i == data.intervieweeList.length) {
 							socket.emit('after-push-problem', {log: 'success'});
+							socket.broadcast.emit('refresh-interview');
 						}
 					});
 				});
@@ -1321,6 +1323,7 @@ io.sockets.on('connection', function(socket){
 					users: users,
 					interviewName: data.interviewName
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1360,6 +1363,7 @@ io.sockets.on('connection', function(socket){
 				return socket.emit('after-change-problem-status-interview', {err: err});
 			}
 			socket.emit('after-change-problem-status-interview', {interview: interview});
+			socket.broadcast.emit('refresh-interview');
 		});
 	});
 
@@ -1480,7 +1484,7 @@ io.sockets.on('connection', function(socket){
 				socket.emit('try-enter-interview', {
 					doc: doc,
 					interviewName: data.interviewName
-				})
+				});
 			});
 		});
 	});
