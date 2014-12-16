@@ -27,9 +27,6 @@ var app = app || {};
                 });
                 $('#interviewers-control-table').append(model.view.render().el);
             }
-            if (model.v) {
-                model.v.renewView();
-            }
             return this;
         },
 
