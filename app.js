@@ -1013,7 +1013,7 @@ io.sockets.on('connection', function(socket){
 					mode: 1,
 					username: socket.session.user.name
 				});
-				socket.broadcast.emit('read-interview', {mode: 'interviewer'});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
