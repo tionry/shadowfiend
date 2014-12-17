@@ -127,6 +127,7 @@ var app = app || {};
         },
 
         renew_completed_interview: function(){
+            $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');
