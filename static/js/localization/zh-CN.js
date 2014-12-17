@@ -177,5 +177,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'interviewee list is empty'   : '面试者列表不能为空',
   'stillNotPushProblem'         : '请先选择一道题目发给面试者',
   'not a running interview'     : '面试尚未开始',
-  'no pushing problem'         : '请做好准备！等待面试官出题...',
+  'no pushing problem'          : '请做好准备！等待面试官出题...',
+  'startinterviewconfirm?'      : '确定要开始一场面试吗？',
 };

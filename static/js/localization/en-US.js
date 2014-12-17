@@ -180,4 +180,5 @@ app.languages['en-US'] = { Name :'English Version',
   'stillNotPushProblem' : 'Please choose push a problem to interviewees',
   'not a running interview' : 'Interview has not started',
   'no pushing problem' : 'Get ready! Please wait for interviewers to push a problem...',
+  'startinterviewconfirm?' : 'Sure to start the interview?',
 };
