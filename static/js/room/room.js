@@ -162,11 +162,7 @@ app.Room && _.extend(app.Room.prototype, {
 		//comments
 		for (var i = 0; i < this.view.editor.doc.size; i++){
 			var msg = document.createElement("div");
-			var icon = msg.appendChild(document.createElement("span"));
-			icon.innerHTML = "!";
-			icon.className = "lint-error-icon";
-			msg.appendChild(document.createTextNode('No.'+ i + " line comment"));
-			msg.className = "lint-error";
+			msg.className = "glyphicon glyphicon-bookmark";
 			this.view.editor.addLineWidget(i, msg, {coverGutter: false, noHScroll: true});
 		}
 
