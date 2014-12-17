@@ -170,6 +170,16 @@ var room, listeners = {
 			room.bq[i].version++;
 			room.bq[i].version = room.bq[i].version % 65536;
 		}
+		//test
+		var msg = document.createElement("div");
+		var icon = msg.appendChild(document.createElement("span"));
+		icon.innerHTML = "!!";
+		icon.className = "lint-error-icon";
+		msg.appendChild(document.createTextNode("注意： 这个地方写得不够简洁"));
+		msg.className = "lint-error";
+		room.view.editor.addLineWidget(3, msg, {coverGutter: false, noHScroll: true});
+
+
 		if(room.q.length > 0){
 			room.socket('change', room.q[0]);
 		}
@@ -486,15 +496,6 @@ var room, listeners = {
 		var pos = room.view.editor.posFromIndex(data.from + data.text.length);
 		room.cursors[data.name].pos = data.from + data.text.length;
 		room.view.editor.addWidget(pos, room.cursors[data.name].element, false);
-
-		//test
-		var msg = document.createElement("div");
-		var icon = msg.appendChild(document.createElement("span"));
-		icon.innerHTML = "!!";
-		icon.className = "lint-error-icon";
-		msg.appendChild(document.createTextNode("hahahaha"));
-		msg.className = "lint-error";
-		room.view.editor.addLineWidget(3, msg, {coverGutter: false, noHScroll: true});
 
 	    return;
 	},
