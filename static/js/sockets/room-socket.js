@@ -486,6 +486,16 @@ var room, listeners = {
 		var pos = room.view.editor.posFromIndex(data.from + data.text.length);
 		room.cursors[data.name].pos = data.from + data.text.length;
 		room.view.editor.addWidget(pos, room.cursors[data.name].element, false);
+
+		//test
+		var msg = document.createElement("div");
+		var icon = msg.appendChild(document.createElement("span"));
+		icon.innerHTML = "!!";
+		icon.className = "lint-error-icon";
+		msg.appendChild(document.createTextNode("hahahaha"));
+		msg.className = "lint-error";
+		room.view.editor.addLineWidget(3, msg, {coverGutter: false, noHScroll: true});
+
 	    return;
 	},
 	  
