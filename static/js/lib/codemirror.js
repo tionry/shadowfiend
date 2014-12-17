@@ -717,12 +717,11 @@ window.CodeMirror = (function() {
     if (widget.noHScroll) {
       (wrap.alignable || (wrap.alignable = [])).push(node);
       var width = dims.wrapperWidth;
-      node.style.left = dims.fixedPos +500 + "px";
+      node.style.left = dims.fixedPos + "px";
       if (!widget.coverGutter) {
         width -= dims.gutterTotalWidth;
         node.style.paddingLeft = dims.gutterTotalWidth + "px";
       }
-      node.style.top = "-22px";
       node.style.width = width + "px";
     }
     if (widget.coverGutter) {
