@@ -161,9 +161,13 @@ app.Room && _.extend(app.Room.prototype, {
 		//初始化批注按钮
 		//comments
 		for (var i = 0; i < this.view.editor.doc.size; i++){
-			var msg = document.createElement("div");
-			msg.className = "glyphicon glyphicon-bookmark";
-			this.view.editor.addLineWidget(i, msg, {coverGutter: false, noHScroll: true});
+			var msg = $('<div></div>>');
+			var icon = $('<span></span>');
+			icon.html('+');
+			icon.addClass('lint-error-icon');
+			msg.append(icon);
+			msg.addClass('lint-error');
+			this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
 		}
 
 
