@@ -162,6 +162,12 @@ var app = app || {};
             app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
+        },
+
+        // Notify by other user
+        "refresh-interview": function() {
+            app.socket.emit('read-interview', {mode: 'interviewer'});
+            app.socket.emit('read-interview', {mode: 'interviewee'});
         }
     };
 

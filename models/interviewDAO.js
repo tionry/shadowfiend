@@ -85,9 +85,16 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     });
 };
 
-InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
-    if(mode == 1){
-        db.interview.find({"interviewer":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime:1}, function (err,interviews) {
+InterviewDAO.prototype.getInterviews = function (userName, mode, callback) {
+    if (mode == 1) {
+        db.interview.find({"interviewer": userName}, {
+            name: 1,
+            interviewer: 1,
+            interviewee: 1,
+            problemlist: 1,
+            status: 1,
+            createTime: 1
+        }, function (err, interviews) {
             if (err) {
                 return callback("inner error");
             }
@@ -96,22 +103,21 @@ InterviewDAO.prototype.getInterviews = function (userName,mode,callback) {
             }
             return callback(null, interviews);
         });
+    } else {
+        if (mode == 2) {
+            db.interview.find({"interviewee.name":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime: 1}, function (err,interviews) {
+                if (err) {
+                    return callback("inner error");
+                }
+                if (!interviews) {
+                    return callback("interview not found");
+                }
+                return callback(null, interviews);
+            });
+        } else {
+            return callback("bad mode infomation");
+        }
     }
-    else if(mode == 2){
-        db.interview.find({"interviewee.name":userName}, {name:1,interviewer:1,interviewee:1,status:1, createTime: 1}, function (err,interviews) {
-            if (err) {
-                return callback("inner error");
-            }
-            if (!interviews) {
-                return callback("interview not found");
-            }
-            return callback(null, interviews);
-        });
-    }
-    else{
-        return callback("bad mode infomation");
-    }
-
 };
 
 
@@ -240,7 +246,6 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
     lock.acquire(interviewname, function() {
         db.interview.findOne({name:interviewname},{problemlist:1},function(err,interv){
             if(err){
-
                 lock.release(interviewname);
                 return callback("inner error");
             }
@@ -269,7 +274,6 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
                                     lock.release(interviewname);
                                     return callback("inner error");
                                 }
-
                                 db.interview.findOne({name: interviewname}, {
                                     name: 1,
                                     problemlist: 1

@@ -23,6 +23,9 @@ var app = app || {};
 
         render: function () {
             this.$el.html(this.template(this.model.json));
+            if (this.model.v) {
+                this.model.v.renewView();
+            }
             return this;
         },
 

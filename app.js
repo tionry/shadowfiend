@@ -918,6 +918,7 @@ io.sockets.on('connection', function(socket){
 					problem: problem,
 					mode: 'problemset'
 				});
+				socket.broadcast.emit('refresh-problemset');
 			});
 		});
 	});
@@ -930,7 +931,10 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		problemDAO.deleteProblem(data.name, function(err) {
-			return socket.emit('delete-problem', {err: err});
+			if (err) {
+				return socket.emit('delete-problem', {err: err});
+			}
+			socket.broadcast.emit('refresh-problemset');
 		});
 	});
 
@@ -1013,6 +1017,7 @@ io.sockets.on('connection', function(socket){
 					mode: 1,
 					username: socket.session.user.name
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1074,6 +1079,7 @@ io.sockets.on('connection', function(socket){
 					return socket.emit('after-update-interview-problem', {err: err});
 				}
 				socket.emit('after-update-interview-problem', {problem: problems});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1152,6 +1158,7 @@ io.sockets.on('connection', function(socket){
 					interviewers: users,
 					interviewName: data.name
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1183,6 +1190,7 @@ io.sockets.on('connection', function(socket){
 							interviewees: intervieweeList,
 							interviewName: data.name
 						});
+						socket.broadcast.emit('refresh-interview');
 					}
 				});
 			});
@@ -1207,7 +1215,8 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('after-change-interview-status', {err: err});
 				}
-				return socket.emit('after-change-interview-status', {log: 'success'});
+				socket.emit('after-change-interview-status', {log: 'success'});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1259,6 +1268,7 @@ io.sockets.on('connection', function(socket){
 						i++;
 						if (i == data.intervieweeList.length) {
 							socket.emit('after-push-problem', {log: 'success'});
+							socket.broadcast.emit('refresh-interview');
 						}
 					});
 				});
@@ -1286,6 +1296,7 @@ io.sockets.on('connection', function(socket){
 					mode: 1,
 					username: socket.session.user.name
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1312,6 +1323,7 @@ io.sockets.on('connection', function(socket){
 					users: users,
 					interviewName: data.interviewName
 				});
+				socket.broadcast.emit('refresh-interview');
 			});
 		});
 	});
@@ -1351,6 +1363,7 @@ io.sockets.on('connection', function(socket){
 				return socket.emit('after-change-problem-status-interview', {err: err});
 			}
 			socket.emit('after-change-problem-status-interview', {interview: interview});
+			socket.broadcast.emit('refresh-interview');
 		});
 	});
 
@@ -1444,22 +1457,33 @@ io.sockets.on('connection', function(socket){
 			if (interview.status != 'running') {
 				return socket.emit('try-enter-interview', {err: "not a running interview"});
 			}
-			interviewDAO.getstatusproblems(data.interviewName, 'pushing', function(err, problemList) {
+			var i;
+			for (i = 0; i < interview.interviewee.length; i++) {
+				if (interview.interviewee[i].name == socket.session.user.name) {
+					if (interview.interviewee[i].status != 'onRound') {
+						return socket.emit('try-enter-interview', {err: "not an onRound interviewee"});
+					}
+					break;
+				}
+			}
+			var problem = null;
+			for (i = 0; i < interview.problemlist.length; i++) {
+				if (interview.problemlist[i].status == 'pushing') {
+					problem = interview.problemlist[i].name;
+					break;
+				}
+			}
+			if (!problem) {
+				return socket.emit('try-enter-interview', {err: "no pushing problem"});
+			}
+			var path = '/' + socket.session.user.name + '/' + problem + '@' + data.interviewName;
+			docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
 				if (err) {
 					return socket.emit('try-enter-interview', {err: err});
 				}
-				if (problemList.length == 0) {
-					return socket.emit('try-enter-interview', {err: "no pushing problem"});
-				}
-				var path = '/' + data.intervieweeName + '/' + problemList[0] + '@' + data.interviewName;
-				docDAO.getDocByPath(socket.session.user._id, path, function(err, doc) {
-					if (err) {
-						return socket.emit('try-enter-interview', {err: err});
-					}
-					socket.emit('try-enter-interview', {
-						doc: doc,
-						interviewName: data.interviewName
-					})
+				socket.emit('try-enter-interview', {
+					doc: doc,
+					interviewName: data.interviewName
 				});
 			});
 		});
