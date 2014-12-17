@@ -160,7 +160,7 @@ app.Room && _.extend(app.Room.prototype, {
 
 		//初始化批注按钮
 		//comments
-		for (var i = 0; i < this.view.editor.lines.length; i++){
+		for (var i = 0; i < this.view.editor.doc.size; i++){
 			var msg = document.createElement("div");
 			var icon = msg.appendChild(document.createElement("span"));
 			icon.innerHTML = "!";
