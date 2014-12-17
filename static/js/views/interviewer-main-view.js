@@ -133,7 +133,7 @@ var app = app || {};
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
-            $('#end-interview-btn').hide();
+            $('#end-interview-btn').attr('disabled', 'disabled');
             $('#interviewer-item-status').text('completed');
             $('#interviewer-item-status').removeClass();
             $('#interviewer-item-status').addClass('blue');
