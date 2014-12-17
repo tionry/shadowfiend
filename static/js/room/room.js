@@ -158,6 +158,19 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		//初始化批注按钮
+		//comments
+		for (var i = 0; i < this.view.editor.lines.length; i++){
+			var msg = document.createElement("div");
+			var icon = msg.appendChild(document.createElement("span"));
+			icon.innerHTML = "!";
+			icon.className = "lint-error-icon";
+			msg.appendChild(document.createTextNode('No.'+ i + " line comment"));
+			msg.className = "lint-error";
+			this.view.editor.addLineWidget(i, msg, {coverGutter: false, noHScroll: true});
+		}
+
+
 		//初始化控制台
 	    $('#console-inner').html('');
 	    this.view.setConsole(false);
