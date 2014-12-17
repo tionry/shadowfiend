@@ -730,8 +730,13 @@ var app = app || {};
         start_interview: function(){
             var modal = Backbone.$('#startinterview-cfm');
             app.showInputModal(modal);
+            modal.on('hide', function () {
+                cnfm.off('click');
+                modal.off('hide');
+            });
             var cnfm = modal.find('.modal-confirm');
             cnfm.on('click', function(){
+                modal.hide();
                 var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
