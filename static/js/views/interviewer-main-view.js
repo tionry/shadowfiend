@@ -728,13 +728,14 @@ var app = app || {};
 
         //开始整场面试
         start_interview: function(){
-            var modal = Backbone.$('#startinterview-cfm');
+            var modal = Backbone.$('#startinterview-cfm'),
+                cnfm = $('#startinterview-cnfm'),
+                that = this;
             app.showInputModal(modal);
             modal.on('hide', function () {
                 cnfm.off('click');
                 modal.off('hide');
             });
-            var cnfm = $('#startinterview-cnfm');
             cnfm.on('click', function(){
                 modal.modal('hide');
                 var name = $('#interviewer-item-name').text();
@@ -745,7 +746,7 @@ var app = app || {};
                         status: 'ready',
                     });
                 }
-                this.renew_ready_interview();
+                that.renew_ready_interview();
                 app.showMessageBox('info', 'interviewstart');
             })
         },
