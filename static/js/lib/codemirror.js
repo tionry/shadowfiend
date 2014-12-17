@@ -690,8 +690,8 @@ window.CodeMirror = (function() {
         wrap.lineNumber = gutterWrap.appendChild(
           elt("div", lineNumberFor(cm.options, lineNo),
               "CodeMirror-linenumber CodeMirror-gutter-elt",
-              "left: " + 500+dims.gutterLeft["CodeMirror-linenumbers"] + "px; width: "
-              + display.lineNumInnerWidth + "px; top: -22px;"));
+              "left: " + dims.gutterLeft["CodeMirror-linenumbers"] + "px; width: "
+              + display.lineNumInnerWidth + "px"));
       if (markers)
         for (var k = 0; k < cm.options.gutters.length; ++k) {
           var id = cm.options.gutters[k], found = markers.hasOwnProperty(id) && markers[id];
@@ -717,11 +717,12 @@ window.CodeMirror = (function() {
     if (widget.noHScroll) {
       (wrap.alignable || (wrap.alignable = [])).push(node);
       var width = dims.wrapperWidth;
-      node.style.left = dims.fixedPos + "px";
+      node.style.left = dims.fixedPos +500 + "px";
       if (!widget.coverGutter) {
         width -= dims.gutterTotalWidth;
         node.style.paddingLeft = dims.gutterTotalWidth + "px";
       }
+      node.style.top = "-22px";
       node.style.width = width + "px";
     }
     if (widget.coverGutter) {
