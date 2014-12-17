@@ -167,12 +167,10 @@ app.Room && _.extend(app.Room.prototype, {
 			icon.addClass('lint-error-icon');
 			msg.append(icon);
 			msg.addClass('lint-error');
-			this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
-			msg.parent().css({
-				'top' : '-22px',
-				'left' : '',
-				'right' : '22px',
+			msg.on('click', function(){
+				alert('done!');
 			})
+			this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
 		}
 
 
