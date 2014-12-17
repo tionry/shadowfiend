@@ -734,9 +734,9 @@ var app = app || {};
                 cnfm.off('click');
                 modal.off('hide');
             });
-            var cnfm = modal.find('.modal-confirm');
+            var cnfm = $('#startinterview-cnfm');
             cnfm.on('click', function(){
-                modal.hide();
+                modal.modal('hide');
                 var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
