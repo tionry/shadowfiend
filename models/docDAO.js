@@ -89,7 +89,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 						}
 						else{
 							var cTime = new Date().getTime();
-							db.doc.insert({path:path, type:"doc", owner:userId, members:[],drawingboard:{}, revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
+							db.doc.insert({path:path, type:"doc", owner:userId, members:[],drawingboard:"", revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
 								if(err){
 									lock.release(rootPath);
 									return callback("inner error");
