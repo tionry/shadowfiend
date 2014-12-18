@@ -56,6 +56,7 @@ var app = app || {};
             'click #debugcontinue': 'debugcontinue',
             'click #voice-on': 'voice',
             'click #toggle-problem': 'toggleproblem',
+            'click #graphics-on': 'drawboard',
 
             'keydown #console-input': function (e) {
                 ((e.keyCode || e.which) == 13) && this.stdin();
@@ -463,7 +464,18 @@ var app = app || {};
                 }, 200);
             });
             return msg;
-        }
+        },
+
+        drawboard: function(){
+            var modal = $('#graphics');
+            app.showInputModal(modal);
+        },
+
+        clearAllLineWidget :function(){
+            for (var i = 0; i < this.widgets.length; i++)
+                this.editor.removeLineWidget(this.widgets[i]);
+            this.widgets = [];
+        },
     });
     app.init || (app.init = {});
     app.init.roomView = function () {
