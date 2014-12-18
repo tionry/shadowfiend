@@ -480,7 +480,7 @@ var app = app || {};
         drawboard: function(){
             var modal = $('#graphics');
             app.showInputModal(modal);
-            var canvas = $('#drawing-board-canvas'),
+            var canvas = $('.drawing-board-canvas'),
                 that = this;
             canvas.on('mouseup', function(){
                 that.saveCanvas();
