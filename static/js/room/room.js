@@ -180,7 +180,7 @@ app.Room && _.extend(app.Room.prototype, {
 			msg.on('click', function(){
 				alert('done!');
 			})
-			var options = {placement: 'left', trigger: 'manual', html: true, title:'Comment'};
+			var options = {placement:'bottom', trigger: 'manual', html: true, title:'Comment'};
 			this.createPopover(icon, options);
 			icon.on('mouseenter', function() {
 				msg.popover('show');
