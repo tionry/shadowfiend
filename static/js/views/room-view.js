@@ -474,7 +474,9 @@ var app = app || {};
 
         renewDraw: function(data){
             var canvas = $('.drawing-board-canvas')[0];
-            canvas.getContext("2d").drawImage(data, 0, 0);
+            var image = new Image();
+            image.src = data;
+            canvas.getContext("2d").drawImage(image, 0, 0);
         },
 
         drawboard: function(){
