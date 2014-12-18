@@ -455,15 +455,5 @@ var app = app || {};
         if (!app.Package.ENABLE_DEBUG) {
             $('#editor-debug').remove();
         }
-        var msg = $('<div></div>');
-        var icon = $('<span></span>');
-        icon.html('+');
-        icon.addClass('lint-error-icon');
-        msg.append(icon);
-        msg.addClass('lint-line');
-        msg.on('click', function(){
-            alert('done!');
-        })
-        view.commentElement = msg;
     };
 })();
