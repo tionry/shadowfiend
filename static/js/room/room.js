@@ -180,9 +180,9 @@ app.Room && _.extend(app.Room.prototype, {
 			msg.on('click', function(){
 				alert('done!');
 			})
-			var options = {placement: 'top', trigger: 'manual', html: true, title:'Comment'};
-			this.createPopover(msg, options);
-			msg.on('mouseenter', function() {
+			var options = {placement: 'left', trigger: 'manual', html: true, title:'Comment'};
+			this.createPopover(icon, options);
+			icon.on('mouseenter', function() {
 				msg.popover('show');
 			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
