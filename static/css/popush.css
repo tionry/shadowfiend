@@ -597,7 +597,6 @@ hr{
 	position: relative;
 	z-index: 3;
 }
-.lint-error-icon:hover
-{
+.lint-error-icon:hover {
 	background-color: #aa0000;
 }

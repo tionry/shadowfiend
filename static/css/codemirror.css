@@ -197,7 +197,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
 .CodeMirror-linewidget {
   position: absolute;
-  z-index: 2;
   overflow: auto;
 }
 
