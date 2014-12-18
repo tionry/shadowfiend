@@ -55,6 +55,8 @@ var app = app || {};
             'click #debugfinish': 'debugfinish',
             'click #debugcontinue': 'debugcontinue',
             'click #voice-on': 'voice',
+            'click #toggle-problem': 'toggleproblem',
+
             'keydown #console-input': function (e) {
                 ((e.keyCode || e.which) == 13) && this.stdin();
             },
@@ -119,6 +121,26 @@ var app = app || {};
             this.editor.refresh();
             this.resize();
             this.room.chatstate = !this.room.chatstate;
+        },
+
+        /*开关题目显示*/
+        toggleproblem: function(){
+            if (this.room.problemstate) {
+                $('#editormain').parent().removeClass('col-xs-9');
+                $('#editormain').parent().addClass('col-xs-6');
+                $('#problem-box').show();
+                $('#toggle-problem').html('<span class="glyphicon glyphicon-backward"></span>');
+                $('#toggle-problem').attr('title', strings['hide-title']);
+            } else {
+                $('#problem-box').hide();
+                $('#editormain').parent().removeClass('col-xs-6');
+                $('#editormain').parent().addClass('col-xs-9');
+                $('#toggle-chat').html('<span class="glyphicon glyphicon-forward"></span>');
+                $('#toggle-chat').attr('title', strings['show-title']);
+            }
+            this.editor.refresh();
+            this.resize();
+            this.room.problemstate = !this.room.problemstate;
         },
         /*设置代码编辑框全屏*/
         setFullScreen: function (cm, full) {
