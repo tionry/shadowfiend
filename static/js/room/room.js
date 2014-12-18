@@ -183,10 +183,11 @@ app.Room && _.extend(app.Room.prototype, {
 			var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
 			icon.popover(options);
 			icon.on('mouseenter', function() {
-				icon.popover('show');
+				$(this).popover('show');
 			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
+
 
 
 
