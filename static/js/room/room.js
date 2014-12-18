@@ -181,7 +181,7 @@ app.Room && _.extend(app.Room.prototype, {
 				alert('done!');
 			})
 			var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
-			this.createPopover(icon, options);
+			icon.popover(options);
 			icon.on('mouseenter', function() {
 				icon.popover('show');
 			});
