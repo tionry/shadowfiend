@@ -496,6 +496,11 @@ var room, listeners = {
 			return;
 		}
 		app.room.afterRevision(data.doc.drawingboard);
+	},
+
+	// Notify by other user
+	"refresh-drawing-board": function(data) {
+		app.socket.emit('get-image', {fileName: data.fileName});
 	}
 	  
 };
