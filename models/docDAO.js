@@ -1323,7 +1323,7 @@ DocDAO.prototype.commit = function(userId, path, content, callback){
 				creater:userId,
 				modifyTime:new Date().getTime(),
 				modifier:userId,
-				content:content,
+				content:content
 				},
 				function(err,revision){
 					if (err){
@@ -1479,7 +1479,7 @@ DocDAO.prototype.interviewdone = function(path,memberlist,callback){
 	return callback(null,memberlist);
 };
 
-DocDAO.prototype.updatedrawingboard(docId,drawingboard,callback)
+DocDAO.prototype.updatedrawingboard = function(docId,drawingboard,callback)
 {
 	db.doc.update({_id:docId},{
 		$set:{
@@ -1491,9 +1491,9 @@ DocDAO.prototype.updatedrawingboard(docId,drawingboard,callback)
 		}
 		return callback(null);
 	});
-}
+};
 
-DocDAO.prototype.getdrawingboard(docId,drawingboard,callback)
+DocDAO.prototype.getdrawingboard = function(docId, callback)
 {
 	db.doc.findOne({_id:docId},{
 			drawingboard:1
@@ -1503,4 +1503,4 @@ DocDAO.prototype.getdrawingboard(docId,drawingboard,callback)
 		}
 		return callback(doc);
 	});
-}
+};

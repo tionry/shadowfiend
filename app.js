@@ -1488,4 +1488,43 @@ io.sockets.on('connection', function(socket){
 			});
 		});
 	});
+
+	socket.on('save-image', function(data) {
+		if (!check(data, 'fileName', 'image')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		docDAO.getDocByPath(socket.user._id, data.fileName, function(err, doc) {
+			if (err) {
+				return socket.emit('after-save-image', {err: err});
+			}
+			docDAO.updatedrawingboard(doc._id, data.image, function(err) {
+				if (err) {
+					return socket.emit('after-save-image', {err: err});
+				}
+			});
+		});
+	});
+
+	socket.on('get-image', function(data) {
+		if (!check(data, 'fileName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		docDAO.getDocByPath(socket.user._id, data.fileName, function(err, doc) {
+			if (err) {
+				return socket.emit('after-get-image', {err: err});
+			}
+			docDAO.getdrawingboard(doc._id, function(err, doc) {
+				if (err) {
+					return socket.emit('after-get-image', {err: err});
+				}
+				socket.emit('after-get-image', {doc: doc});
+			});
+		});
+	});
 });

@@ -490,6 +490,13 @@ var room, listeners = {
 
 	    return;
 	},
+
+	"after-get-image": function(data) {
+		if (!data || data.err) {
+			return;
+		}
+		app.room.afterRevision(data.doc.drawingboard);
+	}
 	  
 };
 
