@@ -7,6 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
   <link href="css/codemirror.css" rel="stylesheet" media="screen" />
   <link href="css/popush.css" rel="stylesheet" media="screen" />
+  <link href="css/drawingboard.css" rel="stylesheet" media="screen" />
   <script type="text/javascript" src="js/conf.js"></script>
   <script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
@@ -307,6 +308,7 @@
             <span class="input-group-btn">
               <button class="btn btn-white" type="button" title="send" id="chat-send"><span class="glyphicon glyphicon-comment"></span></button>
               <button class="btn btn-white" type="button" id="voice-on" title="voice"><span class="glyphicon glyphicon-volume-up"></span></button>
+              <button class="btn btn-white" type="button" id="graphics-on" title="graphics"><span class="glyphicon glyphicon-edit"></span></button>
             </span>
           </div>
         </div>
@@ -1086,6 +1088,22 @@
         </div>
       </div>
     </div>
+
+    <!-- popover -->
+    <div id="graphics" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="graphicsLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="graphicsLabel" localization>graphics</h3>
+          </div>
+          <div class="modal-body">
+            <div id="drawingboard" style="width:600px; height:400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <a href="" download="" id="downloada" onclick=""></a>
   <div id="footer" class="navbar navbar-default navbar-fixed-bottom">
@@ -1098,6 +1116,7 @@
       </div>
     </div>
   </div>
+
   <!--templates-->
   <script type="text/template" id="member-popover-template">
     <img class="pull-left popover-character user-<%= name %>" src="<%= avatar %>" witdh="48" height="48"/>
@@ -1178,5 +1197,9 @@
   <script type="text/javascript" src="js/room/voice.js"></script>
   <script type="text/javascript" src="js/room/room.js"></script>
   <script type="text/javascript" src="js/router.js"></script>
+  <script type="text/javascript" src="js/room/drawingboard.js"></script>
+  <script>
+    var myBoard = new DrawingBoard.Board('drawingboard');
+  </script>
 </body>
 </html>
