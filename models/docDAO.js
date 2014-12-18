@@ -1501,6 +1501,6 @@ DocDAO.prototype.getdrawingboard = function(path, callback)
 		if (err) {
 			return callback("inner error");
 		}
-		return callback(doc);
+		return callback(null, doc);
 	});
 };
