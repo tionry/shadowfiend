@@ -9,7 +9,7 @@ var Room = function() {
 	    operationLock: false,
 	    waiting: false,
 		chatstate: false,
-        problemstate: false,
+        problemstate: true,
     	runable: true,
     	debugable: false,
     	cursors: {},
