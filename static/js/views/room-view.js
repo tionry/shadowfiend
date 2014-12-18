@@ -35,7 +35,7 @@ var app = app || {};
 			    $varsBtns: '.debugandwait',
 			    $mainBox: '#editormain-inner',
 			    $main: '#editormain',
-			    $tip: '#fullscreentip',
+			    $tip: '#fullscreentip'
 			};
             for (var i in m) {
                 this[i] = e.find(m[i]);
@@ -56,13 +56,14 @@ var app = app || {};
             'click #debugcontinue': 'debugcontinue',
             'click #voice-on': 'voice',
             'click #toggle-problem': 'toggleproblem',
+            'click #graphics-on': 'drawboard',
 
             'keydown #console-input': function (e) {
                 ((e.keyCode || e.which) == 13) && this.stdin();
             },
             'keydown #chat-input': function (e) {
                 ((e.keyCode || e.which) == 13) && this.chat();
-            },
+            }
         },
         /*语音*/
         voice: function () {
@@ -334,7 +335,7 @@ var app = app || {};
                 content: strings['unsaved'] || 'unsaved',
                 placement: 'right',
                 trigger: 'hover',
-                container: 'body',
+                container: 'body'
             });
             this.room.timestamp = 0;
             this.room.isSaving = true;
@@ -362,7 +363,7 @@ var app = app || {};
                 html: true,
                 content: '<b>' + content + '</b>',
                 placement: 'bottom',
-                trigger: 'hover',
+                trigger: 'hover'
             });
             return cur[0];
         },
@@ -386,18 +387,18 @@ var app = app || {};
             o.$under.css('height', underh + 'px');
             o.$con.css({
                 width: (w - w / 3 - 2) + 'px',
-                height: (underh - 12) + 'px',
+                height: (underh - 12) + 'px'
             });
             o.$vars.css({
                 width: (w / 3 - 1) + 'px',
-                height: (underh - 12) + 'px',
+                height: (underh - 12) + 'px'
             });
             o.$varsReal.css('height', (underh - 42) + 'px');
             o.$conBox.css({
-                height: (underh - 81) + 'px',
+                height: (underh - 81) + 'px'
             });
             o.$conIn.css({
-                width: (w - w / 3 - 5) + 'px',
+                width: (w - w / 3 - 5) + 'px'
             });
             if (!this.isFullScreen(this.editor))
                 this.$('.CodeMirror').css('height', (h - underh - this.$('#over-editor').height() - 110) + 'px');
@@ -463,6 +464,17 @@ var app = app || {};
                 }, 200);
             });
             return msg;
+        },
+
+        drawboard: function(){
+            var modal = $('#graphics');
+            app.showInputModal(modal);
+        },
+
+        clearAllLineWidget :function(){
+            for (var i = 0; i < this.widgets.length; i++)
+                this.editor.removeLineWidget(this.widgets[i]);
+            this.widgets = [];
         }
     });
     app.init || (app.init = {});
@@ -478,7 +490,7 @@ var app = app || {};
         var Browser = {};
         var ua = navigator.userAgent.toLowerCase();
         var s; (s = ua.match(/msie ([\d.]+)/)) ? Browser.ie = s[1] : (s = ua.match(/firefox\/([\d.]+)/)) ? Browser.firefox = s[1] : (s = ua.match(/chrome\/([\d.]+)/)) ? Browser.chrome = s[1] : (s = ua.match(/opera.([\d.]+)/)) ? Browser.opera = s[1] : (s = ua.match(/version\/([\d.]+).*safari/)) ? Browser.safari = s[1] : 0;
-        /*if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12)) {
+        if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12) && (!Browser.firefox)) {
             app.novoice = true;
             $('#voice-on').addClass('disabled');
             $('#voice-on').removeAttr('title');
@@ -489,7 +501,7 @@ var app = app || {};
                 trigger: 'hover',
                 container: 'body'
             });
-        }*/
+        }
         view.editor = CodeMirror.fromTextArea($('#editor-textarea').get(0), {
             lineNumbers: true,
             lineWrapping: true,
