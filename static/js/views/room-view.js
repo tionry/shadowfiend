@@ -421,6 +421,49 @@ var app = app || {};
                 CodeMirror.autoLoadMode(this.editor, '');
             }
         },
+
+        attachEvents : function (e) {
+            var view = this;
+            $('.popover').on('mouseenter', function() {
+                view.inpopover=true;
+            });
+            $('.popover').on('mouseleave', function() {
+                view.inpopover=false;
+                $(e).popover('hide');
+            });
+        },
+
+        setLineWidget: function (){
+            var msg = $('<div></div>');
+            var icon = $('<span></span>');
+            icon.html('+');
+            icon.addClass('lint-error-icon');
+            msg.addClass('lint-line');
+            msg.append(icon);
+            msg.on('click', function(){
+                alert('done!');
+            })
+            var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
+            var view = this;
+            icon.popover(options);
+            icon.on('mouseenter', function() {
+                var that = this;
+                setTimeout(function(){
+                    if (!view.inpopover) {
+                        $(that).popover('show');
+                        view.attachEvents(that);
+                    }
+                }, 200);
+            });
+            icon.on('mouseleave', function(){
+                var that = this;
+                setTimeout(function(){
+                    if (!view.inpopover)
+                        $(that).popover('hide');
+                }, 200);
+            });
+            return msg;
+        }
     });
     app.init || (app.init = {});
     app.init.roomView = function () {
@@ -435,7 +478,7 @@ var app = app || {};
         var Browser = {};
         var ua = navigator.userAgent.toLowerCase();
         var s; (s = ua.match(/msie ([\d.]+)/)) ? Browser.ie = s[1] : (s = ua.match(/firefox\/([\d.]+)/)) ? Browser.firefox = s[1] : (s = ua.match(/chrome\/([\d.]+)/)) ? Browser.chrome = s[1] : (s = ua.match(/opera.([\d.]+)/)) ? Browser.opera = s[1] : (s = ua.match(/version\/([\d.]+).*safari/)) ? Browser.safari = s[1] : 0;
-        if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12)) {
+        /*if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12)) {
             app.novoice = true;
             $('#voice-on').addClass('disabled');
             $('#voice-on').removeAttr('title');
@@ -446,7 +489,7 @@ var app = app || {};
                 trigger: 'hover',
                 container: 'body'
             });
-        }
+        }*/
         view.editor = CodeMirror.fromTextArea($('#editor-textarea').get(0), {
             lineNumbers: true,
             lineWrapping: true,

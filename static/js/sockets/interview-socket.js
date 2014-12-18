@@ -22,7 +22,6 @@ var app = app || {};
             }
         },
 
-        // Check the user exists
         "check-user": function(data) {
             if (data == null) {
                 app.Lock.remove();
