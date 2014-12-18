@@ -1496,7 +1496,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		docDAO.getDocByPath(socket.user._id, data.fileName, function(err, doc) {
+		docDAO.getDocByPath(socket.session.user._id, data.fileName, function(err, doc) {
 			if (err) {
 				return socket.emit('after-save-image', {err: err});
 			}
@@ -1516,7 +1516,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		docDAO.getDocByPath(socket.user._id, data.fileName, function(err, doc) {
+		docDAO.getDocByPath(socket.session.user._id, data.fileName, function(err, doc) {
 			if (err) {
 				return socket.emit('after-get-image', {err: err});
 			}
