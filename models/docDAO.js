@@ -89,7 +89,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 						}
 						else{
 							var cTime = new Date().getTime();
-							db.doc.insert({path:path, type:"doc", owner:userId, members:[], revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
+							db.doc.insert({path:path, type:"doc", owner:userId, members:[],drawingboard:{}, revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
 								if(err){
 									lock.release(rootPath);
 									return callback("inner error");
@@ -122,7 +122,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 														}
 														else{
 															lock.release(rootPath);
-                              return callback(null, newDoc.createTime);
+                              								return callback(null, newDoc.createTime);
 														}
 													});
 												}
@@ -189,7 +189,8 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 														creater:userId,
 														modifyTime:new Date().getTime(),
 														modifier:userId,
-														content:""
+														content:"",
+														drawingboard:{}
 													}, function(err,revision){
 														if(err){
 															lock.release(rootPath);
@@ -1322,7 +1323,7 @@ DocDAO.prototype.commit = function(userId, path, content, callback){
 				creater:userId,
 				modifyTime:new Date().getTime(),
 				modifier:userId,
-				content:content
+				content:content,
 				},
 				function(err,revision){
 					if (err){
@@ -1477,3 +1478,29 @@ DocDAO.prototype.interviewdone = function(path,memberlist,callback){
 	});
 	return callback(null,memberlist);
 };
+
+DocDAO.prototype.updatedrawingboard(docId,drawingboard,callback)
+{
+	db.doc.update({_id:docId},{
+		$set:{
+			drawingboard:drawingboard
+		}
+	},function(err) {
+		if (err) {
+			return callback("inner error");
+		}
+		return callback(null);
+	});
+}
+
+DocDAO.prototype.getdrawingboard(docId,drawingboard,callback)
+{
+	db.doc.findOne({_id:docId},{
+			drawingboard:1
+	},function(err,doc) {
+		if (err) {
+			return callback("inner error");
+		}
+		return callback(doc);
+	});
+}
