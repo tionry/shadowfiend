@@ -168,6 +168,7 @@ app.Room && _.extend(app.Room.prototype, {
 			var icon = $('<span></span>');
 			icon.html('+');
 			icon.addClass('lint-error-icon');
+			msg.addClass('lint-line');
 			msg.append(icon);
 			msg.on('click', function(){
 				alert('done!');
