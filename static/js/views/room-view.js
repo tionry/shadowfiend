@@ -473,7 +473,7 @@ var app = app || {};
         },
 
         renewDraw: function(data){
-            var canvas = $('#drawing-board-canvas')[0];
+            var canvas = $('.drawing-board-canvas')[0];
             canvas.drawImage(data, 0, 0);
         },
 
