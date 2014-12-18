@@ -135,8 +135,8 @@ var app = app || {};
                 $('#problem-box').hide();
                 $('#editormain').parent().removeClass('col-xs-6');
                 $('#editormain').parent().addClass('col-xs-9');
-                $('#toggle-chat').html('<span class="glyphicon glyphicon-forward"></span>');
-                $('#toggle-chat').attr('title', strings['show-title']);
+                $('#toggle-problem').html('<span class="glyphicon glyphicon-forward"></span>');
+                $('#toggle-problem').attr('title', strings['show-title']);
             }
             this.editor.refresh();
             this.resize();
