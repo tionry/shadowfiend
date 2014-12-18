@@ -199,7 +199,7 @@ app.Room && _.extend(app.Room.prototype, {
 				setTimeout(function(){
 					if (!inpopover) {
 						$(that).popover('show');
-						attachEvents(this);
+						attachEvents(that);
 					}
 				}, 200);
 			});
