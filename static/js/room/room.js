@@ -170,8 +170,10 @@ app.Room && _.extend(app.Room.prototype, {
 			msg.on('click', function(){
 				alert('done!');
 			})
-			this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
+			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
+		for (var i = 0; i < this.view.widgets.length; i++)
+			this.view.editor.removeLineWidget(this.view.widgets[i]);
 
 
 		//初始化控制台

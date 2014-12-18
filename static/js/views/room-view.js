@@ -408,6 +408,7 @@ var app = app || {};
         app.room || app.init.room();
         var view = app.views['room'] = new app.RoomView();
         view.room = app.room;
+        view.widgets = [];
         app.room.view = view;
         var Browser = {};
         var ua = navigator.userAgent.toLowerCase();
