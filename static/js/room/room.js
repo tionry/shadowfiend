@@ -185,6 +185,9 @@ app.Room && _.extend(app.Room.prototype, {
 			icon.on('mouseenter', function() {
 				$(this).popover('show');
 			});
+			icon.on('mouseleave', function(){
+				$(this).popover('hide');
+			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
 
