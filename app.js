@@ -1496,17 +1496,11 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		docDAO.getDocByPath(socket.session.user._id, data.fileName, function(err, doc) {
+		docDAO.updatedrawingboard(data.fileName, data.image, function(err) {
 			if (err) {
 				return socket.emit('after-save-image', {err: err});
 			}
-			socket.emit('refresh-drawing-board', {log: doc._id, image: data.image});
-			docDAO.updatedrawingboard(doc._id, data.image, function(err) {
-				if (err) {
-					return socket.emit('after-save-image', {err: err});
-				}
-				socket.broadcast.emit('refresh-drawing-board', {fileName: data.fileName});
-			});
+			socket.broadcast.emit('refresh-drawing-board', {fileName: data.fileName});
 		});
 	});
 
@@ -1517,16 +1511,11 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		docDAO.getDocByPath(socket.session.user._id, data.fileName, function(err, doc) {
+		docDAO.getdrawingboard(data.fileName, function(err, doc) {
 			if (err) {
 				return socket.emit('after-get-image', {err: err});
 			}
-			docDAO.getdrawingboard(doc._id, function(err, doc) {
-				if (err) {
-					return socket.emit('after-get-image', {err: err});
-				}
-				socket.emit('after-get-image', {doc: doc});
-			});
+			socket.emit('after-get-image', {doc: doc});
 		});
 	});
 });
