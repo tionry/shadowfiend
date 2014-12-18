@@ -78,13 +78,6 @@ app.Room && _.extend(app.Room.prototype, {
       		this.socket('join', model.get('path'));
     	}
 	},
-
-	createPopover : function(element, args){
-		var href =  $(element).data('popover-url'), txt = $(element).data('popover-content');
-		var html = '<p>Challenge: Can you click the link in a popover?</p><p><a href="'+href+'">'+txt+'</a></p>';
-
-		$(element).data('content', html).popover(args);
-	},
 	
   	/* 进入房间处理初始化 */
 	onSet: function(data, backPath) {
@@ -167,50 +160,12 @@ app.Room && _.extend(app.Room.prototype, {
 
 		//初始化批注按钮
 		//comments
-
-		//var inpopover = false;
-		//function attachEvents(e) {
-		//	$('.popover').on('mouseenter', function() {
-		//		inpopover=true;
-		//	});
-		//	$('.popover').on('mouseleave', function() {
-		//		inpopover=false;
-		//		$(e).popover('hide');
-		//	});
-		//}
-
-		for (var i = 0; i < this.view.widgets.length; i++)
-			this.view.editor.removeLineWidget(this.view.widgets[i]);
-		this.view.widgets = [];
+		this.view.clearAllLineWidget();
+		//for (var i = 0; i < this.view.widgets.length; i++)
+		//	this.view.editor.removeLineWidget(this.view.widgets[i]);
+		//this.view.widgets = [];
 		this.view.inpopover = false;
 		for (var i = 0; i < this.view.editor.doc.size; i++){
-			//var msg = $('<div></div>');
-			//var icon = $('<span></span>');
-			//icon.html('+');
-			//icon.addClass('lint-error-icon');
-			//msg.addClass('lint-line');
-			//msg.append(icon);
-			//msg.on('click', function(){
-			//	alert('done!');
-			//})
-			//var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
-			//icon.popover(options);
-			//icon.on('mouseenter', function() {
-			//	var that = this;
-			//	setTimeout(function(){
-			//		if (!inpopover) {
-			//			$(that).popover('show');
-			//			attachEvents(that);
-			//		}
-			//	}, 200);
-			//});
-			//icon.on('mouseleave', function(){
-			//	var that = this;
-			//	setTimeout(function(){
-			//		if (!inpopover)
-			//			$(that).popover('hide');
-			//	}, 200);
-			//});
 			var msg = this.view.setLineWidget();
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}

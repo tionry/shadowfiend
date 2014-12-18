@@ -466,9 +466,25 @@ var app = app || {};
             return msg;
         },
 
+        saveCanvas: function(){
+            var canvas = $('#drawing-board-canvas')[0];
+            var data = canvas.toDataURL('image/png');
+            app.room.onSavingDraw(data);
+        },
+
+        renewDraw: function(data){
+            var canvas = $('#drawing-board-canvas')[0];
+            canvas.drawImage(data, 0, 0);
+        },
+
         drawboard: function(){
             var modal = $('#graphics');
             app.showInputModal(modal);
+            var canvas = $('#drawing-board-canvas'),
+                that = this;
+            canvas.on('mouseup', function(){
+                that.saveCanvas();
+            });
         },
 
         clearAllLineWidget :function(){
