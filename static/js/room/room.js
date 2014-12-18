@@ -165,12 +165,23 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		//初始化批注按钮
+		//comments
+
 		var inpopover = false;
+		function attachEvents(e) {
+			$('.popover').on('mouseenter', function() {
+				inpopover=true;
+			});
+			$('.popover').on('mouseleave', function() {
+				inpopover=false;
+				$(e).popover('hide');
+			});
+		}
+
 		for (var i = 0; i < this.view.widgets.length; i++)
 			this.view.editor.removeLineWidget(this.view.widgets[i]);
 		this.view.widgets = [];
-		//初始化批注按钮
-		//comments
 		for (var i = 0; i < this.view.editor.doc.size; i++){
 			var msg = $('<div></div>');
 			var icon = $('<span></span>');
@@ -184,23 +195,23 @@ app.Room && _.extend(app.Room.prototype, {
 			var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
 			icon.popover(options);
 			icon.on('mouseenter', function() {
-				$(this).popover('show');
+				var that = this;
+				setTimeout(function(){
+					if (!inpopover) {
+						$(that).popover('show');
+						attachEvents(this);
+					}
+				}, 200);
 			});
 			icon.on('mouseleave', function(){
-				if (!inpopover)
-					$(this).popover('hide');
-			});
-			$('.popover').on('mouseenter', function(){
-				inpopover = true;
-			});
-			$('.popover').on('mouseleave', function(){
-				inpopover = false;
+				var that = this;
+				setTimeout(function(){
+					if (!inpopover)
+						$(that).popover('hide');
+				}, 200);
 			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
-
-
-
 
 		//初始化控制台
 	    $('#console-inner').html('');
