@@ -1479,9 +1479,9 @@ DocDAO.prototype.interviewdone = function(path,memberlist,callback){
 	return callback(null,memberlist);
 };
 
-DocDAO.prototype.updatedrawingboard = function(docId,drawingboard,callback)
+DocDAO.prototype.updatedrawingboard = function(path,drawingboard,callback)
 {
-	db.doc.update({_id:docId},{
+	db.doc.update({path:path},{
 		$set:{
 			drawingboard:drawingboard
 		}
@@ -1493,9 +1493,9 @@ DocDAO.prototype.updatedrawingboard = function(docId,drawingboard,callback)
 	});
 };
 
-DocDAO.prototype.getdrawingboard = function(docId, callback)
+DocDAO.prototype.getdrawingboard = function(path, callback)
 {
-	db.doc.findOne({_id:docId},{
+	db.doc.findOne({path:path},{
 			drawingboard:1
 	},function(err,doc) {
 		if (err) {
