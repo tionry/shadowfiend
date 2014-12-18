@@ -78,6 +78,13 @@ app.Room && _.extend(app.Room.prototype, {
       		this.socket('join', model.get('path'));
     	}
 	},
+
+	createPopover : function(element, args){
+		var href =  $(element).data('popover-url'), txt = $(element).data('popover-content');
+		var html = '<p>Challenge: Can you click the link in a popover?</p><p><a href="'+href+'">'+txt+'</a></p>';
+
+		$(element).data('content', html).popover(args);
+	},
 	
   	/* 进入房间处理初始化 */
 	onSet: function(data, backPath) {
@@ -173,6 +180,11 @@ app.Room && _.extend(app.Room.prototype, {
 			msg.on('click', function(){
 				alert('done!');
 			})
+			var options = {placement: 'top', trigger: 'manual', html: true, title:'Comment'};
+			this.createPopover(msg, options);
+			msg.on('mouseenter', function() {
+				msg.popover('show');
+			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
 
