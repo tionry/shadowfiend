@@ -41,7 +41,7 @@ app.Room && _.extend(app.Room.prototype, {
 				var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
 				var that = this;
 				var i = 0;
-				while(i < 100) {
+
 					dataRef.once('value', function (snapShot) {
 						delete dataRef;
 						if (snapShot.val() == null) {
@@ -133,14 +133,19 @@ app.Room && _.extend(app.Room.prototype, {
 							connection.connect();
 						}
 					});
-				}
+
 			}
 			catch(err){
 				alert(err);
 			}
 		}
 		else {
-			setTimeout(openVoice,2000);
+			var i = 0;
+			while(i < 100){
+				setTimeout(openVoice,2000);
+				i++;
+			}
+
 			this.leaveVoiceRoom();
 		}
   	},	
