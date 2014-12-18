@@ -934,7 +934,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 	var paths = path.split('/');
 	if (paths.length == 3){
 		//root
-		db.doc.findOne({path:path}, {_id:1}, function(err,result){
+		db.doc.findOne({path:path}, {_id:0}, function(err,result){
 			if (err){
 				return callback("inner error",null);
 			}
@@ -982,7 +982,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 			}
 			//is dir
 			else{
-				db.doc.find({_id:{$in:result.docs}}, {revisions:0,_id:1,docs:0}, function(err,docs){
+				db.doc.find({_id:{$in:result.docs}}, {revisions:0,_id:0,docs:0}, function(err,docs){
 					if (err){
 						return callback("inner error");
 					}
@@ -1047,7 +1047,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 			if (user.name != paths[1]){
 				return callback("unauthorized");
 			}
-			db.doc.find({_id:{$in : user.docs}}, {revisions:0,_id:1,docs:0}, function(err,docs){
+			db.doc.find({_id:{$in : user.docs}}, {revisions:0,_id:0,docs:0}, function(err,docs){
 				if (err){
 					return callback("inner error");
 				}
@@ -1088,7 +1088,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 	}
 	else {
 		var rootpath = '/' + paths[1]  + '/' + paths[2];
-		db.doc.findOne({path:rootpath}, {_id:1}, function(err,result){
+		db.doc.findOne({path:rootpath}, {_id:0}, function(err,result){
 			if (err){
 				return callback("inner error",null);
 			}
@@ -1109,7 +1109,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 				return callback("unauthorized",null);
 			}
 			/////////////
-			db.doc.findOne({path:path}, {_id:1}, function(err,mydoc){
+			db.doc.findOne({path:path}, {_id:0}, function(err,mydoc){
 				if (err){
 					return callback("inner error");
 				}
@@ -1120,7 +1120,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 				//returnResult.owner = paths[1];
 				returnResult.members = [];
 				if(mydoc.type == "doc"){
-					db.user.find({_id:{$in:userIds}}, {name:1,_id:1,avatar:1}, function(err,members){
+					db.user.find({_id:{$in:userIds}}, {name:1,_id:0,avatar:1}, function(err,members){
 						if(err){
 							return callback("inner error",null);
 						}
@@ -1141,7 +1141,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 					});
 				}
 				else{
-					db.doc.find({_id:{$in:mydoc.docs}}, {revisions:0,_id:1,docs:0}, function(err,docs){
+					db.doc.find({_id:{$in:mydoc.docs}}, {revisions:0,_id:0,docs:0}, function(err,docs){
 						if (err){
 							return callback("inner error");
 						}
