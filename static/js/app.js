@@ -167,4 +167,7 @@ $(document).ready(function() {
 	$(window).resize(function() {
     	(typeof app.resize === 'function') && app.resize();
 	});
+
+	//初始化绘图板控件
+	app.myBoard = new DrawingBoard.Board('drawingboard');
 });
