@@ -478,7 +478,7 @@ var app = app || {};
         var Browser = {};
         var ua = navigator.userAgent.toLowerCase();
         var s; (s = ua.match(/msie ([\d.]+)/)) ? Browser.ie = s[1] : (s = ua.match(/firefox\/([\d.]+)/)) ? Browser.firefox = s[1] : (s = ua.match(/chrome\/([\d.]+)/)) ? Browser.chrome = s[1] : (s = ua.match(/opera.([\d.]+)/)) ? Browser.opera = s[1] : (s = ua.match(/version\/([\d.]+).*safari/)) ? Browser.safari = s[1] : 0;
-        if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12)) {
+        /*if ((!Browser.chrome || parseInt(Browser.chrome) < 18) && (!Browser.opera || parseInt(Browser.opera) < 12)) {
             app.novoice = true;
             $('#voice-on').addClass('disabled');
             $('#voice-on').removeAttr('title');
@@ -489,7 +489,7 @@ var app = app || {};
                 trigger: 'hover',
                 container: 'body'
             });
-        }
+        }*/
         view.editor = CodeMirror.fromTextArea($('#editor-textarea').get(0), {
             lineNumbers: true,
             lineWrapping: true,
