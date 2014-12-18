@@ -164,9 +164,18 @@ app.Room && _.extend(app.Room.prototype, {
 		//初始化批注按钮
 		//comments
 		for (var i = 0; i < this.view.editor.doc.size; i++){
-			var widget = this.view.commentElement;
-			this.view.widgets.push(this.view.editor.addLineWidget(i, widget[0], {coverGutter: false, noHScroll: true}));
+			var msg = $('<div></div>');
+			var icon = $('<span></span>');
+			icon.html('+');
+			icon.addClass('lint-error-icon');
+			msg.append(icon);
+			msg.on('click', function(){
+				alert('done!');
+			})
+			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
+
+
 
 		//初始化控制台
 	    $('#console-inner').html('');
