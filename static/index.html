@@ -22,6 +22,7 @@
   <script type="text/javascript" src="js/lib/FileSaver.js"></script>
   <script type="text/javascript" src="js/lib/jszip.js"></script>
   <script type="text/javascript" src="js/lib/jszip-deflate.js"></script>
+  <script type="text/javascript" src="js/lib/drawingboard.js"></script>
 </head>
 <body style="display:none;">
   <div class="hero-unit navbar navbar-fixed-top" id="big-one">
@@ -1092,7 +1093,7 @@
     <!-- popover -->
     <div id="graphics" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="graphicsLabel" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog" style="width:660px; height:660px;">
-        <div class="modal-content">
+        <div class="modal-content" style="width:660px; height:660px;">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3 id="graphicsLabel" localization>graphics</h3>
@@ -1197,7 +1198,6 @@
   <script type="text/javascript" src="js/room/voice.js"></script>
   <script type="text/javascript" src="js/room/room.js"></script>
   <script type="text/javascript" src="js/router.js"></script>
-  <script type="text/javascript" src="js/room/drawingboard.js"></script>
   <script>
     var myBoard = new DrawingBoard.Board('drawingboard');
   </script>
