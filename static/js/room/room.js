@@ -158,6 +158,9 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		for (var i = 0; i < this.view.widgets.length; i++)
+			this.view.editor.removeLineWidget(this.view.widgets[i]);
+		this.view.widgets = [];
 		//初始化批注按钮
 		//comments
 		for (var i = 0; i < this.view.editor.doc.size; i++){
@@ -172,8 +175,7 @@ app.Room && _.extend(app.Room.prototype, {
 			})
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
-		for (var i = 0; i < this.view.widgets.length; i++)
-			this.view.editor.removeLineWidget(this.view.widgets[i]);
+
 
 
 		//初始化控制台
