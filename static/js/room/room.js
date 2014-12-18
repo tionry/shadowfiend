@@ -169,7 +169,6 @@ app.Room && _.extend(app.Room.prototype, {
 			icon.html('+');
 			icon.addClass('lint-error-icon');
 			msg.append(icon);
-			msg.addClass('lint-error');
 			msg.on('click', function(){
 				alert('done!');
 			})
