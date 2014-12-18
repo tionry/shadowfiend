@@ -138,6 +138,7 @@ app.Room && _.extend(app.Room.prototype, {
 			catch(err){
 				alert(err);
 			}
+			setTimeout(openVoice,5000);
 		}
 		else {
 			this.leaveVoiceRoom();
