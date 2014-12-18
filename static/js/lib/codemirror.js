@@ -722,7 +722,6 @@ window.CodeMirror = (function() {
         width -= dims.gutterTotalWidth;
         node.style.paddingLeft = dims.gutterTotalWidth + "px";
         node.style.top = "0px";
-        node.style.left = "3px"
       }
       node.style.width = width + "px";
     }
