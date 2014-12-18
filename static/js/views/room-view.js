@@ -421,6 +421,49 @@ var app = app || {};
                 CodeMirror.autoLoadMode(this.editor, '');
             }
         },
+
+        attachEvents : function (e) {
+            var view = this;
+            $('.popover').on('mouseenter', function() {
+                view.inpopover=true;
+            });
+            $('.popover').on('mouseleave', function() {
+                view.inpopover=false;
+                $(e).popover('hide');
+            });
+        },
+
+        setLineWidget: function (){
+            var msg = $('<div></div>');
+            var icon = $('<span></span>');
+            icon.html('+');
+            icon.addClass('lint-error-icon');
+            msg.addClass('lint-line');
+            msg.append(icon);
+            msg.on('click', function(){
+                alert('done!');
+            })
+            var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
+            var view = this;
+            icon.popover(options);
+            icon.on('mouseenter', function() {
+                var that = this;
+                setTimeout(function(){
+                    if (!view.inpopover) {
+                        $(that).popover('show');
+                        view.attachEvents(that);
+                    }
+                }, 200);
+            });
+            icon.on('mouseleave', function(){
+                var that = this;
+                setTimeout(function(){
+                    if (!view.inpopover)
+                        $(that).popover('hide');
+                }, 200);
+            });
+            return msg;
+        }
     });
     app.init || (app.init = {});
     app.init.roomView = function () {
