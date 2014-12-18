@@ -467,7 +467,7 @@ var app = app || {};
         },
 
         saveCanvas: function(){
-            var canvas = $('#drawing-board-canvas')[0];
+            var canvas = $('.drawing-board-canvas')[0];
             var data = canvas.toDataURL('image/png');
             app.room.onSavingDraw(data);
         },
