@@ -1088,6 +1088,16 @@
         </div>
       </div>
     </div>
+
+    <!-- popover -->
+    <div id="graphics" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="messagedialogLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div id="drawingboard" style="width:400px; height:600px;"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <a href="" download="" id="downloada" onclick=""></a>
   <div id="footer" class="navbar navbar-default navbar-fixed-bottom">
@@ -1100,6 +1110,7 @@
       </div>
     </div>
   </div>
+
   <!--templates-->
   <script type="text/template" id="member-popover-template">
     <img class="pull-left popover-character user-<%= name %>" src="<%= avatar %>" witdh="48" height="48"/>
@@ -1181,5 +1192,8 @@
   <script type="text/javascript" src="js/room/room.js"></script>
   <script type="text/javascript" src="js/router.js"></script>
   <script type="text/javascript" src="js/drawingboard.js"></script>
+  <script>
+    var myBoard = new DrawingBoard.Board('drawingboard');
+  </script>
 </body>
 </html>
