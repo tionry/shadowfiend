@@ -1090,10 +1090,16 @@
     </div>
 
     <!-- popover -->
-    <div id="graphics" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="messagedialogLabel" aria-hidden="true" data-backdrop="static">
+    <div id="graphics" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="graphicsLabel" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div id="drawingboard" style="width:400px; height:600px;"></div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="graphicsLabel" localization>graphics</h3>
+          </div>
+          <div class="modal-body">
+            <div id="drawingboard" style="width:400px; height:600px;"></div>
+          </div>
         </div>
       </div>
     </div>
