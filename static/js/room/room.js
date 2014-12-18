@@ -165,6 +165,7 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		var inpopover = false;
 		for (var i = 0; i < this.view.widgets.length; i++)
 			this.view.editor.removeLineWidget(this.view.widgets[i]);
 		this.view.widgets = [];
@@ -186,7 +187,14 @@ app.Room && _.extend(app.Room.prototype, {
 				$(this).popover('show');
 			});
 			icon.on('mouseleave', function(){
-				$(this).popover('hide');
+				if (!inpopover)
+					$(this).popover('hide');
+			});
+			$('.popover').on('mouseenter', function(){
+				inpopover = true;
+			});
+			$('.popover').on('mouseleave', function(){
+				inpopover = false;
 			});
 			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
 		}
