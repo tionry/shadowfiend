@@ -596,6 +596,7 @@ hr{
 	margin-right: 7px;
 	position: relative;
 	z-index: 3;
+	left: 30px;
 }
 .lint-error-icon:hover {
 	background-color: #aa0000;
