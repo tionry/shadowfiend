@@ -1496,11 +1496,11 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		socket.emit('refresh-drawing-board', {log: data.image});
 		docDAO.getDocByPath(socket.session.user._id, data.fileName, function(err, doc) {
 			if (err) {
 				return socket.emit('after-save-image', {err: err});
 			}
+			socket.emit('refresh-drawing-board', {log: doc._id, image: data.image});
 			docDAO.updatedrawingboard(doc._id, data.image, function(err) {
 				if (err) {
 					return socket.emit('after-save-image', {err: err});
