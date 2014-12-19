@@ -506,7 +506,7 @@ var room, listeners = {
 		}
 		data.members.forEach(function(member) {
 			if (app.currentUser.name == member) {
-				app.socket.emit('get-image', {fileName: data.fileName});
+				app.room.afterRevision(data.image);
 			}
 		});
 	}

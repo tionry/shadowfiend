@@ -1501,7 +1501,7 @@ io.sockets.on('connection', function(socket){
 				return socket.emit('after-save-image', {err: err});
 			}
 			socket.broadcast.emit('refresh-drawing-board', {
-				fileName: data.fileName,
+				image: data.image,
 				members: data.members
 			});
 		});
