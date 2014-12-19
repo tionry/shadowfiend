@@ -161,9 +161,6 @@ app.Room && _.extend(app.Room.prototype, {
 		//初始化批注按钮
 		//comments
 		this.view.clearAllLineWidget();
-		//for (var i = 0; i < this.view.widgets.length; i++)
-		//	this.view.editor.removeLineWidget(this.view.widgets[i]);
-		//this.view.widgets = [];
 		this.view.inpopover = false;
 		for (var i = 0; i < this.view.editor.doc.size; i++){
 			var msg = this.view.setLineWidget();
