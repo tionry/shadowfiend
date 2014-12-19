@@ -163,7 +163,7 @@ app.Room && _.extend(app.Room.prototype, {
 		var attrs = app.room.docModel.attributes;
 		app.room.allMembers.push(attrs.owner.name)
 		for (var i = 0; i < attrs.members.length; i++) {
-			app.room.allMembers.push(attrs.members[0].name)
+			app.room.allMembers.push(attrs.members[i].name)
 		}
 
 		//初始化批注按钮
