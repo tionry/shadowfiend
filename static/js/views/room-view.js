@@ -424,15 +424,22 @@ var app = app || {};
         },
 
         setPopover: function(elem, options){
-            var child = $('<a href="#" id="add-comment"></a>');
-            child.addClass('.comment-content');
-            child.editable({
-                pk: 1,
-                title: 'Enter comment',
-                type: 'text',
-                value: 'nothing.',
-                url: 'post.php',
-            });
+            var child = $('<a href="#"></a>');
+            child.addClass('comment-content');
+            child.text('initial value');
+            child.on('click', function(){
+                var prev = child.text().trim();
+                var modifyText = $('<div class="control-group">' +
+                '<input type="text" class="span2">&nbsp;' +
+                '<button type="submit" class="btn btn-primary">' +
+                '<i class="icon-ok icon-white"></i></button>&nbsp;' +
+                '<button type="button" class="btn editable-cancel">' +
+                '<i class="icon-ban-circle"></i></button>' +
+                '<span class="help-block" style="clear: both"></span></div>');
+                modifyText.find('text').text(prev);
+                child.html('');
+                child.append(modifyText);
+            })
             elem.data('content', child).popover(options);
         },
 
