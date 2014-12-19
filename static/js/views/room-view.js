@@ -105,15 +105,27 @@ var app = app || {};
             if (app.viewswitchLock)
                 return;
             if (this.room.chatstate) {
-                $('#editormain').parent().removeClass('col-xs-12');
-                $('#editormain').parent().addClass('col-xs-9');
+                if ($('#editormain').parent().hasClass('col-xs-12')) {
+                    $('#editormain').parent().removeClass('col-xs-12');
+                    $('#editormain').parent().addClass('col-xs-9');
+                }
+                else{
+                    $('#editormain').parent().removeClass('col-xs-9');
+                    $('#editormain').parent().addClass('col-xs-6');
+                }
                 $('#chatbox').show();
                 $('#toggle-chat').html('<span class="glyphicon glyphicon-forward"></span>');
                 $('#toggle-chat').attr('title', strings['hide-title']);
             } else {
+                if ($('#editormain').parent().hasClass('col-xs-9')) {
+                    $('#editormain').parent().removeClass('col-xs-9');
+                    $('#editormain').parent().addClass('col-xs-12');
+                }
+                else{
+                    $('#editormain').parent().removeClass('col-xs-6');
+                    $('#editormain').parent().addClass('col-xs-9');
+                }
                 $('#chatbox').hide();
-                $('#editormain').parent().removeClass('col-xs-9');
-                $('#editormain').parent().addClass('col-xs-12');
                 $('#toggle-chat').html('<span class="glyphicon glyphicon-backward"></span>');
                 $('#toggle-chat').attr('title', strings['show-title']);
             }
