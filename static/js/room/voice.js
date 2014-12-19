@@ -71,7 +71,7 @@ app.Room && _.extend(app.Room.prototype, {
 								};
 							}
 						};
-						//connection.connect();
+						connection.connect();
 						connection.extra = {username:username};
 						connection.interval = 1000;
 						connection.open(
@@ -105,7 +105,7 @@ app.Room && _.extend(app.Room.prototype, {
 						connection.join({
 							sessionid: session_id,
 							userid: userid,
-							extra: {},
+							extra: {username:username},
 							session: {audio:true}
 						});
 						connection.onstream = function (stream) {
