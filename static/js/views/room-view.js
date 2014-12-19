@@ -469,9 +469,6 @@ var app = app || {};
             });
             icon.on('click', function(){
                 var modal = $('#newcomment');
-                modal.modal.css({
-                    'margin-top': '500px',
-                });
                 app.showInputModal(modal);
             });
             return msg;
