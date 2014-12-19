@@ -431,6 +431,7 @@ var app = app || {};
                 title: 'Enter comment',
                 type: 'text',
                 value: 'nothing.',
+                url: 'post.php',
             });
             elem.data('content', child).popover(options);
         },
