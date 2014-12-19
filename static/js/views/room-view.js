@@ -127,15 +127,27 @@ var app = app || {};
         /*开关题目显示*/
         toggleproblem: function(){
             if (this.room.problemstate) {
-                $('#editormain').parent().removeClass('col-xs-9');
-                $('#editormain').parent().addClass('col-xs-6');
+                if ($('#editormain').parent().hasClass('col-xs-9')) {
+                    $('#editormain').parent().removeClass('col-xs-9');
+                    $('#editormain').parent().addClass('col-xs-6');
+                }
+                else{
+                    $('#editormain').parent().removeClass('col-xs-12');
+                    $('#editormain').parent().addClass('col-xs-9');
+                }
                 $('#problem-box').show();
                 $('#toggle-problem').html('<span class="glyphicon glyphicon-backward"></span>');
                 $('#toggle-problem').attr('title', strings['hide-title']);
             } else {
+                if ($('#editormain').parent().hasClass('col-xs-6')) {
+                    $('#editormain').parent().removeClass('col-xs-6');
+                    $('#editormain').parent().addClass('col-xs-9');
+                }
+                else{
+                    $('#editormain').parent().removeClass('col-xs-9');
+                    $('#editormain').parent().addClass('col-xs-12');
+                }
                 $('#problem-box').hide();
-                $('#editormain').parent().removeClass('col-xs-6');
-                $('#editormain').parent().addClass('col-xs-9');
                 $('#toggle-problem').html('<span class="glyphicon glyphicon-forward"></span>');
                 $('#toggle-problem').attr('title', strings['show-title']);
             }
