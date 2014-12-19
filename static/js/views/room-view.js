@@ -431,6 +431,7 @@ var app = app || {};
                 title: 'Enter comment',
                 type: 'text',
                 value: 'nothing.',
+                name: 'comment',
             });
             elem.data('content', child).popover(options);
         },
