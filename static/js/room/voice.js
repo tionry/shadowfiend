@@ -43,7 +43,7 @@ app.Room && _.extend(app.Room.prototype, {
 				var userid = this.docData.id + 1;
 				var session_id = this.docData.id + 2;
 				dataRef.once('value',function(snapShot){
-					delete dataRef;
+					//delete dataRef;
 					if (snapShot.val() == null){
 						var connection = new RTCMultiConnection(that.docData.id);
 						window.voiceConnection = connection;
