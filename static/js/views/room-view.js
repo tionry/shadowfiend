@@ -423,6 +423,10 @@ var app = app || {};
             }
         },
 
+        setPopover: function(options){
+
+        },
+
         attachEvents : function (e) {
             var view = this;
             $('.popover').on('mouseenter', function() {
@@ -436,7 +440,7 @@ var app = app || {};
 
         setLineWidget: function (){
             var msg = $('<div></div>');
-            var icon = $('<span></span>');
+            var icon = $('<a href="#"></a>');
             icon.html('+');
             icon.addClass('lint-error-icon');
             msg.addClass('lint-line');
