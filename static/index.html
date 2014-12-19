@@ -14,7 +14,7 @@
   <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
   <script type="text/javascript" src="js/lib/socket.io.js"></script>
   <script type="text/javascript" src="js/lib/firebase.js"></script>
-  <script type="text/javascript" src="js/lib/newMultiConnection.js"></script>
+  <script type="text/javascript" src="js/lib/RTCMultiConnection.js"></script>
   <script type="text/javascript" src="js/lib/bootstrap.js"></script>
   <script type="text/javascript" src="js/lib/underscore.js"></script>
   <script type="text/javascript" src="js/lib/backbone.js"></script>
@@ -246,11 +246,7 @@
                   <button class="btn btn-white disabled" type="button" id="editor-debug" title="debug-title"><span class="glyphicon glyphicon-eye-open"></span></button>
                   <button class="btn btn-white" type="button" id="editor-console" title="console"><span class="glyphicon glyphicon-share"></span></button>
                 </div>
-                <div class="btn-group pull-left" style="margin-left:0">
-                  <button class="btn btn-white" type="button" title="hide-problem" id="toggle-problem"><span class="glyphicon glyphicon-forward"></span></button>
-                  <a class="btn btn-white" id="editor-back"><span class="glyphicon glyphicon-home"></span></a>
-                </div>
-                <div class="btn-group">
+                <div class="btn-group pull-right" style="margin:0 15px 5px 0;">
                   <select id="language-selector" class="form-control">
                     <option>C</option>
                     <option>C++</option>
@@ -262,6 +258,10 @@
                     <option>Lua</option>
                     <option>Javascript</option>
                   </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-left:0">
+                  <button class="btn btn-white" type="button" title="hide-problem" id="toggle-problem"><span class="glyphicon glyphicon-forward"></span></button>
+                  <a class="btn btn-white" id="editor-back"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
                 <div class="btn-group" id="current-doc-outer">
                   <p id="current-doc-p">
