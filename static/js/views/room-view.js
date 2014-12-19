@@ -558,6 +558,7 @@ var app = app || {};
             lineWrapping: true,
             indentUnit: 4,
             indentWithTabs: true,
+            styleActiveLine: true,
             extraKeys: {
                 "Esc": function (cm) {
                     if (view.isFullScreen(cm))
