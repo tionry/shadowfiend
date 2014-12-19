@@ -426,7 +426,7 @@ var app = app || {};
         setPopover: function(elem, options){
             var child = $('<a href="#" id="add-comment"></a>');
             child.addClass('.comment-content');
-            child.editable({
+            $('#add-comment').editable({
                 pk: 1,
                 title: 'Enter comment',
                 type: 'text',
