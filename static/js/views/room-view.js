@@ -424,22 +424,22 @@ var app = app || {};
         },
 
         setPopover: function(elem, options){
-            var child = $('<a href="#"></a>');
+            var child = $('<span></span>');
             child.addClass('comment-content');
             child.text('initial value');
-            child.on('click', function(){
-                var c = $(this);
-                var prev = c.val();
-                var modifyText = $('<input type="text">')
-                modifyText.val(prev);
-                c.html('');
-                c.append(modifyText);
-                modifyText.blur(function(){
-                    var now = $(this).val();
-                    c.html('');
-                    c.val(now);
-                })
-            })
+            //child.on('click', function(){
+            //    var c = $(this);
+            //    var prev = c.val();
+            //    var modifyText = $('<input type="text">')
+            //    modifyText.val(prev);
+            //    c.html('');
+            //    c.append(modifyText);
+            //    modifyText.blur(function(){
+            //        var now = $(this).val();
+            //        c.html('');
+            //        c.val(now);
+            //    })
+            //})
             elem.data('content', child).popover(options);
         },
 
