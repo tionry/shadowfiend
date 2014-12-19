@@ -1490,7 +1490,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('save-image', function(data) {
-		if (!check(data, 'fileName', 'image')) {
+		if (!check(data, 'fileName', 'image', 'members')) {
 			return;
 		}
 		if (!socket.session) {
@@ -1500,7 +1500,10 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-save-image', {err: err});
 			}
-			socket.broadcast.emit('refresh-drawing-board', {fileName: data.fileName});
+			socket.broadcast.emit('refresh-drawing-board', {
+				fileName: data.fileName,
+				members: data.members
+			});
 		});
 	});
 

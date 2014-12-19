@@ -501,7 +501,14 @@ var room, listeners = {
 
 	// Notify by other user
 	"refresh-drawing-board": function(data) {
-		app.socket.emit('get-image', {fileName: data.fileName});
+		if (!data || data.err) {
+			return;
+		}
+		data.members.forEach(function(member) {
+			if (app.socket.session.user.name == member) {
+				app.socket.emit('get-image', {fileName: data.fileName});
+			}
+		});
 	}
 	  
 };
