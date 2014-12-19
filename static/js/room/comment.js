@@ -26,7 +26,7 @@ app.Room && _.extend(app.Room.prototype, {
     },
 
     //增加批注
-    addComment: function(data){
+    addComment: function(){
         var path = this.docModel.attributes.path;
         app.socket.emit('save-image', {
             fileName: path,

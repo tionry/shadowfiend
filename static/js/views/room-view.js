@@ -330,13 +330,13 @@ var app = app || {};
         },
         setSaving: function () {
             this.$docState.text(strings['saving...'] || 'saving...').addClass('red');
-            this.$btnHome.attr('title', '').popover({
-                html: true,
-                content: strings['unsaved'] || 'unsaved',
-                placement: 'right',
-                trigger: 'hover',
-                container: 'body'
-            });
+            //this.$btnHome.attr('title', '').popover({
+            //    html: true,
+            //    content: strings['unsaved'] || 'unsaved',
+            //    placement: 'right',
+            //    trigger: 'hover',
+            //    container: 'body'
+            //});
             this.room.timestamp = 0;
             this.room.isSaving = true;
             this.setRunState();
@@ -451,7 +451,6 @@ var app = app || {};
             var options = {placement:'left', trigger: 'manual', html: true};
             var view = this;
             this.setPopover(icon, options);
-            //icon.popover(options);
             icon.on('mouseenter', function() {
                 var that = this;
                 setTimeout(function(){
@@ -467,6 +466,10 @@ var app = app || {};
                     if (!view.inpopover)
                         $(that).popover('hide');
                 }, 200);
+            });
+            icon.on('click', function(){
+                var modal = $('#newcomment');
+                app.showInputModal(modal);
             });
             return msg;
         },
