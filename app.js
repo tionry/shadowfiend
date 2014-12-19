@@ -1496,14 +1496,14 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
+		socket.broadcast.emit('refresh-drawing-board', {
+			image: data.image,
+			fileName: data.fileName
+		});
 		docDAO.updatedrawingboard(data.fileName, data.image, function(err) {
 			if (err) {
 				return socket.emit('after-save-image', {err: err});
 			}
-			socket.broadcast.emit('refresh-drawing-board', {
-				image: data.image,
-				fileName: data.fileName
-			});
 		});
 	});
 

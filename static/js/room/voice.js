@@ -37,6 +37,25 @@ app.Room && _.extend(app.Room.prototype, {
 			}
 			$('#voice-on').addClass('active');
 			try{
+				var connection = new RTCMultiConnection();
+				connection.openSignalingChannel = function (config) {
+					config.channel = config.channel || this.channel;
+
+					var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
+					dataRef.channel = config.channel;
+
+					dataRef.on('child_added', function (data) {
+						config.onmessage(data.val());
+					});
+
+					dataRef.send = function (data) {
+						this.push(data);
+					};
+
+					config.onopen && setTimeout(config.onopen, 1);
+					dataRef.onDisconnect().remove();
+					return socket;
+				};
 				var username = $('#nav-user-name').html();
 				var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
 				var that = this;
@@ -45,7 +64,6 @@ app.Room && _.extend(app.Room.prototype, {
 				dataRef.once('value',function(snapShot){
 					//delete dataRef;
 					if (snapShot.val() == null){
-						var connection = new RTCMultiConnection(that.docData.id);
 						window.voiceConnection = connection;
 						connection.session = "audio-only";
 						connection.autoCloseEntireSession = true;
