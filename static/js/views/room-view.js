@@ -404,7 +404,7 @@ var app = app || {};
                 this.$('.CodeMirror').css('height', (h - underh - this.$('#over-editor').height() - 110) + 'px');
             w = o.$chatShow.width();
             if (w != 0) {
-                o.$chatIn.css('width', (w - 70) + 'px');
+                o.$chatIn.css('width', (w - 105) + 'px');
             }
             o.$tip.css('left', (($(window).width() - o.$tip.width()) / 2) + 'px');
             o.$mainBox.css('left', (-$(window).scrollLeft()) + 'px');
