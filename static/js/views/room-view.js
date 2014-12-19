@@ -427,16 +427,17 @@ var app = app || {};
             var child = $('<a href="#"></a>');
             child.addClass('comment-content');
             child.text('initial value');
-            child.on('click', function(){
-                var prev = child.text().trim();
+            $('.comment-content').on('click', function(){
+                var c = $(this);
+                var prev = c.text().trim();
                 var modifyText = $('<input type="text">')
-                modifyText.find('text').text(prev);
-                child.html('');
-                child.append(modifyText);
-                modifyText.on('blur', function(){
+                modifyText.text(prev);
+                c.html('');
+                c.append(modifyText);
+                modifyText.blur(function(){
                     var now = $(this).text().trim();
-                    child.html('');
-                    child.text(now);
+                    c.html('');
+                    c.text(now);
                 })
             })
             elem.data('content', child).popover(options);
@@ -460,7 +461,7 @@ var app = app || {};
             icon.addClass('lint-error-icon');
             msg.addClass('lint-line');
             msg.append(icon);
-            var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
+            var options = {placement:'left', trigger: 'manual', html: true};
             var view = this;
             this.setPopover(icon, options);
             //icon.popover(options);
