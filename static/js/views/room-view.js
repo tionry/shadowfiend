@@ -423,8 +423,16 @@ var app = app || {};
             }
         },
 
-        setPopover: function(options){
-
+        setPopover: function(elem, options){
+            var child = $('<a href="#"></a>');
+            child.addClass('.comment-content');
+            child.editable({
+                pk: 1,
+                title: 'Enter comment',
+                type: 'text',
+                value: 'nothing.',
+            });
+            elem.data('content', child).popover(options);
         },
 
         attachEvents : function (e) {
@@ -440,7 +448,7 @@ var app = app || {};
 
         setLineWidget: function (){
             var msg = $('<div></div>');
-            var icon = $('<a href="#"></a>');
+            var icon = $('<span></span>');
             icon.html('+');
             icon.addClass('lint-error-icon');
             msg.addClass('lint-line');
@@ -450,7 +458,8 @@ var app = app || {};
             })
             var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
             var view = this;
-            icon.popover(options);
+            this.setPopover(icon, options);
+            //icon.popover(options);
             icon.on('mouseenter', function() {
                 var that = this;
                 setTimeout(function(){
