@@ -427,7 +427,7 @@ var app = app || {};
             var child = $('<a href="#"></a>');
             child.addClass('comment-content');
             child.text('initial value');
-            $('.comment-content').on('click', function(){
+            child.on('click', function(){
                 var c = $(this);
                 var prev = c.text().trim();
                 var modifyText = $('<input type="text">')
