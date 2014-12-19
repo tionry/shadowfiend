@@ -8,7 +8,6 @@ app.Room && _.extend(app.Room.prototype, {
         var path = this.docModel.attributes.path;
         app.socket.emit('get-image',{
             fileName: path,
-            members: app.room.allMembers,
         })
     },
 
@@ -22,6 +21,7 @@ app.Room && _.extend(app.Room.prototype, {
         app.socket.emit('save-image', {
             fileName: path,
             image: data,
+            members: app.room.allMembers,
         });
     },
 
