@@ -40,13 +40,17 @@ app.Room && _.extend(app.Room.prototype, {
 				var username = $('#nav-user-name').html();
 				var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
 				var that = this;
+				var userid = this.docData.id + 1;
+				var session_id = this.docData.id + 2;
 				dataRef.once('value',function(snapShot){
-					delete dataRef;
+					//delete dataRef;
 					if (snapShot.val() == null){
 						var connection = new RTCMultiConnection(that.docData.id);
 						window.voiceConnection = connection;
 						connection.session = "audio-only";
 						connection.autoCloseEntireSession = true;
+						connection.sessionid = session_id;
+						connection.userid = userid;
 
 						connection.onstream = function (stream) {
 							if ((stream.type == 'remote') && (stream.extra.username != username)) {
@@ -68,13 +72,29 @@ app.Room && _.extend(app.Room.prototype, {
 							}
 						};
 						connection.connect();
+						connection.extra = {username:username};
+						connection.interval = 1000;
+						connection.open(
+							{
+								dontTransmit:true,
+								sessionid: session_id,
+								captureUserMediaOnDemand: false,
+								onMediaCaptured: function() {
+									// storing room on server
+									roomFirebase.set(connection.sessionDescription);
 
-						connection.open({
-							extra: {
-								username: username
-							},
-							interval: 1000
-						});
+									// if room owner leaves; remove room from the server
+									roomFirebase.onDisconnect().remove();
+								}
+							}
+						);
+						//connection.open({
+						//	extra: {
+						//		username: username
+						//	},
+                        //
+						//	interval: 1000
+						//});
 					}
 					else{
 						var connection = new RTCMultiConnection(that.docData.id);
@@ -82,14 +102,20 @@ app.Room && _.extend(app.Room.prototype, {
 						connection.session = "audio-only";
 						connection.autoCloseEntireSession = true;
 
-						connection.onNewSession = function (session){
-							if(window.joinedARoom){
-								return;
-							}
-							connection.join(session, {
-								username: username
-							});
-						};
+						//connection.onNewSession = function (session){
+						//	if(window.joinedARoom){
+						//		return;
+						//	}
+						//	connection.join(session, {
+						//		username: username
+						//	});
+						//};
+						connection.join({
+							sessionid: session_id,
+							userid: userid,
+							extra: {username:username},
+							session: {audio:true}
+						});
 						connection.onstream = function (stream) {
 							if ((stream.type == 'remote') && (stream.extra.username != username)) {
 								stream.mediaElement.style.display = "none";
