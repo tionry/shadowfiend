@@ -8,6 +8,7 @@ app.Room && _.extend(app.Room.prototype, {
         var path = this.docModel.attributes.path;
         app.socket.emit('get-image',{
             fileName: path,
+            members: app.room.allMembers,
         })
     },
 
