@@ -116,7 +116,7 @@ app.Room && _.extend(app.Room.prototype, {
 	
     	this.view.editor.refresh();
 
- 		//初始化成员和鼠标   	
+ 		//初始化成员和鼠标
 		app.collections['cooperators'].updatedoc(docobj);
 	    app.views['cooperators'].setalloffline();
     	app.views['cooperators'].setonline(app.currentUser.name, true);
@@ -158,9 +158,19 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		//获取全体成员
+		app.room.allMembers = [];
+		var attrs = app.room.docModel.attributes;
+		app.room.allMembers.push(attrs.owner.name)
+		for (var i = 0; i < attrs.members.length; i++) {
+			app.room.allMembers.push(attrs.members[0].name)
+		}
+
 		//初始化批注按钮
-		//comments
 		app.room.initComment();
+
+		//初始化绘图板
+		app.room.initBoard();
 
 		//初始化控制台
 	    $('#console-inner').html('');
