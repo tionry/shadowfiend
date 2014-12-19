@@ -429,16 +429,15 @@ var app = app || {};
             child.text('initial value');
             child.on('click', function(){
                 var prev = child.text().trim();
-                var modifyText = $('<div class="control-group">' +
-                '<input type="text" class="span2">&nbsp;' +
-                '<button type="submit" class="btn btn-primary">' +
-                '<i class="icon-ok icon-white"></i></button>&nbsp;' +
-                '<button type="button" class="btn editable-cancel">' +
-                '<i class="icon-ban-circle"></i></button>' +
-                '<span class="help-block" style="clear: both"></span></div>');
+                var modifyText = $('<input type="text">')
                 modifyText.find('text').text(prev);
                 child.html('');
                 child.append(modifyText);
+                modifyText.on('blur', function(){
+                    var now = $(this).text().trim();
+                    child.html('');
+                    child.text(now);
+                })
             })
             elem.data('content', child).popover(options);
         },
