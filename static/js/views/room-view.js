@@ -432,6 +432,7 @@ var app = app || {};
                 type: 'text',
                 value: 'nothing.',
                 url: 'post.php',
+                name: 'add-comment',
             });
             elem.data('content', child).popover(options);
         },
