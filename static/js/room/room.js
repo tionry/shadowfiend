@@ -160,12 +160,7 @@ app.Room && _.extend(app.Room.prototype, {
 
 		//初始化批注按钮
 		//comments
-		this.view.clearAllLineWidget();
-		this.view.inpopover = false;
-		for (var i = 0; i < this.view.editor.doc.size; i++){
-			var msg = this.view.setLineWidget();
-			this.view.widgets.push(this.view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
-		}
+		app.room.initComment();
 
 		//初始化控制台
 	    $('#console-inner').html('');
