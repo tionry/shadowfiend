@@ -424,14 +424,13 @@ var app = app || {};
         },
 
         setPopover: function(elem, options){
-            var child = $('<a href="#"></a>');
+            var child = $('<a href="#" id="add-comment"></a>');
             child.addClass('.comment-content');
             child.editable({
                 pk: 1,
                 title: 'Enter comment',
                 type: 'text',
                 value: 'nothing.',
-                name: 'comment',
             });
             elem.data('content', child).popover(options);
         },
