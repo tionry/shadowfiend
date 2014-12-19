@@ -454,9 +454,6 @@ var app = app || {};
             icon.addClass('lint-error-icon');
             msg.addClass('lint-line');
             msg.append(icon);
-            msg.on('click', function(){
-                alert('done!');
-            })
             var options = {placement:'left', trigger: 'manual', html: true, title:'Comment'};
             var view = this;
             this.setPopover(icon, options);
