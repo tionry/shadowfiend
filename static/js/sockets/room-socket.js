@@ -504,11 +504,17 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		data.members.forEach(function(member) {
-			if (app.currentUser.name == member) {
+		if (app.room.docModel.attributes.path == data.fileName) {
+			if (app.room.docModel.attributes.owner.name == app.currentUser.name) {
 				app.room.afterRevision(data.image);
+			} else {
+				app.room.docModel.attributes.members.forEach(function(member) {
+					if (member.name == app.currentUser.name) {
+						app.room.afterRevision(data.image);
+					}
+				});
 			}
-		});
+		}
 	}
 	  
 };
