@@ -512,6 +512,7 @@ var app = app || {};
         },
 
         drawboard: function(){
+            app.room.initBoard();
             var modal = $('#graphics');
             app.showInputModal(modal);
             var canvas = $('.drawing-board-canvas'),
