@@ -77,7 +77,15 @@ app.Room && _.extend(app.Room.prototype, {
 						connection.open(
 							{
 								dontTransmit:true,
-								sessionid: session_id
+								sessionid: session_id,
+								captureUserMediaOnDemand: false,
+								onMediaCaptured: function() {
+									// storing room on server
+									roomFirebase.set(connection.sessionDescription);
+
+									// if room owner leaves; remove room from the server
+									roomFirebase.onDisconnect().remove();
+								}
 							}
 						);
 						//connection.open({
