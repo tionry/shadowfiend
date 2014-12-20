@@ -28,7 +28,7 @@ app.Room && _.extend(app.Room.prototype, {
             var LineHandle = editor.getLineHandle(i);
             if (!LineHandle.comment) {
                 var text = 'initial value for Line' + (i+1);
-                LineHandle = text;
+                LineHandle.comment = text;
                 var msg = view.setLineWidget(i, text);
                 view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
             }
