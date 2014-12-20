@@ -10,7 +10,7 @@ app.Room && _.extend(app.Room.prototype, {
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < view.editor.lineCount(); i++){
-            var text = 'initial value for Line' + i;
+            var text = 'initial value for Line' + (i+1);
             view.lineCommments.push(text);
             var msg = view.setLineWidget(i, text);
             view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
