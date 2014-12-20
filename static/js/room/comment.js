@@ -32,7 +32,7 @@ app.Room && _.extend(app.Room.prototype, {
             editor = view.editor;
         view.clearAllLineWidget();
         view.inpopover = false;
-        for (var i = 0; i < editor.lineCount(); i++){
+        for (var i = 0; i < LineList.length; i++){
             var text = LineList[i];
             this.setLineComment(i, text);
         }
