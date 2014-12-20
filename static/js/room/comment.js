@@ -47,7 +47,7 @@ app.Room && _.extend(app.Room.prototype, {
         //});
     },
 
-    afterRevision: function(line,text){
+    afterCommentRevision: function(line,text){
         var view = app.room.view,
             editor = view.editor;
         var LineHandle = editor.getLineHandle(line);

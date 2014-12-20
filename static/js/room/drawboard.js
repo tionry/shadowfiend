@@ -25,7 +25,7 @@ app.Room && _.extend(app.Room.prototype, {
         });
     },
 
-    afterRevision: function(data){
+    afterDrawRevision: function(data){
         this.view.renewDraw(data);
     }
 
