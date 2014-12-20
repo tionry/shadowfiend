@@ -43,7 +43,7 @@ function updateActiveLines(cm, ranges) {
     var range = ranges[i];
     if (!range.empty()) continue;
     //var line = cm.getLineHandleVisualStart(range.head.line);
-    if (active[active.length - 1] != line) active.push(line);
+    //if (active[active.length - 1] != line) active.push(line);
   }
   if (sameArray(cm.state.activeLines, active)) return;
   cm.operation(function() {
