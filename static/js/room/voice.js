@@ -37,146 +37,74 @@ app.Room && _.extend(app.Room.prototype, {
 			}
 			$('#voice-on').addClass('active');
 			try{
-				var connection = new RTCMultiConnection();
-				connection.openSignalingChannel = function (config) {
-					config.channel = config.channel || this.channel;
-
-					var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
-					dataRef.channel = config.channel;
-
-					dataRef.on('child_added', function (data) {
-						config.onmessage(data.val());
-					});
-
-					dataRef.send = function (data) {
-						this.push(data);
-					};
-
-					config.onopen && setTimeout(config.onopen, 1);
-					dataRef.onDisconnect().remove();
-					return socket;
+				var rtcMultiConnection = new RTCMultiConnection(this.docData.id);
+				rtcMultiConnection.userid = app.currentUser._id;
+				rtcMultiConnection.session = { data: true };
+				rtcMultiConnection.sdpConstraints.mandatory = {
+					OfferToReceiveAudio: true,
+					OfferToReceiveVideo: false
 				};
-				var username = $('#nav-user-name').html();
-				var dataRef = new Firebase('https://popush.firebaseIO.com/' + this.docData.id);
-				var that = this;
-				var userid = this.docData.id + 1;
-				var session_id = this.docData.id + 2;
-				dataRef.once('value',function(snapShot){
-					//delete dataRef;
-					if (snapShot.val() == null){
-						window.voiceConnection = connection;
-						connection.session = "audio-only";
-						connection.autoCloseEntireSession = true;
-						connection.sessionid = session_id;
-						connection.userid = userid;
 
-						connection.onstream = function (stream) {
-							if ((stream.type == 'remote') && (stream.extra.username != username)) {
-								stream.mediaElement.style.display = "none";
-								stream.mediaElement.muted = false;
-								stream.mediaElement.play();
-								document.body.appendChild(stream.mediaElement);
-								window.userArray.push(stream.extra.username);
-								window.audioArray[stream.extra.username] = stream.mediaElement;
-							}
-						};
-						connection.onUserLeft = function(userid, extra, ejected) {
-							$(window.audioArray[extra.username]).remove();
-							if(window.peerArray[extra.username]){
-								window.peerArray[extra.username].myOnRemoteStream = function (stream){
-									stream.mediaElement.muted = true;
-									return;
-								};
-							}
-						};
-						connection.connect();
-						connection.extra = {username:username};
-						connection.interval = 1000;
-						connection.open(
-							{
-								dontTransmit:true,
-								sessionid: session_id,
-								captureUserMediaOnDemand: false,
-								onMediaCaptured: function() {
-									// storing room on server
-									roomFirebase.set(connection.sessionDescription);
-
-									// if room owner leaves; remove room from the server
-									roomFirebase.onDisconnect().remove();
-								}
-							}
-						);
-						//connection.open({
-						//	extra: {
-						//		username: username
-						//	},
-                        //
-						//	interval: 1000
-						//});
-					}
-					else{
-						var connection = new RTCMultiConnection(that.docData.id);
-						window.voiceConnection = connection;
-						connection.session = "audio-only";
-						connection.autoCloseEntireSession = true;
-
-						//connection.onNewSession = function (session){
-						//	if(window.joinedARoom){
-						//		return;
-						//	}
-						//	connection.join(session, {
-						//		username: username
-						//	});
-						//};
-						connection.join({
-							sessionid: session_id,
-							userid: userid,
-							extra: {username:username},
-							session: {audio:true}
-						});
-						connection.onstream = function (stream) {
-							if ((stream.type == 'remote') && (stream.extra.username != username)) {
-								stream.mediaElement.style.display = "none";
-								stream.mediaElement.muted = false;
-								stream.mediaElement.play();
-								window.userArray.push(stream.extra.username);
-								window.audioArray[stream.extra.username] = stream.mediaElement;
-								document.body.appendChild(stream.mediaElement);
-							}
-						};
-						connection.onUserLeft = function(userid, extra, ejected) {
-							if(ejected){
-								$('#voice-on').removeClass('active');
-								while(window.userArray.length > 0){
-									$(window.audioArray[window.userArray.shift()]).remove();
-								}
-								while(window.peerUserArray.length > 0){
-									var peerUName = window.peerUserArray.shift();
-									if(window.peerArray[peerUName]){
-										window.peerArray[peerUName].myOnRemoteStream = function (stream){
-											stream.mediaElement.muted = true;
-											return;
-										};
-									}
-								}
-								delete window.voiceConnection;
-								window.voiceon = !window.voiceon;
-							}
-							else{
-								$(window.audioArray[extra.username]).remove();
-								if(window.peerArray[extra.username]){
-									window.peerArray[extra.username].myOnRemoteStream = function (stream){
-										stream.mediaElement.muted = true;
-										return;
-									};
-								}
-							}
-						};
-						connection.connect();
+				app.socket.on('presence', function (isChannelPresent) {
+					if (!isChannelPresent) {
+						rtcMultiConnection.open();
+					} else {
+						rtcMultiConnection.connect();
 					}
 				});
-			}
-			catch(err){
+				app.socket.emit('presence', rtcMultiConnection.channel);
+				rtcMultiConnection.openSignalingChannel = function(config) {
+					var channel = config.channel || this.channel;
+					io.connect(app.Package.SOCKET_IO).emit('new-channel', {
+						channel: channel,
+						sender : rtcMultiConnection.userid
+					});
+					var socket = io.connect(app.Package.SOCKET_IO + channel);
+					socket.channel = channel;
+					socket.on('connect', function () {
+						if (config.callback) config.callback(socket);
+					});
+					socket.send = function (message) {
+						socket.emit('message', {
+							sender: rtcMultiConnection.userid,
+							data : message
+						});
+					};
+					socket.on('message', config.onmessage);
+				};
+
+				var username = $('#nav-user-name').html();
+				var that = this;
+
+				var sessions = { };
+				rtcMultiConnection.onNewSession = function(session) {
+					if (sessions[session.sessionid]) return;
+					sessions[session.sessionid] = session;
+					session.join();
+				};
+
+				rtcMultiConnection.onRequest = function(request) {
+					rtcMultiConnection.accept(request);
+				};
+
+				rtcMultiConnection.blobURLs = { };
+				rtcMultiConnection.onstream = function (stream) {
+					if ((stream.type == 'remote') && (stream.extra.username != username)) {
+						stream.mediaElement.style.display = "none";
+						stream.mediaElement.muted = false;
+						stream.mediaElement.play();
+						document.body.appendChild(stream.mediaElement);
+						window.userArray.push(stream.extra.username);
+						window.audioArray[stream.extra.username] = stream.mediaElement;
+					}
+				};
+
+				rtcMultiConnection.sendMessage = function(message) {
+					message.userid = rtcMultiConnection.userid;
+					message.extra = rtcMultiConnection.extra;
+					rtcMultiConnection.sendCustomMessage(message);
+				};
+			} catch(err){
 				alert(err);
 			}
 		} else {
