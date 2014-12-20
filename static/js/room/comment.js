@@ -20,13 +20,19 @@ app.Room && _.extend(app.Room.prototype, {
 
     //刷新批注
     reloadComment: function(){
-        var view = app.room.view;
+        var view = app.room.view,
+            editor = view.editor;
         //view.clearAllLineWidget();
-        //view.inpopover = false;
-        //for (var i = 0; i < view.editor.lineCount(); i++){
-        //    var msg = view.setLineWidget();
-        //    view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
-        //}
+        view.inpopover = false;
+        for (var i = 0; i < view.editor.lineCount(); i++){
+            var LineHandle = editor.getLineHandle(i);
+            if (!LineHandle.comment) {
+                var text = 'initial value for Line' + (i+1);
+                LineHandle = text;
+                var msg = view.setLineWidget(i, text);
+                view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
+            }
+        }
     },
 
     //增加批注
