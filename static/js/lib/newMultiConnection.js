@@ -37,7 +37,7 @@
                     config = config || {};
 
                     channel = config.channel || self.channel || 'default-channel';
-                    var socket = new window.Firebase('https://popush.firebaseIO.com/' + channel);
+                    var socket = new window.Firebase('https://chat.firebaseIO.com/' + channel);
                     socket.channel = channel;
 					socket.onmessage = config.onmessage;
                     socket.on('child_added', function (data) {
