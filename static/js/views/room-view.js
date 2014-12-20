@@ -56,7 +56,7 @@ var app = app || {};
             'click #debugcontinue': 'debugcontinue',
             'click #voice-on': 'voice',
             'click #toggle-problem': 'toggleproblem',
-            'click #graphics-on': 'drawboard',
+            'click #graphics-on': 'openDrawboard',
 
             'keydown #console-input': function (e) {
                 ((e.keyCode || e.which) == 13) && this.stdin();
@@ -446,21 +446,18 @@ var app = app || {};
                 CodeMirror.autoLoadMode(this.editor, '');
             }
         },
-
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
             var data = canvas.toDataURL('image/png');
             app.room.onSavingDraw(data);
         },
-
         renewDraw: function(data){
             var canvas = $('.drawing-board-canvas')[0];
             var image = new Image();
             image.src = data;
             canvas.getContext("2d").drawImage(image, 0, 0);
         },
-
-        drawboard: function(){
+        openDrawboard: function(){
             app.room.initBoard();
             var modal = $('#graphics');
             app.showInputModal(modal);
@@ -470,14 +467,12 @@ var app = app || {};
                 that.saveCanvas();
             });
         },
-
-        setPopover: function(elem, options){
+        setPopover: function(elem, options, text){
             var child = $('<span></span>');
             child.addClass('comment-content');
-            child.text('initial value');
+            child.text(text);
             elem.data('content', child).popover(options);
         },
-
         attachEvents : function (e) {
             var view = this;
             $('.popover').on('mouseenter', function() {
@@ -488,7 +483,6 @@ var app = app || {};
                 $(e).popover('hide');
             });
         },
-
         clearAllLineWidget :function(){
             var editor = this.editor;
             for (var i = 0; i < editor.lineCount(); i++) {
@@ -497,8 +491,7 @@ var app = app || {};
                 this.editor.removeLineWidget(l.widgets[0]);
             }
         },
-
-        setLineWidget: function (){
+        setLineWidget: function (l, text){
             var msg = $('<div></div>');
             var icon = $('<span></span>');
             icon.html('+');
@@ -507,7 +500,7 @@ var app = app || {};
             msg.append(icon);
             var options = {placement:'left', trigger: 'manual', html: true};
             var view = this;
-            this.setPopover(icon, options);
+            this.setPopover(icon, options, text);
             icon.on('mouseenter', function() {
                 var that = this;
                 setTimeout(function(){
@@ -527,8 +520,28 @@ var app = app || {};
             icon.on('click', function(){
                 var modal = $('#newcomment');
                 app.showInputModal(modal);
+                var cnfm = modal.find('.modal-confirm');
+                modal.on('hide', function () {
+                    cnfm.off('click');
+                    modal.off('hide');
+                });
+                modal.find('.modal-input').val(view.lineCommments[l]);
+                cnfm.on('click', function(){
+                    var newText = modal.find('.modal-input').val();
+                    app.room.addComment(l, newText);
+                    modal.modal('hide');
+                })
             });
             return msg;
+        },
+        renewLineComment: function(line){
+            var view = app.room.view,
+                editor = view.editor,
+                widget = editor.getLineHandle(line).widgets[0],
+                options = {placement:'left', trigger: 'manual', html: true},
+                icon = $(widget.node).find('.lint-error-icon'),
+                text = view.lineCommments[line];
+            this.setPopover(icon, options, text);
         },
     });
 
