@@ -33,7 +33,7 @@ app.Room && _.extend(app.Room.prototype, {
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < editor.lineCount(); i++){
-            var text = LineList[i].comment;
+            var text = LineList[i];
             this.setLineComment(i, text);
         }
     },
@@ -46,7 +46,7 @@ app.Room && _.extend(app.Room.prototype, {
         LineHandle.comment = text;
         var sendList = [];
         for (var i = 0; i < editor.lineCount(); i++){
-            sendList.push(editor.getLineHandle(i));
+            sendList.push(editor.getLineHandle(i).comment);
         }
         var path = this.docModel.attributes.path;
         app.socket.emit('update-comment', {
@@ -66,7 +66,7 @@ app.Room && _.extend(app.Room.prototype, {
                 var text = 'initial value for Line' + (i+1);
                 this.setLineComment(i, text);
             }
-            sendList.push(editor.getLineHandle(i));
+            sendList.push(editor.getLineHandle(i).comment);
         }
         var path = this.docModel.attributes.path;
         app.socket.emit('update-comment', {
