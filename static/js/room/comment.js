@@ -48,7 +48,9 @@ app.Room && _.extend(app.Room.prototype, {
         for (var i = 0; i < editor.lineCount(); i++){
             sendList.push(editor.getLineHandle(i));
         }
-        //app.socket.emit('add-line-comment', {
+        var path = this.docModel.attributes.path;
+        //app.socket.emit('update-comment', {
+        //    path : path,
         //    LineList : sendList,
         //});
     },
@@ -66,7 +68,9 @@ app.Room && _.extend(app.Room.prototype, {
             }
             sendList.push(editor.getLineHandle(i));
         }
-        //app.socket.emit('add-line-comment', {
+        var path = this.docModel.attributes.path;
+        //app.socket.emit('update-comment', {
+        //    path : path,
         //    LineList : sendList,
         //});
     },
