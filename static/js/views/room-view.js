@@ -447,6 +447,30 @@ var app = app || {};
             }
         },
 
+        saveCanvas: function(){
+            var canvas = $('.drawing-board-canvas')[0];
+            var data = canvas.toDataURL('image/png');
+            app.room.onSavingDraw(data);
+        },
+
+        renewDraw: function(data){
+            var canvas = $('.drawing-board-canvas')[0];
+            var image = new Image();
+            image.src = data;
+            canvas.getContext("2d").drawImage(image, 0, 0);
+        },
+
+        drawboard: function(){
+            app.room.initBoard();
+            var modal = $('#graphics');
+            app.showInputModal(modal);
+            var canvas = $('.drawing-board-canvas'),
+                that = this;
+            canvas.on('mouseup', function(){
+                that.saveCanvas();
+            });
+        },
+
         setPopover: function(elem, options){
             var child = $('<span></span>');
             child.addClass('comment-content');
@@ -463,6 +487,14 @@ var app = app || {};
                 view.inpopover=false;
                 $(e).popover('hide');
             });
+        },
+
+        clearAllLineWidget :function(){
+            var editor = this.editor;
+            for (var i = 0; i < editor.lineCount(); i++) {
+                var w = editor.getLineHandle(i);
+                this.editor.removeLineWidget(w);
+            }
         },
 
         setLineWidget: function (){
@@ -497,37 +529,8 @@ var app = app || {};
             });
             return msg;
         },
-
-        saveCanvas: function(){
-            var canvas = $('.drawing-board-canvas')[0];
-            var data = canvas.toDataURL('image/png');
-            app.room.onSavingDraw(data);
-        },
-
-        renewDraw: function(data){
-            var canvas = $('.drawing-board-canvas')[0];
-            var image = new Image();
-            image.src = data;
-            canvas.getContext("2d").drawImage(image, 0, 0);
-        },
-
-        drawboard: function(){
-            app.room.initBoard();
-            var modal = $('#graphics');
-            app.showInputModal(modal);
-            var canvas = $('.drawing-board-canvas'),
-                that = this;
-            canvas.on('mouseup', function(){
-                that.saveCanvas();
-            });
-        },
-
-        clearAllLineWidget :function(){
-            for (var i = 0; i < this.widgets.length; i++)
-                this.editor.removeLineWidget(this.widgets[i]);
-            this.widgets = [];
-        }
     });
+
     app.init || (app.init = {});
     app.init.roomView = function () {
         if (app.views['room']) {

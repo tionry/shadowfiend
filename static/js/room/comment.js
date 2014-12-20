@@ -8,9 +8,9 @@ app.Room && _.extend(app.Room.prototype, {
         var view = app.room.view;
         view.clearAllLineWidget();
         view.inpopover = false;
-        for (var i = 0; i < view.editor.doc.size; i++){
+        for (var i = 0; i < view.editor.lineCount(); i++){
             var msg = view.setLineWidget();
-            view.widgets.push(view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
+            view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
         }
     },
 
@@ -19,9 +19,9 @@ app.Room && _.extend(app.Room.prototype, {
         var view = app.room.view;
         view.clearAllLineWidget();
         view.inpopover = false;
-        for (var i = 0; i < view.editor.doc.size; i++){
+        for (var i = 0; i < view.editor.lineCount(); i++){
             var msg = view.setLineWidget();
-            view.widgets.push(view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true}));
+            view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
         }
     },
 
