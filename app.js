@@ -1528,7 +1528,41 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('update-comment', function(data) {
+		if (!check(data, 'path', 'LineList')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		socket.broadcast.emit('refresh-line-comment', {
+			path: data.path,
+			comment: data.LineList
+		});
+		docDAO.updatenotes(data.path, data.LineList, function(err) {
+			if (err) {
+				return socket.emit('after-update-comment', {err: err});
+			}
+		});
+	});
 
+	socket.on('get-comment', function(data){
+		if (!check(data, 'path')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		docDAO.getnotes(data.path, function(err, doc) {
+			if (err) {
+				return socket.emit('after-get-comment', {err: err});
+			}
+			socket.emit('after-get-comment', {
+				path: data.path,
+				comment: data.notes
+			});
+		});
+	});
 
 	// voice control in rom
 	var initiatorChannel = '';

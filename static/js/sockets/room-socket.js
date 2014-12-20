@@ -496,7 +496,9 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		app.room.afterDrawRevision(data.doc.drawingboard);
+		if (app.room && app.room.docModel.attributes.path == data.fileName) {
+			app.room.afterDrawRevision(data.doc.drawingboard);
+		}
 	},
 
 	// Notify by other user
@@ -504,19 +506,28 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		if (app.room.docModel.attributes.path == data.fileName) {
-			if (app.room.docModel.attributes.owner.name == app.currentUser.name) {
-				app.room.afterDrawRevision(data.image);
-			} else {
-				app.room.docModel.attributes.members.forEach(function(member) {
-					if (member.name == app.currentUser.name) {
-						app.room.afterDrawRevision(data.image);
-					}
-				});
-			}
+		if (app.room && app.room.docModel.attributes.path == data.fileName) {
+			app.room.afterDrawRevision(data.image);
+		}
+	},
+
+	"after-get-comment": function(data) {
+		if (!data || data.err) {
+			return;
+		}
+		if (app.room && app.room.docModel.attributes.path == data.path) {
+			app.room.reloadComment(data.comment);
+		}
+	},
+
+	"refresh-line-comment": function(data) {
+		if (!data || data.err) {
+			return;
+		}
+		if (app.room && app.room.docModel.attributes.path == data.path) {
+			app.room.reloadComment(data.comment);
 		}
 	}
-	  
 };
 
 /* 开始监听 */
