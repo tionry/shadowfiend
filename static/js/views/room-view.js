@@ -500,7 +500,9 @@ var app = app || {};
             msg.addClass('lint-line');
             msg.append(icon);
             var options = {placement:'left', trigger: 'manual', html: true};
-            var view = this;
+            var view = this,
+                editor = view.editor,
+                LineHandle = editor.getLineHandle(l);
             this.setPopover(icon, options, text);
             icon.on('mouseenter', function() {
                 var that = this;
@@ -526,7 +528,7 @@ var app = app || {};
                     cnfm.off('click');
                     modal.off('hide');
                 });
-                modal.find('.modal-input').val(view.lineCommments[l]);
+                modal.find('.modal-input').val(LineHandle.comment);
                 cnfm.on('click', function(){
                     var newText = modal.find('.modal-input').val();
                     app.room.addComment(l, newText);
@@ -541,7 +543,8 @@ var app = app || {};
                 widget = editor.getLineHandle(line).widgets[0],
                 options = {placement:'left', trigger: 'manual', html: true},
                 icon = $(widget.node).find('.lint-error-icon'),
-                text = view.lineCommments[line];
+                LineHandle = editor.getLineHandle(line),
+                text = LineHandle.comment;
             this.setPopover(icon, options, text);
         },
     });

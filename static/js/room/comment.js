@@ -5,13 +5,14 @@ app.Room && _.extend(app.Room.prototype, {
 
     //初始化批注
     initComment: function(){
-        var view = app.room.view;
-        view.lineCommments = [];
+        var view = app.room.view,
+            editor = view.editor;
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < view.editor.lineCount(); i++){
             var text = 'initial value for Line' + (i+1);
-            view.lineCommments.push(text);
+            var LineHandle = editor.getLineHandle(i);
+            LineHandle.comment = text;
             var msg = view.setLineWidget(i, text);
             view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
         }
@@ -30,8 +31,10 @@ app.Room && _.extend(app.Room.prototype, {
 
     //增加批注
     addComment: function(line, text){
-        var view = app.room.view;
-        view.lineCommments[line] = text;
+        var view = app.room.view,
+            editor = view.editor;
+        var LineHandle = editor.getLineHandle(line);
+        LineHandle.comment = text;
         view.renewLineComment(line);
     },
 
