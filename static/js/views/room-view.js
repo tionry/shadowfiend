@@ -492,8 +492,8 @@ var app = app || {};
         clearAllLineWidget :function(){
             var editor = this.editor;
             for (var i = 0; i < editor.lineCount(); i++) {
-                var w = editor.getLineHandle(i);
-                this.editor.removeLineWidget(w);
+                var l = editor.getLineHandle(i);
+                this.editor.removeLineWidget(l.widgets[0]);
             }
         },
 
