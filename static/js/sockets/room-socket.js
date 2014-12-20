@@ -524,12 +524,9 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		setTimeout(function(){
-			if (app.room && app.room.docModel.attributes.path == data.path) {
-				app.room.reloadComment(data.comment);
-			}
-		}, 5000);
-
+		if (app.room && app.room.docModel.attributes.path == data.path) {
+			app.room.reloadComment(data.comment);
+		}
 	}
 };
 
