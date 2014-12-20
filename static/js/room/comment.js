@@ -30,8 +30,7 @@ app.Room && _.extend(app.Room.prototype, {
 
     //增加批注
     addComment: function(line, text){
-        var view = app.room.view,
-            editor = view.editor;
+        var view = app.room.view;
         view.lineCommments[line] = text;
         view.renewLineComment(line);
     },

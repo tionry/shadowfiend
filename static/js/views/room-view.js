@@ -468,6 +468,7 @@ var app = app || {};
             });
         },
         setPopover: function(elem, options, text){
+            elem.popover('destroy');
             var child = $('<span></span>');
             child.addClass('comment-content');
             child.text(text);
