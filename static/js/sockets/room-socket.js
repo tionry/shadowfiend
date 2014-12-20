@@ -177,7 +177,7 @@ var room, listeners = {
 		if (room.bq.length > 0){
 			room.socket('bps', room.bq[0]);
 		}
-		room.reloadComment();
+		//room.reloadComment();
 	    return;
 	},
   
