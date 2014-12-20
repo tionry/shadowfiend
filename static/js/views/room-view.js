@@ -493,6 +493,7 @@ var app = app || {};
             var editor = this.editor;
             for (var i = 0; i < editor.lineCount(); i++) {
                 var l = editor.getLineHandle(i);
+                if (!l.widgets) continue;
                 this.editor.removeLineWidget(l.widgets[0]);
             }
         },
