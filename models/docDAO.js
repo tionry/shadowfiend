@@ -89,7 +89,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 						}
 						else{
 							var cTime = new Date().getTime();
-							db.doc.insert({path:path, type:"doc", owner:userId, members:[],drawingboard:"", revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
+							db.doc.insert({path:path, type:"doc", owner:userId, members:[],drawingboard:"",notes:"", revisions:[], permission:"private", createTime:cTime, modifyTime:cTime}, function(err, newDoc){
 								if(err){
 									lock.release(rootPath);
 									return callback("inner error");
@@ -189,8 +189,7 @@ DocDAO.prototype.createDoc = function(userId, path, type, callback){
 														creater:userId,
 														modifyTime:new Date().getTime(),
 														modifier:userId,
-														content:"",
-														drawingboard:{}
+														content:""
 													}, function(err,revision){
 														if(err){
 															lock.release(rootPath);
@@ -1493,10 +1492,36 @@ DocDAO.prototype.updatedrawingboard = function(path,drawingboard,callback)
 	});
 };
 
+DocDAO.prototype.updatenotes = function(path,notes,callback)
+{
+	db.doc.update({path:path},{
+		$set:{
+			notes:notes
+		}
+	},function(err) {
+		if (err) {
+			return callback("inner error");
+		}
+		return callback(null);
+	});
+};
+
 DocDAO.prototype.getdrawingboard = function(path, callback)
 {
 	db.doc.findOne({path:path},{
 			drawingboard:1
+	},function(err,doc) {
+		if (err) {
+			return callback("inner error");
+		}
+		return callback(null, doc);
+	});
+};
+
+DocDAO.prototype.getnotes = function(path, callback)
+{
+	db.doc.findOne({path:path},{
+		notes:1
 	},function(err,doc) {
 		if (err) {
 			return callback("inner error");
