@@ -496,7 +496,7 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		app.room.afterRevision(data.doc.drawingboard);
+		app.room.afterDrawRevision(data.doc.drawingboard);
 	},
 
 	// Notify by other user
@@ -506,11 +506,11 @@ var room, listeners = {
 		}
 		if (app.room.docModel.attributes.path == data.fileName) {
 			if (app.room.docModel.attributes.owner.name == app.currentUser.name) {
-				app.room.afterRevision(data.image);
+				app.room.afterDrawRevision(data.image);
 			} else {
 				app.room.docModel.attributes.members.forEach(function(member) {
 					if (member.name == app.currentUser.name) {
-						app.room.afterRevision(data.image);
+						app.room.afterDrawRevision(data.image);
 					}
 				});
 			}
