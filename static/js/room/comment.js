@@ -22,7 +22,6 @@ app.Room && _.extend(app.Room.prototype, {
     reloadComment: function(){
         var view = app.room.view,
             editor = view.editor;
-        //view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < view.editor.lineCount(); i++){
             var LineHandle = editor.getLineHandle(i);
@@ -42,10 +41,18 @@ app.Room && _.extend(app.Room.prototype, {
         var LineHandle = editor.getLineHandle(line);
         LineHandle.comment = text;
         view.renewLineComment(line);
+        //app.socket.emit('add-line-comment', {
+        //    line: line,
+        //    comment: text,
+        //});
     },
 
-    afterRevision: function(data){
-        this.view.renewDraw(data);
+    afterRevision: function(line,text){
+        var view = app.room.view,
+            editor = view.editor;
+        var LineHandle = editor.getLineHandle(line);
+        LineHandle.comment = text;
+        view.renewLineComment(line);
     }
 
 });
