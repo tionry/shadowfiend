@@ -49,10 +49,10 @@ app.Room && _.extend(app.Room.prototype, {
             sendList.push(editor.getLineHandle(i));
         }
         var path = this.docModel.attributes.path;
-        //app.socket.emit('update-comment', {
-        //    path : path,
-        //    LineList : sendList,
-        //});
+        app.socket.emit('update-comment', {
+            path : path,
+            LineList : sendList,
+        });
     },
 
     //代码被修改后更新批注
@@ -69,9 +69,9 @@ app.Room && _.extend(app.Room.prototype, {
             sendList.push(editor.getLineHandle(i));
         }
         var path = this.docModel.attributes.path;
-        //app.socket.emit('update-comment', {
-        //    path : path,
-        //    LineList : sendList,
-        //});
+        app.socket.emit('update-comment', {
+            path : path,
+            LineList : sendList,
+        });
     },
 });
