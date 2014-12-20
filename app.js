@@ -1502,7 +1502,7 @@ io.sockets.on('connection', function(socket){
 		if (!socket.session) {
 			return socket.emit('unauthorized');
 		}
-		socket.broadcast.emit('refresh-drawing-board', {
+		io.emit('refresh-drawing-board', {
 			image: data.image,
 			fileName: data.fileName
 		});
