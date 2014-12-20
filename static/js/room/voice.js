@@ -138,6 +138,6 @@ app.Room && _.extend(app.Room.prototype, {
 		} else {
 			this.leaveVoiceRoom();
 		}
-	},
+	}
 
 });
