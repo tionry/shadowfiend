@@ -14,7 +14,7 @@ CodeMirror.defineOption("styleActiveLine", false, function(cm, val, old) {
   var prev = old && old != CodeMirror.Init;
   if (val && !prev) {
     cm.state.activeLines = [];
-    updateActiveLines(cm, cm.listSelections());
+    //updateActiveLines(cm, cm.listSelections());
     cm.on("beforeSelectionChange", selectionChange);
   } else if (!val && prev) {
     cm.off("beforeSelectionChange", selectionChange);
@@ -42,7 +42,7 @@ function updateActiveLines(cm, ranges) {
   for (var i = 0; i < ranges.length; i++) {
     var range = ranges[i];
     if (!range.empty()) continue;
-    var line = cm.getLineHandleVisualStart(range.head.line);
+    //var line = cm.getLineHandleVisualStart(range.head.line);
     if (active[active.length - 1] != line) active.push(line);
   }
   if (sameArray(cm.state.activeLines, active)) return;
@@ -57,6 +57,6 @@ function updateActiveLines(cm, ranges) {
 }
 
 function selectionChange(cm, sel) {
-  updateActiveLines(cm, sel.ranges);
+  //updateActiveLines(cm, sel.ranges);
 }
 
