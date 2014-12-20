@@ -97,6 +97,8 @@ app.Room && _.extend(app.Room.prototype, {
 			return true;
 		}
 
+		app.room.commentChangeWithDoc();
+
 		var cfrom = editor.indexFromPos(chg.from);
 		var cto = editor.indexFromPos(chg.to);
 		var removetext = "";

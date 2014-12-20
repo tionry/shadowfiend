@@ -9,28 +9,32 @@ app.Room && _.extend(app.Room.prototype, {
             editor = view.editor;
         view.clearAllLineWidget();
         view.inpopover = false;
-        for (var i = 0; i < view.editor.lineCount(); i++){
+        for (var i = 0; i < editor.lineCount(); i++){
             var text = 'initial value for Line' + (i+1);
-            var LineHandle = editor.getLineHandle(i);
-            LineHandle.comment = text;
-            var msg = view.setLineWidget(i, text);
-            view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
+            this.setLineComment(i, text);
         }
     },
 
-    //刷新批注
-    reloadComment: function(){
+    //设置一行批注
+    setLineComment: function(line, text){
         var view = app.room.view,
             editor = view.editor;
         view.inpopover = false;
-        for (var i = 0; i < view.editor.lineCount(); i++){
-            var LineHandle = editor.getLineHandle(i);
-            if (!LineHandle.comment) {
-                var text = 'initial value for Line' + (i+1);
-                LineHandle.comment = text;
-                var msg = view.setLineWidget(i, text);
-                view.editor.addLineWidget(i, msg[0], {coverGutter: false, noHScroll: true});
-            }
+        var LineHandle = editor.getLineHandle(line);
+        LineHandle.comment = text;
+        var msg = view.setLineWidget(line, text);
+        view.editor.addLineWidget(line, msg[0], {coverGutter: false, noHScroll: true});
+    },
+
+    //刷新批注
+    reloadComment: function(LineList){
+        var view = app.room.view,
+            editor = view.editor;
+        view.clearAllLineWidget();
+        view.inpopover = false;
+        for (var i = 0; i < editor.lineCount(); i++){
+            var text = LineList[i].comment;
+            this.setLineComment(i, text);
         }
     },
 
@@ -40,19 +44,30 @@ app.Room && _.extend(app.Room.prototype, {
             editor = view.editor;
         var LineHandle = editor.getLineHandle(line);
         LineHandle.comment = text;
-        view.renewLineComment(line);
+        var sendList = [];
+        for (var i = 0; i < editor.lineCount(); i++){
+            sendList.push(editor.getLineHandle(i));
+        }
         //app.socket.emit('add-line-comment', {
-        //    line: line,
-        //    comment: text,
+        //    LineList : sendList,
         //});
     },
 
-    afterCommentRevision: function(line,text){
+    //代码被修改后更新批注
+    commentChangeWithDoc: function(){
         var view = app.room.view,
             editor = view.editor;
-        var LineHandle = editor.getLineHandle(line);
-        LineHandle.comment = text;
-        view.renewLineComment(line);
-    }
-
+        var sendList = [];
+        for (var i = 0; i < editor.lineCount(); i++){
+            var LineHandle = editor.getLineHandle(i);
+            if (!LineHandle.widgets){
+                var text = 'initial value for Line' + (i+1);
+                this.setLineComment(i, text);
+            }
+            sendList.push(editor.getLineHandle(i));
+        }
+        //app.socket.emit('add-line-comment', {
+        //    LineList : sendList,
+        //});
+    },
 });
