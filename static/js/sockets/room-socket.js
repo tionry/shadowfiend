@@ -177,10 +177,6 @@ var room, listeners = {
 		if (room.bq.length > 0){
 			room.socket('bps', room.bq[0]);
 		}
-
-		if (app.room && app.room.docModel.attributes.path == app.tempdata.path) {
-			app.room.reloadComment(app.tempdata.comment);
-		}
 		//room.reloadComment();
 	    return;
 	},
@@ -528,7 +524,9 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		app.tempdata || (app.tempdata = data);
+		if (app.room && app.room.docModel.attributes.path == data.path) {
+			app.room.reloadComment(data.comment);
+		}
 	}
 };
 
