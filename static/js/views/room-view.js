@@ -620,6 +620,9 @@ var app = app || {};
             $('#editor-debug').remove();
         }
         $('#language-selector').val('');
+        if (app.languageMap[this.ext]){
+            $('#language-selector').val(this.ext);
+        }
         $('#language-selector').on('change', view.selectlanguage);
     };
 })();
