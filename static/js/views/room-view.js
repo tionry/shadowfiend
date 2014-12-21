@@ -474,6 +474,16 @@ var app = app || {};
             child.text(text);
             elem.data('content', child).popover(options);
         },
+        flashComment: function(line){
+            var editor = this.editor,
+                LineHandle = editor.getLineHandle(line),
+                icon = LineHandle.widgets[0].find('.lint-error-icon');
+            icon.popover('show');
+            var popoverFlash = setTimeout(function(){
+                icon.popover('hide');
+                clearTimeout(popoverFlash);
+            }, 5000);
+        },
         attachEvents : function (e) {
             var view = this;
             $('.popover').on('mouseenter', function() {
