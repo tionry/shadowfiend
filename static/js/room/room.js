@@ -167,7 +167,7 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 
 		//初始化批注按钮
-		app.room.initComments();
+		app.room.initComment();
 
 		//初始化绘图板
 		app.room.initBoard();
