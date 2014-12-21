@@ -528,7 +528,7 @@ var room, listeners = {
 			var editor = app.room.view.editor;
 			if (editor.lineCount() != data.comment.length){
 				var checkUpdate = setTimeout(function(){
-					if (editor.lineCount != data.comment.length)
+					if (editor.lineCount() != data.comment.length)
 						return;
 					clearTimeout(checkUpdate);
 					app.room.reloadComment(data.comment);
