@@ -524,9 +524,9 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		//if (app.room && app.room.docModel.attributes.path == data.path) {
+		if (app.room && app.room.docModel.attributes.path == data.path) {
 			app.room.reloadComment(data.comment);
-		//}
+		}
 	}
 };
 
