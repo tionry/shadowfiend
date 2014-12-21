@@ -451,6 +451,8 @@ var app = app || {};
                 lan = sel.val(),
                 view = app.room.view;
             view.changelanguage(app.languageShortMap[lan]);
+            app.room.ext = app.languageShortMap[lan];
+            app.room.checkrunanddebug(app.languageShortMap[lan]);
         },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
@@ -617,6 +619,7 @@ var app = app || {};
         if (!app.Package.ENABLE_DEBUG) {
             $('#editor-debug').remove();
         }
+        $('#language-selector').val('');
         $('#language-selector').on('change', view.selectlanguage);
     };
 })();
