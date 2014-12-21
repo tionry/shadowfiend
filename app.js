@@ -1560,7 +1560,7 @@ io.sockets.on('connection', function(socket){
 			}
 			socket.emit('after-get-comment', {
 				path: data.path,
-				comment: data.notes
+				comment: doc.notes
 			});
 		});
 	});
