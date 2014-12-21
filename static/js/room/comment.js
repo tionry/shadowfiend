@@ -53,6 +53,7 @@ app.Room && _.extend(app.Room.prototype, {
             path : path,
             LineList : sendList,
         });
+        app.room.reloadComment(sendList);
     },
 
     //代码被修改后更新批注
@@ -73,6 +74,5 @@ app.Room && _.extend(app.Room.prototype, {
             path : path,
             LineList : sendList,
         });
-        app.room.reloadComment(sendList);
     },
 });
