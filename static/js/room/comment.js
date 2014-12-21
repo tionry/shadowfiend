@@ -74,5 +74,6 @@ app.Room && _.extend(app.Room.prototype, {
             path : path,
             LineList : sendList,
         });
+        app.room.reloadComment(sendList);
     },
 });
