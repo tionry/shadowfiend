@@ -59,7 +59,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
   
   	/* 申请进入房间处理 */
-	tryEnter: function(model, loading, backPath) {
+	tryEnter: function(model, loading, backPath, rule) {
 	    var that = this;
     	if(app.Lock.attach({
 			loading: loading,
@@ -71,7 +71,7 @@ app.Room && _.extend(app.Room.prototype, {
       			app.showMessageBox('error', data.err); 
       		},
       		success: function(data) { 
-      			window.location.href = '#edit/'; that.onSet(data, backPath);
+      			window.location.href = '#edit/'; that.onSet(data, backPath, rule);
       		},
     	})) {
       		this.docModel = model;
@@ -80,7 +80,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
 	
   	/* 进入房间处理初始化 */
-	onSet: function(data, backPath) {
+	onSet: function(data, backPath, rule) {
     	app.Lock.remove();
     	data.notRemove = true;
 		
@@ -161,6 +161,11 @@ app.Room && _.extend(app.Room.prototype, {
     		    $(this.cursors[i].element).remove();
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
+
+		//初始化权限
+		if (rule == 'interviewer'){
+			this.view.editor.setOption('readOnly', true);
+		}
 
 		//初始化语言选择列表
 		$('#language-selector').val('');
