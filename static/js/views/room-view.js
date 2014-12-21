@@ -479,11 +479,13 @@ var app = app || {};
                 view = this,
                 LineHandle = editor.getLineHandle(line),
                 icon = $(LineHandle.widgets[0].node).find('.lint-error-icon');
+            icon.addClass('lint-error-icon-highlight');
             icon.popover('show');
             icon.parent().parent().addClass('lint-line-highlight');
             var popoverFlash = setTimeout(function(){
                 icon.popover('hide');
                 icon.parent().parent().removeClass('lint-line-highlight');
+                icon.removeClass('lint-error-icon-highlight');
                 view.inpopover = false;
                 clearTimeout(popoverFlash);
             }, 5000);

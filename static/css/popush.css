@@ -602,6 +602,10 @@ hr{
 	background-color: #aa0000;
 }
 
+.lint-error-icon-highlight {
+	background-color: #aa0000;
+}
+
 .lint-line-highlight {
 	background-color: #CFDBE7;
 }
