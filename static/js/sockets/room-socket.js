@@ -532,10 +532,14 @@ var room, listeners = {
 						return;
 					clearTimeout(checkUpdate);
 					app.room.reloadComment(data.comment);
+					if (data.line >= 0)
+						app.room.view.flashComment(data.line);
 				}, 200);
 			}
 			else{
 				app.room.reloadComment(data.comment);
+				if (data.line >= 0)
+					app.room.view.flashComment(data.line);
 			}
 
 		}

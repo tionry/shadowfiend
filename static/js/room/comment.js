@@ -58,6 +58,7 @@ app.Room && _.extend(app.Room.prototype, {
         app.socket.emit('update-comment', {
             path : path,
             LineList : sendList,
+            line: line,
         });
         app.room.reloadComment(sendList);
         view.flashComment(line);
@@ -80,6 +81,7 @@ app.Room && _.extend(app.Room.prototype, {
         app.socket.emit('update-comment', {
             path : path,
             LineList : sendList,
+            line: -1,
         });
         app.room.reloadComment(sendList);
     },

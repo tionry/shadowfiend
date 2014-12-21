@@ -1529,7 +1529,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('update-comment', function(data) {
-		if (!check(data, 'path', 'LineList')) {
+		if (!check(data, 'path', 'LineList', 'line')) {
 			return;
 		}
 		if (!socket.session) {
@@ -1537,7 +1537,8 @@ io.sockets.on('connection', function(socket){
 		}
 		socket.broadcast.emit('refresh-line-comment', {
 			path: data.path,
-			comment: data.LineList
+			comment: data.LineList,
+			line: data.line,
 		});
 		docDAO.updatenotes(data.path, data.LineList, function(err) {
 			if (err) {
