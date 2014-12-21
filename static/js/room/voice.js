@@ -5,23 +5,6 @@ app.Room && _.extend(app.Room.prototype, {
 
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
-		while(window.userArray.length > 0){
-			$(window.audioArray[window.userArray.shift()]).remove();
-		}
-		while(window.peerUserArray.length > 0){
-			var peerUName = window.peerUserArray.shift();
-			if(window.peerArray[peerUName]){
-				window.peerArray[peerUName].myOnRemoteStream = function (stream){
-					stream.mediaElement.muted = true;
-					return;
-				};
-			}
-		}
-		if(!window.joinedARoom){
-			return;
-		}
-		$('#voice-on').removeClass('active');
-		window.voiceConnection.myLocalStream.stop();
 		window.voiceConnection.leave();
 		delete window.voiceConnection;
 	},
@@ -43,6 +26,7 @@ app.Room && _.extend(app.Room.prototype, {
 					audio: true,
 					video: false
 				};
+				connection.extra = {username: username};
 				window.voiceConnection = connection;
 				connection.autoCloseEntireSession = true;
 
@@ -54,13 +38,12 @@ app.Room && _.extend(app.Room.prototype, {
 						document.body.appendChild(stream.mediaElement);
 					}
 				};
+				var sessions = {};
 				connection.onNewSession = function (session){
-					if(window.joinedARoom){
-						return;
-					}
-					connection.join(session, {
-						username: username
-					});
+					if (sessions[session.sessionid]) return;
+					sessions[session.sessionid] = session;
+
+					connection.join(session);
 				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
