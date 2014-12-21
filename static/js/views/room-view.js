@@ -477,7 +477,7 @@ var app = app || {};
         flashComment: function(line){
             var editor = this.editor,
                 LineHandle = editor.getLineHandle(line),
-                icon = LineHandle.widgets[0].find('.lint-error-icon');
+                icon = $(LineHandle.widgets[0].node).find('.lint-error-icon');
             icon.popover('show');
             var popoverFlash = setTimeout(function(){
                 icon.popover('hide');
