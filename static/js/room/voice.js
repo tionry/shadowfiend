@@ -5,25 +5,10 @@ app.Room && _.extend(app.Room.prototype, {
 
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
-		while(window.userArray.length > 0){
-			$(window.audioArray[window.userArray.shift()]).remove();
-		}
-		while(window.peerUserArray.length > 0){
-			var peerUName = window.peerUserArray.shift();
-			if(window.peerArray[peerUName]){
-				window.peerArray[peerUName].myOnRemoteStream = function (stream){
-					stream.mediaElement.muted = true;
-					return;
-				};
-			}
-		}
-		if(!window.joinedARoom){
-			return;
-		}
-		$('#voice-on').removeClass('active');
-		window.voiceConnection.myLocalStream.stop();
-		window.voiceConnection.leave();
-		delete window.voiceConnection;
+		//$('#voice-on').removeClass('active');
+		//window.voiceConnection.streams.stop('local');
+		//window.voiceConnection.leave();
+		//delete window.voiceConnection;
 	},
 
 	/* 进入并初始化聊天室 */
@@ -32,9 +17,6 @@ app.Room && _.extend(app.Room.prototype, {
 			return;
 		window.voiceon = !window.voiceon;
 		if(window.voiceon) {
-			if(window.joinedARoom){
-				return;
-			}
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
@@ -43,7 +25,7 @@ app.Room && _.extend(app.Room.prototype, {
 					audio: true,
 					video: false
 				};
-				window.voiceConnection = connection;
+				connection.extra = {username: username};
 				connection.autoCloseEntireSession = true;
 
 				connection.onstream = function (stream) {
@@ -54,13 +36,12 @@ app.Room && _.extend(app.Room.prototype, {
 						document.body.appendChild(stream.mediaElement);
 					}
 				};
+				var sessions = {};
 				connection.onNewSession = function (session){
-					if(window.joinedARoom){
-						return;
-					}
-					connection.join(session, {
-						username: username
-					});
+					if (sessions[session.sessionid]) return;
+					sessions[session.sessionid] = session;
+
+					connection.join(session);
 				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
@@ -71,6 +52,7 @@ app.Room && _.extend(app.Room.prototype, {
 					} else {
 						connection.connect();
 					}
+					window.voiceon = true;
 				});
 				socket.emit('presence', connection.channel);
 				connection.openSignalingChannel = function(config) {
@@ -93,6 +75,7 @@ app.Room && _.extend(app.Room.prototype, {
 					socket.on('message', config.onmessage);
 					return socket;
 				};
+				window.voiceConnection = connection;
 			}
 			catch(err){
 				alert(err);
