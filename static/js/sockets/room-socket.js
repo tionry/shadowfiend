@@ -525,7 +525,19 @@ var room, listeners = {
 			return;
 		}
 		if (app.room && app.room.docModel.attributes.path == data.path) {
-			app.room.reloadComment(data.comment);
+			var editor = app.room.view.editor;
+			if (editor.lineCount() < data.length){
+				var checkUpdate = setTimeout(function(){
+					if (editor.lineCount < data.length)
+						return;
+					clearTimeout(checkUpdate);
+					app.room.reloadComment(data.comment);
+				}, 200);
+			}
+			else{
+				app.room.reloadComment(data.comment);
+			}
+
 		}
 	}
 };
