@@ -590,7 +590,7 @@ hr{
 .lint-error-icon {
 	color: white;
     background-color: #447aff;
-	opacity: 0.3;
+	opacity: 0;
 	font-weight: bold;
 	border-radius: 50%;
 	padding: 0 3px;
@@ -606,6 +606,7 @@ hr{
 
 .lint-error-icon-highlight {
 	background-color: #aa0000;
+	opacity: 1;
 }
 
 .lint-line-highlight {
