@@ -160,8 +160,9 @@ app.Room && _.extend(app.Room.prototype, {
 
 		//初始化语言选择列表
 		$('#language-selector').val('');
-		if (app.languageMap[this.ext]){
-			$('#language-selector').val(this.ext);
+		for (var l in app.languageMap){
+			if (app.languageMap[l] == this.ext)
+				$('#language-selector').val(l);
 		}
 		$('#language-selector').on('change', this.view.selectlanguage);
 
