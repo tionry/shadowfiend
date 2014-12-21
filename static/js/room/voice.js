@@ -5,6 +5,7 @@ app.Room && _.extend(app.Room.prototype, {
 
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
+		$('#voice-on').removeClass('active');
 		window.voiceConnection.leave();
 		delete window.voiceConnection;
 	},
@@ -37,7 +38,6 @@ app.Room && _.extend(app.Room.prototype, {
 				};
 				var sessions = {};
 				connection.onNewSession = function (session){
-					window.voiceon = true;
 					if (sessions[session.sessionid]) return;
 					sessions[session.sessionid] = session;
 
@@ -52,6 +52,7 @@ app.Room && _.extend(app.Room.prototype, {
 					} else {
 						connection.connect();
 					}
+					window.voiceon = true;
 				});
 				socket.emit('presence', connection.channel);
 				connection.openSignalingChannel = function(config) {
