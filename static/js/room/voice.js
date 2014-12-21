@@ -15,9 +15,6 @@ app.Room && _.extend(app.Room.prototype, {
 			return;
 		window.voiceon = !window.voiceon;
 		if(window.voiceon) {
-			if(window.joinedARoom){
-				return;
-			}
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
@@ -40,6 +37,7 @@ app.Room && _.extend(app.Room.prototype, {
 				};
 				var sessions = {};
 				connection.onNewSession = function (session){
+					window.voiceon = true;
 					if (sessions[session.sessionid]) return;
 					sessions[session.sessionid] = session;
 
