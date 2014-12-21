@@ -47,7 +47,7 @@ var app = app || {};
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
         var cnfm = modal.find('#btn_newproblemconfirm');
-        $('#newproblem-name')[0].focus();
+        $('#newproblem-name').focus();
         modal.on('hide', function () {
             input.off('input');
             cnfm.off('click');
