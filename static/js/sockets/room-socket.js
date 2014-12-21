@@ -515,11 +515,12 @@ var room, listeners = {
 		if (!data || data.err) {
 			return;
 		}
-		if (app.room && app.room.docModel.attributes.path == data.path) {
+		if (app.room && app.room.docModel.attributes.path == data.path && data.comment) {
 			app.room.reloadComment(data.comment);
 		}
 	},
 
+	// Notify by other user
 	"refresh-line-comment": function(data) {
 		if (!data || data.err) {
 			return;
