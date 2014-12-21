@@ -60,6 +60,7 @@ app.Room && _.extend(app.Room.prototype, {
             LineList : sendList,
         });
         app.room.reloadComment(sendList);
+        view.flashComment(line);
     },
 
     //代码被修改后更新批注
