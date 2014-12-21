@@ -526,9 +526,9 @@ var room, listeners = {
 		}
 		if (app.room && app.room.docModel.attributes.path == data.path) {
 			var editor = app.room.view.editor;
-			if (editor.lineCount() < data.length){
+			if (editor.lineCount() < data.comment.length){
 				var checkUpdate = setTimeout(function(){
-					if (editor.lineCount < data.length)
+					if (editor.lineCount < data.comment.length)
 						return;
 					clearTimeout(checkUpdate);
 					app.room.reloadComment(data.comment);
