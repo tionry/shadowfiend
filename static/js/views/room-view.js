@@ -537,16 +537,6 @@ var app = app || {};
             });
             return msg;
         },
-        renewLineComment: function(line){
-            var view = app.room.view,
-                editor = view.editor,
-                widget = editor.getLineHandle(line).widgets[0],
-                options = {placement:'left', trigger: 'manual', html: true},
-                icon = $(widget.node).find('.lint-error-icon'),
-                LineHandle = editor.getLineHandle(line),
-                text = LineHandle.comment;
-            this.setPopover(icon, options, text);
-        },
     });
 
     app.init || (app.init = {});

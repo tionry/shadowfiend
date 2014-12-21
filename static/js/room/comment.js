@@ -10,7 +10,7 @@ app.Room && _.extend(app.Room.prototype, {
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < editor.lineCount(); i++){
-            var text = 'initial value for Line' + (i+1);
+            var text = '';
             this.setLineComment(i, text);
         }
     },
@@ -28,14 +28,20 @@ app.Room && _.extend(app.Room.prototype, {
 
     //刷新批注
     reloadComment: function(LineList){
-        var view = app.room.view,
-            editor = view.editor;
+        var view = app.room.view;
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < LineList.length; i++){
             var text = LineList[i];
             this.setLineComment(i, text);
         }
+    },
+
+    initComments: function(){
+        var path = this.docModel.attributes.path;
+        app.socket.emit('get-comment', {
+            path : path,
+        });
     },
 
     //增加批注
@@ -64,7 +70,7 @@ app.Room && _.extend(app.Room.prototype, {
         for (var i = 0; i < editor.lineCount(); i++){
             var LineHandle = editor.getLineHandle(i);
             if (!LineHandle.widgets){
-                var text = 'initial value for Line' + (i+1);
+                var text = '';
                 this.setLineComment(i, text);
             }
             sendList.push(editor.getLineHandle(i).comment);
