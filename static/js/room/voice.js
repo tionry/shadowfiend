@@ -26,7 +26,6 @@ app.Room && _.extend(app.Room.prototype, {
 					video: false
 				};
 				connection.extra = {username: username};
-				window.voiceConnection = connection;
 				connection.autoCloseEntireSession = true;
 
 				connection.onstream = function (stream) {
@@ -76,6 +75,7 @@ app.Room && _.extend(app.Room.prototype, {
 					socket.on('message', config.onmessage);
 					return socket;
 				};
+				window.voiceConnection = connection;
 			}
 			catch(err){
 				alert(err);
