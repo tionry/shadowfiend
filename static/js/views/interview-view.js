@@ -11,9 +11,7 @@ var app = app || {};
         events:{
             'click a.interviewer-go':'interviewer_go',
             'click a.interviewee-go':'interviewee_go',
-        //    'click a.problem-modify':'modify',
             'click a.operation':'delete'
-        //    'click a.problem-toggle':'toggleDone',
         },
         initialize: function(){
             this.listenTo(this.model, 'change', this.render);
