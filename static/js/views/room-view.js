@@ -446,6 +446,11 @@ var app = app || {};
                 CodeMirror.autoLoadMode(this.editor, '');
             }
         },
+        selectlanguage: function(){
+            var sel = $('#language-selector');
+            var lan = sel.val();
+            this.changelanguage(app.languageShortMap[lan]);
+        },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
             var data = canvas.toDataURL('image/png');
@@ -611,5 +616,6 @@ var app = app || {};
         if (!app.Package.ENABLE_DEBUG) {
             $('#editor-debug').remove();
         }
+        $('#language-selector').on('change', view.selectlanguage);
     };
 })();

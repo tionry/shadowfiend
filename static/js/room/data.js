@@ -90,6 +90,18 @@ app.languageMap = {
   'xml':    'xml',
 };
 
+app.languageShortMap = {
+  'C':          'c',
+  'C++':        'cpp',
+  'Java':       'java',
+  'Python':     'py',
+  'Perl':       'pl',
+  'Ruby':       'rb',
+  'Haskell':    'hs',
+  'Lua':        'lua',
+  'Javascript': 'js',
+};
+
 app.modeMap = {
   'c':      'text/x-csrc',
   'clj':    'text/x-clojure',
