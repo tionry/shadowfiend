@@ -601,3 +601,7 @@ hr{
 .lint-error-icon:hover {
 	background-color: #aa0000;
 }
+
+.lint-line-highlight {
+	background-color: #CFDBE7;
+}
