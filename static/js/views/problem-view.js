@@ -28,7 +28,6 @@ var app = app || {};
 
         //Check one problem
         go:function(e){
-
             $('#problem-name').html(this.model.attributes.name);
             $('#problem-description').html(this.model.attributes.description);
         },

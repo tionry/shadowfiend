@@ -12,7 +12,6 @@ var app = app || {};
             //this.table = this.el.find('#problemset-table');
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
-            //try here
         },
 
         addOne: function(model) {
@@ -48,6 +47,7 @@ var app = app || {};
         app.showInputModal(modal);
         var input = modal.find('.modal-input');
         var cnfm = modal.find('#btn_newproblemconfirm');
+        $('#newproblem-name')[0].focus();
         modal.on('hide', function () {
             input.off('input');
             cnfm.off('click');
