@@ -148,6 +148,7 @@ var app = app || {};
                     $('#editormain').parent().addClass('col-xs-9');
                 }
                 $('#problem-box').show();
+                $('#current-doc').hide();
                 $('#toggle-problem').html('<span class="glyphicon glyphicon-backward"></span>');
                 $('#toggle-problem').attr('title', strings['hide-title']);
             } else {
@@ -160,6 +161,7 @@ var app = app || {};
                     $('#editormain').parent().addClass('col-xs-12');
                 }
                 $('#problem-box').hide();
+                $('#current-doc').show();
                 $('#toggle-problem').html('<span class="glyphicon glyphicon-forward"></span>');
                 $('#toggle-problem').attr('title', strings['show-title']);
             }
