@@ -447,9 +447,10 @@ var app = app || {};
             }
         },
         selectlanguage: function(){
-            var sel = $('#language-selector');
-            var lan = sel.val();
-            this.changelanguage(app.languageShortMap[lan]);
+            var sel = $('#language-selector'),
+                lan = sel.val(),
+                view = app.room.view;
+            view.changelanguage(app.languageShortMap[lan]);
         },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
