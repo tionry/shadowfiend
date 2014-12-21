@@ -6,12 +6,8 @@ app.Room && _.extend(app.Room.prototype, {
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
 		$('#voice-on').removeClass('active');
-		window.voiceConnection.streams.stop({
-			local: true,
-			voice: true
-		});
+		window.voiceConnection.streams.remove({local: true});
 		window.voiceConnection.leave();
-		delete window.voiceConnection;
 	},
 
 	/* 进入并初始化聊天室 */
