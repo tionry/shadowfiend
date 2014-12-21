@@ -158,6 +158,13 @@ app.Room && _.extend(app.Room.prototype, {
     		this.cursors[i] = { element:cursor, pos:0 };
     	}
 
+		//初始化语言选择列表
+		$('#language-selector').val('');
+		if (app.languageMap[this.ext]){
+			$('#language-selector').val(this.ext);
+		}
+		$('#language-selector').on('change', this.view.selectlanguage);
+
 		//获取全体成员
 		app.room.allMembers = [];
 		var attrs = app.room.docModel.attributes;
