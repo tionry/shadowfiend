@@ -519,10 +519,10 @@ var app = app || {};
             icon.on('mouseenter', function() {
                 var that = this;
                 setTimeout(function(){
-                    if (!view.inpopover) {
+                    //if (!view.inpopover) {
                         $(that).popover('show');
                         view.attachEvents(that);
-                    }
+                    //}
                 }, 200);
             });
             icon.on('mouseleave', function(){
