@@ -182,7 +182,7 @@ app.Room && _.extend(app.Room.prototype, {
 		//获取全体成员
 		app.room.allMembers = [];
 		var attrs = app.room.docModel.attributes;
-		app.room.allMembers.push(attrs.owner.name)
+		app.room.allMembers.push(attrs.owner.name);
 		for (var i = 0; i < attrs.members.length; i++) {
 			app.room.allMembers.push(attrs.members[i].name)
 		}

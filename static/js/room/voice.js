@@ -25,50 +25,46 @@ app.Room && _.extend(app.Room.prototype, {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
-				var connection = new RTCMultiConnection(this.docData.id);
-				connection.keepStreamsOpened = false;
-				connection.session = {
+				window.voiceConnection = new RTCMultiConnection(this.docData.id);
+				window.voiceConnection.keepStreamsOpened = false;
+				window.voiceConnection.session = {
 					audio: true,
 					video: false
 				};
-				connection.extra = {username: username};
-				connection.autoCloseEntireSession = true;
+				window.voiceConnection.extra = {username: username};
 
-				connection.onstream = function (stream) {
+				window.voiceConnection.onstream = function (stream) {
 					if ((stream.type == 'remote') && (stream.extra.username != username)) {
 						stream.mediaElement.style.display = "none";
 						stream.mediaElement.muted = false;
 						stream.mediaElement.play();
 						document.body.appendChild(stream.mediaElement);
 					}
-					if ((stream.type == 'local') && (stream.extra.username == username)) {
-						window.voiceConnection.myLocalStreamid = stream.streamid;
-					}
 				};
 				var sessions = {};
-				connection.onNewSession = function (session){
+				window.voiceConnection.onNewSession = function (session){
 					if (sessions[session.sessionid]) return;
 					sessions[session.sessionid] = session;
 
-					connection.join(session);
+					window.voiceConnection.join(session);
 				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
 				socket.on('presence', function (isChannelPresent) {
 					if (!isChannelPresent) {
-						connection.open();
+						window.voiceConnection.open();
 					} else {
-						connection.connect();
+						window.voiceConnection.connect();
 					}
 					window.voiceon = true;
 				});
 				socket.emit('presence', connection.channel);
-				connection.openSignalingChannel = function(config) {
+				window.voiceConnection.openSignalingChannel = function(config) {
 					var channel = config.channel || this.channel;
 					io.connect(SIGNALING_SERVER).emit('new-channel', {
 						channel: channel,
-						sender : connection.userid
+						sender : window.voiceConnection.userid
 					});
 					var socket = io.connect(SIGNALING_SERVER + channel);
 					socket.channel = channel;
@@ -77,14 +73,13 @@ app.Room && _.extend(app.Room.prototype, {
 					});
 					socket.send = function (message) {
 						socket.emit('message', {
-							sender: connection.userid,
+							sender: window.voiceConnection.userid,
 							data : message
 						});
 					};
 					socket.on('message', config.onmessage);
 					return socket;
 				};
-				window.voiceConnection = connection;
 			}
 			catch(err){
 				alert(err);
