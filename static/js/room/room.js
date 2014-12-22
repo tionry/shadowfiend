@@ -71,7 +71,7 @@ app.Room && _.extend(app.Room.prototype, {
       			app.showMessageBox('error', data.err); 
       		},
       		success: function(data) { 
-      			window.location.href = '#edit/'; that.onSet(data, backPath, rule);
+      			window.location.href = '#edit/'; that.onSet(data, backPath, rule, problem);
       		},
     	})) {
       		this.docModel = model;
