@@ -10,7 +10,7 @@ var app = app || {};
             variable: 'model'
         }),
         events: {
-            'click a' : 'showProblem',
+            'click .interview-single-problem' : 'showProblem',
         },
 
         initialize: function(){
