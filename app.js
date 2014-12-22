@@ -1603,7 +1603,7 @@ io.sockets.on('connection', function(socket){
 		socket.emit('presence', isChannelPresent);
 	});
 	socket.on('disconnect', function (channel) {
-		if (initiatorChannel) {
+		if (initiatorChannel == channel) {
 			delete channels[initiatorChannel];
 		}
 	});
