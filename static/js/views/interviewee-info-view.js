@@ -41,7 +41,7 @@ var app = app || {};
                 problemName: problemName,
             })
             app.models['doc-' + interviewName].on('change', function(){
-                app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer');
+                app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer', app.models['pro-' + interviewName]);
             })
         },
     });

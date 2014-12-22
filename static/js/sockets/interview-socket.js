@@ -160,7 +160,9 @@ var app = app || {};
             app.Lock.remove();
             app.models || (app.models = {});
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
+            app.models['pro-' + data.interviewName] || (app.models['pro-' + data.interviewName] = new app.Problem());
             app.models['doc-' + data.interviewName].set(data.doc);
+            app.models['pro-' + data.interviewName].set(data.problem);
         },
 
         // Notify by other user

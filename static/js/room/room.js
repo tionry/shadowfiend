@@ -59,7 +59,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
   
   	/* 申请进入房间处理 */
-	tryEnter: function(model, loading, backPath, rule) {
+	tryEnter: function(model, loading, backPath, rule, problem) {
 	    var that = this;
     	if(app.Lock.attach({
 			loading: loading,
@@ -80,7 +80,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
 	
   	/* 进入房间处理初始化 */
-	onSet: function(data, backPath, rule) {
+	onSet: function(data, backPath, rule, problem) {
     	app.Lock.remove();
     	data.notRemove = true;
 		
@@ -166,6 +166,9 @@ app.Room && _.extend(app.Room.prototype, {
 		if (rule == 'interviewer'){
 			this.view.editor.setOption('readOnly', true);
 		}
+
+		//初始化题目
+		this.view.showProblem(problem);
 
 		//初始化语言选择列表
 		$('#language-selector').val('');

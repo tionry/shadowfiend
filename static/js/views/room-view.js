@@ -460,6 +460,10 @@ var app = app || {};
             app.room.ext = app.languageShortMap[lan];
             app.room.checkrunanddebug(app.languageShortMap[lan]);
         },
+        showProblem: function(problem){
+            $('#interviewproblem-name').text(problem.attributes.name);
+            $('#interviewproblem-description').text(problem.attributes.description);
+        },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
             var data = canvas.toDataURL('image/png');

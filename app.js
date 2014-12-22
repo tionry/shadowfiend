@@ -1460,6 +1460,9 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('try-enter-interview', {err: err});
 			}
+			if (interview.status == 'completed'){
+				return socket.emit('try-enter-interview', {err: 'interview ended.'})
+			}
 			if (interview.status != 'running') {
 				return socket.emit('try-enter-interview', {err: "not a running interview"});
 			}
@@ -1487,10 +1490,14 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('try-enter-interview', {err: err});
 				}
-				socket.emit('try-enter-interview', {
-					doc: doc,
-					interviewName: data.interviewName
+				problemDAO.getProblemByName(problem, function(err, problem) {
+					socket.emit('try-enter-interview', {
+						doc: doc,
+						interviewName: data.interviewName,
+						problem: problem,
+					});
 				});
+
 			});
 		});
 	});
