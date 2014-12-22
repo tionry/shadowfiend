@@ -10,8 +10,8 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 		try {
 			window.voiceConnection.disconnect();
-			if (window.voiceConnection.isInitiator) {
-				app.socket.emit('disconnect-channel');
+			if (window.isInitiator) {
+				app.socket.emit('disconnect-channel', window.voiceConnection.channel);
 			}
 			delete window.voiceConnection;
 			$('#voice-on').removeClass('active');
@@ -57,6 +57,7 @@ app.Room && _.extend(app.Room.prototype, {
 				socket.on('presence', function (isChannelPresent) {
 					if (!isChannelPresent) {
 						window.voiceConnection.open();
+						window.isInitiator = true;
 					} else {
 						window.voiceConnection.connect();
 					}

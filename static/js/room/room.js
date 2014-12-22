@@ -134,12 +134,7 @@ app.Room && _.extend(app.Room.prototype, {
     
     	//初始化声音
 		window.voiceon = false;
-		window.voiceLock = false;
-		window.userArray = [];
-		window.audioArray = {};
-		window.joinedARoom = false;
-		window.peerArray = {};
-		window.peerUserArray = [];
+		window.isInitiator = false;
 
 		$('#voice-on').removeClass('active');
     
