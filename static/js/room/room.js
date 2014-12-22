@@ -140,7 +140,7 @@ app.Room && _.extend(app.Room.prototype, {
 		window.joinedARoom = false;
 		window.peerArray = {};
 		window.peerUserArray = [];
-		window.voiceConnection = new RTCMultiConnection(this.docData.id);
+		window.voiceConnection = new RTCMultiConnection(data.id);
 
 		$('#voice-on').removeClass('active');
     
@@ -215,7 +215,7 @@ app.Room && _.extend(app.Room.prototype, {
 			that.view.resize();
 			if (!showing) return;
 			showing.CodeMirror.getWrapperElement().style.height =  $(window).height() + "px";
-		}
+		};
         
 		$('body').scrollTop(32767);
     
