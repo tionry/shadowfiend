@@ -660,10 +660,10 @@ var app = app || {};
                     });
                     var btn = $(this);
                     app.models || (app.models = {});
-                    app.models['pro-' + interviewName] || (app.models['pro-' + interviewName] = new app.Problem());
-                    app.models['pro-' + interviewName].on('change', function(){
-                        $('#checkproblem-name').text(app.models['pro-' + interviewName].name);
-                        $('#checkproblem-description').text(app.models['pro-'+interviewName].description);
+                    app.models['problem'] || (app.models['problem'] = new app.Problem());
+                    app.models['problem'].on('change', function(){
+                        $('#checkproblem-name').text(app.models['problem'].attributes.name);
+                        $('#checkproblem-description').text(app.models['problem'].attributes.description);
                     })
                     modal.find('.modal-confirm').on('click', function(){
                         that.viewers = [];

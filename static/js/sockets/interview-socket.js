@@ -178,8 +178,8 @@ var app = app || {};
                 return;
             }
             app.models || (app.models = {});
-            app.models['pro-' + data.interviewName] || (app.models['pro-' + data.interviewName] = new app.Problem());
-            app.models['pro-' + data.interviewName].set(data.problem);
+            app.models['problem'] || (app.models['problem'] = new app.Problem());
+            app.models['problem'].set(data.problem);
         },
     };
 
