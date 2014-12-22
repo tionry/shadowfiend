@@ -1545,7 +1545,7 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('refresh-line-comment', {
 			path: data.path,
 			comment: data.LineList,
-			line: data.line,
+			line: data.line
 		});
 		docDAO.updatenotes(data.path, data.LineList, function(err) {
 			if (err) {
@@ -1572,7 +1572,8 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
-	// voice control in rom
+	// voice control in room
+	// Reference: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
 	var initiatorChannel = '';
 	socket.on('new-channel', function (data) {
 		if (!channels[data.channel]) {
@@ -1592,6 +1593,8 @@ io.sockets.on('connection', function(socket){
 	});
 });
 
+// voice control in room
+// Reference: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
 function onNewNamespace(channel, sender) {
 	io.of('/' + channel).on('connection', function (socket) {
 		var username;
