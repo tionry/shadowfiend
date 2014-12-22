@@ -10,7 +10,7 @@ var app = app || {};
             variable: 'model'
         }),
         events: {
-            'click .interview-single-problem' : 'showProblem',
+            'click ii' : 'showProblem',
         },
 
         initialize: function(){
@@ -36,7 +36,6 @@ var app = app || {};
                 $('#viewproblem-name').text(app.models['problem'].attributes.name);
                 $('#viewproblem-description').text(app.models['problem'].attributes.description);
             });
-            modal.find('.modal-confirm').hide();
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
             })
