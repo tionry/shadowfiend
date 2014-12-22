@@ -174,6 +174,9 @@ var app = app || {};
         },
 
         "get-problem" : function(data){
+            if (data == null || data.err) {
+                return;
+            }
             app.models || (app.models = {});
             app.models['pro-' + data.interviewName] || (app.models['pro-' + data.interviewName] = new app.Problem());
             app.models['pro-' + data.interviewName].set(data.problem);
