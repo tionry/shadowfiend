@@ -648,37 +648,48 @@ var app = app || {};
                 var that = this;
                 var interviewName = $('#interviewer-item-name').text();
                 if ($(this).children().hasClass('glyphicon-play')){
-                    that.viewers = [];
-                    that.viewees = [];
-                    var cc = app.collections['interviewerList-'+interviewName];
-                    for (var i = 0; i < cc.length; i++){
-                        var model = cc.models[i].attributes;
-                        that.viewers.push(model.name);
-                    }
-                    var c = app.collections['round-intervieweeList-'+interviewName];
-                    for (var i = 0; i < c.length; i++){
-                        var model = c.models[i].attributes;
-                        that.viewees.push(model.name);
-                    }
-                    $('.push-problem-btn').attr('disabled', 'disabled');
-                    $(this).children().removeClass('glyphicon-play');
-                    $(this).children().addClass('glyphicon-stop');
-                    $(this).removeAttr('disabled');
-                    var problemName = $(this).parent().text().trim();
-                    if (app.Lock.attach({
-                            error: function(){
-                                app.showMessageBox('info', 'inner error');
-                            },
-                            success:function() {
-                            }
-                        })) {
-                        app.socket.emit('push-problem', {
-                            interviewName: interviewName,
-                            intervieweeList: that.viewees,
-                            interviewerList: that.viewers,
-                            problemName: problemName,
-                        });
-                    }
+                    var modal = $('#checkproblem');
+                    app.showInputModal(modal);
+                    modal.on('hide', function () {
+                        modal.find('.modal-confirm').off('click');
+                        modal.off('hide');
+                    });
+                    var btn = $(this);
+                    modal.find('.modal-confirm').on('click', function(){
+                        that.viewers = [];
+                        that.viewees = [];
+                        var cc = app.collections['interviewerList-'+interviewName];
+                        for (var i = 0; i < cc.length; i++){
+                            var model = cc.models[i].attributes;
+                            that.viewers.push(model.name);
+                        }
+                        var c = app.collections['round-intervieweeList-'+interviewName];
+                        for (var i = 0; i < c.length; i++){
+                            var model = c.models[i].attributes;
+                            that.viewees.push(model.name);
+                        }
+                        $('.push-problem-btn').attr('disabled', 'disabled');
+                        btn.children().removeClass('glyphicon-play');
+                        btn.children().addClass('glyphicon-stop');
+                        btn.removeAttr('disabled');
+                        var problemName = $(this).parent().text().trim();
+                        if (app.Lock.attach({
+                                error: function(){
+                                    app.showMessageBox('info', 'inner error');
+                                },
+                                success:function() {
+                                }
+                            })) {
+                            app.socket.emit('push-problem', {
+                                interviewName: interviewName,
+                                intervieweeList: that.viewees,
+                                interviewerList: that.viewers,
+                                problemName: problemName,
+                            });
+                        }
+                        modal.modal('hide');
+                    })
+
                 } else
                 if ($(this).children().hasClass('glyphicon-stop')){
                     var problemName = $(this).parent().text().trim();
