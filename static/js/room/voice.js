@@ -10,7 +10,7 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 		try {
 			window.voiceConnection.disconnect();
-			if (window.voiceConnection.isInitiator) {
+			if (window.isInitiator) {
 				app.socket.emit('disconnect-channel');
 			}
 			delete window.voiceConnection;
@@ -28,7 +28,6 @@ app.Room && _.extend(app.Room.prototype, {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
-				var that = this;
 				window.voiceConnection = new RTCMultiConnection(this.docData.id);
 				window.voiceConnection.keepStreamsOpened = false;
 				window.voiceConnection.session = {
@@ -45,14 +44,22 @@ app.Room && _.extend(app.Room.prototype, {
 						document.body.appendChild(stream.mediaElement);
 					}
 				};
+				var sessions = {};
+				window.voiceConnection.onNewSession = function (session){
+					if (sessions[session.sessionid]) return;
+					sessions[session.sessionid] = session;
+
+					window.voiceConnection.join(session);
+				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
 				socket.on('presence', function (isChannelPresent) {
 					if (!isChannelPresent) {
 						window.voiceConnection.open();
+						window.isInitiator = true;
 					} else {
-						window.voiceConnection.join(that.docData.id);
+						window.voiceConnection.connect();
 					}
 					window.voiceon = true;
 				});
