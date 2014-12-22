@@ -8,10 +8,13 @@ app.Room && _.extend(app.Room.prototype, {
 		if (!window.voiceon) {
 			return;
 		}
-		window.voiceon = false;
-		$('#voice-on').removeClass('active');
-		window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
-		window.voiceConnection.leave();
+		try {
+			$('#voice-on').removeClass('active');
+			window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
+			window.voiceConnection.leave();
+			window.voiceon = false;
+		} catch (err) {
+		}
 	},
 
 	/* 进入并初始化聊天室 */
