@@ -112,8 +112,6 @@ app.resize = function() {
 /* 登出 */
 app.logout = function() {
 	app.isLogined = false;
-	$('#interviewers-control-table').find('tbody').html('');
-	$('#interviewees-control-table').find('tbody').html('');
 	$.removeCookie('sid');
 	app.socket.emit('logout', { });
 	window.location.href = '#login';
