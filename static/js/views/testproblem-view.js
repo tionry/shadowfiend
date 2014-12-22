@@ -20,7 +20,7 @@ var app = app || {};
         },
 
         showProblem: function(){
-            var problemName = this.model.attribute.name;
+            var problemName = this.model.attributes.name;
             app.socket.emit('get-problem', {
                 problemName : problemName,
             });
