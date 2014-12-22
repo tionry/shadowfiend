@@ -184,5 +184,6 @@ app.languages['en-US'] = { Name :'English Version',
   'startinterviewconfirm?'  : 'Sure to start the interview?',
   'interview ended'         : 'Interview Ended',
   'push'                    : 'push',
+  'Push Problem'            : 'Push Problem',
   'Check Problem'           : 'Check Problem',
 };

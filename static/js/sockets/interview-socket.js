@@ -171,7 +171,13 @@ var app = app || {};
         "refresh-interview": function() {
             app.socket.emit('read-interview', {mode: 'interviewer'});
             app.socket.emit('read-interview', {mode: 'interviewee'});
-        }
+        },
+
+        "get-problem" : function(data){
+            app.models || (app.models = {});
+            app.models['pro-' + data.interviewName] || (app.models['pro-' + data.interviewName] = new app.Problem());
+            app.models['pro-' + data.interviewName].set(data.problem);
+        },
     };
 
     app.init_suf || (app.init_suf = {});

@@ -182,5 +182,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'startinterviewconfirm?'      : '确定要开始一场面试吗？',
   'interview ended'             : '面试已结束',
   'push'                        : '推送',
+  'Push Problem'                : '推送题目',
   'Check Problem'               : '查看题目',
 };

@@ -654,7 +654,12 @@ var app = app || {};
                         modal.find('.modal-confirm').off('click');
                         modal.off('hide');
                     });
+                    var problemName = $(this).parent().text().trim();
                     var btn = $(this);
+                    app.models['pro-' + interviewName].on('change', function(){
+                        $('#checkproblem-name').text(app.models['pro-' + interviewName].name);
+                        $('#checkproblem-description').text(app.models['pro-'+interviewName].description);
+                    })
                     modal.find('.modal-confirm').on('click', function(){
                         that.viewers = [];
                         that.viewees = [];
@@ -672,7 +677,6 @@ var app = app || {};
                         btn.children().removeClass('glyphicon-play');
                         btn.children().addClass('glyphicon-stop');
                         btn.removeAttr('disabled');
-                        var problemName = btn.parent().text().trim();
                         if (app.Lock.attach({
                                 error: function(){
                                     app.showMessageBox('info', 'inner error');

@@ -1574,6 +1574,20 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('get-problem', function(data){
+		if (!check(data, 'problemName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		problemDAO.getProblemByName(data.problemName, function(err, problem) {
+			socket.emit('try-enter-interview', {
+				problem: problem,
+			});
+		});
+	});
+
 	// voice control in room
 	// Reference: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
 	var initiatorChannel = '';
