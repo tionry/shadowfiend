@@ -8,10 +8,13 @@ app.Room && _.extend(app.Room.prototype, {
 		if (!window.voiceon) {
 			return;
 		}
-		window.voiceon = false;
-		$('#voice-on').removeClass('active');
-		window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
-		window.voiceConnection.leave();
+		try {
+			$('#voice-on').removeClass('active');
+			window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
+			window.voiceConnection.leave();
+			window.voiceon = false;
+		} catch (err) {
+		}
 	},
 
 	/* 进入并初始化聊天室 */
@@ -40,9 +43,6 @@ app.Room && _.extend(app.Room.prototype, {
 					if ((stream.type == 'local') && (stream.extra.username == username)) {
 						window.voiceConnection.myLocalStreamid = stream.streamid;
 					}
-				};
-				connection.onstreamended = function(e) {
-					e.mediaElement.parentNode.removeChild(e.mediaElement);
 				};
 				var sessions = {};
 				connection.onNewSession = function (session){
