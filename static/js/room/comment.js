@@ -28,12 +28,19 @@ app.Room && _.extend(app.Room.prototype, {
 
     //刷新批注
     reloadComment: function(LineList){
-        var view = app.room.view;
+        var view = app.room.view,
+            editor = view.editor;
         view.clearAllLineWidget();
         view.inpopover = false;
         for (var i = 0; i < LineList.length; i++){
             var text = LineList[i];
             this.setLineComment(i, text);
+        }
+        if (LineList == null){
+            for (var i = 0; i < editor.lineCount(); i++){
+                var text = "";
+                this.setLineComment(i, text);
+            }
         }
     },
 
