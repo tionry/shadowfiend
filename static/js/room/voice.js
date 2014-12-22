@@ -8,6 +8,7 @@ app.Room && _.extend(app.Room.prototype, {
 		if (!window.voiceon) {
 			return;
 		}
+		window.voiceon = false;
 		$('#voice-on').removeClass('active');
 		window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
 		window.voiceConnection.leave();
@@ -17,8 +18,7 @@ app.Room && _.extend(app.Room.prototype, {
 	openVoice: function() {
 		if(app.novoice)
 			return;
-		window.voiceon = !window.voiceon;
-		if(window.voiceon) {
+		if(!window.voiceon) {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
@@ -57,6 +57,7 @@ app.Room && _.extend(app.Room.prototype, {
 					} else {
 						connection.connect();
 					}
+					window.voiceon = true;
 				});
 				socket.emit('presence', connection.channel);
 				connection.openSignalingChannel = function(config) {
