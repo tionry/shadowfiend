@@ -208,8 +208,8 @@ var app = app || {};
         },
         setShownName: function () {
             this.$('#current-doc').html(this.room.docModel.json.shownName);
-            if ($('#current-doc').text().trim().length >= 28){
-                var replaceName = $('#current-doc').text().trim().substring(0, 25)+'...';
+            if ($('#current-doc').text().trim().length >= 24){
+                var replaceName = $('#current-doc').text().trim().substring(0, 20)+'...';
                 $('#current-doc').text(replaceName);
             }
         },
