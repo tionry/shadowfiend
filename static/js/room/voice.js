@@ -59,7 +59,7 @@ app.Room && _.extend(app.Room.prototype, {
 					}
 					window.voiceon = true;
 				});
-				socket.emit('presence', connection.channel);
+				socket.emit('presence', window.voiceConnection.channel);
 				window.voiceConnection.openSignalingChannel = function(config) {
 					var channel = config.channel || this.channel;
 					io.connect(SIGNALING_SERVER).emit('new-channel', {
