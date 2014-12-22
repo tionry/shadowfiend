@@ -2,6 +2,7 @@ var app = app || {};
 app.languages || (app.languages = {});
 
 app.languages['en-US'] = { Name :'English Version',
+  'Index'				:  'Index',
   'File'				    : 'File',
   'Problem'				    : 'Problem',
   'Interview'				: 'Interview',
