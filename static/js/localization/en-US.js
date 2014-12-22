@@ -182,5 +182,7 @@ app.languages['en-US'] = { Name :'English Version',
   'not a running interview' : 'Interview has not started',
   'no pushing problem'      : 'Get ready! Please wait for interviewers to push a problem...',
   'startinterviewconfirm?'  : 'Sure to start the interview?',
-  'interview ended'         : 'Interview Ended'
+  'interview ended'         : 'Interview Ended',
+  'push'                    : 'push',
+  'Check Problem'           : 'Check Problem',
 };

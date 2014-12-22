@@ -672,7 +672,7 @@ var app = app || {};
                         btn.children().removeClass('glyphicon-play');
                         btn.children().addClass('glyphicon-stop');
                         btn.removeAttr('disabled');
-                        var problemName = $(this).parent().text().trim();
+                        var problemName = btn.parent().text().trim();
                         if (app.Lock.attach({
                                 error: function(){
                                     app.showMessageBox('info', 'inner error');
