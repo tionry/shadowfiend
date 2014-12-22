@@ -39,7 +39,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                 var intervieweelist = [];
                 var i = 0;
                 interviewees.forEach(function(iname,i){
-                    intervieweelist[i] = {name:iname,status:"waiting"};
+                    intervieweelist[i] = {name:iname,status:"waiting",evaluation:""};
                     i++;
                 });
                 var problemlist = [];
@@ -189,7 +189,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             interv.interviewee.forEach(function(viewee){
                 intervieweename.forEach(function(vieweename){
                     if(viewee.name == vieweename){
-                        intervieweelist[i] = {name:vieweename,status:status}
+                        intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation}
                         i++;
                         flag = 1;
                     }
@@ -476,4 +476,94 @@ InterviewDAO.prototype.restoreAllToWaiting = function(interviewName, callback) {
             })
         });
     });
+};
+
+//change interviewee's evaluation.
+InterviewDAO.prototype.updateIntervieweeevaluation = function(interviewname, intervieweename,evaluation, callback) {
+    lock.acquire(interviewname, function() {
+        db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+            if(err){
+                lock.release(interviewname);
+                return callback("inner error");
+            }
+            var intervieweelist=[];
+            var i = 0,j = 0;
+            var flag = 0;
+            interv.interviewee.forEach(function(viewee){
+                intervieweename.forEach(function(vieweename){
+                    if(viewee.name == vieweename){
+                        intervieweelist[i] = {name:vieweename,status:viewee.status,evaluation:evaluation}
+                        i++;
+                        flag = 1;
+                    }
+                    j++;
+                    if(j == intervieweename.length){
+                        j = 0;
+                        if(flag == 0){
+                            intervieweelist[i] = viewee;
+                            i++;
+                        }
+                        flag = 0;
+                    }
+                    if(i == interv.interviewee.length)
+                    {
+                        db.interview.update(
+                            {
+                                name:interviewname
+                            },
+                            {
+                                $set:{
+                                    interviewee:intervieweelist
+                                }
+                            }, function(err, interview) {
+                                if (err) {
+                                    lock.release(interviewname);
+                                    return callback("inner error");
+                                }
+
+                                db.interview.findOne({name: interviewname}, {
+                                    name: 1,
+                                    interviewee: 1
+                                }, function (err, interview) {
+                                    if (err) {
+                                        lock.release(interviewname);
+                                        return callback("inner error");
+                                    }
+                                    if (!interview) {
+                                        lock.release(interviewname);
+                                        return callback("interview not found");
+                                    }
+                                    lock.release(interviewname);
+                                    return callback(null, interview);
+
+                                });
+                            });
+                    }
+                })
+            })
+        })
+    });
+};
+
+InterviewDAO.prototype.getintervieweeevaluation = function(interviewname,intervieweename,callback){
+    db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
+        if(err){
+            return callback("inner error");
+        }
+        var intervieweeobj = [];
+        var i,j;
+        i = 0;
+        j = 0;
+
+        inter.interviewee.forEach(function(interviewee){
+            if(interviewee.name == intervieweename){
+                intervieweeobj = interviewee;
+                i++;
+            }
+            j++;
+            if(j == inter.interviewee.length){
+                return callback(null,intervieweeobj);
+            }
+        });
+    })
 };
