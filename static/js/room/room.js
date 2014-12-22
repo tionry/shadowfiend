@@ -135,6 +135,7 @@ app.Room && _.extend(app.Room.prototype, {
     	//初始化声音
 		window.voiceon = false;
 		window.isInitiator = false;
+		window.skipRTCMultiConnectionLogs = true;
 
 		$('#voice-on').removeClass('active');
     
