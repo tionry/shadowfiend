@@ -144,6 +144,8 @@ var app = app || {};
                 return;
             }
             app.models || (app.models = {});
+            app.models['pro-' + data.interviewName] || (app.models['pro-' + data.interviewName] = new app.Problem());
+            app.models['pro-' + data.interviewName].set(data.problem);
             app.models['doc-' + data.interviewName] || (app.models['doc-' + data.interviewName] = new app.File());
             app.models['doc-' + data.interviewName].set(data.doc);
         },
