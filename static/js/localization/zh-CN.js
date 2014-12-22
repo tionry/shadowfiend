@@ -2,6 +2,7 @@ var app = app || {};
 app.languages || (app.languages = {});
 
 app.languages['zh-CN'] = { Name : '中文版',
+  'Index',				: '首页',
   'File'				    : '文件',
   'Interview'				: '面试',
   'Problem'				    : '问题',
