@@ -5,8 +5,11 @@ app.Room && _.extend(app.Room.prototype, {
 
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
+		if (!window.voiceon) {
+			return;
+		}
 		$('#voice-on').removeClass('active');
-		window.voiceConnection.myLocalstream.stop();
+		window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
 		window.voiceConnection.leave();
 	},
 
@@ -35,7 +38,7 @@ app.Room && _.extend(app.Room.prototype, {
 						document.body.appendChild(stream.mediaElement);
 					}
 					if ((stream.type == 'local') && (stream.extra.username == username)) {
-						window.voiceConnection.myLocalstream = stream;
+						window.voiceConnection.myLocalStreamid = stream.streamid;
 					}
 				};
 				var sessions = {};
@@ -54,7 +57,6 @@ app.Room && _.extend(app.Room.prototype, {
 					} else {
 						connection.connect();
 					}
-					window.voiceon = true;
 				});
 				socket.emit('presence', connection.channel);
 				connection.openSignalingChannel = function(config) {
