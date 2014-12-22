@@ -1602,7 +1602,7 @@ io.sockets.on('connection', function(socket){
 		var isChannelPresent = !! channels[channel];
 		socket.emit('presence', isChannelPresent);
 	});
-	socket.on('disconnect', function (channel) {
+	socket.on('disconnect-channel', function (channel) {
 		if (initiatorChannel) {
 			delete channels[initiatorChannel];
 		}
