@@ -656,6 +656,7 @@ var app = app || {};
                     });
                     var problemName = $(this).parent().text().trim();
                     var btn = $(this);
+                    app.models['pro-' + interviewName] || (app.models['pro-' + interviewName] = new app.Problem());
                     app.models['pro-' + interviewName].on('change', function(){
                         $('#checkproblem-name').text(app.models['pro-' + interviewName].name);
                         $('#checkproblem-description').text(app.models['pro-'+interviewName].description);
