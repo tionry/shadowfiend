@@ -9,9 +9,9 @@ app.Room && _.extend(app.Room.prototype, {
 			return;
 		}
 		try {
-			$('#voice-on').removeClass('active');
 			window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
 			window.voiceConnection.leave();
+			$('#voice-on').removeClass('active');
 			window.voiceon = false;
 		} catch (err) {
 		}
