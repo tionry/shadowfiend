@@ -9,8 +9,7 @@ app.Room && _.extend(app.Room.prototype, {
 			return;
 		}
 		try {
-			window.voiceConnection.streams[window.voiceConnection.myLocalStreamid].stop();
-			window.voiceConnection.leave();
+			window.voiceConnection.disconnect();
 			$('#voice-on').removeClass('active');
 			window.voiceon = false;
 		} catch (err) {
