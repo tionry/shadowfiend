@@ -1603,8 +1603,8 @@ io.sockets.on('connection', function(socket){
 		socket.emit('presence', isChannelPresent);
 	});
 	socket.on('disconnect-channel', function (channel) {
-		if (initiatorChannel) {
-			delete channels[initiatorChannel];
+		if (channels[channel]) {
+			delete channels[channel];
 		}
 	});
 });
