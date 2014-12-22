@@ -140,7 +140,6 @@ app.Room && _.extend(app.Room.prototype, {
 		window.joinedARoom = false;
 		window.peerArray = {};
 		window.peerUserArray = [];
-		window.voiceConnection = new RTCMultiConnection(data.id);
 
 		$('#voice-on').removeClass('active');
     

@@ -10,6 +10,7 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 		try {
 			window.voiceConnection.disconnect();
+			delete window.voiceConnection;
 			$('#voice-on').removeClass('active');
 			window.voiceon = false;
 		} catch (err) {
@@ -24,7 +25,7 @@ app.Room && _.extend(app.Room.prototype, {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
-				var connection = window.voiceConnection;
+				var connection = new RTCMultiConnection(data.id);
 				connection.keepStreamsOpened = false;
 				connection.session = {
 					audio: true,
