@@ -44,9 +44,6 @@ app.Room && _.extend(app.Room.prototype, {
 						window.voiceConnection.myLocalStreamid = stream.streamid;
 					}
 				};
-				connection.onstreamended = function(e) {
-					e.mediaElement.parentNode.removeChild(e.mediaElement);
-				};
 				var sessions = {};
 				connection.onNewSession = function (session){
 					if (sessions[session.sessionid]) return;
