@@ -24,7 +24,7 @@ app.Room && _.extend(app.Room.prototype, {
 			$('#voice-on').addClass('active');
 			try{
 				var username = $('#nav-user-name').html();
-				var connection = new RTCMultiConnection(this.docData.id);
+				var connection = window.voiceConnection;
 				connection.session = {
 					audio: true,
 					video: false

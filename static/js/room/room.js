@@ -48,7 +48,7 @@ app.Room && _.extend(app.Room.prototype, {
 		var that = this;
 		this.setCursor(data.name, { 
 			pos: 0,
-			element: that.newCursor(data.name),
+			element: that.newCursor(data.name)
 		});
 	},
 
@@ -72,7 +72,7 @@ app.Room && _.extend(app.Room.prototype, {
       		},
       		success: function(data) { 
       			window.location.href = '#edit/'; that.onSet(data, backPath, rule, problem);
-      		},
+      		}
     	})) {
       		this.docModel = model;
       		this.socket('join', model.get('path'));
@@ -140,6 +140,7 @@ app.Room && _.extend(app.Room.prototype, {
 		window.joinedARoom = false;
 		window.peerArray = {};
 		window.peerUserArray = [];
+		window.voiceConnection = new RTCMultiConnection(this.docData.id);
 
 		$('#voice-on').removeClass('active');
     
@@ -243,7 +244,7 @@ app.Room && _.extend(app.Room.prototype, {
     	delete data.running;
     	delete data.debugging;
     	delete data.state;
-  	},	
+  	}
   
 });
 

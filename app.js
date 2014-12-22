@@ -1445,7 +1445,7 @@ io.sockets.on('connection', function(socket){
 					socket.emit('get-doc-in-interview', {
 						doc: doc,
 						interviewName: data.interviewName,
-						problem: problem,
+						problem: problem
 					});
 				});
 			});
@@ -1497,7 +1497,7 @@ io.sockets.on('connection', function(socket){
 					socket.emit('try-enter-interview', {
 						doc: doc,
 						interviewName: data.interviewName,
-						problem: problem,
+						problem: problem
 					});
 				});
 			});
@@ -1583,7 +1583,7 @@ io.sockets.on('connection', function(socket){
 		}
 		problemDAO.getProblemByName(data.problemName, function(err, problem) {
 			socket.emit('after-get-problem', {
-				problem: problem,
+				problem: problem
 			});
 		});
 	});
@@ -1603,7 +1603,7 @@ io.sockets.on('connection', function(socket){
 		socket.emit('presence', isChannelPresent);
 	});
 	socket.on('disconnect', function (channel) {
-		if (initiatorChannel == channel) {
+		if (initiatorChannel) {
 			delete channels[initiatorChannel];
 		}
 	});
