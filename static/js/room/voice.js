@@ -25,6 +25,7 @@ app.Room && _.extend(app.Room.prototype, {
 			try{
 				var username = $('#nav-user-name').html();
 				var connection = window.voiceConnection;
+				connection.keepStreamsOpened = false;
 				connection.session = {
 					audio: true,
 					video: false
