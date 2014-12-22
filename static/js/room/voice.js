@@ -6,7 +6,7 @@ app.Room && _.extend(app.Room.prototype, {
 	/* 离开聊天室 */
 	leaveVoiceRoom: function() {
 		$('#voice-on').removeClass('active');
-		window.voiceConnection.streams.remove({local: true});
+		window.voiceConnection.myLocalstream.stop();
 		window.voiceConnection.leave();
 	},
 
@@ -33,6 +33,9 @@ app.Room && _.extend(app.Room.prototype, {
 						stream.mediaElement.muted = false;
 						stream.mediaElement.play();
 						document.body.appendChild(stream.mediaElement);
+					}
+					if ((stream.type == 'local') && (stream.extra.username == username)) {
+						window.voiceConnection.myLocalstream = stream;
 					}
 				};
 				var sessions = {};
