@@ -168,7 +168,8 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 
 		//初始化题目
-		this.view.showProblem(problem);
+		if (problem)
+			this.view.showProblem(problem);
 
 		//初始化语言选择列表
 		$('#language-selector').val('');
