@@ -169,10 +169,10 @@
         <main class="bs-docs-masthead" id="content" role="main" style="padding-bottom:40px;">
           <div class="container">
             <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">P</span>
-            <p class="lead">Popush is an online programing platform.</p>
+            <p class="lead">Popush is an online interview platform.</p>
           </div>
           <p class="lead">
-            <a href="#" class="btn btn-outline-inverse btn-lg">Learn more</a>
+            <a href="#" onclick="app.showInputModal($('#about'));" class="btn btn-outline-inverse btn-lg">Learn more</a>
           </p>
         </main>
 
@@ -1203,25 +1203,43 @@
       </div>
     </div>
 
-  <!-- popover -->
-  <div id="newcomment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body form-horizontal">
-          <div class="form-group">
-            <label class="control-label col-sm-1" localization></label>
-            <div class="col-sm-7">
-              <input class="modal-input form-control" type="text"/>
-            </div>
-            <div class="col-sm-4 modal-buttons">
-              <button class="btn btn-primary modal-confirm" localization>ok</button>
-              <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+    <!-- popover -->
+    <div id="newcomment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newfile-label" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-sm-1" localization></label>
+              <div class="col-sm-7">
+                <input class="modal-input form-control" type="text"/>
+              </div>
+              <div class="col-sm-4 modal-buttons">
+                <button class="btn btn-primary modal-confirm" localization>ok</button>
+                 <button class="btn" data-dismiss="modal" aria-hidden="true" localization>cancel</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- popover -->
+    <div id="about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="aboutdialogLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="aboutdialogLabel">About Popush</h3>
+          </div>
+          <div class="modal-body">
+            <p id="aboutdialogContent">What can you do with Popush?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true" localization>ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
   <a href="" download="" id="downloada" onclick=""></a>
