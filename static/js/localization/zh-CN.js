@@ -180,4 +180,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'not a running interview'     : '面试尚未开始',
   'no pushing problem'          : '请做好准备！等待面试官出题...',
   'startinterviewconfirm?'      : '确定要开始一场面试吗？',
+  'interview ended'             : '面试已结束'
 };
