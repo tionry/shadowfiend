@@ -1582,7 +1582,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		problemDAO.getProblemByName(data.problemName, function(err, problem) {
-			socket.emit('get-problem', {
+			socket.emit('after-get-problem', {
 				problem: problem,
 			});
 		});

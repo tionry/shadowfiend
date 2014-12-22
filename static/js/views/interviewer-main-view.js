@@ -657,7 +657,7 @@ var app = app || {};
                     var problemName = $(this).parent().text().trim();
                     app.socket.emit('get-problem', {
                         problemName : problemName,
-                    })
+                    });
                     var btn = $(this);
                     app.models['pro-' + interviewName] || (app.models['pro-' + interviewName] = new app.Problem());
                     app.models['pro-' + interviewName].on('change', function(){

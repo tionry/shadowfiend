@@ -173,7 +173,7 @@ var app = app || {};
             app.socket.emit('read-interview', {mode: 'interviewee'});
         },
 
-        "get-problem" : function(data){
+        "after-get-problem" : function(data){
             if (data == null || data.err) {
                 return;
             }
