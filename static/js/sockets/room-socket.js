@@ -544,7 +544,29 @@ var room, listeners = {
 			}
 
 		}
-	}
+	},
+
+	"stop-problem" : function(data){
+		if (data == null || data.err) {
+			return;
+		}
+		for (var i = 0; i < data.intervieweeList.length; i++){
+			if (app.currentUser.name == data.intervieweeList[i]){
+				app.room.stopOneProblem();
+			}
+		}
+	},
+
+	"start-problem" : function(data){
+		if (data == null || data.err) {
+			return;
+		}
+		for (var i = 0; i < data.intervieweeList.length; i++){
+			if (app.currentUser.name == data.intervieweeList[i]){
+				app.room.startOneProblem();
+			}
+		}
+	},
 };
 
 /* 开始监听 */

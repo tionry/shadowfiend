@@ -10,7 +10,6 @@ var app = app || {};
             variable: 'model'
         }),
         events: {
-            'click a': 'select',
             'click .interviewee-img-div' : 'enterIntervieweeRoom',
         },
         initialize: function () {
@@ -21,10 +20,6 @@ var app = app || {};
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
-        },
-
-        select: function () {
-
         },
 
         enterIntervieweeRoom: function(){
@@ -39,7 +34,7 @@ var app = app || {};
                 interviewName: interviewName,
                 intervieweeName: intervieweeName,
                 problemName: problemName,
-            })
+            });
             app.models || (app.models = {});
             app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
             app.models['doc-' + interviewName].on('change', function(){

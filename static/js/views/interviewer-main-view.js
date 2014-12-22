@@ -678,6 +678,9 @@ var app = app || {};
                             var model = c.models[i].attributes;
                             that.viewees.push(model.name);
                         }
+                        app.socket.emit('round-start-problem', {
+                            intervieweeList: that.viewees,
+                        });
                         $('.push-problem-btn').attr('disabled', 'disabled');
                         btn.children().removeClass('glyphicon-play');
                         btn.children().addClass('glyphicon-stop');
@@ -698,7 +701,6 @@ var app = app || {};
                         }
                         modal.modal('hide');
                     })
-
                 } else
                 if ($(this).children().hasClass('glyphicon-stop')){
                     var problemName = $(this).parent().text().trim();
@@ -717,6 +719,14 @@ var app = app || {};
                     }
                     $('.glyphicon-stop').removeClass('glyphicon-stop').addClass('glyphicon-play');
                     $('.push-problem-btn').removeAttr('disabled');
+                    var roundcol = app.collections['round-intervieweeList-' + interviewName];
+                    var sendList = [];
+                    for (var i = 0 ; i < roundcol.length; i++){
+                        sendList.push(roundcol.models[i].attributes.name);
+                    }
+                    app.socket.emit('round-stop-problem', {
+                        intervieweeList : sendList,
+                    });
                 }
             });
         },
