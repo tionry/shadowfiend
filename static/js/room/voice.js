@@ -10,6 +10,9 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 		try {
 			window.voiceConnection.disconnect();
+			if (window.voiceConnection.isInitiator) {
+				app.socket.emit('disconnect-channel');
+			}
 			delete window.voiceConnection;
 			$('#voice-on').removeClass('active');
 			window.voiceon = false;
