@@ -189,7 +189,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             interv.interviewee.forEach(function(viewee){
                 intervieweename.forEach(function(vieweename){
                     if(viewee.name == vieweename){
-                        intervieweelist[i] = {name:vieweename,status:status};
+                        intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation};
                         i++;
                         flag = 1;
                     }
