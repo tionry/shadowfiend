@@ -24,7 +24,7 @@ var app = app || {};
             app.socket.emit('get-problem', {
                 problemName : problemName,
             });
-            var modal = $('#checkproblem');
+            var modal = $('#viewproblem');
             app.showInputModal(modal);
             modal.on('hide', function () {
                 modal.find('.modal-confirm').off('click');
@@ -33,10 +33,10 @@ var app = app || {};
             app.models || (app.models = {});
             app.models['problem'] || (app.models['problem'] = new app.Problem());
             app.models['problem'].on('change', function(){
-                $('#checkproblem-name').text(app.models['problem'].attributes.name);
-                $('#checkproblem-description').text(app.models['problem'].attributes.description);
+                $('#viewproblem-name').text(app.models['problem'].attributes.name);
+                $('#viewproblem-description').text(app.models['problem'].attributes.description);
             });
-            modal.find('.modal-confirm').text('ok');
+            modal.find('.modal-confirm').hide();
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
             })
