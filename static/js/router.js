@@ -151,7 +151,7 @@ var app = app || {};
       }),
       
       // dependency
-      _head1: new Page ({ el: '#nav-head-big' }),
+      _head1: new Page ({ el: '#big-one' }),
       _head2: new Page ({ el: '#nav-head' }),
       _footer: new Page ({ el: '#footer' }),
       _ads: new Page ({ el: '#popush-info' }),
