@@ -11,7 +11,6 @@
   <link href="css/bootstrap-editable.css" rel="stylesheet" media="screen">
   <link href="css/docs.min.css" rel="stylesheet" media="screen">
   <link href="css/flexslider.css" rel="stylesheet" media="screen">
-  <link href="css/parallax-slider.css" rel="stylesheet" media="screen">
   <script type="text/javascript" src="js/conf.js"></script>
   <script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
@@ -75,29 +74,6 @@
   
   <div id="first-page">
 
-<!-- Place somewhere in the <body> of your page -->
-<div class="flexslider">
-  <ul class="slides">
-    <li>
-      <img src="/images/step1.jpg" />
-    </li>
-    <li>
-      <img src="/images/step2.jpg" />
-    </li>
-    <li>
-      <img src="/images/step3.jpg" />
-    </li>
-
-  </ul>
-</div>
-<script>
-// Can also be used with $(document).ready()
-$(window).load(function() {
-  $('.flexslider').flexslider({
-    animation: "slide"
-  });
-});
-</script>
     <div class="row" style="margin:0px;">
 
 <!--
@@ -115,6 +91,26 @@ $(window).load(function() {
         </div>
       </div>
 -->
+<!-- Place somewhere in the <body> of your page -->
+<div style="height:400px;">
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="/images/step1.jpg" />
+    </li>
+    <li>
+      <img src="/images/step2.png" />
+    </li>
+    <li>
+      <img src="/images/step3.jpg" />
+    </li>
+    <li>
+      <img src="/images/step3.png" />
+    </li>
+
+  </ul>
+</div>
+</div>
       <div class="col-xs-6">
         <div id="login">
           <h2 style="text-align:center" class="blink" localization>login</h2>
@@ -1453,5 +1449,14 @@ $(window).load(function() {
   <script type="text/javascript" src="js/room/drawboard.js"></script>
   <script type="text/javascript" src="js/room/comment.js"></script>
   <script type="text/javascript" src="js/room/info.js"></script>
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+</script>
+
 </body>
 </html>
