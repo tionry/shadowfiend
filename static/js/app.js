@@ -103,7 +103,6 @@ app.resize = function() {
 	$("#login").css("margin-top", marT);
 	$("#register").css("margin-top", marT);
 	$("#popush-info").css("margin-top", bigoneHeight + 20);
-	var topHeight = document.getElementById("nav-head").clientHeight;
 	var topWidth = document.getElementById("nav-head").clientWidth;
 	if (topWidth >= 770){
 		$('.navbar-right').show();
@@ -114,6 +113,7 @@ app.resize = function() {
 		$('.navbar-right').hide();
 		$('.navbar-left').hide();
 	}
+	var topHeight = document.getElementById("nav-head").clientHeight;
 	$('#filecontrol').css("margin-top", topHeight - 5);
 	$('#editor').css("margin-top", topHeight + 5);
 	$('#problemset-control').css("margin-top", topHeight + 5);
