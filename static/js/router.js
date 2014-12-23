@@ -43,7 +43,7 @@ var app = app || {};
     pages: {
       login: new Page({
         el: '#login',
-        depend: ['_head1', '_footer', '_ads'],
+        depend: ['_img', '_head1', '_footer', '_ads'],
         logined: 0,
         force: true,
         show: function() {
@@ -58,7 +58,7 @@ var app = app || {};
 
       register: new Page({
         el: '#register',
-        depend: ['_head1', '_footer', '_ads'],
+        depend: ['_img', '_head1', '_footer', '_ads'],
         force: true,
         show: function() {
           this.el.show();
@@ -155,6 +155,7 @@ var app = app || {};
       _head2: new Page ({ el: '#nav-head' }),
       _footer: new Page ({ el: '#footer' }),
       _ads: new Page ({ el: '#popush-info' }),
+      _img: new Page({el:'#img-player'}),
     },
 
     analy: function(name) {
