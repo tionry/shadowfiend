@@ -10,6 +10,8 @@
   <link href="css/drawingboard.css" rel="stylesheet" media="screen" />
   <link href="css/bootstrap-editable.css" rel="stylesheet" media="screen">
   <link href="css/docs.min.css" rel="stylesheet" media="screen">
+  <link href="css/flexslider.css" rel="stylesheet" media="screen">
+  <link href="css/parallax-slider.css" rel="stylesheet" media="screen">
   <script type="text/javascript" src="js/conf.js"></script>
   <script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
@@ -25,9 +27,9 @@
   <script type="text/javascript" src="js/lib/jszip-deflate.js"></script>
   <script type="text/javascript" src="js/lib/drawingboard.js"></script>
   <script type="text/javascript" src="js/lib/bootstrap-editable.min.js"></script>
+  <script type="text/javascript" src="js/lib/jquery.flexslider-min.js"></script>
 </head>
 <body style="display:none;">
-
 
   <div class="hero-unit navbar navbar-fixed-top hide" id="big-one">
     <div class="container">
@@ -72,8 +74,33 @@
   </div>
   
   <div id="first-page">
+
+<!-- Place somewhere in the <body> of your page -->
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="/images/step1.jpg" />
+    </li>
+    <li>
+      <img src="/images/step2.jpg" />
+    </li>
+    <li>
+      <img src="/images/step3.jpg" />
+    </li>
+
+  </ul>
+</div>
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+</script>
     <div class="row" style="margin:0px;">
 
+<!--
       <div class="col-xs-6">
         <div class="flowinfo" id="popush-info">
         <main class="bs-docs-masthead" id="content" role="main" style="padding-bottom:40px;">
@@ -87,7 +114,7 @@
         </main>
         </div>
       </div>
-
+-->
       <div class="col-xs-6">
         <div id="login">
           <h2 style="text-align:center" class="blink" localization>login</h2>
