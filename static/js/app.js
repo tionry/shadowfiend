@@ -105,15 +105,15 @@ app.resize = function() {
 	$("#popush-info").css("margin-top", bigoneHeight + 20);
 	var topHeight = document.getElementById("nav-head").clientHeight;
 	var topWidth = document.getElementById("nav-head").clientWidth;
-	//if (topWidth >= 770){
-	//	$('.navbar-right').show();
-	//	$('.navbar-left').show();
-	//}
-	//else
-	//{
-	//	$('.navbar-right').hide();
-	//	$('.navbar-left').hide();
-	//}
+	if (topWidth >= 770){
+		$('.navbar-right').show();
+		$('.navbar-left').show();
+	}
+	else
+	{
+		$('.navbar-right').hide();
+		$('.navbar-left').hide();
+	}
 	$('#filecontrol').css("margin-top", topHeight - 5);
 	$('#editor').css("margin-top", topHeight + 5);
 	$('#problemset-control').css("margin-top", topHeight + 5);
