@@ -438,6 +438,16 @@ var app = app || {};
             }
             o.$tip.css('left', (($(window).width() - o.$tip.width()) / 2) + 'px');
             o.$mainBox.css('left', (-$(window).scrollLeft()) + 'px');
+            var topWidth = document.getElementById("nav-head").clientWidth;
+            if (topWidth >= 770){
+                $('.navbar-right').show();
+                $('.navbar-left').show();
+            }
+            else
+            {
+                $('.navbar-right').hide();
+                $('.navbar-left').hide();
+            }
             this.editor.refresh();
         },
         changelanguage: function (language) {
