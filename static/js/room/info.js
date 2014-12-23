@@ -7,6 +7,9 @@ app.Room && _.extend(app.Room.prototype, {
     stopOneProblem: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
+            modal.modal({
+                keyboard: false
+            });
             app.showInputModal(modal, null, 'noclose');
             modal.find('.modal-confirm').attr('disabled', 'disabled');
         }
