@@ -177,70 +177,118 @@
         </main>
 
         <div class="row">
-          <div class="col-xs-12">
-            <ul class="nav nav-tabs">
-              <li class="dropdown" id="ownedfile">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span localization>owningfiles</span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#" data-toggle="modal" new-type="doc" localization>newfile</a></li>
-                  <li><a href="#" data-toggle="modal" new-type="dir" localization>newfolder</a></li>
-                  <li><a href="#" new-type="down" localization>downzip</a></li>
-                  <li>
-                    <input type="file" id="uploadfile" style="display:none" />
-                    <a href="#" new-type="up" id="upload" localization>upload</a>
-                  </li>
-                  <!--<li class="divider"></li>
-                  <li><a href="#" localization>import</a></li>-->
-                </ul>
-              </li>
-              <li id="ownedfileex" class="hide"><a href="#" class="file-go" localization>owningfiles</a></li>
-              <li id="sharedfile"><a href="#" class="file-go" localization>sharedfiles</a></li>
-            </ul>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范" target="_blank" >
+                <img class="lazy" src="/images/guide1.jpg" width="300" height="150" alt="Headroom.js">
+              </a>
+              <div class="caption">
+                <h3>
+                  <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])">Bootstrap 编码规范<br><small>by @mdo</small></a>
+                </h3>
+                <p>
+                  Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="row" id="file-list" style="margin-bottom: 20px;">
-          <div class="col-xs-10">
-            <p><span localization>currentdir:</span>&nbsp;<span id="current-dir"></span><!--<img src="images/newfile.png" width="28"/><img src="images/newfolder.png" width="35">--></p>
-            <table class="table table-hover" id="file-list-table">
-              <tr class="head">
-                <th class="col1">&nbsp;</th>
-                <th class="col2" localization>filename</th>
-                <th class="col3" localization>state</th>
-                <th class="col4" localization>timestamp</th>
-                <th class="col5">&nbsp;</th>
-              </tr>
-              <tr id="no-file"><td></td><td localization>nofile</td> <td></td> <td></td> <td></td></tr>
-              <script type="text/template" id="file-template">
-                <td class="col1"><img src="<%=model.pic%>" height="32" width="32" /></td>
-                <td class="col2"><a href="#index<%=encodeURI(model.shownPath)%>" class="file-go"><%=_.escape(model.shownName)%></a></td>
-                <% if (model.belongSelf) { %>
-                <td class="col3" localization><%=model.shared?strings["shared"]:""%></td>
-                <% } else { var o = model.owner; %>
-                <td class="col3 owner"><img class="user-other" src="<%=o.avatar%>" width="32" height="32"/><%=_.escape(o.name)%></td>
-                <% } %>
-                <td class="col4"><%=model.time%></td>
-                <td class="col5">
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> operation" data-toggle="dropdown">&nbsp;</a>
-                  <ul class="dropdown-menu">
-                    <% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>
-                    <li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>
-                    <li><a href="#" class="file-go-rename" localization><%=strings["rename"]%></a></li>
-                    <li><a href="#" class="file-go-download" localization><%=strings["download"]%></a></li>
-                  </ul>
-                </div>
-                </td>
-              </script>
-            </table>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范" target="_blank" >
+                <img class="lazy" src="/images/guide1.jpg" width="300" height="150" alt="Headroom.js">
+              </a>
+              <div class="caption">
+                <h3>
+                  <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])">Bootstrap 编码规范<br><small>by @mdo</small></a>
+                </h3>
+                <p>
+                  Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-2">
-            <span localization>shareduser</span>：
-            <div id="member-list">
-              <!--              <img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>-->
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范" target="_blank" >
+                <img class="lazy" src="/images/guide1.jpg" width="300" height="150" alt="Headroom.js">
+              </a>
+              <div class="caption">
+                <h3>
+                  <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])">Bootstrap 编码规范<br><small>by @mdo</small></a>
+                </h3>
+                <p>
+                  Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
+        <!--<div class="row">-->
+          <!--<div class="col-xs-12">-->
+            <!--<ul class="nav nav-tabs">-->
+              <!--<li class="dropdown" id="ownedfile">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span localization>owningfiles</span><b class="caret"></b></a>-->
+                <!--<ul class="dropdown-menu">-->
+                  <!--<li><a href="#" data-toggle="modal" new-type="doc" localization>newfile</a></li>-->
+                  <!--<li><a href="#" data-toggle="modal" new-type="dir" localization>newfolder</a></li>-->
+                  <!--<li><a href="#" new-type="down" localization>downzip</a></li>-->
+                  <!--<li>-->
+                    <!--<input type="file" id="uploadfile" style="display:none" />-->
+                    <!--<a href="#" new-type="up" id="upload" localization>upload</a>-->
+                  <!--</li>-->
+                  <!--&lt;!&ndash;<li class="divider"></li>-->
+                  <!--<li><a href="#" localization>import</a></li>&ndash;&gt;-->
+                <!--</ul>-->
+              <!--</li>-->
+              <!--<li id="ownedfileex" class="hide"><a href="#" class="file-go" localization>owningfiles</a></li>-->
+              <!--<li id="sharedfile"><a href="#" class="file-go" localization>sharedfiles</a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row" id="file-list" style="margin-bottom: 20px;">-->
+          <!--<div class="col-xs-10">-->
+            <!--<p><span localization>currentdir:</span>&nbsp;<span id="current-dir"></span>&lt;!&ndash;<img src="images/newfile.png" width="28"/><img src="images/newfolder.png" width="35">&ndash;&gt;</p>-->
+            <!--<table class="table table-hover" id="file-list-table">-->
+              <!--<tr class="head">-->
+                <!--<th class="col1">&nbsp;</th>-->
+                <!--<th class="col2" localization>filename</th>-->
+                <!--<th class="col3" localization>state</th>-->
+                <!--<th class="col4" localization>timestamp</th>-->
+                <!--<th class="col5">&nbsp;</th>-->
+              <!--</tr>-->
+              <!--<tr id="no-file"><td></td><td localization>nofile</td> <td></td> <td></td> <td></td></tr>-->
+              <!--<script type="text/template" id="file-template">-->
+                <!--<td class="col1"><img src="<%=model.pic%>" height="32" width="32" /></td>-->
+                <!--<td class="col2"><a href="#index<%=encodeURI(model.shownPath)%>" class="file-go"><%=_.escape(model.shownName)%></a></td>-->
+                <!--<% if (model.belongSelf) { %>-->
+                <!--<td class="col3" localization><%=model.shared?strings["shared"]:""%></td>-->
+                <!--<% } else { var o = model.owner; %>-->
+                <!--<td class="col3 owner"><img class="user-other" src="<%=o.avatar%>" width="32" height="32"/><%=_.escape(o.name)%></td>-->
+                <!--<% } %>-->
+                <!--<td class="col4"><%=model.time%></td>-->
+                <!--<td class="col5">-->
+                <!--<div class="dropdown">-->
+                  <!--<a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> operation" data-toggle="dropdown">&nbsp;</a>-->
+                  <!--<ul class="dropdown-menu">-->
+                    <!--<% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>-->
+                    <!--<li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>-->
+                    <!--<li><a href="#" class="file-go-rename" localization><%=strings["rename"]%></a></li>-->
+                    <!--<li><a href="#" class="file-go-download" localization><%=strings["download"]%></a></li>-->
+                  <!--</ul>-->
+                <!--</div>-->
+                <!--</td>-->
+              <!--</script>-->
+            <!--</table>-->
+          <!--</div>-->
+          <!--<div class="col-xs-2">-->
+            <!--<span localization>shareduser</span>：-->
+            <!--<div id="member-list">-->
+              <!--&lt;!&ndash;              <img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
 
       <div id="editor" class="row hide">
