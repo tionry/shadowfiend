@@ -111,77 +111,7 @@
   </ul>
 </div>
 </div>
-      <div class="col-xs-6">
-        <div id="login">
-          <h2 style="text-align:center" class="blink" localization>login</h2>
-          <div class="alert hide" id="login-message">
-            <button type="button" class="close"  onclick="$('#login-message').slideUp()">&times;</button>
-            <span>Nothing here</span>
-          </div>
-          <hr />
-          <div id="login-box" class="form-horizontal">
-            <div class="form-group">
-              <label class="control-label col-xs-3" for="login-inputName" localization>username</label>
-              <div class="controls col-xs-7">
-                <input type="text" class="form-control" id="login-inputName"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-xs-3" for="login-inputPassword" localization>password</label>
-              <div class="controls col-xs-7">
-                <input type="password" class="form-control" id="login-inputPassword"/>
-              </div>
-            </div>
-            <div class="control-group hide" id="login-padding">
-              <label class="control-label">&nbsp;</label>
-            </div>
-            <div class="form-group">
-              <div class="controls col-xs-7" id="login-control">
-                <button id="login-submit" type="submit" class="btn btn-primary" localization>login</button>
-                <a class="switch-rel" href="#register" localization>register</a>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        <div class="hide" id="register" >
-          <h2 style="text-align:center" class="blink" localization>register</h2>
-          <div class="alert hide" id="register-message">
-            <button type="button" class="close" onclick="$('#register-message').slideUp()">&times;</button>
-            <span>Nothing here</span>
-          </div>
-          <hr />
-          <div id="register-box" class="form-horizontal">
-            <div class="form-group">
-              <label class="control-label col-xs-3" for="register-inputName" localization>username</label>
-                <div class="controls col-xs-7">
-                  <a id="tooltip" href="#" data-toggle="tooltip" title="only-contain" localization>
-                    <input type="text" class="form-control" id="register-inputName"/>
-                  </a>
-                </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-xs-3" for="register-inputPassword" localization>password</label>
-              <div class="controls col-xs-7">
-                <input type="password" class="form-control" id="register-inputPassword"/>
-              </div>
-            </div>
-            <div class="form-group hide" id="register-padding">
-              <label class="control-label  col-xs-3" for="register-inputPassword" localization>confirm</label>
-              <div class="controls col-xs-7">
-                <input type="password" class="form-control" id="register-confirmPassword"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="controls col-xs-7" id="register-control">
-                <button id="register-submit" type="submit" class="btn btn-primary" localization>register</button>
-                <a class="switch-rel" href="#login" localization>login</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-			
+      			
     </div>
     <div class="main-body">
       <div id="filecontrol" class="hide">
@@ -913,6 +843,88 @@
       </div>
     </div> 
   </div>
+
+  <!-- popover -->
+  <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <div id="login">
+          <h2 style="text-align:center" class="blink" localization>login</h2>
+          <div class="alert hide" id="login-message">
+            <button type="button" class="close"  onclick="$('#login-message').slideUp()">&times;</button>
+            <span>Nothing here</span>
+          </div>
+          <hr />
+          <div id="login-box" class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-xs-3" for="login-inputName" localization>username</label>
+              <div class="controls col-xs-7">
+                <input type="text" class="form-control" id="login-inputName"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-3" for="login-inputPassword" localization>password</label>
+              <div class="controls col-xs-7">
+                <input type="password" class="form-control" id="login-inputPassword"/>
+              </div>
+            </div>
+            <div class="control-group hide" id="login-padding">
+              <label class="control-label">&nbsp;</label>
+            </div>
+            <div class="form-group">
+              <div class="controls col-xs-7" id="login-control">
+                <button id="login-submit" type="submit" class="btn btn-primary" localization>login</button>
+                <a class="switch-rel" href="#register" localization>register</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="hide" id="register" >
+          <h2 style="text-align:center" class="blink" localization>register</h2>
+          <div class="alert hide" id="register-message">
+            <button type="button" class="close" onclick="$('#register-message').slideUp()">&times;</button>
+            <span>Nothing here</span>
+          </div>
+          <hr />
+          <div id="register-box" class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-xs-3" for="register-inputName" localization>username</label>
+                <div class="controls col-xs-7">
+                  <a id="tooltip" href="#" data-toggle="tooltip" title="only-contain" localization>
+                    <input type="text" class="form-control" id="register-inputName"/>
+                  </a>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-3" for="register-inputPassword" localization>password</label>
+              <div class="controls col-xs-7">
+                <input type="password" class="form-control" id="register-inputPassword"/>
+              </div>
+            </div>
+            <div class="form-group hide" id="register-padding">
+              <label class="control-label  col-xs-3" for="register-inputPassword" localization>confirm</label>
+              <div class="controls col-xs-7">
+                <input type="password" class="form-control" id="register-confirmPassword"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="controls col-xs-7" id="register-control">
+                <button id="register-submit" type="submit" class="btn btn-primary" localization>register</button>
+                <a class="switch-rel" href="#login" localization>login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+
 
   <!-- popover -->
   <div id="startinterview-cfm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="startinterview-label" aria-hidden="true" data-backdrop="static">
