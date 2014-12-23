@@ -307,9 +307,9 @@
             <table class="table table-hover" id="problemset-table">
               <thead>
                 <tr class="head">
-                  <th localization>&nbsp;</th>
-                  <th localization>name</th>
-                  <th localization>Date</th>
+                  <th style="width: 15%" localization>&nbsp;</th>
+                  <th style="width: 35%" localization>name</th>
+                  <th style="width: 35%"localization>Date</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
@@ -318,9 +318,7 @@
                   <td class="col1">&nbsp;</td>
                   <td class="col2"><a href="/#problem/<%=encodeURI(model.name)%>" class="problem-go"><%= model.name%></a></td>
                   <td class="col3"><%=model.time%></td>
-                  <td class="col4">
-                    <a href="#" class="operation">&nbsp;</a>
-                  </td>
+                  <td class="col4">>&nbsp;</td>
                 </script>
               </tbody>
             </table>
