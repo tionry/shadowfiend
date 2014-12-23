@@ -43,7 +43,7 @@ var app = app || {};
     pages: {
       login: new Page({
         el: '#login',
-        depend: ['_head1', '_footer', '_ads'],
+        depend: ['_head2', '_footer', '_ads'],
         logined: 0,
         force: true,
         show: function() {
@@ -58,7 +58,7 @@ var app = app || {};
 
       register: new Page({
         el: '#register',
-        depend: ['_head1', '_footer', '_ads'],
+        depend: ['_head2', '_footer', '_ads'],
         force: true,
         show: function() {
           this.el.show();
