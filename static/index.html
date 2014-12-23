@@ -30,20 +30,42 @@
 </head>
 <body>
 
+<!--<div class="navbar navbar-default navbar-fixed-top hide" id="nav-head-big">-->
+  <!--<div class="container" style="max-width:inherit; width:auto; padding: 0 20px;">-->
+    <!--<div class="navbar-header">-->
+      <!--<div class="navbar-brand" style="font-size:22px; font-family:">Popush</div>-->
+    <!--</div>-->
+    <!--<ul class="nav navbar-nav narv navbar-left">-->
+      <!--<li><a href="#index//" localization>Index</a></li>-->
+      <!--<li class="dropdown">-->
+        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span localization>Interview</span><span class="caret"></span></a>-->
+        <!--<ul class="dropdown-menu" role="menu">-->
+          <!--<li><a href="#interviewers" localization>I'm Interviewer</a></li>-->
+          <!--<li><a href="#interviewees" localization>I'm Interviewee</a></li>-->
+        <!--</ul>-->
+      <!--</li>-->
+      <!--<li><a href="#problemset" localization>Problem</a></li>-->
+    <!--</ul>-->
+
+    <!--<ul class="nav navbar-nav navbar-right">-->
+      <!--<button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</div>-->
+
   <div class="hero-unit navbar navbar-fixed-top" style="display:none;" id="big-one">
     <div class="container" style="max-width:inherit; width:auto; padding: 0 20px;">
       <div class="navbar-header">
         <div class="navbar-brand" style="font-size:22px; font-family:">Popush</div>
       </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+      <div class="nav navbar-nav navbar-right">
           <button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>
-        </li>
-      </ul>
+      </div>
+      <button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>
     </div>
 
-    </div>
+
   </div>
 
   <div class="navbar navbar-default navbar-fixed-top hide" id="nav-head">
@@ -79,7 +101,26 @@
       </ul>
     </div>
   </div>
-  
+
+<div id="img-player" style="width:200px; height:100px; margin-top:60px;">
+  <div class="flexslider">
+    <ul class="slides">
+      <li>
+        <img src="/images/step1.jpg" />
+      </li>
+      <li>
+        <img src="/images/step2.png" />
+      </li>
+      <li>
+        <img src="/images/step3.jpg" />
+      </li>
+      <li>
+        <img src="/images/step3.png" />
+      </li>
+    </ul>
+  </div>
+</div>
+
   <div id="first-page">
 <!--
       <div class="col-xs-6">
@@ -97,24 +138,6 @@
       </div>
 -->
     <!-- Place somewhere in the <body> of your page -->
-    <div id="img-player" style="width:200px; height:100px; margin-top:60px;">
-      <div class="flexslider">
-        <ul class="slides">
-          <li>
-            <img src="/images/step1.jpg" />
-          </li>
-          <li>
-            <img src="/images/step2.png" />
-          </li>
-          <li>
-            <img src="/images/step3.jpg" />
-          </li>
-          <li>
-            <img src="/images/step3.png" />
-          </li>
-        </ul>
-      </div>
-    </div>
 
     <div class="main-body">
       <div id="filecontrol" class="hide">

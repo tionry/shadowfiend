@@ -51,7 +51,7 @@ var onLogin = function(data) {
     	/*更新页面*/
 		app.views['account'].show();
 		app.views.files.afterLogin();
-		$('#loginModal').hide();
+		$('#loginModal').modal('hide');
 		/*更新URL*/
 		app.isLogined = true;
 		window.location.href = '#index//';
