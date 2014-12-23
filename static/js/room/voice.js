@@ -65,7 +65,7 @@ app.Room && _.extend(app.Room.prototype, {
 				connection.onstreamended = function (e) {
 					e.mediaElement.parentNode.removeChild(e.mediaElement);
 					if (e.type == 'remote') {
-						connection.streams[e.streamid].stop();
+						connection.removeStream(e.streamid);
 					}
 				};
 
