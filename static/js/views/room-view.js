@@ -491,6 +491,9 @@ var app = app || {};
             app.showInputModal(modal);
             var canvas = $('.drawing-board-canvas'),
                 that = this;
+            $('.drawing-board-control-navigation').find('button').on('click', function(){
+                that.saveCanvas();
+            });
             canvas.on('mouseup', function(){
                 that.saveCanvas();
             });
