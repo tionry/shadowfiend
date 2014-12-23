@@ -119,6 +119,7 @@ app.resize = function() {
 	$('#problemset-control').css("margin-top", topHeight + 50);
 	$('#interviewers-control').css("margin-top", topHeight + 50);
 	$('#interviewer-item').css("margin-top", topHeight + 50);
+	$('#problem-item').css("margin-top", topHeight + 50);
 	$('#interviewees-control').css("margin-top", topHeight + 50);
 	$('#fullscreentip').css('left', (($(window).width()-$('#fullscreentip').width())/2) + 'px');
 };
