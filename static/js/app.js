@@ -151,8 +151,8 @@ $(document).ready(function() {
 		},
 	});
 
-	$('body').scroll(function(){
-		$(this).animate({left:'-250px', opacity: '0.6'}, 'slow', function(){
+	$(window).scroll(function(){
+		$('#anim-btn').animate({left:'-250px', opacity: '0.6'}, 'slow', function(){
 			$('#anim').off('click');
 			$('#anim-login').fadeIn('fast');
 		});
