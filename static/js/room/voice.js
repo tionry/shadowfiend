@@ -52,7 +52,10 @@ app.Room && _.extend(app.Room.prototype, {
 						window.localStreamID = stream.streamid;
 					}
 				};
-
+				var sessions = {};
+				connection.onNewSession = function (session){
+					return;
+				};
 				window.onbeforeunload = function() {
 					that.leaveVoiceRoom();
 				};
@@ -71,6 +74,7 @@ app.Room && _.extend(app.Room.prototype, {
 						window.isInitiator = true;
 						window.voiceon = true;
 					} else {
+						connection.connect(connection.sessionid);
 						connection.join(connection.sessionid);
 						window.voiceon = true;
 					}
