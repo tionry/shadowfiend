@@ -193,4 +193,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'CreateInterview'            : '发起面试',
   'AttendInterview'            : '参加面试',
   'ProblemSet'                 : '编程题目',
+  'checkeveryone'              : '点选头像与面试者进行编程交流',
 };

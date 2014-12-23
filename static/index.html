@@ -74,6 +74,30 @@
   </div>
   
   <div id="first-page">
+
+<!-- Place somewhere in the <body> of your page -->
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="/images/step1.jpg" />
+    </li>
+    <li>
+      <img src="/images/step2.jpg" />
+    </li>
+    <li>
+      <img src="/images/step3.jpg" />
+    </li>
+
+  </ul>
+</div>
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+</script>
     <div class="row" style="margin:0px;">
 
 <!--
@@ -91,32 +115,6 @@
         </div>
       </div>
 -->
-    <div class="slider-inner">
-        <div id="da-slider" class="da-slider">
-            <div class="da-slide">
-                <h2><i>CLEAN &amp; FRESH</i> <br /> <i>FULLY RESPONSIVE</i> <br /> <i>DESIGN</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
-                <div class="da-img"><img class="img-responsive" src="/images/step1.jpg" alt=""></div>
-            </div>
-            <div class="da-slide">
-                <h2><i>RESPONSIVE VIDEO</i> <br /> <i>SUPPORT AND</i> <br /> <i>MANY MORE</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i></p>
-                <div class="da-img">
-                    <img class="img-responsive" src="/images/step1.jpg" alt="">
-                </div>
-            </div>
-            <div class="da-slide">
-                <h2><i>USING BEST WEB</i> <br /> <i>SOLUTIONS WITH</i> <br /> <i>HTML5/CSS3</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
-                <div class="da-img"><img src="/images/step2.jpg" alt="image01" /></div>
-            </div>
-            <div class="da-arrows">
-                <span class="da-arrows-prev"></span>
-                <span class="da-arrows-next"></span>        
-            </div>
-        </div>
-    </div><!--/slider-->
-
       <div class="col-xs-6">
         <div id="login">
           <h2 style="text-align:center" class="blink" localization>login</h2>
@@ -491,8 +489,26 @@
         <div class="row">
           <div class="panel panel-default">
             <div class="col-sm-9">
-              <div class="panel-heading" localization>Interviewees</div>
+              <div class="row">
+                <div class="guide-page-header">
+                  <h2 style="font-size: 40px">This round interviewees</h2>
+                  <p>checkeveryone</p>
+                </div>
+              </div>
+              <div class="panel-heading" localization></div>
               <div id="interviewer-interviewee-control">
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                      <img data-src="holder.js/300x300" alt="...">
+                      <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-sm-3">
