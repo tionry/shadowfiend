@@ -634,3 +634,7 @@ hr{
 .contain-holder {
 	margin: 150px 100px 100px;
 }
+
+.interviewer-interviewee {
+	padding-left: 20px;
+}
