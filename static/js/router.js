@@ -32,10 +32,12 @@ var app = app || {};
       },
       'interviewers':function() {
         app.socket.emit('read-interview', {mode: 'interviewer'});
+        $('.slides').hide()
         this.analy('interviewers');
       },
       'interviewees':function() {
         app.socket.emit('read-interview', {mode: 'interviewee'});
+        $('.slides').hide()
         this.analy('interviewees');
       }
     },
