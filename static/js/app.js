@@ -151,6 +151,13 @@ $(document).ready(function() {
 		},
 	});
 
+	$('#anim-btn').on('click', function(){
+		$(this).animate({left:'-200px', opacity: '0.6'}, 'slow', function(){
+			$('#anim').off('click');
+			$('#anim-login').fadeIn('fast');
+		});
+	});
+
 	//初始化视图、路由和集合等
 	var init = function(funcs) {
 		for(var i in funcs) {
