@@ -151,6 +151,12 @@ $(document).ready(function() {
 		},
 	});
 
+	$('body').scroll(function(){
+		$(this).animate({left:'-250px', opacity: '0.6'}, 'slow', function(){
+			$('#anim').off('click');
+			$('#anim-login').fadeIn('fast');
+		});
+	});
 	$('#anim-btn').on('click', function(){
 		$(this).animate({left:'-250px', opacity: '0.6'}, 'slow', function(){
 			$('#anim').off('click');
