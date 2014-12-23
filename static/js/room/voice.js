@@ -74,6 +74,7 @@ app.Room && _.extend(app.Room.prototype, {
 						window.isInitiator = true;
 						window.voiceon = true;
 					} else {
+						connection.connect(connection.sessionid);
 						connection.join(connection.sessionid);
 						window.voiceon = true;
 					}
