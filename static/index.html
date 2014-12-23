@@ -30,7 +30,7 @@
 </head>
 <body style="display:none;">
 
-  <div class="hero-unit navbar navbar-fixed-top hide" id="big-one">
+  <div class="hero-unit navbar navbar-fixed-top" style="display:none;" id="big-one">
     <div class="container">
       <div class="row">
         <h1>Popush</h1>
@@ -74,8 +74,6 @@
   
   <div id="first-page">
 
-    <div class="row" style="margin:0px;">
-
 <!--
       <div class="col-xs-6">
         <div class="flowinfo" id="popush-info">
@@ -91,28 +89,27 @@
         </div>
       </div>
 -->
-<!-- Place somewhere in the <body> of your page -->
-<div style="height:400px;">
-<div class="flexslider">
-  <ul class="slides">
-    <li>
-      <img src="/images/step1.jpg" />
-    </li>
-    <li>
-      <img src="/images/step2.png" />
-    </li>
-    <li>
-      <img src="/images/step3.jpg" />
-    </li>
-    <li>
-      <img src="/images/step3.png" />
-    </li>
 
-  </ul>
-</div>
-</div>
-      			
+    <!-- Place somewhere in the <body> of your page -->
+    <div style="width:400px;height:200px;">
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <img src="/images/step1.jpg" />
+          </li>
+          <li>
+            <img src="/images/step2.png" />
+          </li>
+          <li>
+            <img src="/images/step3.jpg" />
+          </li>
+          <li>
+            <img src="/images/step3.png" />
+          </li>
+        </ul>
+      </div>
     </div>
+    <button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>
     <div class="main-body">
       <div id="filecontrol" class="hide">
 <!--
@@ -843,11 +840,9 @@
   <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
 
         <div id="login">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h2 style="text-align:center" class="blink" localization>login</h2>
           <div class="alert hide" id="login-message">
             <button type="button" class="close"  onclick="$('#login-message').slideUp()">&times;</button>
@@ -880,6 +875,7 @@
         </div>
     
         <div class="hide" id="register" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h2 style="text-align:center" class="blink" localization>register</h2>
           <div class="alert hide" id="register-message">
             <button type="button" class="close" onclick="$('#register-message').slideUp()">&times;</button>
@@ -918,8 +914,6 @@
       </div>
     </div> 
   </div>
-
-
 
   <!-- popover -->
   <div id="startinterview-cfm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="startinterview-label" aria-hidden="true" data-backdrop="static">
