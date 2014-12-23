@@ -666,6 +666,7 @@ var app = app || {};
                         $('#checkproblem-description').text(app.models['problem'].attributes.description);
                     })
                     modal.find('.modal-confirm').on('click', function(){
+                        that.parent().addClass('push-problem-highlight');
                         that.viewers = [];
                         that.viewees = [];
                         var cc = app.collections['interviewerList-'+interviewName];
@@ -703,6 +704,7 @@ var app = app || {};
                     })
                 } else
                 if ($(this).children().hasClass('glyphicon-stop')){
+                    that.parent().removeClass('push-problem-highlight');
                     var problemName = $(this).parent().text().trim();
                     if (app.Lock.attach({
                             error: function () {

@@ -612,3 +612,7 @@ hr{
 .lint-line-highlight {
 	background-color: #CFDBE7;
 }
+
+.push-problem-highlight {
+	background-color: #4bd5e7;
+}
