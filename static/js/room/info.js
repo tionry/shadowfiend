@@ -42,6 +42,9 @@ app.Room && _.extend(app.Room.prototype, {
     endRound: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#endroundinfo');
+            modal.modal({
+                keyboard: false
+            });
             app.showInputModal(modal, null, 'noclose');
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
@@ -53,6 +56,9 @@ app.Room && _.extend(app.Room.prototype, {
     endInterview: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#endroundinfo');
+            modal.modal({
+                keyboard: false
+            });
             app.showInputModal(modal, null, 'noclose');
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
