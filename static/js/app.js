@@ -106,13 +106,13 @@ app.resize = function() {
 	var topHeight = document.getElementById("nav-head").clientHeight;
 	var topWidth = document.getElementById("nav-head").clientWidth;
 	if (topWidth >= 770){
-		$('.nav-bar-right').hide();
-		$('.nav-bar-left').hide();
+		$('.navbar-right').hide();
+		$('.navbar-left').hide();
 	}
 	else
 	{
-		$('.nav-bar-right').show();
-		$('.nav-bar-left').show();
+		$('.navbar-right').show();
+		$('.navbar-left').show();
 	}
 	$('#filecontrol').css("margin-top", topHeight - 5);
 	$('#editor').css("margin-top", topHeight + 5);
