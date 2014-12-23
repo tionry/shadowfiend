@@ -43,7 +43,7 @@ var app = app || {};
     pages: {
       login: new Page({
         el: '#login',
-        depend: ['_head2', '_footer', '_ads'],
+        depend: ['_head1', '_footer', '_ads'],
         logined: 0,
         force: true,
         show: function() {
@@ -58,7 +58,7 @@ var app = app || {};
 
       register: new Page({
         el: '#register',
-        depend: ['_head2', '_footer', '_ads'],
+        depend: ['_head1', '_footer', '_ads'],
         force: true,
         show: function() {
           this.el.show();
@@ -151,7 +151,7 @@ var app = app || {};
       }),
       
       // dependency
-      _head1: new Page ({ el: '#big-one' }),
+      _head1: new Page ({ el: '#nav-head-big' }),
       _head2: new Page ({ el: '#nav-head' }),
       _footer: new Page ({ el: '#footer' }),
       _ads: new Page ({ el: '#popush-info' }),

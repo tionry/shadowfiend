@@ -30,10 +30,10 @@
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top" id="big-one">
+<div class="navbar navbar-default navbar-fixed-top hide" id="nav-head-big">
   <div class="container" style="max-width:inherit; width:auto; padding: 0 20px;">
     <div class="navbar-header">
-      <div class="navbar-brand" style="font-size:22px;">Popush</div>
+      <div class="navbar-brand" style="font-size:22px; font-family:">Popush</div>
     </div>
     <ul class="nav navbar-nav narv navbar-left">
       <li><a href="#index//" localization>Index</a></li>
@@ -47,10 +47,25 @@
       <li><a href="#problemset" localization>Problem</a></li>
     </ul>
 
+    <ul class="nav navbar-nav navbar-right">
+      <button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>
+    </ul>
   </div>
+</div>
 
-    <button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>
-  </div>
+  <!--<div class="hero-unit navbar navbar-fixed-top" style="display:none;" id="big-one">-->
+    <!--<div class="container" style="max-width:inherit; width:auto; padding: 0 20px;">-->
+      <!--<div class="navbar-header">-->
+        <!--<div class="navbar-brand" style="font-size:22px; font-family:">Popush</div>-->
+      <!--</div>-->
+
+      <!--<div class="nav navbar-nav navbar-right">-->
+          <!--<button class="btn btn-default" onclick="app.showInputModal($('#loginModal'));">login</button>-->
+      <!--</div>-->
+    <!--</div>-->
+
+   <!---->
+  <!--</div>-->
 
   <div class="navbar navbar-default navbar-fixed-top hide" id="nav-head">
     <div class="container" style="max-width:inherit; width:auto; padding: 0 20px;">
