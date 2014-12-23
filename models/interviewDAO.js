@@ -39,7 +39,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
                 var intervieweelist = [];
                 var i = 0;
                 interviewees.forEach(function(iname,i){
-                    intervieweelist[i] = {name:iname,status:"waiting",evaluation:""};
+                    intervieweelist[i] = {name:iname,status:"waiting",evaluation:"",problem:[]};
                     i++;
                 });
                 var problemlist = [];
@@ -189,7 +189,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
             interv.interviewee.forEach(function(viewee){
                 intervieweename.forEach(function(vieweename){
                     if(viewee.name == vieweename){
-                        intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation};
+                        intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation,problem:viewee.problem};
                         i++;
                         flag = 1;
                     }
@@ -492,7 +492,7 @@ InterviewDAO.prototype.updateIntervieweeevaluation = function(interviewname, int
             interv.interviewee.forEach(function(viewee){
                 intervieweename.forEach(function(vieweename){
                     if(viewee.name == vieweename){
-                        intervieweelist[i] = {name:vieweename,status:viewee.status,evaluation:evaluation}
+                        intervieweelist[i] = {name:vieweename,status:viewee.status,evaluation:evaluation,problem:viewee.problem}
                         i++;
                         flag = 1;
                     }
@@ -566,4 +566,97 @@ InterviewDAO.prototype.getintervieweeevaluation = function(interviewname,intervi
             }
         });
     })
+};
+
+//problem is expected as an object like {name:"",status:""}
+InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,intervieweename,problem,callback) {
+    db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+        if(err){
+            return callback("inner error");
+        }
+        var intervieweelist = [];
+        var i,j = 0;
+        i = 0;
+        j = 0;
+
+        interv.interviewee.forEach(function(viewee) {
+            intervieweename.forEach(function (vieweename) {
+                if (viewee.name == vieweename) {
+                    var problemlist = [];
+                    var k = 0;
+                    var fla = 0;
+                    viewee.problem.forEach(function(pro){
+                       if(pro.name == problem.name){
+                           problemlist[k] = problem;
+                           fla = 1;
+                       }
+                       else{
+                           problemlist[k] = pro;
+                       }
+                       k++;
+                       if(k == viewee.problem.length){
+                           if(fla){
+                               problemlist[k] = problem;
+                           }
+                           intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation,problem:problemlist};
+                           i++;
+                           flag = 1;
+                       }
+                    });
+                }
+                j++;
+                if (j == intervieweename.length) {
+                    j = 0;
+                    if (flag == 0) {
+                        intervieweelist[i] = viewee;
+                        i++;
+                    }
+                    flag = 0;
+                }
+                if (i == interv.interviewee.length) {
+                    db.interview.update(
+                        {
+                            name: interviewname
+                        },
+                        {
+                            $set: {
+                                interviewee: intervieweelist
+                            }
+                        }, function (err, interview) {
+                            if (err) {
+                                return callback("inner error");
+                            }
+                            db.interview.findOne({name: interviewname}, {
+                                name: 1,
+                                interviewee: 1
+                            }, function (err, interview) {
+                                if (err) {
+                                    return callback("inner error");
+                                }
+                                if (!interview) {
+                                    return callback("interview not found");
+                                }
+                                return callback(null, interview);
+
+                            });
+                        });
+                }
+            });
+        });
+    });
+};
+
+InterviewDAO.prototype.getintervieweeproblem = function(interviewname,intervieweename,callback) {
+    db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+        var i = 0;
+        interv.interviewee.forEach(function(viewee) {
+            if (viewee.name == intervieweename) {
+                return callback(null,viewee.problem);
+            }
+            i++;
+            if(i == interv.interviewee.length){
+                return callback("not found");
+            }
+        });
+    });
 };
