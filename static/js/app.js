@@ -134,6 +134,7 @@ app.logout = function() {
 /* 初始化 */
 $(document).ready(function() {
 	//初始化锁
+	$('.slides').hide();
 	app.Lock.attach({
 		loading: '#login-control',
 		tbegin: 0,
