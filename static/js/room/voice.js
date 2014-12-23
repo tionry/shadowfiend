@@ -63,7 +63,7 @@ app.Room && _.extend(app.Room.prototype, {
 				connection.onstreamended = function (e) {
 					e.mediaElement.parentNode.removeChild(e.mediaElement);
 					if (e.type == 'remote') {
-						connection.removeStream(e.streamid);
+						delete connection[e.streamid];
 					}
 				};
 
