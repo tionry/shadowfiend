@@ -58,9 +58,9 @@ app.Room && _.extend(app.Room.prototype, {
 					connection.join(session);
 					window.voiceon = true;
 				};
-				window.addEventListener('unload', function () {
+				window.onbeforeunload = function() {
 					that.leaveVoiceRoom();
-				}, false);
+				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
