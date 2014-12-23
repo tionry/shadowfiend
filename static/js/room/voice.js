@@ -11,6 +11,7 @@ app.Room && _.extend(app.Room.prototype, {
 		try {
 			if (window.localStreamID) {
 				window.voiceConnection.localStreams[window.localStreamID].stop();
+				io.connect(app.Package.SOCKET_IO + window.voiceConnection.channel).emit('disconnect');
 			}
 			if (window.isInitiator) {
 				app.socket.emit('disconnect-channel', window.voiceConnection.channel);
@@ -62,13 +63,11 @@ app.Room && _.extend(app.Room.prototype, {
 					that.leaveVoiceRoom();
 				};
 				connection.onstreamended = function (e) {
-					alert('onstreamended work!');
+					e.mediaElement.parentNode.removeChild(e.mediaElement);
+					if (e.type == 'remote') {
+						connection.removeStream(e.streamid);
+					}
 				};
-				
-				connection.onleave = function (e) {
-					alert('onleave work!');
-				};
-
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
