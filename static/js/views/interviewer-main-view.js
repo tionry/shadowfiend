@@ -32,8 +32,8 @@ var app = app || {};
         renewView: function(){
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
-            $('#set-interview-menu').show();
-            $('#start-interview-btn').show();
+            $('#set-interview-menu').removeAttr('disabled');
+            $('#start-interview-btn').removeAttr('disabled');
             $('#end-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
@@ -98,8 +98,8 @@ var app = app || {};
             $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
-            $('#set-interview-menu').hide();
-            $('#start-interview-btn').hide();
+            $('#set-interview-menu').attr('disabled', 'disabled');
+            $('#start-interview-btn').attr('disabled', 'disabled');
             $('#set-round-btn').removeAttr('disabled');
             $('#end-round-btn').attr('disabled','disabled');
             $('#interviewer-item-status').text('ready');
@@ -109,8 +109,8 @@ var app = app || {};
         },
 
         renew_running_interview: function(){
-            $('#set-interview-menu').hide();
-            $('#start-interview-btn').hide();
+            $('#set-interview-menu').attr('disabled', 'disabled');
+            $('#start-interview-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
             $('.remark-btn').removeAttr('disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
@@ -128,8 +128,8 @@ var app = app || {};
 
         renew_completed_interview: function(){
             $('#interviewer-interviewee-control').html('');
-            $('#set-interview-menu').hide();
-            $('#start-interview-btn').hide();
+            $('#set-interview-menu').attr('disabled', 'disabled');
+            $('#start-interview-btn').attr('disabled', 'disabled');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
