@@ -160,7 +160,7 @@ var app = app || {};
         //当前轮次面试者列表更新 & 进入文件
         addAllRoundInterviewee: function(){
             $('#interviewer-interviewee-control').html('');
-},
+        },
 
         addOneProblem: function(model){
             if (!model) return;
@@ -183,6 +183,9 @@ var app = app || {};
 
         //所有题目列表更新 & 打开推送事件监听
         addAllProblem: function(){
+            if (this.options.problemList.length > 0){
+                $('#no-problem').hide();
+            }
             this.options.problemList.each(this.addOneProblem);
             if (this.itv.status == 'running'){
                 $('.push-problem-btn').removeAttr('disabled');
