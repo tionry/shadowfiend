@@ -17,6 +17,7 @@ app.Room && _.extend(app.Room.prototype, {
 				app.socket.emit('disconnect-channel', window.voiceConnection.channel);
 			}
 			window.voiceConnection.leave();
+			delete window.voiceConnection;
 			$('#voice-on').removeClass('active');
 			window.voiceon = false;
 		} catch (err) {
