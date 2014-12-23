@@ -338,6 +338,8 @@ body{
 	-moz-border-radius:4px;
 	border-radius:4px;
 	padding:50px;
+	-webkit-box-shadow: 0 0 .625em .07em rgba(0,0,0,0.2);
+	box-shadow: 0 0 .625em .07em rgba(0,0,0,0.2);
 }
 
 #share-user-box img,#interviewee-box img,#interviewer-box img,#interview-problem-box img,#setinterviewer-box img,#setinterviewee-box img,#setproblemall-box img,#setprobleminterview-box img,#interviewer-problem-box img,#setuserall-box img,#setuserround-box img{
