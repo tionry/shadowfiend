@@ -94,7 +94,7 @@ app.resize = function() {
 	$('#register-box').css('left', ((w-420)/2-30) + 'px');
 	
 	var bottomHeight = document.getElementById("footer").clientHeight;
-	var bigoneHeight = document.getElementById("big-one").clientHeight;
+	var bigoneHeight = document.getElementById("nav-head-big").clientHeight;
 	$("#login").css("margin-bottom", bottomHeight + 20);
 	$("#register").css("margin-bottom", bottomHeight + 20);
 	$("#popush-info").css("margin-bottom", bottomHeight + 20);
