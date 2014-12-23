@@ -104,6 +104,7 @@ app.resize = function() {
 	$("#register").css("margin-top", marT);
 	$("#popush-info").css("margin-top", bigoneHeight + 20);
 	var topHeight = document.getElementById("nav-head").clientHeight;
+	var topWidth = document.getElementById("nav-head").clientWidth;
 	$('#filecontrol').css("margin-top", topHeight - 5);
 	$('#editor').css("margin-top", topHeight + 5);
 	$('#problemset-control').css("margin-top", topHeight + 5);
