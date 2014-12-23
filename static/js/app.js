@@ -152,7 +152,7 @@ $(document).ready(function() {
 	});
 
 	$('#anim-btn').on('click', function(){
-		$(this).animate({left:'-200px', opacity: '0.6'}, 'slow', function(){
+		$(this).animate({left:'-400px', opacity: '0.6'}, 'slow', function(){
 			$('#anim').off('click');
 			$('#anim-login').fadeIn('fast');
 		});
