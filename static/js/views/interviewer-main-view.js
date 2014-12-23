@@ -644,21 +644,21 @@ var app = app || {};
 
         //推送/终止题目事件监听
         pushstopProblem: function(){
+            var that = this;
             $('.push-problem-btn').on('click', function(){
-                var that = this;
+                var button = $(this);
                 var interviewName = $('#interviewer-item-name').text();
-                if ($(this).children().hasClass('glyphicon-play')){
+                if (button.children().hasClass('glyphicon-play')){
                     var modal = $('#checkproblem');
                     app.showInputModal(modal);
                     modal.on('hide', function () {
                         modal.find('.modal-confirm').off('click');
                         modal.off('hide');
                     });
-                    var problemName = $(this).parent().text().trim();
+                    var problemName = button.parent().text().trim();
                     app.socket.emit('get-problem', {
                         problemName : problemName,
                     });
-                    var btn = $(this);
                     app.models || (app.models = {});
                     app.models['problem'] || (app.models['problem'] = new app.Problem());
                     app.models['problem'].on('change', function(){
@@ -666,7 +666,7 @@ var app = app || {};
                         $('#checkproblem-description').text(app.models['problem'].attributes.description);
                     })
                     modal.find('.modal-confirm').on('click', function(){
-                        that.parent().addClass('push-problem-highlight');
+                        button.parent().addClass('push-problem-highlight');
                         that.viewers = [];
                         that.viewees = [];
                         var cc = app.collections['interviewerList-'+interviewName];
@@ -683,9 +683,9 @@ var app = app || {};
                             intervieweeList: that.viewees,
                         });
                         $('.push-problem-btn').attr('disabled', 'disabled');
-                        btn.children().removeClass('glyphicon-play');
-                        btn.children().addClass('glyphicon-stop');
-                        btn.removeAttr('disabled');
+                        button.children().removeClass('glyphicon-play');
+                        button.children().addClass('glyphicon-stop');
+                        button.removeAttr('disabled');
                         if (app.Lock.attach({
                                 error: function(){
                                     app.showMessageBox('info', 'inner error');
@@ -704,7 +704,7 @@ var app = app || {};
                     })
                 } else
                 if ($(this).children().hasClass('glyphicon-stop')){
-                    that.parent().removeClass('push-problem-highlight');
+                    button.parent().removeClass('push-problem-highlight');
                     var problemName = $(this).parent().text().trim();
                     if (app.Lock.attach({
                             error: function () {
