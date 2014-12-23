@@ -11,6 +11,7 @@ app.Room && _.extend(app.Room.prototype, {
 		try {
 			if (window.localStreamID) {
 				window.voiceConnection.localStreams[window.localStreamID].stop();
+				io.connect(app.Package.SOCKET_IO + window.voiceConnection.channel).emit('disconnect');
 			}
 			if (window.isInitiator) {
 				app.socket.emit('disconnect-channel', window.voiceConnection.channel);
@@ -100,6 +101,9 @@ app.Room && _.extend(app.Room.prototype, {
 						});
 					};
 					socket.on('message', config.onmessage);
+					socket.on('user-left', function() {
+						alert('test-user-left');
+					});
 					return socket;
 				};
 				window.voiceConnection = connection;
