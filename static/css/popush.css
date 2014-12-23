@@ -319,7 +319,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#interviewer-problem-box,#setuserall-box,#setuserround-box,#interviewer-interviewee-control{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#interviewer-problem-box,#setuserall-box,#setuserround-box{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -329,6 +329,17 @@ body{
 	-moz-border-radius:4px;
 	border-radius:4px
 }
+
+#interviewer-interviewee-control{
+	margin:10px 0;
+	width:100%;
+	border:1px solid #ccc;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	padding:50px;
+}
+
 #share-user-box img,#interviewee-box img,#interviewer-box img,#interview-problem-box img,#setinterviewer-box img,#setinterviewee-box img,#setproblemall-box img,#setprobleminterview-box img,#interviewer-problem-box img,#setuserall-box img,#setuserround-box img{
 	margin-right:10px;
 	max-height:32px;
