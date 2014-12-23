@@ -219,72 +219,6 @@
             </div>
           </div>
         </div>
-
-        <!--<div class="row">-->
-          <!--<div class="col-xs-12">-->
-            <!--<ul class="nav nav-tabs">-->
-              <!--<li class="dropdown" id="ownedfile">-->
-                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span localization>owningfiles</span><b class="caret"></b></a>-->
-                <!--<ul class="dropdown-menu">-->
-                  <!--<li><a href="#" data-toggle="modal" new-type="doc" localization>newfile</a></li>-->
-                  <!--<li><a href="#" data-toggle="modal" new-type="dir" localization>newfolder</a></li>-->
-                  <!--<li><a href="#" new-type="down" localization>downzip</a></li>-->
-                  <!--<li>-->
-                    <!--<input type="file" id="uploadfile" style="display:none" />-->
-                    <!--<a href="#" new-type="up" id="upload" localization>upload</a>-->
-                  <!--</li>-->
-                  <!--&lt;!&ndash;<li class="divider"></li>-->
-                  <!--<li><a href="#" localization>import</a></li>&ndash;&gt;-->
-                <!--</ul>-->
-              <!--</li>-->
-              <!--<li id="ownedfileex" class="hide"><a href="#" class="file-go" localization>owningfiles</a></li>-->
-              <!--<li id="sharedfile"><a href="#" class="file-go" localization>sharedfiles</a></li>-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row" id="file-list" style="margin-bottom: 20px;">-->
-          <!--<div class="col-xs-10">-->
-            <!--<p><span localization>currentdir:</span>&nbsp;<span id="current-dir"></span>&lt;!&ndash;<img src="images/newfile.png" width="28"/><img src="images/newfolder.png" width="35">&ndash;&gt;</p>-->
-            <!--<table class="table table-hover" id="file-list-table">-->
-              <!--<tr class="head">-->
-                <!--<th class="col1">&nbsp;</th>-->
-                <!--<th class="col2" localization>filename</th>-->
-                <!--<th class="col3" localization>state</th>-->
-                <!--<th class="col4" localization>timestamp</th>-->
-                <!--<th class="col5">&nbsp;</th>-->
-              <!--</tr>-->
-              <!--<tr id="no-file"><td></td><td localization>nofile</td> <td></td> <td></td> <td></td></tr>-->
-              <!--<script type="text/template" id="file-template">-->
-                <!--<td class="col1"><img src="<%=model.pic%>" height="32" width="32" /></td>-->
-                <!--<td class="col2"><a href="#index<%=encodeURI(model.shownPath)%>" class="file-go"><%=_.escape(model.shownName)%></a></td>-->
-                <!--<% if (model.belongSelf) { %>-->
-                <!--<td class="col3" localization><%=model.shared?strings["shared"]:""%></td>-->
-                <!--<% } else { var o = model.owner; %>-->
-                <!--<td class="col3 owner"><img class="user-other" src="<%=o.avatar%>" width="32" height="32"/><%=_.escape(o.name)%></td>-->
-                <!--<% } %>-->
-                <!--<td class="col4"><%=model.time%></td>-->
-                <!--<td class="col5">-->
-                <!--<div class="dropdown">-->
-                  <!--<a href="#" class="dropdown-toggle<%=model.belongSelf ? "" : " disabled"%> operation" data-toggle="dropdown">&nbsp;</a>-->
-                  <!--<ul class="dropdown-menu">-->
-                    <!--<% if(model.inRoot) { %><li><a href="#" class="file-go-share" localization><%=strings["sharemanage"]%></a></li> <% } %>-->
-                    <!--<li><a href="#" class="file-go-delete" localization><%=strings["delete"]%></a></li>-->
-                    <!--<li><a href="#" class="file-go-rename" localization><%=strings["rename"]%></a></li>-->
-                    <!--<li><a href="#" class="file-go-download" localization><%=strings["download"]%></a></li>-->
-                  <!--</ul>-->
-                <!--</div>-->
-                <!--</td>-->
-              <!--</script>-->
-            <!--</table>-->
-          <!--</div>-->
-          <!--<div class="col-xs-2">-->
-            <!--<span localization>shareduser</span>：-->
-            <!--<div id="member-list">-->
-              <!--&lt;!&ndash;              <img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>&ndash;&gt;-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
 
       <div id="editor" class="row hide">
@@ -393,7 +327,7 @@
         </div>
       </div>
 
-      <div id="problemset-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+      <div id="problemset-control" class="hide contain-holder">
         <div class="row">
           <div class="col-xs-12">
             <ul class="nav navbar-nav navbar-left">
@@ -430,7 +364,7 @@
         </div>
       </div>
 
-      <div id="problem-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
+      <div id="problem-item" class="hide contain-holder">
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
           <div class="btn-group pull-left" style="margin-left:0">
             <a class="btn btn-white" id="problem-item-back" href="#problemset"><span class="glyphicon glyphicon-home"></span></a>
@@ -446,7 +380,7 @@
         </div>
       </div>
 
-      <div id="interviewers-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+      <div id="interviewers-control" class="hide contain-holder">
         <div class="row">
           <div class="col-xs-12">
             <ul class="nav navbar-nav navbar-left">
@@ -497,7 +431,7 @@
         </div>
       </div>
 
-      <div id="interviewer-item" class="hide" style="margin-bottom: 104px;margin-top:55px;">
+      <div id="interviewer-item" class="hide contain-holder">
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
           <div class="navbar navbar-default pull-right" style="min-height:40px;margin:0px;">
             <ul class="nav navbar-nav navbar-right">
@@ -568,7 +502,7 @@
         </div>
       </div>
 
-      <div id="interviewees-control" class="hide" style="margin-bottom: 104px; margin-top: 55px;">
+      <div id="interviewees-control" class="hide contain-holder">
         <div class="row">
           <div class="col-xs-12">
             <ul class="nav navbar-nav navbar-left">

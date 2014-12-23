@@ -630,3 +630,7 @@ hr{
 	border-bottom: 1px solid #eee;
 
 }
+
+.contain-holder {
+	margin: 150px 100px 100px;
+}
