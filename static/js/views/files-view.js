@@ -76,29 +76,29 @@ var app = app || {};
             return this;
         },
         renewList: function (c, opts) {
-            opts || (opts = {});
-            if (opts.previousModels) {
-                _.each(opts.previousModels, function (m) {
-				    m.trigger('remove');
-				});
-            }
-            var els = [],
-			mode = (opts.mode || this.mode),
-			isMine = (mode == app.FilesView.Mode.BelongSelf);
-            _.each(this.collection.models, function (model) {
-			    if (isMine == model.json.belongSelf) {
-			        if (model.view) {
-			            model.view.$el.show();
-			        } else {
-			            model.view = new this.ItemView({ model: model });
-			            els.push(model.view.render().el);
-			        }
-			    } else {
-			        model.view && (model.view.$el.hide());
-			    }
-			}, this);
-            this.$table.append(els);
-            return this;
+            //opts || (opts = {});
+            //if (opts.previousModels) {
+            //    _.each(opts.previousModels, function (m) {
+				//    m.trigger('remove');
+				//});
+            //}
+            //var els = [],
+            //mode = (opts.mode || this.mode);
+            //isMine = (mode == app.FilesView.Mode.BelongSelf);
+            //_.each(this.collection.models, function (model) {
+            //    if (isMine == model.json.belongSelf) {
+            //        if (model.view) {
+            //            model.view.$el.show();
+            //        } else {
+            //            model.view = new this.ItemView({ model: model });
+            //            els.push(model.view.render().el);
+            //        }
+            //    } else {
+            //        model.view && (model.view.$el.hide());
+            //    }
+            //}, this);
+            //this.$table.append(els);
+            //return this;
         },
         render: function (opts) {
             var mode = (opts && opts.mode) || this.mode;

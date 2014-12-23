@@ -750,7 +750,7 @@ var app = app || {};
             }
             if (app.Lock.attach({
                     error: function(){
-                        app.showMessageBox('info', 'inner error')
+                        app.showMessageBox('info', 'syntax error')
                     },
                     success: function(){
                         that.renew_ready_interview();
@@ -827,6 +827,8 @@ var app = app || {};
             var modal = Backbone.$('#remark');
             app.showInputModal(modal);
         },
+
+
 
     });
 })();
