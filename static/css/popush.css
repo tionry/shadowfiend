@@ -616,3 +616,15 @@ hr{
 .push-problem-highlight {
 	background-color: #DCFFDA;
 }
+
+.guide-page-header {
+	width: 60%;
+	text-align: center;
+	font-weight: 200;
+	margin-bottom: 40px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
