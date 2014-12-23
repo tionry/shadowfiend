@@ -319,7 +319,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#interviewer-problem-box,#setuserall-box,#setuserround-box{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#setuserall-box,#setuserround-box{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -330,7 +330,7 @@ body{
 	border-radius:4px
 }
 
-#interviewer-interviewee-control{
+#interviewer-interviewee-control, #interviewer-problem-box{
 	margin:10px 0;
 	width:100%;
 	border:1px solid #ccc;
