@@ -9,11 +9,7 @@ app.Room && _.extend(app.Room.prototype, {
 			return;
 		}
 		try {
-			window.voiceConnection.disconnect();
-			if (window.isInitiator) {
-				app.socket.emit('disconnect-channel', window.voiceConnection.channel);
-			}
-			delete window.voiceConnection;
+			window.voiceConnection.leave();
 			$('#voice-on').removeClass('active');
 			window.voiceon = false;
 		} catch (err) {
@@ -43,6 +39,9 @@ app.Room && _.extend(app.Room.prototype, {
 						stream.mediaElement.play();
 						document.body.appendChild(stream.mediaElement);
 					}
+					if (stream.type == 'local') {
+						window.localStreamID = stream.streamid;
+					}
 				};
 				var sessions = {};
 				connection.onNewSession = function (session){
@@ -51,6 +50,12 @@ app.Room && _.extend(app.Room.prototype, {
 
 					connection.join(session);
 					window.voiceon = true;
+				};
+				connection.onleave = function (e) {
+					connection.localStreams[window.localStreamID].stop();
+					if (window.isInitiator) {
+						app.socket.emit('disconnect-channel', connection.channel);
+					}
 				};
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;

@@ -1596,7 +1596,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		socket.broadcast.emit('stop-problem', {
-			intervieweeList: data.intervieweeList,
+			intervieweeList: data.intervieweeList
 		});
 	});
 
@@ -1608,7 +1608,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		socket.broadcast.emit('start-problem', {
-			intervieweeList: data.intervieweeList,
+			intervieweeList: data.intervieweeList
 		});
 	});
 
@@ -1620,7 +1620,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		socket.broadcast.emit('get-end-round-info', {
-			intervieweeList: data.intervieweeList,
+			intervieweeList: data.intervieweeList
 		});
 	});
 
@@ -1632,7 +1632,7 @@ io.sockets.on('connection', function(socket){
 			return socket.emit('unauthorized');
 		}
 		socket.broadcast.emit('get-end-interview-info', {
-			intervieweeList: data.intervieweeList,
+			intervieweeList: data.intervieweeList
 		});
 	});
 
