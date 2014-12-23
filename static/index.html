@@ -406,23 +406,23 @@
       </div>
 
       <div id="interviewer-item" class="hide contain-holder">
-        <div class="button-group" id="interviewer-item-options" style="position: fixed; left: 30px; top: 30%">
-          <!--<ul>-->
-            <!--<li>-->
-              <!--<button id="set-round-btn" type="button" class="btn btn-primary" localization>Set Round</button>-->
-              <!--</li>-->
-            <!--<li>-->
-              <!--<button id="end-round-btn" type="button" class="btn btn-primary" localization>End Round</button>-->
-            <!--</li>-->
-          <!--</ul>-->
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Tutorials</a></li>
-                <li><a href="#">Practice Editor </a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-        </div>
+        <!--<div class="button-group" id="interviewer-item-options" style="position: fixed; left: 30px; top: 30%">-->
+          <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+              <!--&lt;!&ndash;<button id="set-round-btn" type="button" class="btn btn-primary" localization>Set Round</button>&ndash;&gt;-->
+              <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+              <!--&lt;!&ndash;<button id="end-round-btn" type="button" class="btn btn-primary" localization>End Round</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+              <!--<ul class="nav nav-pills nav-stacked">-->
+                <!--<li><a href="#">Home</a></li>-->
+                <!--<li><a href="#">Tutorials</a></li>-->
+                <!--<li><a href="#">Practice Editor </a></li>-->
+                <!--<li><a href="#">Gallery</a></li>-->
+                <!--<li><a href="#">Contact</a></li>-->
+              <!--</ul>-->
+        <!--</div>-->
 
         <div class="btn-toolbar" style="margin:0 0 5px 0;">
           <div class="navbar navbar-default pull-right" style="min-height:40px;margin:0px;">
@@ -478,13 +478,13 @@
                 </a>
                 <p><%= model.name %></p>
                 <button type="button" class="btn btn-primary remark-btn" localization>Remark</button>
-                <!--<div class="thumbnail">-->
-                  <!--<img class="interviewee-img" src="<%= model.avatar%>" alt="no avatar">-->
-                  <!--<div class="caption">-->
-                    <!--<h3><%= model.name %></h3>-->
-                    <!--<p><button type="button" class="btn btn-primary remark-btn" localization>Remark</button></p>-->
-                  <!--</div>-->
-                <!--</div>-->
+                <div class="thumbnail">
+                  <img class="interviewee-img" src="<%= model.avatar%>" alt="no avatar">
+                  <div class="caption">
+                    <h3><%= model.name %></h3>
+                    <p><button type="button" class="btn btn-primary remark-btn" localization>Remark</button></p>
+                  </div>
+                </div>
             </script>
             <script type="text/template" id="interviewer-problem-template">
               <a href="#" class="interview-single-problem">
