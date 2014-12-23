@@ -115,7 +115,7 @@ app.resize = function() {
 	}
 	var topHeight = document.getElementById("nav-head").clientHeight;
 	$('#filecontrol').css("margin-top", topHeight - 5);
-	$('#editor').css("margin-top", topHeight + 50);
+	$('#editor').css("margin-top", topHeight + 5);
 	$('#problemset-control').css("margin-top", topHeight + 50);
 	$('#interviewers-control').css("margin-top", topHeight + 50);
 	$('#interviewer-item').css("margin-top", topHeight + 50);

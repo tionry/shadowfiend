@@ -43,12 +43,13 @@ app.Room && _.extend(app.Room.prototype, {
     },
 
     endRound: function(){
+        $('#stopprobleminfo').hide();
         if (window.location.hash == '#edit/'){
             var modal = $('#endroundinfo');
             modal.modal({
                 keyboard: false
             });
-            app.showInputModal(modal, null, 'noclose');
+            app.showInputModal(modal, null);
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
                 window.location.href = '/#interviewees';
@@ -57,12 +58,13 @@ app.Room && _.extend(app.Room.prototype, {
     },
 
     endInterview: function(){
+        $('#stopprobleminfo').hide();
         if (window.location.hash == '#edit/'){
             var modal = $('#endroundinfo');
             modal.modal({
                 keyboard: false
             });
-            app.showInputModal(modal, null, 'noclose');
+            app.showInputModal(modal, null);
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
                 window.location.href = '/#interviewees';
