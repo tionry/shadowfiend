@@ -63,13 +63,11 @@ app.Room && _.extend(app.Room.prototype, {
 					that.leaveVoiceRoom();
 				};
 				connection.onstreamended = function (e) {
-					alert('onstreamended work!');
+					e.mediaElement.parentNode.removeChild(e.mediaElement);
+					if (e.type == 'remote') {
+						connection.streams[e.streamid].stop();
+					}
 				};
-				
-				connection.onleave = function (e) {
-					alert('onleave work!');
-				};
-
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
@@ -101,9 +99,6 @@ app.Room && _.extend(app.Room.prototype, {
 						});
 					};
 					socket.on('message', config.onmessage);
-					socket.on('user-left', function() {
-						alert('test-user-left');
-					});
 					return socket;
 				};
 				window.voiceConnection = connection;
