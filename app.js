@@ -1612,6 +1612,30 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('send-end-round-info', function(data){
+		if (!check(data, 'intervieweeList')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		socket.broadcast.emit('get-end-round-info', {
+			intervieweeList: data.intervieweeList,
+		});
+	});
+
+	socket.on('send-end-interview-info', function(data){
+		if (!check(data, 'intervieweeList')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		socket.broadcast.emit('get-end-interview-info', {
+			intervieweeList: data.intervieweeList,
+		});
+	});
+
 	// voice control in room
 	// Reference: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
 	var initiatorChannel = '';

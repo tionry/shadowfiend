@@ -32,7 +32,7 @@ app.showMessageBar = function(id, stringid, type) {
 };
 
 /* 显示输入模态对话框 */
-app.showInputModal = function(modal, val) {
+app.showInputModal = function(modal, val, noclose) {
 	modal.find('.form-group').removeClass('danger').find('input').val('');
 	modal.find('.help-inline').text('');
 	var i = modal.find('.modal-input').val(val || '');
@@ -43,8 +43,9 @@ app.showInputModal = function(modal, val) {
 			if(k == 13) { 
 				ok && ok.click();
 			} 
-			else if(k == 27) { 
-				modal.modal('hide');
+			else if(k == 27) {
+				if (!noclose)
+					modal.modal('hide');
 			}
     	});
   	}).on('hide', function() {

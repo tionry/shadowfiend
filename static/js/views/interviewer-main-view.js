@@ -739,7 +739,12 @@ var app = app || {};
             that.viewees = [];
             $('.interviewer-interviewee').find('p').each(function(){
                 that.viewees.push($(this).text().trim());
-            })
+            });
+            if (that.viewees.length > 0){
+                app.socket.emit('send-end-round-info', {
+                    intervieweeList: that.viewees,
+                })
+            }
             if (app.Lock.attach({
                     error: function(){
                         app.showMessageBox('info', 'inner error')
@@ -800,6 +805,15 @@ var app = app || {};
                         name: name,
                         status: 'completed',
                     });
+                }
+                that.viewees = [];
+                $('.interviewer-interviewee').find('p').each(function(){
+                    that.viewees.push($(this).text().trim());
+                });
+                if (that.viewees.length > 0){
+                    app.socket.emit('send-end-interview-info', {
+                        intervieweeList: that.viewees,
+                    })
                 }
                 that.renew_completed_interview();
             });

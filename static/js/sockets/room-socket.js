@@ -567,6 +567,28 @@ var room, listeners = {
 			}
 		}
 	},
+
+	"get-end-round-info" : function(data){
+		if (data == null || data.err) {
+			return;
+		}
+		for (var i = 0; i < data.intervieweeList.length; i++){
+			if (app.currentUser.name == data.intervieweeList[i]){
+				app.room.endRound();
+			}
+		}
+	},
+
+	"get-end-interview-info" : function(data){
+		if (data == null || data.err) {
+			return;
+		}
+		for (var i = 0; i < data.intervieweeList.length; i++){
+			if (app.currentUser.name == data.intervieweeList[i]){
+				app.room.endInterview();
+			}
+		}
+	},
 };
 
 /* 开始监听 */

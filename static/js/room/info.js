@@ -7,7 +7,7 @@ app.Room && _.extend(app.Room.prototype, {
     stopOneProblem: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
-            app.showInputModal(modal);
+            app.showInputModal(modal, null, 'noclose');
             modal.find('.modal-confirm').attr('disabled', 'disabled');
         }
     },
@@ -36,6 +36,28 @@ app.Room && _.extend(app.Room.prototype, {
                     modal.modal('hide');
                 });
             });
+        }
+    },
+
+    endRound: function(){
+        if (window.location.hash == '#edit/'){
+            var modal = $('#endroundinfo');
+            app.showInputModal(modal, null, 'noclose');
+            modal.find('.modal-confirm').on('click', function(){
+                modal.modal('hide');
+                window.location.href = '/#interviewees';
+            })
+        }
+    },
+
+    endInterview: function(){
+        if (window.location.hash == '#edit/'){
+            var modal = $('#endroundinfo');
+            app.showInputModal(modal, null, 'noclose');
+            modal.find('.modal-confirm').on('click', function(){
+                modal.modal('hide');
+                window.location.href = '/#interviewees';
+            })
         }
     },
 });
