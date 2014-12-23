@@ -5,7 +5,7 @@ var app = app || {};
 (function () {
     app.IntervieweeInfoView = Backbone.View.extend({
         tagName: 'div',
-        className: 'interviewer-interviewee col-sm-6 col-md-4',
+        className: 'interviewer-interviewee',
         template: _.template($('#interviewer-interviewee-template').html(), null, {
             variable: 'model'
         }),
