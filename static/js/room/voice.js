@@ -61,6 +61,14 @@ app.Room && _.extend(app.Room.prototype, {
 				window.onbeforeunload = function() {
 					that.leaveVoiceRoom();
 				};
+				connection.onstreamended = function (e) {
+					alert('onstreamended work!');
+				};
+				
+				connection.onleave = function (e) {
+					alert('onleave work!');
+				};
+
 
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
