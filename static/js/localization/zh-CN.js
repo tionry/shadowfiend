@@ -185,4 +185,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'push'                        : '推送',
   'Push Problem'                : '推送题目',
   'Check Problem'               : '查看题目',
+  'waitfornextproblem'          : '本道题已经结束。请等待下一题。',
+  'Next'                        : '下一题',
 };

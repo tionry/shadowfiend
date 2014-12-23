@@ -187,4 +187,6 @@ app.languages['en-US'] = { Name :'English Version',
   'push'                    : 'push',
   'Push Problem'            : 'Push Problem',
   'Check Problem'           : 'Check Problem',
+  'waitfornextproblem'      : 'The interview has been paused by interviewer. Please wait for comming problems.',
+  'Next'                    : 'Next',
 };

@@ -59,7 +59,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
   
   	/* 申请进入房间处理 */
-	tryEnter: function(model, loading, backPath, rule, problem) {
+	tryEnter: function(model, loading, backPath, rule, problem, interviewName) {
 	    var that = this;
     	if(app.Lock.attach({
 			loading: loading,
@@ -71,7 +71,7 @@ app.Room && _.extend(app.Room.prototype, {
       			app.showMessageBox('error', data.err); 
       		},
       		success: function(data) { 
-      			window.location.href = '#edit/'; that.onSet(data, backPath, rule, problem);
+      			window.location.href = '#edit/'; that.onSet(data, backPath, rule, problem, interviewName);
       		}
     	})) {
       		this.docModel = model;
@@ -80,7 +80,7 @@ app.Room && _.extend(app.Room.prototype, {
 	},
 	
   	/* 进入房间处理初始化 */
-	onSet: function(data, backPath, rule, problem) {
+	onSet: function(data, backPath, rule, problem, interviewName) {
     	app.Lock.remove();
     	data.notRemove = true;
 		
@@ -104,6 +104,7 @@ app.Room && _.extend(app.Room.prototype, {
     	this.runLock = false;
     	this.debugLock = false;
     	this.waiting = false;
+		this.interviewName = interviewName;
 	
     	$('#current-doc').html(_.escape(docobj.shownName));
 		if ($('#current-doc').text().trim().length >= 20){

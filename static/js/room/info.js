@@ -8,13 +8,34 @@ app.Room && _.extend(app.Room.prototype, {
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
             app.showInputModal(modal);
+            modal.find('.modal-confirm').attr('disabled', 'disabled');
         }
     },
 
     startOneProblem: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
-            modal.modal('hide');
+            modal.find('.modal-confirm').removeAttr('disabled');
+            modal.find('.modal-confirm').on('click', function(){
+                var interviewName = this.interviewName
+                var intervieweeName = app.currentUser.name;
+                if (app.Lock.attach({
+                        error: function (data) {
+                            app.showMessageBox('info', data.err);
+                        }
+                    })) {
+                    app.socket.emit('enter-interview', {
+                        interviewName: interviewName,
+                        intervieweeName: intervieweeName
+                    })
+                }
+                app.models || (app.models = {});
+                app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
+                app.models['doc-' + interviewName].on('change', function() {
+                    app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewees', 'interviewee', app.models['pro-' + interviewName], interviewName);
+                    modal.modal('hide');
+                });
+            });
         }
     },
 });
