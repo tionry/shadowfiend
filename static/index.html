@@ -843,11 +843,9 @@
   <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
 
         <div id="login">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h2 style="text-align:center" class="blink" localization>login</h2>
           <div class="alert hide" id="login-message">
             <button type="button" class="close"  onclick="$('#login-message').slideUp()">&times;</button>
@@ -880,6 +878,7 @@
         </div>
     
         <div class="hide" id="register" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h2 style="text-align:center" class="blink" localization>register</h2>
           <div class="alert hide" id="register-message">
             <button type="button" class="close" onclick="$('#register-message').slideUp()">&times;</button>
@@ -918,8 +917,6 @@
       </div>
     </div> 
   </div>
-
-
 
   <!-- popover -->
   <div id="startinterview-cfm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="startinterview-label" aria-hidden="true" data-backdrop="static">
