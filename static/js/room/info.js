@@ -17,7 +17,7 @@ app.Room && _.extend(app.Room.prototype, {
             var modal = $('#stopprobleminfo');
             modal.find('.modal-confirm').removeAttr('disabled');
             modal.find('.modal-confirm').on('click', function(){
-                var interviewName = this.interviewName
+                var interviewName = app.room.interviewName
                 var intervieweeName = app.currentUser.name;
                 if (app.Lock.attach({
                         error: function (data) {
