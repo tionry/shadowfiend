@@ -200,6 +200,7 @@ var app = app || {};
                     $(this).find('button').removeAttr('disabled');
                     $(this).find('button').children().removeClass('glyphicon-play');
                     $(this).find('button').children().addClass('glyphicon-stop');
+                    $(this).find('button').parent.addClass('push-problem-highlight');
                 }
             })
         },
