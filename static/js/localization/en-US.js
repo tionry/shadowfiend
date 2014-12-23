@@ -195,4 +195,5 @@ app.languages['en-US'] = { Name :'English Version',
   'CreateInterview'        : 'Create Interview',
   'AttendInterview'        : 'Attend Interview',
   'ProblemSet'             : 'Coding Problems',
+  'checkeveryone'           : 'Click the avatars to communicate with interviewee',
 };
