@@ -10,7 +10,7 @@ function InterviewDAO() {
 function validateName(str){
     var re = /[\*\\\|:\"\'\/\<\>\?\@]/;
     return str.length <= 40 && re.test(str);
-};
+}
 
 InterviewDAO.prototype.createInterview = function (name,interviewers,interviewees,problems,callback) {
     db.interview.findOne({name:name}, {_id:1}, function(err, interview) {
@@ -30,7 +30,12 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
             var intervieweelist = [];
             var i = 0;
             interviewees.forEach(function(iname,i){
-                intervieweelist[i] = {name:iname,status:"waiting",evaluation:""};
+                intervieweelist[i] = {
+                    name: iname,
+                    status: "waiting",
+                    evaluation: "",
+                    problem: []
+                };
                 i++;
             });
             var problemlist = [];
@@ -508,7 +513,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
         var i,j = 0;
         i = 0;
         j = 0;
-
+        var flag = 0;
         interv.interviewee.forEach(function(viewee) {
             intervieweename.forEach(function (vieweename) {
                 if (viewee.name == vieweename) {
@@ -528,11 +533,11 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                            if(fla){
                                problemlist[k] = problem;
                            }
-                           intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation,problem:problemlist};
-                           i++;
-                           flag = 1;
                        }
                     });
+                    intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation, problem:problemlist};
+                    i++;
+                    flag = 1;
                 }
                 j++;
                 if (j == intervieweename.length) {
@@ -570,7 +575,8 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                                     }
                                     db.interview.findOne({name: interviewname}, {
                                         name: 1,
-                                        interviewee: 1
+                                        interviewee: 1,
+                                        problemlist: 1
                                     }, function (err, interview) {
                                         if (err) {
                                             return callback("inner error");
@@ -579,7 +585,6 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                                             return callback("interview not found");
                                         }
                                         return callback(null, interview);
-
                                     });
                                 });
                         }
