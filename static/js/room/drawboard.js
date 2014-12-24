@@ -11,6 +11,7 @@ app.Room && _.extend(app.Room.prototype, {
         });
     },
 
+    //清空绘图板
     clearBoard: function(){
         var canvas = $('canvas')[0];
         canvas.width = canvas.width;
