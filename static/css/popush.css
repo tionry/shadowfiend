@@ -617,7 +617,7 @@ hr{
     background-color: #447aff;
 	opacity: 0.3;
 	font-weight: bold;
-	border-radius: 50%;
+	border-radius: 10%;
 	padding: 0 3px;
 	margin-right: 7px;
 	position: relative;
@@ -627,6 +627,8 @@ hr{
 .lint-error-icon:hover {
 	background-color: #447aff;
 	opacity: 1;
+	-webkit-box-shadow:2px 2px .625em .07em rgba(0,0,0,0.2);
+	box-shadow:2px 2px .625em .07em rgba(0,0,0,0.2);
 }
 
 .lint-error-icon-highlight {
