@@ -88,10 +88,10 @@ app.resize = function() {
 	if(h < 100)
 		h = 100;
 	var cbh = h-$('#member-list-doc').height()-158;
-	w = $('#login-box').parent('*').width();
-	$('#login-box').css('left', ((w-420)/2-30) + 'px');
-	w = $('#register-box').parent('*').width();
-	$('#register-box').css('left', ((w-420)/2-30) + 'px');
+	//w = $('#login-box').parent('*').width();
+	//$('#login-box').css('left', ((w-420)/2-30) + 'px');
+	//w = $('#register-box').parent('*').width();
+	//$('#register-box').css('left', ((w-420)/2-30) + 'px');
 	
 	var bottomHeight = document.getElementById("footer").clientHeight;
 	var bigoneHeight = document.getElementById("big-one").clientHeight;
