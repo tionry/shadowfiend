@@ -18,7 +18,12 @@ var _bad = ['56', '57', '58', '62', '112'];
 function Debugger(name, type, src){
     if (!(this instanceof Debugger)) return new Debugger(type, src);
 	var that = this;
-	that.name = name;
+	// If ext name is not existed, add it.
+	if ((name.lastIndexOf(type) != (name.length - type.length)) || name.charAt(name.length - type.length - 1) != '.') {
+		that.name = name + '.' + type;
+	} else {
+		that.name = name;
+	}
 	that.src = src;
 	that.dir = prefix + '/' + new Date().getTime().toString();
 	that.path = that.dir + '/' + that.name;
