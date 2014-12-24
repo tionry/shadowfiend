@@ -32,6 +32,7 @@ app.Room && _.extend(app.Room.prototype, {
                         intervieweeName: intervieweeName
                     })
                 }
+                app.room.view.closeeditor();
                 app.models || (app.models = {});
                 app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
                 app.models['doc-' + interviewName].on('change', function() {
