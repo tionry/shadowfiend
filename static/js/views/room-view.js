@@ -229,11 +229,11 @@ var app = app || {};
 			});
         },
         exit: function () {
-            this.room.leaveVoiceRoom();
+            //this.room.leaveVoiceRoom();
             $("body").animate({
                 scrollTop: this.oldscrolltop
             });
-            this.stopListening();
+            //this.stopListening();
         },
 		/*设置断点*/
         setBreak: function (cm, n, add) {

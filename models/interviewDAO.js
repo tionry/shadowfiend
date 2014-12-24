@@ -167,7 +167,12 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
         interv.interviewee.forEach(function(viewee){
             intervieweename.forEach(function(vieweename){
                 if(viewee.name == vieweename){
-                    intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation};
+                    intervieweelist[i] = {
+                        name: vieweename,
+                        status:status,
+                        evaluation:viewee.evaluation,
+                        problem: viewee.problem
+                    };
                     i++;
                     flag = 1;
                 }
@@ -361,7 +366,12 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
     var intervieweelist = [];
     var i = 0;
     interviewees.forEach(function(iname,i){
-        intervieweelist[i] = {name:iname,status:"waiting"};
+        intervieweelist[i] = {
+            name: iname,
+            status: "waiting",
+            evaluation: "",
+            problem: []
+        };
         i++;
         if(i == interviewees.length){
             db.interview.update(
