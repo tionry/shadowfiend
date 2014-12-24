@@ -505,7 +505,7 @@ InterviewDAO.prototype.getintervieweeevaluation = function(interviewname,intervi
 };
 //problem is expected as an object like {name:"",status:""}
 InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,intervieweename,problem,callback) {
-    db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
+    db.interview.findOne({name:interviewname},{interviewee:1, problemlist:1},function(err,interv){
         if(err){
             return callback("inner error");
         }

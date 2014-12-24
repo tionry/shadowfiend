@@ -46,8 +46,6 @@ body{
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	max-width:500px;
-	margin-left:-10px;
-	margin-top:192px;
 	z-index:1
 }
 #login-control{
@@ -62,8 +60,6 @@ body{
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	max-width:500px;
-	margin-left:-10px;
-	margin-top:192px;
 	z-index:2
 }
 #register-control{
@@ -71,7 +67,7 @@ body{
 	padding-right:10px
 }
 #popush-info {
-    margin-top:192px
+    margin-top:80px
 }
 #footer{
 	color:white;
