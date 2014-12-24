@@ -196,4 +196,5 @@ app.languages['en-US'] = { Name :'English Version',
   'AttendInterview'        : 'Attend Interview',
   'ProblemSet'             : 'Coding Problems',
   'checkeveryone'           : 'Click the avatars to communicate with interviewee',
+  'nametoolong'             : 'The length of the name can not exceed 20',
 };
