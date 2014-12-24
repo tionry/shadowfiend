@@ -181,6 +181,19 @@ var app = app || {};
             app.models['problem'] || (app.models['problem'] = new app.Problem());
             app.models['problem'].set(data.problem);
         },
+
+        "after-get-interviewee-problem-list": function(data) {
+            if (!data || data.err) {
+                return;
+            }
+            app.collections['interviewee-problem-list' + data.interviewName] || (app.collections['interviewee-problem-list' + data.interviewName] = new app.Problems());
+            app.collections['interviewee-problem-list' + data.interviewName].fetch({
+                reset: true,
+                all: true,
+                name: '',
+                data: data.problemList
+            });
+        }
     };
 
     app.init_suf || (app.init_suf = {});
