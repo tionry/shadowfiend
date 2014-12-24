@@ -97,8 +97,8 @@ app.resize = function() {
 	var bigoneHeight = document.getElementById("big-one").clientHeight;
 	$("#login").css("margin-bottom", bottomHeight + 20);
 	$("#register").css("margin-bottom", bottomHeight + 20);
-	$("#popush-info").css("margin-bottom", bottomHeight + 20);
-	$("#filecontrol").css("margin-bottom", bottomHeight + 45);
+	//$("#popush-info").css("margin-bottom", bottomHeight + 20);
+	//$("#filecontrol").css("margin-bottom", bottomHeight + 45);
 	var marT = (bigoneHeight + 20) > 192 ? (bigoneHeight + 20) : 192;
 	$("#login").css("margin-top", marT);
 	$("#register").css("margin-top", marT);
