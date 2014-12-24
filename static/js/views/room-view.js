@@ -511,7 +511,10 @@ var app = app || {};
             var canvas = $('.drawing-board-canvas'),
                 that = this;
             $('.drawing-board-control-navigation').find('button').on('click', function(){
-                that.saveCanvas();
+                var Update = setTimeout(function(){
+                    that.saveCanvas();
+                    clearTimeout(Update);
+                }, 200);
             });
             canvas.on('mouseup', function(){
                 that.saveCanvas();
