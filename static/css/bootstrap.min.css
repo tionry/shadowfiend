@@ -5653,7 +5653,7 @@ body.modal-open,.modal-open .navbar-fixed-top,.modal-open .navbar-fixed-bottom {
     .modal-dialog {
         right:auto;
         left: 50%;
-        width: 600px;
+        width: 800px;
         padding-top: 30px;
         padding-bottom: 30px
     }
