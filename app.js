@@ -1258,7 +1258,7 @@ io.sockets.on('connection', function(socket){
 		if (data.intervieweeList.length == 0) {
 			return socket.emit('after-push-problem', {log: 'no interviewee'});
 		}
-		interviewDAO.updateProblemstatus(data.interviewName, data.intervieweeList, 'pushing', function(err){
+		interviewDAO.updateProblemstatus(data.interviewName, data.problemName, 'pushing', function(err){
 			if (err) {
 				return socket.emit('after-push-problem', {err: err});
 			}
