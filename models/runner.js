@@ -20,6 +20,12 @@ var JAVA = '/popush/bin/jre/bin/java';
 function Runner(name, type, src){
     if (!(this instanceof Runner)) return new Runner(type, src);
 	var that = this;
+
+	// Java cannot compile file which contains Chinese name.
+	if (type == 'java') {
+		name = 'tmpJavaSrc.java';
+	}
+	// If ext name is not existed, add it.
 	if ((name.lastIndexOf(type) != (name.length - type.length)) || name.charAt(name.length - type.length - 1) != '.') {
 		that.name = name + '.' + type;
 	} else {
