@@ -207,7 +207,10 @@ var app = app || {};
             this.room.debug();
         },
         setShownName: function () {
-            this.$('#current-doc').html(this.room.docModel.json.shownName);
+            var name = this.room.docModel.json.shownName;
+            if (name.indexOf('@') >= 0)
+                name = name.substr(0, name.indexof('@') - 1)
+            this.$('#current-doc').html(name);
             if ($('#current-doc').text().trim().length >= 20){
                 var replaceName = $('#current-doc').text().trim().substring(0, 16)+'...';
                 $('#current-doc').text(replaceName);

@@ -105,8 +105,11 @@ app.Room && _.extend(app.Room.prototype, {
     	this.debugLock = false;
     	this.waiting = false;
 		this.interviewName = interviewName;
-	
-    	$('#current-doc').html(_.escape(docobj.shownName));
+
+		var name = _.escape(docobj.shownName);
+		if (name.indexOf('@') >= 0)
+			name = name.substr(0, name.indexof('@') - 1)
+		this.$('#current-doc').html(name);
 		if ($('#current-doc').text().trim().length >= 20){
 			var replaceName = $('#current-doc').text().trim().substring(0, 16)+'...';
 			$('#current-doc').text(replaceName);
