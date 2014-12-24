@@ -167,8 +167,13 @@ app.Room && _.extend(app.Room.prototype, {
 		}
 
 		//初始化题目
-		if (problem)
+		if (problem){
 			this.view.showProblem(problem);
+			var that = this;
+			$('#viewproblemdetail').on('click', function(){
+				that.view.showProblemDetail(problem);
+			});
+		}
 
 		//初始化语言选择列表
 		$('#language-selector').val('');

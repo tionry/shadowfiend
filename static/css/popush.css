@@ -663,3 +663,7 @@ hr{
 .interviewer-interviewee {
 	padding-left: 20px;
 }
+
+.no-hover-deco.hover{
+	text-decoration: none;
+}

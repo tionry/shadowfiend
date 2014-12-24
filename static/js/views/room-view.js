@@ -475,7 +475,16 @@ var app = app || {};
         },
         showProblem: function(problem){
             $('#interviewproblem-name').text(problem.attributes.name);
-            $('#interviewproblem-description').text(problem.attributes.description);
+            var description = problem.attributes.description;
+            if (description.length >= 599)
+                description = description.substring(0, 597)+ '...';
+            $('#interviewproblem-description').text(description);
+        },
+        showProblemDetail: function(problem){
+            var modal = $('#viewproblem');
+            $('#viewproblem-name').text(problem.attributes.name);
+            $('#viewproblem-description').text(problem.attributes.description);
+            app.showInputModal(modal);
         },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
