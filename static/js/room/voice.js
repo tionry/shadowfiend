@@ -70,14 +70,13 @@ app.Room && _.extend(app.Room.prototype, {
 				var SIGNALING_SERVER = app.Package.SOCKET_IO;
 				var socket = io.connect(SIGNALING_SERVER);
 				socket.on('presence', function (isChannelPresent) {
+					window.voiceon = true;
 					if (!isChannelPresent) {
 						connection.open();
 						window.isInitiator = true;
-						window.voiceon = true;
 					} else {
 						connection.connect(connection.sessionid);
 						connection.join(connection.sessionid);
-						window.voiceon = true;
 					}
 				});
 				socket.emit('presence', connection.channel);

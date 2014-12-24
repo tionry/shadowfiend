@@ -510,7 +510,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
             return callback("inner error");
         }
         var intervieweelist = [];
-        var i,j = 0;
+        var i,j;
         i = 0;
         j = 0;
         var flag = 0;
@@ -530,7 +530,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                        }
                        k++;
                        if(k == viewee.problem.length){
-                           if(fla){
+                           if(!fla){
                                problemlist[k] = problem;
                            }
                        }
