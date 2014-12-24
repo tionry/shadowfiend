@@ -164,7 +164,7 @@ body{
 }
 
 #filecontrol, #problemset-control, #interviewers-control, #interviewees-control, #problem-item, #interviewer-item, #interviewee-item{
-	padding:25px;
+	padding:40px;
 	background-color:#fff;
 	font-size:16px;
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
