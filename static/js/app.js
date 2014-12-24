@@ -151,6 +151,12 @@ $(document).ready(function() {
 		},
 	});
 
+	$('#anim-login').on('click', function(){
+		$(this).css({
+			border: 'none'
+		});
+	})
+
 	$(window).scroll(function(){
 		$('#anim-btn').animate({left:'-250px', opacity: '0.6'}, 1500, function(){
 			$(window).off('scroll');
