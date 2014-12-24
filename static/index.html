@@ -65,16 +65,9 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="#interviewers" localization>I'm Interviewer</a></li>
             <li><a href="#interviewees" localization>I'm Interviewee</a></li>
-<!--            <li><a href="#" id="btn_nic" localization>New Interview</a></li>-->
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span localization>Problem</span><span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#problemset" localization>Problems</a></li>
-            <li><a href="#" id="new-pro-btn" localization>New Problem</a></li>
-          </ul>
-        </li>
+        <li><a href="#problemset" localization>Problems</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -314,7 +307,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-default" style="border-radius:50%;position:fixed;right:120px;">+</button>
+        <button class="btn btn-default" id="new-pro-btn" style="border-radius:50%;position:fixed;right:120px;">+</button>
         <div class="row">
           <div class="panel panel-default panel-list">
             <table class="table table-hover" id="problemset-table">
