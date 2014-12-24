@@ -29,7 +29,7 @@ var app = app || {};
         //Check one problem
         go:function(e){
             $('#problem-name').html(this.model.attributes.name);
-            $('#problem-description').html(_.unescape(this.model.attributes.description));
+            $('#problem-description').html(this.model.attributes.description);
         },
 
         // Remove the item, destroy the model.
