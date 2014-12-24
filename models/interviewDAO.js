@@ -513,7 +513,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
         var i,j = 0;
         i = 0;
         j = 0;
-
+        var flag = 0;
         interv.interviewee.forEach(function(viewee) {
             intervieweename.forEach(function (vieweename) {
                 if (viewee.name == vieweename) {
