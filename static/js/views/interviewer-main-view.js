@@ -98,8 +98,8 @@ var app = app || {};
             $('#interviewer-interviewee-control').html('');
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#end-interview-btn').removeAttr('disabled');
-            $('#set-interview-menu').attr('disabled', 'disabled');
-            $('#start-interview-btn').attr('disabled', 'disabled');
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
             $('#set-round-btn').removeAttr('disabled');
             $('#end-round-btn').attr('disabled','disabled');
             $('#interviewer-item-status').text('ready');
@@ -109,8 +109,8 @@ var app = app || {};
         },
 
         renew_running_interview: function(){
-            $('#set-interview-menu').attr('disabled', 'disabled');
-            $('#start-interview-btn').attr('disabled', 'disabled');
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
             $('#end-interview-btn').removeAttr('disabled');
             $('.remark-btn').removeAttr('disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
@@ -128,8 +128,8 @@ var app = app || {};
 
         renew_completed_interview: function(){
             $('#interviewer-interviewee-control').html('');
-            $('#set-interview-menu').attr('disabled', 'disabled');
-            $('#start-interview-btn').attr('disabled', 'disabled');
+            $('#set-interview-menu').hide();
+            $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
             $('#end-round-btn').attr('disabled', 'disabled');
@@ -753,7 +753,7 @@ var app = app || {};
             }
             if (app.Lock.attach({
                     error: function(){
-                        app.showMessageBox('info', 'syntax error')
+                        app.showMessageBox('info', 'no problem');
                     },
                     success: function(){
                         that.renew_ready_interview();
@@ -779,6 +779,10 @@ var app = app || {};
             });
             cnfm.on('click', function(){
                 modal.modal('hide');
+                if ($('#interviewer-problem-list').text().trim().length == 0) {
+                    app.showMessageBox('info', '还未设置备选题目');
+                }
+
                 var name = $('#interviewer-item-name').text();
                 if (app.Lock.attach({
                     })) {
