@@ -88,10 +88,10 @@ app.resize = function() {
 	if(h < 100)
 		h = 100;
 	var cbh = h-$('#member-list-doc').height()-158;
-	w = $('#login-box').parent('*').width();
-	$('#login-box').css('left', ((w-420)/2-30) + 'px');
-	w = $('#register-box').parent('*').width();
-	$('#register-box').css('left', ((w-420)/2-30) + 'px');
+	//w = $('#login-box').parent('*').width();
+	//$('#login-box').css('left', ((w-420)/2-30) + 'px');
+	//w = $('#register-box').parent('*').width();
+	//$('#register-box').css('left', ((w-420)/2-30) + 'px');
 	
 	var bottomHeight = document.getElementById("footer").clientHeight;
 	var bigoneHeight = document.getElementById("big-one").clientHeight;
@@ -100,9 +100,6 @@ app.resize = function() {
 	//$("#popush-info").css("margin-bottom", bottomHeight + 20);
 	//$("#filecontrol").css("margin-bottom", bottomHeight + 45);
 	var marT = (bigoneHeight + 20) > 192 ? (bigoneHeight + 20) : 192;
-	$("#login").css("margin-top", marT);
-	$("#register").css("margin-top", marT);
-	$("#popush-info").css("margin-top", bigoneHeight + 20);
 	var topWidth = document.getElementById("nav-head").clientWidth;
 	if (topWidth >= 770){
 		$('.navbar-right').show();
