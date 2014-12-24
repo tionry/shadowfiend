@@ -100,8 +100,6 @@ app.resize = function() {
 	//$("#popush-info").css("margin-bottom", bottomHeight + 20);
 	//$("#filecontrol").css("margin-bottom", bottomHeight + 45);
 	var marT = (bigoneHeight + 20) > 192 ? (bigoneHeight + 20) : 192;
-	$("#login").css("margin-top", marT);
-	$("#register").css("margin-top", marT);
 	$("#popush-info").css("margin-top", bigoneHeight + 20);
 	var topWidth = document.getElementById("nav-head").clientWidth;
 	if (topWidth >= 770){
