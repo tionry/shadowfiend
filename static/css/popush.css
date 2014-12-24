@@ -672,3 +672,9 @@ hr{
 	margin-left: 40px;
 	margin-right: 40px;
 }
+
+.btn-default-circle:hover,.btn-default-circle:focus,.btn-default-circle:active,.btn-default-circle.active,.open .dropdown-toggle.btn-default {
+	color: #fff;
+	background-color: #7f9293;
+	border:none
+}
