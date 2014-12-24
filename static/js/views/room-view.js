@@ -76,7 +76,7 @@ var app = app || {};
             $("body").animate({
                 scrollTop: this.oldscrolltop
             });
-            this.room.leaveVoiceRoom();
+            //this.room.leaveVoiceRoom();
             app.resize = this.resize_old;
         },
         debugstep: function () {
