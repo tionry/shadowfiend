@@ -167,7 +167,12 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
         interv.interviewee.forEach(function(viewee){
             intervieweename.forEach(function(vieweename){
                 if(viewee.name == vieweename){
-                    intervieweelist[i] = {name:vieweename,status:status,evaluation:viewee.evaluation};
+                    intervieweelist[i] = {
+                        name: vieweename,
+                        status:status,
+                        evaluation:viewee.evaluation,
+                        problem: viewee.problem
+                    };
                     i++;
                     flag = 1;
                 }
@@ -535,7 +540,6 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                 break;
             }
         }
-        return callback("breakpoint");
         db.interview.update({name: interviewname}, {$set: {
             interviewee: intervieweelist,
             problemlist: interv.problemlist
