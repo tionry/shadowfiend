@@ -613,11 +613,12 @@ hr{
 	float:right;
 }
 .lint-error-icon {
+	background-image:url("../images/note-1.png");
 	color: white;
-    background-color: #447aff;
+    /*background-color: #447aff;*/
 	opacity: 0.3;
-	font-weight: bold;
-	border-radius: 50%;
+	/*font-weight: bold;*/
+	/*border-radius: 50%;*/
 	padding: 0 3px;
 	margin-right: 7px;
 	position: relative;
@@ -625,7 +626,7 @@ hr{
 	left: 30px;
 }
 .lint-error-icon:hover {
-	background-color: #447aff;
+	/*background-color: #447aff;*/
 	opacity: 1;
 }
 
