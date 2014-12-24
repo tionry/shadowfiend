@@ -1644,6 +1644,26 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	socket.on('get-interviewee-problem-list', function(data) {
+		if (!check(data, 'interviewName', 'intervieweeName')) {
+			return;
+		}
+		if (!socket.session) {
+			return socket.emit('unauthorized');
+		}
+		interviewDAO.getintervieweeproblem(data.interviewName, data.intervieweeName, function(err, problemNameList) {
+			if (err) {
+				return socket.emit('after-get-interviewee-problem-list', {err: err});
+			}
+			problemDAO.getProblemByNameList(problemNameList, function(err, problemList) {
+				if (err) {
+					return socket.emit('after-get-interviewee-problem-list', {err: err});
+				}
+				socket.emit('after-get-interviewee-problem-list', {problemList: problemList});
+			});
+		});
+	});
+
 	// voice control in room
 	// Reference: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
 	var initiatorChannel = '';
