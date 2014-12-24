@@ -68,7 +68,7 @@ app.showInputModal = function(modal, val) {
 		$content.html(strings[content] || content);
 		timeout || (timeout = 1000);
 		modal.modal('show');
-		window.setTimeout(function() { modal.modal('hide'); }, timeout);
+		//window.setTimeout(function() { modal.modal('hide'); }, timeout);
 	};
 })();
 
