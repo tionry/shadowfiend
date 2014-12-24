@@ -474,7 +474,10 @@ var app = app || {};
             app.room.checkrunanddebug(app.languageShortMap[lan]);
         },
         showProblem: function(problem){
-            $('#interviewproblem-name').text(problem.attributes.name);
+            var name = problem.attributes.name;
+            if (name.length >= 12)
+            name = name.substring(0, 8) + '...';
+            $('#interviewproblem-name').text(name);
             var description = problem.attributes.description;
             if (description.length >= 499)
                 description = description.substring(0, 497)+ '...';
