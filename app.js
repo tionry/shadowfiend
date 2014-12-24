@@ -1538,7 +1538,10 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-get-image', {err: err});
 			}
-			socket.emit('after-get-image', {doc: doc});
+			socket.emit('after-get-image', {
+				doc: doc,
+				fileName: data.fileName
+			});
 		});
 	});
 
