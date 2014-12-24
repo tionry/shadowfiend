@@ -476,8 +476,8 @@ var app = app || {};
         showProblem: function(problem){
             $('#interviewproblem-name').text(problem.attributes.name);
             var description = problem.attributes.description;
-            if (description.length >= 599)
-                description = description.substring(0, 597)+ '...';
+            if (description.length >= 499)
+                description = description.substring(0, 497)+ '...';
             $('#interviewproblem-description').text(description);
         },
         showProblemDetail: function(problem){
