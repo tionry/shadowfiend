@@ -516,7 +516,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                     var k = 0;
                     var fla = 0;
                     viewee.problem.forEach(function(pro){
-                       if(pro.name == problem.name){
+                       if(pro == problem){
                            problemlist[k] = problem;
                            fla = 1;
                        }
@@ -544,32 +544,46 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                     flag = 0;
                 }
                 if (i == interv.interviewee.length) {
-                    db.interview.update(
-                        {
-                            name: interviewname
-                        },
-                        {
-                            $set: {
-                                interviewee: intervieweelist
-                            }
-                        }, function (err, interview) {
-                            if (err) {
-                                return callback("inner error");
-                            }
-                            db.interview.findOne({name: interviewname}, {
-                                name: 1,
-                                interviewee: 1
-                            }, function (err, interview) {
-                                if (err) {
-                                    return callback("inner error");
-                                }
-                                if (!interview) {
-                                    return callback("interview not found");
-                                }
-                                return callback(null, interview);
+                    var problems = [];
+                    i = 0;
+                    interv.problemlist.forEach(function(singleproblem) {
+                        if (singleproblem.name == problem) {
+                            problems[i] = {name: singleproblem.name, status: 'pushing'}
+                        }
+                        else {
+                            problems[i] = singleproblem;
+                        }
+                        i++;
+                        if(i == interv.problemlist.length) {
+                            db.interview.update(
+                                {
+                                    name: interviewname
+                                },
+                                {
+                                    $set: {
+                                        interviewee: intervieweelist,
+                                        problemlist:problems
+                                    }
+                                }, function (err, interview) {
+                                    if (err) {
+                                        return callback("inner error");
+                                    }
+                                    db.interview.findOne({name: interviewname}, {
+                                        name: 1,
+                                        interviewee: 1
+                                    }, function (err, interview) {
+                                        if (err) {
+                                            return callback("inner error");
+                                        }
+                                        if (!interview) {
+                                            return callback("interview not found");
+                                        }
+                                        return callback(null, interview);
 
-                            });
-                        });
+                                    });
+                                });
+                        }
+                    });
                 }
             });
         });
