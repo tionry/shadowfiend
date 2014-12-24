@@ -359,7 +359,7 @@ body{
 	max-height:32px;
 	max-width:32px
 }
-#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#setinterviewer-box ul,#setinterviewee-box ul,#setproblemall-box ul,#setprobleminterview-box ul,#interviewer-problem-box ul,#setuserall-box ul,#setuserround-box ul,#all-problem-box{
+#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#setinterviewer-box ul,#setinterviewee-box ul,#setproblemall-box ul,#setprobleminterview-box ul,#interviewer-problem-box ul,#setuserall-box ul,#setuserround-box ul,#all-problem-box ul{
 	margin:0
 }
 .interviewee-img{
