@@ -667,3 +667,8 @@ hr{
 .no-hover-deco.hover{
 	text-decoration: none;
 }
+
+.panel-list{
+	margin-left: 40px;
+	margin-right: 40px;
+}
