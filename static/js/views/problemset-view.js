@@ -73,7 +73,7 @@ var app = app || {};
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (err) {
-                        app.showMessageBox('info', err);
+                        app.showMessageBox('info', err.err);
                     },
                     success: function () {
                         modal.modal('hide');
@@ -83,7 +83,6 @@ var app = app || {};
                     name: name,
                     description: description,
                 });
-
             }
         });
     }
