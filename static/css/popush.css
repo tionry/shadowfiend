@@ -615,6 +615,9 @@ hr{
 .lint-error-icon {
 	background-image:url("../images/note-1.png");
 	color: white;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
     /*background-color: #447aff;*/
 	opacity: 0.3;
 	/*font-weight: bold;*/
