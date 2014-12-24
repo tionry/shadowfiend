@@ -26,19 +26,19 @@ var app = app || {};
             });
             var modal = $('#viewproblem');
             app.showInputModal(modal);
-            modal.on('hide', function () {
-                modal.find('.modal-confirm').off('click');
-                modal.off('hide');
-            });
             app.models || (app.models = {});
             app.models['problem'] || (app.models['problem'] = new app.Problem());
             app.models['problem'].on('change', function(){
                 $('#viewproblem-name').text(app.models['problem'].attributes.name);
                 $('#viewproblem-description').text(app.models['problem'].attributes.description);
             });
+            modal.on('hide', function () {
+                modal.find('.modal-confirm').off('click');
+                modal.off('hide');
+            });
             modal.find('.modal-confirm').on('click', function(){
                 modal.modal('hide');
-            })
+            });
         },
 
         render: function () {

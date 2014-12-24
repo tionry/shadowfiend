@@ -485,6 +485,13 @@ var app = app || {};
             $('#viewproblem-name').text(problem.attributes.name);
             $('#viewproblem-description').text(problem.attributes.description);
             app.showInputModal(modal);
+            modal.on('hide', function () {
+                modal.find('.modal-confirm').off('click');
+                modal.off('hide');
+            });
+            modal.find('.modal-confirm').on('click', function(){
+                modal.modal('hide');
+            });
         },
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
