@@ -9,7 +9,11 @@ function ProblemDAO() {
 
 function validateName(str){
 	var re = /[\*\\\|:\"\'\/\<\>\@]/;
-	return str.length <= 100 && re.test(str);
+	return re.test(str);
+};
+
+function validateNameLength(str, len){
+	return (str.length <= len);
 };
 
 ProblemDAO.prototype.createProblem = function (name, description, callback) {
@@ -21,8 +25,11 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 		if (problem) {
 			return callback("problem exists");
 		}
-		if(validateName(name)){
+		if (validateName(name)){
 			return callback("problem name error");
+		}
+		if (validateNameLength(name, 20)){
+			return callback("nametoolong");
 		}
 		db.problem.find({},{_id:1},function(err, problems) {
 			if (err) {
