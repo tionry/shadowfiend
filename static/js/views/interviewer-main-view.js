@@ -743,7 +743,7 @@ var app = app || {};
             var interviewName = $('#interviewer-item-name').text().trim();
             var that = this;
             that.viewees = [];
-            $('.interviewer-interviewee').find('p').each(function(){
+            $('.interviewer-interviewee').each(function(){
                 that.viewees.push($(this).text().trim());
             });
             if (that.viewees.length > 0){
@@ -813,7 +813,7 @@ var app = app || {};
                     });
                 }
                 that.viewees = [];
-                $('.interviewer-interviewee').find('p').each(function(){
+                $('.interviewer-interviewee').each(function(){
                     that.viewees.push($(this).text().trim());
                 });
                 if (that.viewees.length > 0){
