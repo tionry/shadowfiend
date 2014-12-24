@@ -151,10 +151,8 @@ $(document).ready(function() {
 		},
 	});
 
-	$('#anim-login').on('click', function(){
-		$(this).css({
-			border: 'none'
-		});
+	$('#anim-login').focus(function(){
+		$(this).blur();
 	})
 
 	$(window).scroll(function(){
