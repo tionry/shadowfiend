@@ -198,4 +198,5 @@ app.languages['en-US'] = { Name :'English Version',
   'checkeveryone'           : 'Click the avatars to communicate with interviewee',
   'nametoolong'             : 'The length of the name can not exceed 20',
   'interview ended.'        : 'Interview completed.',
+  'no problem'              : 'No problem has been set.',
 };

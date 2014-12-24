@@ -196,4 +196,5 @@ app.languages['zh-CN'] = { Name : '中文版',
   'checkeveryone'              : '点选头像与面试者进行编程交流',
   'nametoolong'                : '名字长度不能超过20',
   'interview ended.'           : '面试已结束',
+  'no problem'                 : '没有设置备考问题',
 };
