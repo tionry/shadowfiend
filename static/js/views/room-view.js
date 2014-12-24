@@ -233,7 +233,7 @@ var app = app || {};
             $("body").animate({
                 scrollTop: this.oldscrolltop
             });
-            this.stopListening();
+            //this.stopListening();
         },
 		/*设置断点*/
         setBreak: function (cm, n, add) {
