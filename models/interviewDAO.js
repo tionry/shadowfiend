@@ -535,7 +535,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                            }
                        }
                     });
-                    intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation,problem:problemlist};
+                    intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation, problem:problemlist};
                     i++;
                     flag = 1;
                 }
@@ -575,7 +575,8 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                                     }
                                     db.interview.findOne({name: interviewname}, {
                                         name: 1,
-                                        interviewee: 1
+                                        interviewee: 1,
+                                        problemlist: 1
                                     }, function (err, interview) {
                                         if (err) {
                                             return callback("inner error");
