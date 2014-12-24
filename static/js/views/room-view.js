@@ -475,7 +475,7 @@ var app = app || {};
         },
         showProblem: function(problem){
             $('#interviewproblem-name').text(problem.attributes.name);
-            var description = _.unescape(problem.attributes.description);
+            var description = problem.attributes.description;
             if (description.length >= 499)
                 description = description.substring(0, 497)+ '...';
             $('#interviewproblem-description').text(description);
@@ -483,7 +483,7 @@ var app = app || {};
         showProblemDetail: function(problem){
             var modal = $('#viewproblem');
             $('#viewproblem-name').text(problem.attributes.name);
-            $('#viewproblem-description').text(_.unescape(problem.attributes.description));
+            $('#viewproblem-description').text(problem.attributes.description);
             app.showInputModal(modal);
             modal.on('hide', function () {
                 modal.find('.modal-confirm').off('click');

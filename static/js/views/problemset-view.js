@@ -72,8 +72,8 @@ var app = app || {};
             var description = _.escape(Backbone.$.trim(modal.find('#newproblem-description').val()));
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
-                    error: function (data) {
-                        app.showMessageBox('info', 'inner error');
+                    error: function (err) {
+                        app.showMessageBox('info', err);
                     },
                     success: function () {
                         modal.modal('hide');
