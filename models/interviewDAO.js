@@ -10,7 +10,7 @@ function InterviewDAO() {
 function validateName(str){
     var re = /[\*\\\|:\"\'\/\<\>\?\@]/;
     return str.length <= 40 && re.test(str);
-};
+}
 
 InterviewDAO.prototype.createInterview = function (name,interviewers,interviewees,problems,callback) {
     db.interview.findOne({name:name}, {_id:1}, function(err, interview) {
@@ -30,7 +30,12 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
             var intervieweelist = [];
             var i = 0;
             interviewees.forEach(function(iname,i){
-                intervieweelist[i] = {name:iname,status:"waiting",evaluation:""};
+                intervieweelist[i] = {
+                    name: iname,
+                    status: "waiting",
+                    evaluation: "",
+                    problem: []
+                };
                 i++;
             });
             var problemlist = [];
