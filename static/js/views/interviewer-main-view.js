@@ -780,7 +780,7 @@ var app = app || {};
             cnfm.on('click', function(){
                 modal.modal('hide');
                 if ($('#interviewer-problem-list').text().trim().length == 0) {
-                    app.showMessageBox('info', '还未设置备选题目');
+                    app.showMessageBox('info', 'no problem');
                     return;
                 }
 
