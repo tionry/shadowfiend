@@ -4,7 +4,6 @@ var app = app || {};
 app.Room && _.extend(app.Room.prototype, {
 
     initBoard: function(){
-        this.clearBoard();
         var path = this.docModel.attributes.path;
         app.socket.emit('get-image',{
             fileName: path,
