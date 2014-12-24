@@ -20,6 +20,9 @@ var JAVA = '/popush/bin/jre/bin/java';
 function Runner(name, type, src){
     if (!(this instanceof Runner)) return new Runner(type, src);
 	var that = this;
+	if (type == 'java') {
+		name = 'tmpJavaSrc.java';
+	}
 	if ((name.lastIndexOf(type) != (name.length - type.length)) || name.charAt(name.length - type.length - 1) != '.') {
 		that.name = name + '.' + type;
 	} else {
