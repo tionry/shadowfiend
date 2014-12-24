@@ -320,7 +320,7 @@ body{
 #delete-name,#rename-name,#share-name{
 	color:red
 }
-#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#setuserall-box,#setuserround-box{
+#share-user-box,#interviewee-box,#interviewer-box,#interview-problem-box,#setinterviewer-box,#setinterviewee-box,#setproblemall-box,#setprobleminterview-box,#setuserall-box,#setuserround-box,#all-problem-box{
 	height:220px;
 	width:100%;
 	margin:10px 0;
@@ -359,7 +359,7 @@ body{
 	max-height:32px;
 	max-width:32px
 }
-#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#setinterviewer-box ul,#setinterviewee-box ul,#setproblemall-box ul,#setprobleminterview-box ul,#interviewer-problem-box ul,#setuserall-box ul,#setuserround-box ul{
+#share-user-box ul,#interviewee-box ul,#interviewer-box ul,#interview-problem-box ul,#setinterviewer-box ul,#setinterviewee-box ul,#setproblemall-box ul,#setprobleminterview-box ul,#interviewer-problem-box ul,#setuserall-box ul,#setuserround-box ul,#all-problem-box{
 	margin:0
 }
 .interviewee-img{

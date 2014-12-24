@@ -558,6 +558,32 @@
   </div>
 
   <!-- popover -->
+  <div id="allproblem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="allproblem-label" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="allproblem-label" localization>All problems</h3>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div id="all-problem-box">
+            <ul class="nav nav-pills nav-stacked" id="all-problem-list">
+              <a href="#" class="all-single-problem">
+                <ii>A+B Problem</ii>
+              </a>
+            </ul>
+            <script type="text/template" id="all-problem-template">
+              <a href="#" class="all-single-problem">
+                <ii><%= model.name %></ii>
+              </a>
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- popover -->
   <div id="new-interview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newinterview-label" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
