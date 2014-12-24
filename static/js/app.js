@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 	$(window).scroll(function(){
 		$('#anim-btn').animate({left:'-250px', opacity: '0.6'}, 1500, function(){
-			$('#anim').off('click');
+			$(window).off('scroll');
 			$('#anim-login').fadeIn('fast');
 		});
 	});
