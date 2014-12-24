@@ -1262,12 +1262,12 @@ io.sockets.on('connection', function(socket){
 			if (err) {
 				return socket.emit('after-push-problem', {err: err});
 			}
+			interviewDAO.pushintervieweeproblem(data.interviewName, data.intervieweeList, data.problemName, function(err){
+				if (err) {
+					return socket.emit('after-push-problem', {err: err});
+				}
+			});
 			data.intervieweeList.forEach(function(interviewee) {
-				interviewDAO.pushintervieweeproblem(data.interviewName, interviewee, data.problemName, function(err){
-					if (err) {
-						return socket.emit('after-push-problem', {err: err});
-					}
-				});
 				_callCreateDocByName(interviewee, data.interviewName, data.problemName, function(err, path) {
 					if (err) {
 						return socket.emit('after-push-problem', {err: err});
