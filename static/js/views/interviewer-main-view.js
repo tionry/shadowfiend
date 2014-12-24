@@ -34,6 +34,8 @@ var app = app || {};
             $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').show();
             $('#start-interview-btn').show();
+            $('#set-interview-menu').removeAttr('disabled');
+            $('#start-interview-btn').removeAttr('disabled');
             $('#end-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
