@@ -533,11 +533,11 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                            if(fla){
                                problemlist[k] = problem;
                            }
-                           intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation,problem:problemlist};
-                           i++;
-                           flag = 1;
                        }
                     });
+                    intervieweelist[i] = {name: vieweename, status: viewee.status, evaluation: viewee.evaluation,problem:problemlist};
+                    i++;
+                    flag = 1;
                 }
                 j++;
                 if (j == intervieweename.length) {
@@ -584,7 +584,6 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
                                             return callback("interview not found");
                                         }
                                         return callback(null, interview);
-
                                     });
                                 });
                         }
