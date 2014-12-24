@@ -20,7 +20,11 @@ var JAVA = '/popush/bin/jre/bin/java';
 function Runner(name, type, src){
     if (!(this instanceof Runner)) return new Runner(type, src);
 	var that = this;
-	that.name = name;
+	if ((name.lastIndexOf(type) != (name.length - type.length)) || name.charAt(name.length - type.length - 1) != '.') {
+		that.name = name + '.' + type;
+	} else {
+		that.name = name;
+	}
 	that.src = src;
 	that.dir = prefix + '/' + new Date().getTime().toString();
 	that.path = that.dir + '/' + that.name;
