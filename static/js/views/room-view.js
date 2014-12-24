@@ -566,8 +566,8 @@ var app = app || {};
         },
         setLineWidget: function (l, text){
             var msg = $('<div></div>');
-            var icon = $('<span class="glyphicon glyphicon-comment"></span>');
-            //icon.html('+');
+            var icon = $('<span></span>');
+            icon.html('=');
             icon.addClass('lint-error-icon');
             msg.addClass('lint-line');
             msg.append(icon);
