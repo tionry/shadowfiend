@@ -69,7 +69,7 @@ var app = app || {};
 
         cnfm.attr('disabled', 'disabled').on('click', function () {
             var name = Backbone.$.trim(modal.find('#newproblem-name').val());
-            var description = Backbone.$.trim(modal.find('#newproblem-description').val());
+            var description = _.escape(Backbone.$.trim(modal.find('#newproblem-description').val()));
             if (app.Lock.attach({
                     loading: '#newproblem-buttons',
                     error: function (data) {

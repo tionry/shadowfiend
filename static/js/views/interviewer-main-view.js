@@ -667,7 +667,7 @@ var app = app || {};
                     app.models['problem'] || (app.models['problem'] = new app.Problem());
                     app.models['problem'].on('change', function(){
                         $('#checkproblem-name').text(app.models['problem'].attributes.name);
-                        $('#checkproblem-description').text(app.models['problem'].attributes.description);
+                        $('#checkproblem-description').text(_.unescape(app.models['problem'].attributes.description));
                     })
                     modal.find('.modal-confirm').on('click', function(){
                         button.parent().addClass('push-problem-highlight');
