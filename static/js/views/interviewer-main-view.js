@@ -32,8 +32,8 @@ var app = app || {};
         renewView: function(){
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
-            $('#set-interview-menu').removeAttr('disabled');
-            $('#start-interview-btn').removeAttr('disabled');
+            $('#set-interview-menu').show();
+            $('#start-interview-btn').show();
             $('#end-interview-btn').show();
             $('.remark-btn').attr('disabled', 'disabled');
             $('#set-round-btn').attr('disabled', 'disabled');
@@ -781,6 +781,7 @@ var app = app || {};
                 modal.modal('hide');
                 if ($('#interviewer-problem-list').text().trim().length == 0) {
                     app.showMessageBox('info', '还未设置备选题目');
+                    return;
                 }
 
                 var name = $('#interviewer-item-name').text();
