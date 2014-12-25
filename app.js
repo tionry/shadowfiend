@@ -1227,9 +1227,11 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
+	// Create a document for interview
 	function _callCreateDocByName(interviewee, interviewName, problemName, callback) {
 		var path = '/' + interviewee + '/' + problemName + '@' + interviewName;
 		docDAO.createDocByname(interviewee, path, 'doc', function(err) {
+			// If the document is existed, delete it and create again.
 			if (err) {
 				return userDAO.getUserByName(interviewee, function(err, user) {
 					if (err) {
