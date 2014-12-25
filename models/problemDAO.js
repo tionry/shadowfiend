@@ -7,6 +7,7 @@ function ProblemDAO() {
 	this.innerError = false;
 }
 
+//命名规范
 function validateName(str){
 	var re = /[\*\\\|:\"\'\/\<\>\@]/;
 	return re.test(str);
@@ -16,6 +17,7 @@ function validateNameLength(str, len){
 	return (str.length <= len);
 }
 
+//新建题目
 ProblemDAO.prototype.createProblem = function (name, description, callback) {
 	db.problem.findOne({name:name}, {_id:1}, function(err, problem) {
 		if (err) {
@@ -54,6 +56,7 @@ ProblemDAO.prototype.createProblem = function (name, description, callback) {
 	});
 };
 
+//获取题目
 ProblemDAO.prototype.getProblemByName = function (name, callback) {
 	db.problem.findOne({name:name}, {name:1, description:1, ord:1, createTime:1}, function (err, problem) {
 		if (err) {
@@ -66,6 +69,7 @@ ProblemDAO.prototype.getProblemByName = function (name, callback) {
 	});
 };
 
+//获取全部题目
 ProblemDAO.prototype.getAllProblems = function (callback) {
 	db.problem.find({}, {name:1, description:1, ord:1, createTime:1}, function (err, problems) {
 		if (err) {
@@ -78,6 +82,7 @@ ProblemDAO.prototype.getAllProblems = function (callback) {
 	});
 };
 
+//删除题目
 ProblemDAO.prototype.deleteProblem = function (name, callback) {
 	db.problem.findOne({name:name}, {_id:1}, function (err, problem) {
 		if (err) {
@@ -95,6 +100,7 @@ ProblemDAO.prototype.deleteProblem = function (name, callback) {
 	});
 };
 
+//获取题目
 ProblemDAO.prototype.getProblemByNameList = function(nameList, callback) {
 	db.problem.find({name: {$in: nameList}}, {name: 1}, function(err, problems) {
 		if (err) {

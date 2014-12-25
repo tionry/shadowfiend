@@ -1,3 +1,4 @@
+//文件的后端借口，文件的内容（代码）被保存到revision表中。
 module.exports = DocDAO;
 var db = require('./db.js');
 
@@ -25,6 +26,7 @@ function DocDAO(){
 	}
 }
 
+//新建一个文件
 DocDAO.prototype.createDoc = function(userId, path, type, callback){
 	var that = this;
 	var reg = /^\/[a-zA-Z0-9]+((\/[^.\/\\]+[^\/\\]*[^.\/\\]+)|(\/[^.\/\\]))+$/;
@@ -198,6 +200,7 @@ DocDAO.prototype.createDocByname = function(username,path,type,callback){
 	});
 }
 
+//删除文件
 DocDAO.prototype.deleteDoc = function(userId, path, callback){
 	var that = this;
 	function _deleteDocFromMember(idArr, docId, deleteMemberCallback){
@@ -414,6 +417,7 @@ DocDAO.prototype.deleteDoc = function(userId, path, callback){
 		});
 };
 
+//移动文件
 DocDAO.prototype.moveDoc = function(userId, path, newPath, callback){
 	var that = this;
 	function _moveDoc(idArr, oldPath, newPath, moveDocCallback){
@@ -693,6 +697,7 @@ DocDAO.prototype.moveDoc = function(userId, path, newPath, callback){
 		});
 };
 
+//添加共享者
 DocDAO.prototype.addMember = function(userId, path, memberName, callback){
 	var that = this;
 	var paths = path.split("/");
@@ -760,6 +765,7 @@ DocDAO.prototype.addMember = function(userId, path, memberName, callback){
 		});
 };
 
+//移除共享者
 DocDAO.prototype.removeMember = function(userId, path, memberName, callback){
 	var that = this;
 	var paths = path.split("/");
@@ -815,6 +821,7 @@ DocDAO.prototype.removeMember = function(userId, path, memberName, callback){
 		});
 };
 
+//获取文件
 DocDAO.prototype.getDocByPath = function(userId, path, callback){
 	var that = this;
 	var trueResult = [];
@@ -1069,6 +1076,7 @@ DocDAO.prototype.getDocByPath = function(userId, path, callback){
 	}
 };
 
+//设置权限
 DocDAO.prototype.setPermission = function(userId, path, permission, callback){
 	var that = this;
 	var paths = path.split("/");
@@ -1109,6 +1117,7 @@ DocDAO.prototype.setPermission = function(userId, path, permission, callback){
 	});
 };
 
+//获取内容
 DocDAO.prototype.getRevision = function(userId, path, revision, obj, callback){
 	var that = this;
 	var paths = path.split('/');
@@ -1165,6 +1174,7 @@ DocDAO.prototype.getRevision = function(userId, path, revision, obj, callback){
 	});
 };
 
+//提交内容
 DocDAO.prototype.commit = function(userId, path, content, callback){
 	var that = this;
 	var revisionDocId,revisionLength,docValue,myrevisionId;
@@ -1233,6 +1243,7 @@ DocDAO.prototype.commit = function(userId, path, content, callback){
 	});
 };
 
+//保存
 DocDAO.prototype.save = function(userId, docId, content, callback){
 	var that = this;
 	var revisionID;
@@ -1286,6 +1297,7 @@ DocDAO.prototype.save = function(userId, docId, content, callback){
 	});
 };
 
+//设置文件共享成员
 DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callback){
 	var that = this;
 	var paths = path.split("/");
@@ -1332,26 +1344,7 @@ DocDAO.prototype.setinterviewmember = function(path,ownername,memberlist,callbac
 	});
 };
 
-DocDAO.prototype.interviewdone = function(path,memberlist,callback){
-	memberlist.forEach(function(member){
-		DocDAO.prototype.getDocByPath(member.id,path,function(err,doc){
-			if(err){
-				return callback("inner error");
-			}
-			doc.status = "done";
-		});
-
-		userDAO.prototype.getUserByName(member,function(err,mem){
-			if(err){
-				return callback("inner error");
-			}
-			mem.status = "done";
-		});
-
-	});
-	return callback(null,memberlist);
-};
-
+//更新画板
 DocDAO.prototype.updatedrawingboard = function(path,drawingboard,callback)
 {
 	db.doc.update({path:path},{
@@ -1366,6 +1359,7 @@ DocDAO.prototype.updatedrawingboard = function(path,drawingboard,callback)
 	});
 };
 
+//更新注释
 DocDAO.prototype.updatenotes = function(path,notes,callback)
 {
 	db.doc.update({path:path},{
@@ -1380,6 +1374,7 @@ DocDAO.prototype.updatenotes = function(path,notes,callback)
 	});
 };
 
+//获取画板
 DocDAO.prototype.getdrawingboard = function(path, callback)
 {
 	db.doc.findOne({path:path},{
@@ -1392,6 +1387,7 @@ DocDAO.prototype.getdrawingboard = function(path, callback)
 	});
 };
 
+//获取注释
 DocDAO.prototype.getnotes = function(path, callback)
 {
 	db.doc.findOne({path:path},{

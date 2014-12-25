@@ -7,11 +7,13 @@ function InterviewDAO() {
     this.innerError = false;
 }
 
+//命名规范
 function validateName(str){
     var re = /[\*\\\|:\"\'\/\<\>\?\@]/;
     return str.length <= 40 && re.test(str);
 }
 
+//新建面试
 InterviewDAO.prototype.createInterview = function (name,interviewers,interviewees,problems,callback) {
     db.interview.findOne({name:name}, {_id:1}, function(err, interview) {
         if (err) {
@@ -65,6 +67,7 @@ InterviewDAO.prototype.createInterview = function (name,interviewers,interviewee
     });
 };
 
+//获取面试
 InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     db.interview.findOne({name:name}, {name:1, interviewer:1, interviewee:1, problemlist:1,status:1 ,createTime:1}, function (err, interview) {
         if (err) {
@@ -77,6 +80,7 @@ InterviewDAO.prototype.getInterviewByName = function (name, callback) {
     });
 };
 
+//获取一个人的所有面试
 InterviewDAO.prototype.getInterviews = function (userName, mode, callback) {
     if (mode == 1) {
         db.interview.find({"interviewer": userName}, {
@@ -112,7 +116,7 @@ InterviewDAO.prototype.getInterviews = function (userName, mode, callback) {
     }
 };
 
-
+//删除面试
 InterviewDAO.prototype.deleteInterview = function (name,callback) {
     db.interview.findOne({name:name}, {_id:1}, function (err, interview) {
         if (err) {
@@ -130,6 +134,7 @@ InterviewDAO.prototype.deleteInterview = function (name,callback) {
     });
 };
 
+//更新题目
 InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
     var probleml = [];
     var i = 0;
@@ -155,7 +160,7 @@ InterviewDAO.prototype.updateProblem = function(name, problems, callback) {
     });
 };
 
-//change interviewee's status.
+//更新面试者状态
 InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervieweename,status, callback) {
     db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
         if(err){
@@ -220,6 +225,7 @@ InterviewDAO.prototype.updateIntervieweestatus = function(interviewname, intervi
     })
 };
 
+//更新题目状态
 InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname,status, callback) {
     db.interview.findOne({name:interviewname},{problemlist:1},function(err,interv){
         if(err){
@@ -268,6 +274,7 @@ InterviewDAO.prototype.updateProblemstatus = function(interviewname, problemname
     })
 };
 
+//更新面试状态
 InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, callback) {
     db.interview.update(
         {name: interviewname},
@@ -292,6 +299,7 @@ InterviewDAO.prototype.updateInterviewstatus = function(interviewname,status, ca
         });
 };
 
+//获取某个状态下的面试者列表
 InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,callback){
     db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
         if(err){
@@ -315,6 +323,7 @@ InterviewDAO.prototype.getstatusinterviewees = function(interviewname,status,cal
     })
 };
 
+//获取某个状态下的题目列表
 InterviewDAO.prototype.getstatusproblems = function(interviewname,status,callback){
     db.interview.findOne({name:interviewname},{problemlist:1},function(err,inter){
         if(err){
@@ -337,6 +346,7 @@ InterviewDAO.prototype.getstatusproblems = function(interviewname,status,callbac
     });
 };
 
+//修改面试官
 InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,callback){
     db.interview.update(
         {name: interviewname},
@@ -362,6 +372,7 @@ InterviewDAO.prototype.modifyinterviewers = function(interviewname,interviewers,
         });
 };
 
+//修改面试者
 InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,callback){
     var intervieweelist = [];
     var i = 0;
@@ -401,6 +412,7 @@ InterviewDAO.prototype.modifyinterviewees = function(interviewname,interviewees,
     });
 };
 
+//置于等待状态
 InterviewDAO.prototype.restoreAllToWaiting = function(interviewName, callback) {
     db.interview.findOne({name: interviewName}, {
         problemlist: 1,
@@ -431,7 +443,7 @@ InterviewDAO.prototype.restoreAllToWaiting = function(interviewName, callback) {
     });
 };
 
-//change interviewee's evaluation.
+//更新评价
 InterviewDAO.prototype.updateIntervieweeevaluation = function(interviewname, intervieweename,evaluation, callback) {
     db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
         if(err){
@@ -491,6 +503,7 @@ InterviewDAO.prototype.updateIntervieweeevaluation = function(interviewname, int
     });
 };
 
+//获取评价
 InterviewDAO.prototype.getintervieweeevaluation = function(interviewname,intervieweename,callback){
     db.interview.findOne({name:interviewname},{interviewee:1},function(err,inter){
         if(err){
@@ -513,7 +526,8 @@ InterviewDAO.prototype.getintervieweeevaluation = function(interviewname,intervi
         });
     })
 };
-//problem is expected as an object like {name:"",status:""}
+
+//更新面试者题目列表
 InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,intervieweename,problem,callback) {
     db.interview.findOne({name:interviewname},{interviewee:1, problemlist:1},function(err,interv){
         if(err){
@@ -557,6 +571,7 @@ InterviewDAO.prototype.pushintervieweeproblem = function(interviewname,interview
     });
 };
 
+//获取面试者题目列表
 InterviewDAO.prototype.getintervieweeproblem = function(interviewname,intervieweename,callback) {
     db.interview.findOne({name:interviewname},{interviewee:1},function(err,interv){
         var i = 0;
