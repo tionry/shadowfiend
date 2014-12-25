@@ -31,6 +31,7 @@ function validateName(str){
 	return str.length >= 6 && str.length <= 20 && re.test(str);
 }
 
+//注册新用户
 UserDAO.prototype.register = function(name, password, avatar, group, callback){
 
 	if(!validateName(name)){
@@ -71,6 +72,7 @@ UserDAO.prototype.register = function(name, password, avatar, group, callback){
 	});
 };
 
+//获取用户
 UserDAO.prototype.getUserByName = function(name,callback){
 	db.user.findOne({name:name}, {name:1, avatar:1, _id:1}, function(err,user){
 		if (err){
@@ -83,6 +85,7 @@ UserDAO.prototype.getUserByName = function(name,callback){
 	});
 };
 
+//登录
 UserDAO.prototype.login = function(name, password, ip, callback){
 	var that = this;
 	db.user.findOne({name:name}, function(err, user){
@@ -149,6 +152,7 @@ UserDAO.prototype.login = function(name, password, ip, callback){
 	});
 };
 
+//更新头像
 UserDAO.prototype.updateAvatar = function(userId, avatar, callback){
 	db.user.findOne({_id:userId}, function(err, user){
 		if(err){
@@ -170,6 +174,7 @@ UserDAO.prototype.updateAvatar = function(userId, avatar, callback){
 	});
 };
 
+//更新密码
 UserDAO.prototype.updatePassword = function(userId, password, newPassword, callback){
 	db.user.findOne({_id:userId},function(err, user){
 		if(err){
@@ -196,6 +201,7 @@ UserDAO.prototype.updatePassword = function(userId, password, newPassword, callb
 	});
 };
 
+//获取用户列表
 UserDAO.prototype.getUserListByName = function(name, callback) {
 	db.user.find({name: {$in: name}}, {
 		name: 1,
