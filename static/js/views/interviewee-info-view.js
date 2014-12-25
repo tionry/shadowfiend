@@ -78,4 +78,8 @@ var app = app || {};
             })
         },
     });
+    app.init || (app.init = {});
+    app.init.InfoView = function () {
+        app.InfoView || (app.InfoView = new app.IntervieweeInfoView());
+    };
 })();
