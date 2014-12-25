@@ -32,12 +32,29 @@ var app = app || {};
 
         addAll: function(){
             this.collection.each(this.addOne);
-        }
+        },
+
+        afterGetList: function(problemList){
+            var modal = $('#allproblem'),
+                list = $('#all-problem-list');
+            list.html('');
+            for (var i = 0; i < problemList.length; i++){
+                var o = {
+                    name: problemList.name,
+                };
+                var li = $('<li></li>');
+                li.html(this.template_problemList(o));
+                list.append(li);
+            }
+            app.showInputModal(modal);
+        },
     });
 
     var newinterviewers = [];
     var newinterviewees = [];
     var newinterviewproblems = [];
+
+
 
     var newinterview = function(){
         var modal = Backbone.$('#new-interview');
@@ -105,6 +122,8 @@ var app = app || {};
                 cnfm.removeAttr('disabled');
             }
         });
+
+
 
         add_interviewer.on('click', function(){
             var name = Backbone.$.trim(modal.find('#interviewer-inputName').val());

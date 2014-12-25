@@ -25,21 +25,6 @@ var app = app || {};
             return this;
         },
 
-        afterGetList: function(problemList){
-            var modal = $('#allproblem'),
-                list = $('#all-problem-list');
-            list.html('');
-            for (var i = 0; i < problemList.length; i++){
-                var o = {
-                    name: problemList.name,
-                };
-                var li = $('<li></li>');
-                li.html(this.template_problemList(o));
-                list.append(li);
-            }
-            app.showInputModal(modal);
-        },
-
         checkStatus: function(){
             if (this.options.status == 'completed')
                 this.checkIntervieweeFiles();

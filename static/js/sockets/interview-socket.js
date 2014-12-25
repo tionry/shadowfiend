@@ -187,8 +187,8 @@ var app = app || {};
             if (!data || data.err) {
                 return;
             }
-            app.InfoView || (app.InfoView = new app.IntervieweeInfoView());
-            app.InfoView.afterGetList(data.problemList);
+
+            app.views['interviewers'].afterGetList(data.problemList);
             //app.collections['interviewee-problem-list' + data.interviewName] || (app.collections['interviewee-problem-list' + data.interviewName] = new app.Problems());
             //app.collections['interviewee-problem-list' + data.interviewName].fetch({
             //    reset: true,
