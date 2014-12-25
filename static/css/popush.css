@@ -41,6 +41,16 @@ body{
 	width: 140px;
 	height: 140px;
 }
+#viewproblemdetail{
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	text-decoration: none;
+}
+#interviewproblem-description{
+	background-color: #ffffff;
+	border: none;
+}
 .app-loading{
 	margin:0px auto;
 	text-align:center
@@ -53,11 +63,14 @@ body{
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	max-width:500px;
-	z-index:1
+	z-index:1;
 }
 #login-control{
 	margin-left:25%;
-	padding-right:10px
+	padding-right:10px;
+}
+#over-editor{
+	margin:0 0 5px 0;
 }
 #register{
 	position:relative;
@@ -67,7 +80,7 @@ body{
 	-webkit-box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	box-shadow:0 0 .625em .07em rgba(0,0,0,0.2);
 	max-width:500px;
-	z-index:2
+	z-index:2;
 }
 #register-control{
 	margin-left:25%;
@@ -75,6 +88,10 @@ body{
 }
 #popush-info {
     margin-top:80px
+}
+#console-title{
+	border-bottom:1px solid #ddd;
+	padding:4px 0 5px 10px;
 }
 #footer{
 	color:white;
@@ -88,8 +105,16 @@ body{
 #footer .btn-link:hover{
 	color:rgb(24,188,156)
 }
+#new-pro-btn, #btn_nic{
+	border-radius:50%;
+	position:fixed;
+	right:120px;
+}
 .switch-rel{
 	margin:5px 0 0 105px
+}
+.btn-toolbar{
+	margin:0 0 5px 0;
 }
 @font-face{
 	font-family:youregon;

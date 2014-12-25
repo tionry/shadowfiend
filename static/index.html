@@ -166,10 +166,10 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="panel-title" id="interviewproblem-name">Panel heading</div>
-              <a href="#" class="no-hover-deco" id="viewproblemdetail" style="position: absolute; right: 30px;top: 10px;text-decoration: none;"> Detail </a>
+              <a href="#" class="no-hover-deco" id="viewproblemdetail">Detail</a>
             </div>
             <div class="panel-body">
-              <pre style="background-color: #ffffff;border: none" id="interviewproblem-description">
+              <pre id="interviewproblem-description">
               Panel content
                 </pre>
             </div>
@@ -181,7 +181,7 @@
           </div>
           <div id="editormain">
             <div id="editormain-inner">
-              <div id="over-editor" class="btn-toolbar" style="margin:0 0 5px 0;">
+              <div id="over-editor" class="btn-toolbar">
                 <div class="btn-group pull-right">
                   <button class="btn btn-white disabled" type="button" id="editor-run" title="run-title"><span class="glyphicon glyphicon-play"></span></button>
                   <button class="btn btn-white" type="button" id="editor-console" title="console"><span class="glyphicon glyphicon-share"></span></button>
@@ -281,13 +281,13 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="guide-page-header">
-              <div  style="text-decoration: none;position: relative">
+              <div style="text-decoration: none;position: relative">
                 <h2 style="font-size: 40px" localization>Problems</h2>
               </div>
             </div>
           </div>
         </div>
-        <button class="btn btn-default" id="new-pro-btn" style="border-radius:50%;position:fixed;right:120px;">+</button>
+        <button class="btn btn-default" id="new-pro-btn">+</button>
         <div class="row">
           <div class="panel panel-default panel-list">
             <table class="table table-hover" id="problemset-table">
@@ -313,7 +313,7 @@
       </div>
 
       <div id="problem-item" class="hide contain-holder">
-        <div class="btn-toolbar" style="margin:0 0 5px 0;">
+        <div class="btn-toolbar">
           <div class="btn-group pull-left" style="margin-left:0">
             <a class="btn btn-white" id="problem-item-back" href="#problemset"><span class="glyphicon glyphicon-home"></span></a>
           </div>
@@ -332,20 +332,13 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="guide-page-header">
-              <div  style="text-decoration: none;position: relative">
+              <div style="text-decoration: none;position: relative">
                 <h2 style="font-size: 40px" localization>Interviews</h2>
               </div>
             </div>
           </div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-12">-->
-            <!--<ul class="nav navbar-nav navbar-right">-->
-              <!--<li><button type="button" class="btn btn-primary" localization>New Interview</button></li>-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--</div>-->
-        <button class="btn btn-default" id="btn_nic" style="border-radius:50%;position:fixed;right:120px;">+</button>
+        <button class="btn btn-default" id="btn_nic">+</button>
         <div class="row">
           <div class="panel panel-default panel-list">
             <table class="table table-hover" id="interviewers-control-table">
@@ -414,7 +407,7 @@
             </li>
           </ul>
         </div>
-        <div class="btn-toolbar" style="margin:0 0 5px 0;">
+        <div class="btn-toolbar">
 
           <div class="btn-group pull-left" style="margin-left:0">
             <a class="btn btn-white" id="interviewer-item-back" href="#interviewers"><span class="glyphicon glyphicon-home"></span></a>
@@ -449,7 +442,7 @@
                 <!--<p><%= model.name %></p>-->
                 <!--<button type="button" class="btn btn-primary remark-btn" localization>Remark</button>-->
                 <a class="thumbnail interviewee-img-div">
-                  <img class="interviewee-img" style="width: 96px; height: 96px;" src="<%= model.avatar%>" alt="no avatar">
+                  <img class="interviewee-img" src="<%= model.avatar%>" alt="no avatar">
                   <div class="caption">
                     <h4><%= model.name %></h4>
                     <!--<p><button type="button" class="btn btn-primary remark-btn" localization>Remark</button></p>-->
@@ -464,12 +457,6 @@
             </script>
           </div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-md-5" style="margin-left:auto; margin-right:auto">-->
-            <!--<button id="set-round-btn" type="button" class="btn btn-primary" localization>Set Round</button>-->
-            <!--<button id="end-round-btn" type="button" class="btn btn-primary" localization>End Round</button>-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
 
       <div id="interviewees-control" class="hide contain-holder">
@@ -1087,7 +1074,7 @@
                   <h3 class="panel-title" style="text-align: center">Panel heading</h3>
                 </div>
                 <div class="panel-body">
-                  <pre style="background-color: #ffffff;border: none" id="viewproblem-description">
+                  <pre id="viewproblem-description">
                     Panel content
                   </pre>
                 </div>
