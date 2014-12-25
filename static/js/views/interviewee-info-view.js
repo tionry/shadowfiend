@@ -41,14 +41,14 @@ var app = app || {};
         },
 
         checkStatus: function(){
-            if (this.status == 'completed')
+            if (this.options.status == 'completed')
                 this.checkIntervieweeFiles();
             else
                 this.enterIntervieweeRoom();
         },
 
         checkIntervieweeFiles: function(){
-            var interviewName = this.interviewName,
+            var interviewName = this.options.interviewName,
                 intervieweeName = this.model.attributes.name;
             app.socket.emit('get-interviewee-problem-list', {
                 interviewName: interviewName,
