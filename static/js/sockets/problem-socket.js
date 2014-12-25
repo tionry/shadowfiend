@@ -1,5 +1,5 @@
 /**
- * Created by tarma on 14年11月9日.
+ * Created by FU CHIN SENG on 14年11月9日.
  */
 var app = app || {};
 
@@ -9,6 +9,7 @@ var app = app || {};
         // Refresh problem collection
         "read-problem": function(data) {
             switch (data.mode) {
+                // show in interview room for selection
                 case 'all-problem':
                     app.collections['allproblems-' + data.name].fetch({
                         all: true,
@@ -17,6 +18,7 @@ var app = app || {};
                         data: data.problem
                     });
                     break;
+                // show in problem list
                 case 'problemset':
                     app.collections.problems.fetch({
                         all: true,
@@ -24,6 +26,7 @@ var app = app || {};
                         data: data.problem
                     });
                     break;
+                // show the problems selected in interview
                 case 'problem-in-interview':
                     app.collections['problemList-' + data.name].fetch({
                         all: true,

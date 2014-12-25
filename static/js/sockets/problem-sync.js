@@ -1,3 +1,7 @@
+/**
+ * Author: FU CHIN SENG
+ */
+
 var app = app || {};
 
 (function() {

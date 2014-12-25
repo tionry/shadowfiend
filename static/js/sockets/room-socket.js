@@ -492,6 +492,7 @@ var room, listeners = {
 	    return;
 	},
 
+	// reload the drawing board locally
 	"after-get-image": function(data) {
 		if (!data || data.err) {
 			return;
@@ -511,6 +512,7 @@ var room, listeners = {
 		}
 	},
 
+	// reload the comment locally
 	"after-get-comment": function(data) {
 		if (!data || data.err) {
 			return;
@@ -588,7 +590,7 @@ var room, listeners = {
 				app.room.endInterview();
 			}
 		}
-	},
+	}
 };
 
 /* 开始监听 */
