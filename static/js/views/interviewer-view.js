@@ -59,6 +59,7 @@ var app = app || {};
                     app.models['doc-' + interviewName].once('change', function(){
                         app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer', app.models['pro-' + interviewName], interviewName);
                         app.models['doc-' + interviewName] = new app.File();
+                        modal.hide();
                     })
                 });
             }
