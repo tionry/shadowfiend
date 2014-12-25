@@ -132,17 +132,24 @@ var app = app || {};
         renew_completed_interview: function(){
             var al = $('#interviewer-interviewee-control');
             al.html('');
-            $('#interviewee-title').text('All Round');
             var interviewName = $('#interviewer-item-name').text().trim();
-            var c = app.collections['intervieweeList-'+interviewName];
-            for (var i = 0; i < c.length; i++){
-                var model = c.models[i];
-                var view = new app.IntervieweeInfoView({
-                    model: model
-                });
-                var text = view.render().el;
-                al.append(text);
-            }
+            var checkUpdate = setTimeout(function(){
+                if (app.collections['intervieweeList-'+interviewName].length == 0)
+                    return;
+                clearTimeout(checkUpdate);
+                var c = app.collections['intervieweeList-'+interviewName];
+                for (var i = 0; i < c.length; i++){
+                    var model = c.models[i];
+                    var view = new app.IntervieweeInfoView({
+                        model: model,
+                        status: 'completed',
+                        interviewName: interviewName,
+                    });
+                    var text = view.render().el;
+                    al.append(text);
+                }
+            }, 200);
+            $('#interviewee-title').text('全部面试者');
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');
@@ -165,7 +172,8 @@ var app = app || {};
                 }
             } else {
                 model.view = new app.IntervieweeInfoView({
-                    model: model
+                    model: model,
+                    status: 'running'
                 });
                 $('#interviewer-interviewee-control').append(model.view.render().el);
             }

@@ -9,8 +9,11 @@ var app = app || {};
         template: _.template($('#interviewer-interviewee-template').html(), null, {
             variable: 'model'
         }),
+        template_problemList:_.template($('#all-problem-template').html(), null, {
+            variable: 'model'
+        }),
         events: {
-            'click .interviewee-img-div' : 'enterIntervieweeRoom',
+            'click .interviewee-img-div' : 'checkStatus',
         },
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -20,6 +23,37 @@ var app = app || {};
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        afterGetList: function(problemList){
+            var modal = $('#allproblem'),
+                list = $('#all-problem-list');
+            list.html('');
+            for (var i = 0; i < problemList.length; i++){
+                var o = {
+                    name: problemList.name,
+                };
+                var li = $('<li></li>');
+                li.html(this.template_problemList(o));
+                list.append(li);
+            }
+            app.showInputModal(modal);
+        },
+
+        checkStatus: function(){
+            if (this.status == 'completed')
+                this.checkIntervieweeFiles();
+            else
+                this.enterIntervieweeRoom();
+        },
+
+        checkIntervieweeFiles: function(){
+            var interviewName = this.interviewName,
+                intervieweeName = this.model.attributes.name;
+            app.socket.emit('get-interviewee-problem-list', {
+                interviewName: interviewName,
+                intervieweeName: intervieweeName,
+            });
         },
 
         enterIntervieweeRoom: function(){

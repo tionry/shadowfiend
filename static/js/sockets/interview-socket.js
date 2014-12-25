@@ -187,6 +187,7 @@ var app = app || {};
             if (!data || data.err) {
                 return;
             }
+            app.IntervieweeInfoView.afterGetList();
             app.collections['interviewee-problem-list' + data.interviewName] || (app.collections['interviewee-problem-list' + data.interviewName] = new app.Problems());
             app.collections['interviewee-problem-list' + data.interviewName].fetch({
                 reset: true,
