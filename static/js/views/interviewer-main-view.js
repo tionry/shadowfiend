@@ -136,7 +136,7 @@ var app = app || {};
             var interviewName = $('#interviewer-item-name').text().trim();
             var c = app.collections['intervieweeList-'+interviewName];
             for (var i = 0; i < c.length; i++){
-                var model = c.models[i].attributes;
+                var model = c.models[i];
                 var view = new app.IntervieweeInfoView({
                     model: model
                 });
