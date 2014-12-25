@@ -43,7 +43,7 @@ var app = app || {};
             list.html('');
             for (var i = 0; i < problemList.length; i++){
                 var o = {
-                    name: problemList.name,
+                    name: problemList[i].name,
                 };
                 var li = $('<li></li>');
                 li.html(this.template_problemList(o));
