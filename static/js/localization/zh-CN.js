@@ -197,4 +197,6 @@ app.languages['zh-CN'] = { Name : '中文版',
   'nametoolong'                : '名字长度不能超过20',
   'interview ended.'           : '面试已结束',
   'no problem'                 : '没有设置备考问题',
+  'This Round'                 : '本轮面试者',
+  'All Round'                  : '全部面试者',
 };

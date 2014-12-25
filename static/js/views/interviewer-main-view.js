@@ -30,6 +30,7 @@ var app = app || {};
 
         //界面渲染
         renewView: function(){
+            $('#interviewee-title').text('This Round');
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').show();
@@ -129,7 +130,19 @@ var app = app || {};
         },
 
         renew_completed_interview: function(){
-            $('#interviewer-interviewee-control').html('');
+            var al = $('#interviewer-interviewee-control');
+            al.html('');
+            $('#interviewee-title').text('All Round');
+            var interviewName = $('#interviewer-item-name').text().trim();
+            var c = app.collections['intervieweeList-'+interviewName];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i];
+                var view = new app.IntervieweeInfoView({
+                    model: model
+                });
+                var text = view.render().el;
+                al.append(text);
+            }
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');

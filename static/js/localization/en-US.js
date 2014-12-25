@@ -199,4 +199,6 @@ app.languages['en-US'] = { Name :'English Version',
   'nametoolong'             : 'The length of the name can not exceed 20',
   'interview ended.'        : 'Interview completed.',
   'no problem'              : 'No problem has been set.',
+  'This Round'              : 'This Round',
+  'All Round'               : 'All interviewees',
 };
