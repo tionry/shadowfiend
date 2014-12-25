@@ -6,6 +6,9 @@ var app = app || {};
     'use strict';
     app.InterviewerView = Backbone.View.extend({
         el:"#interviewer-control",
+        template_problemList:_.template($('#all-problem-template').html(), null, {
+            variable: 'model'
+        }),
 
         initialize: function(){
             this.listenTo(this.collection, 'add', this.addOne);

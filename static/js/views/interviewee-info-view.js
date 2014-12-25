@@ -9,9 +9,6 @@ var app = app || {};
         template: _.template($('#interviewer-interviewee-template').html(), null, {
             variable: 'model'
         }),
-        template_problemList:_.template($('#all-problem-template').html(), null, {
-            variable: 'model'
-        }),
         events: {
             'click .interviewee-img-div' : 'checkStatus',
         },
