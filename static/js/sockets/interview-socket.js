@@ -1,5 +1,5 @@
 /**
- * Created by tarma on 14年11月21日.
+ * Created by FU CHIN SENG on 14年11月21日.
  */
 var app = app || {};
 
@@ -31,6 +31,7 @@ var app = app || {};
             app.Lock.detach(data);
         },
 
+        // Refresh interview list after adding an interview
         "after-add-interview": function(data) {
             if (data == null) {
                 app.Lock.remove();
