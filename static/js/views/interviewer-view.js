@@ -37,7 +37,7 @@ var app = app || {};
             this.collection.each(this.addOne);
         },
 
-        afterGetList: function(problemList){
+        afterGetList: function(problemList, interviewName, intervieweeName){
             var modal = $('#allproblem'),
                 list = $('#all-problem-list');
             list.html('');
@@ -48,6 +48,19 @@ var app = app || {};
                 var li = $('<li></li>');
                 li.html(this.template_problemList(o));
                 list.append(li);
+                li.on('click', function(){
+                    app.socket.emit('get-doc-in-interview', {
+                        interviewName: interviewName,
+                        intervieweeName: intervieweeName,
+                        problemName: $(this).text().trim(),
+                    });
+                    app.models || (app.models = {});
+                    app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
+                    app.models['doc-' + interviewName].once('change', function(){
+                        app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer', app.models['pro-' + interviewName], interviewName);
+                        app.models['doc-' + interviewName] = new app.File();
+                    })
+                });
             }
             app.showInputModal(modal);
         },

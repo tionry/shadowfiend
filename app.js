@@ -1656,7 +1656,11 @@ io.sockets.on('connection', function(socket){
 				if (err) {
 					return socket.emit('after-get-interviewee-problem-list', {err: err});
 				}
-				socket.emit('after-get-interviewee-problem-list', {problemList: problemList});
+				socket.emit('after-get-interviewee-problem-list', {
+					problemList: problemList,
+					interviewName: data.interviewName,
+					intervieweeName: data.intervieweeName
+				});
 			});
 		});
 	});

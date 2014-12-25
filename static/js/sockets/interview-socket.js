@@ -188,7 +188,7 @@ var app = app || {};
                 return;
             }
 
-            app.views['interviewers'].afterGetList(data.problemList);
+            app.views['interviewers'].afterGetList(data.problemList, data.interviewName, data.intervieweeName);
             //app.collections['interviewee-problem-list' + data.interviewName] || (app.collections['interviewee-problem-list' + data.interviewName] = new app.Problems());
             //app.collections['interviewee-problem-list' + data.interviewName].fetch({
             //    reset: true,
