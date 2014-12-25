@@ -129,7 +129,18 @@ var app = app || {};
         },
 
         renew_completed_interview: function(){
-            $('#interviewer-interviewee-control').html('');
+            var al = $('#interviewer-interviewee-control');
+            al.html('');
+            var interviewName = $('#interviewer-item-name').text().trim();
+            var c = app.collections['intervieweeList-'+interviewName];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i].attributes;
+                var view = new app.IntervieweeInfoView({
+                    model: model
+                });
+                var text = view.render().el;
+                al.append(text);
+            }
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();
             $('.push-problem-btn').attr('disabled', 'disabled');
