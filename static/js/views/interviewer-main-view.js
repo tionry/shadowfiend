@@ -133,22 +133,17 @@ var app = app || {};
             var al = $('#interviewer-interviewee-control');
             al.html('');
             var interviewName = $('#interviewer-item-name').text().trim();
-            var checkUpdate = setTimeout(function(){
-                if (app.collections['intervieweeList-'+interviewName].length == 0)
-                    return;
-                clearTimeout(checkUpdate);
-                var c = app.collections['intervieweeList-'+interviewName];
-                for (var i = 0; i < c.length; i++){
-                    var model = c.models[i];
-                    var view = new app.IntervieweeInfoView({
-                        model: model,
-                        status: 'completed',
-                        interviewName: interviewName,
-                    });
-                    var text = view.render().el;
-                    al.append(text);
-                }
-            }, 200);
+            var c = app.collections['intervieweeList-'+interviewName];
+            for (var i = 0; i < c.length; i++){
+                var model = c.models[i];
+                var view = new app.IntervieweeInfoView({
+                    model: model,
+                    status: 'completed',
+                    interviewName: interviewName,
+                });
+                var text = view.render().el;
+                al.append(text);
+            }
             $('#interviewee-title').text('全部面试者');
             $('#set-interview-menu').hide();
             $('#start-interview-btn').hide();

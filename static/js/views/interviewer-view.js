@@ -57,10 +57,10 @@ var app = app || {};
                         intervieweeName: intervieweeName,
                         problemName: $(this).text().trim(),
                     });
-                    modal.modal('hide');
                     app.models || (app.models = {});
                     app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
                     app.models['doc-' + interviewName].once('change', function(){
+                        modal.modal('hide');
                         app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer', app.models['pro-' + interviewName], interviewName);
                         app.models['doc-' + interviewName] = new app.File();
                     })
