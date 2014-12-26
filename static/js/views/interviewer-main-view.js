@@ -30,7 +30,7 @@ var app = app || {};
 
         //界面渲染
         renewView: function(){
-            $('#interviewee-title').text('This Round');
+            $('#interviewee-title').text('本轮面试者');
             this.itv = this.model.attributes;
             $('#interviewer-interviewee-control').html('');
             $('#set-interview-menu').show();
