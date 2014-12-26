@@ -50,7 +50,7 @@ var onLogin = function(data) {
 
     	/*更新页面*/
 		app.views['account'].show();
-		app.views.files.afterLogin();
+		//app.views.files.afterLogin();
 		$('#loginModal').modal('hide');
 		/*更新URL*/
 		app.isLogined = true;
@@ -61,7 +61,7 @@ var onLogin = function(data) {
 		app.collections['files'].fetch({
 			path: '/' + data.user.name,
 			success: function() { 
-				app.views['files'].renewList(); 
+				//app.views['files'].renewList();
 			},
 			virtual: true,
     	});
