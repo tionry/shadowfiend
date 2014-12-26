@@ -40,6 +40,9 @@ var app = app || {};
         afterGetList: function(problemList, interviewName, intervieweeName){
             var modal = $('#allproblem'),
                 list = $('#all-problem-list');
+            modal.on('hide', function () {
+                modal.off('hide');
+            });
             list.html('');
             for (var i = 0; i < problemList.length; i++){
                 var o = {
@@ -54,12 +57,12 @@ var app = app || {};
                         intervieweeName: intervieweeName,
                         problemName: $(this).text().trim(),
                     });
+                    modal.modal('hide');
                     app.models || (app.models = {});
                     app.models['doc-' + interviewName] || (app.models['doc-' + interviewName] = new app.File());
                     app.models['doc-' + interviewName].once('change', function(){
                         app.room.tryEnter(app.models['doc-' + interviewName], null, '#interviewer/'+interviewName, 'interviewer', app.models['pro-' + interviewName], interviewName);
                         app.models['doc-' + interviewName] = new app.File();
-                        modal.hide();
                     })
                 });
             }
