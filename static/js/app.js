@@ -88,17 +88,8 @@ app.resize = function() {
 	if(h < 100)
 		h = 100;
 	var cbh = h-$('#member-list-doc').height()-158;
-	//w = $('#login-box').parent('*').width();
-	//$('#login-box').css('left', ((w-420)/2-30) + 'px');
-	//w = $('#register-box').parent('*').width();
-	//$('#register-box').css('left', ((w-420)/2-30) + 'px');
-	
 	var bottomHeight = document.getElementById("footer").clientHeight;
 	var bigoneHeight = document.getElementById("big-one").clientHeight;
-	//$("#login").css("margin-bottom", bottomHeight + 20);
-	//$("#register").css("margin-bottom", bottomHeight + 20);
-	//$("#popush-info").css("margin-bottom", bottomHeight + 20);
-	//$("#filecontrol").css("margin-bottom", bottomHeight + 45);
 	var marT = (bigoneHeight + 20) > 192 ? (bigoneHeight + 20) : 192;
 	var topWidth = document.getElementById("nav-head").clientWidth;
 	if (topWidth >= 770){
