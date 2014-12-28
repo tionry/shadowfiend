@@ -30,8 +30,6 @@
 	/views					Backbone框架View
 		login-view.js			登录视图
 		register-view.js		注册视图
-		file-view.js			单个文件管理视图
-		files-view.js			文件管理视图
 		member-view.js			单个成员显示视图
 		memberlist-view.js		共享成员显示视图
 		sharer-view.js			分享管理单个分享用户视图
@@ -40,6 +38,16 @@
 		room-view.js			编辑页面视图
 		expression-view.js		单个调试表达式视图
 		expressionlist-view.js	调试表达式视图
+		problemset-view.js      所有题目视图
+		problem-view.js         单个题目视图
+		testproblem-view.js     面试中题目视图
+		pickproblem-view.js     挑选题目视图
+		interviewer-view.js     面试官所有面试视图
+		interviewee-view.js     面试者所有面试视图
+		interview-view.js       单个面试视图
+		interviewer-main-view.js 面试官房间视图
+		interviewee-info-view.js 单个面试者信息视图
+
 		
 	/room					编辑页面相关js
 		data.js				room的定义和常量
@@ -49,6 +57,9 @@
 		editor.js			编辑器
 		room.js				进出逻辑
 		run.js				运行和调试
+		comment.js          批注
+		drawboard.js		绘图板
+		info.js				提示信息
 		
 	/sockets				socket事件监听
 		file-sync.js			Backbone.Model.prototype底层sync机制的重载

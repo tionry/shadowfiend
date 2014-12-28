@@ -1,10 +1,11 @@
+/**
+ * 绘图板逻辑控制
+ */
 var app = app || {};
 
-/* 房间绘图板控制器 */
 app.Room && _.extend(app.Room.prototype, {
 
     initBoard: function(){
-        //this.clearBoard();
         var path = this.docModel.attributes.path;
         app.socket.emit('get-image',{
             fileName: path
@@ -17,6 +18,7 @@ app.Room && _.extend(app.Room.prototype, {
         canvas.width = canvas.width;
     },
 
+    //准备保存绘图
     onSavingDraw: function(data){
         var path = this.docModel.attributes.path;
         app.socket.emit('save-image', {
@@ -26,6 +28,7 @@ app.Room && _.extend(app.Room.prototype, {
         });
     },
 
+    //绘图重渲染
     afterDrawRevision: function(data){
         this.view.renewDraw(data);
     }

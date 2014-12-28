@@ -1,5 +1,5 @@
 /**
- * 面试官面试中主页面
+ * 面试官房间页面
  */
 var app = app || {};
 (function(){
@@ -852,14 +852,5 @@ var app = app || {};
                 that.renew_completed_interview();
             });
         },
-
-        //评论
-        show_remark: function(){
-            var modal = Backbone.$('#remark');
-            app.showInputModal(modal);
-        },
-
-
-
     });
 })();

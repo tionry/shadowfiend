@@ -363,13 +363,6 @@ var app = app || {};
         },
         setSaving: function () {
             this.$docState.text(strings['saving...'] || 'saving...').addClass('red');
-            //this.$btnHome.attr('title', '').popover({
-            //    html: true,
-            //    content: strings['unsaved'] || 'unsaved',
-            //    placement: 'right',
-            //    trigger: 'hover',
-            //    container: 'body'
-            //});
             this.room.timestamp = 0;
             this.room.isSaving = true;
             this.setRunState();
@@ -465,6 +458,7 @@ var app = app || {};
                 CodeMirror.autoLoadMode(this.editor, '');
             }
         },
+        //选择语言
         selectlanguage: function(){
             var sel = $('#language-selector'),
                 lan = sel.val(),
@@ -473,6 +467,7 @@ var app = app || {};
             app.room.ext = app.languageShortMap[lan];
             app.room.checkrunanddebug(app.languageShortMap[lan]);
         },
+        //显示题目描述
         showProblem: function(problem){
             var name = problem.attributes.name;
             if (name.length >= 12)
@@ -483,6 +478,7 @@ var app = app || {};
                 description = description.substring(0, 497)+ '...';
             $('#interviewproblem-description').text(description);
         },
+        //显示题目描述细节对话框
         showProblemDetail: function(problem){
             var modal = $('#viewproblem');
             $('#viewproblem-name').text(problem.attributes.name);
@@ -496,17 +492,20 @@ var app = app || {};
                 modal.modal('hide');
             });
         },
+        //保存绘图
         saveCanvas: function(){
             var canvas = $('.drawing-board-canvas')[0];
             var data = canvas.toDataURL('image/png');
             app.room.onSavingDraw(data);
         },
+        //重渲染绘图
         renewDraw: function(data){
             var canvas = $('.drawing-board-canvas')[0];
             var image = new Image();
             image.src = data;
             canvas.getContext("2d").drawImage(image, 0, 0);
         },
+        //打开绘图板
         openDrawboard: function(){
             app.room.initBoard();
             var modal = $('#graphics');
@@ -523,6 +522,7 @@ var app = app || {};
                 that.saveCanvas();
             });
         },
+        //设置批注html
         setPopover: function(elem, options, text){
             elem.popover('destroy');
             var child = $('<span></span>');
@@ -530,6 +530,7 @@ var app = app || {};
             child.text(text);
             elem.data('content', child).popover(options);
         },
+        //刷新批注
         flashComment: function(line){
             var editor = this.editor,
                 view = this,
@@ -546,6 +547,7 @@ var app = app || {};
                 clearTimeout(popoverFlash);
             }, 5000);
         },
+        //添加批注事件响应
         attachEvents : function (e) {
             var view = this;
             $('.popover').on('mouseenter', function() {
@@ -556,6 +558,7 @@ var app = app || {};
                 $(e).popover('hide');
             });
         },
+        //清空所有批注对应的控件
         clearAllLineWidget :function(){
             var editor = this.editor;
             for (var i = 0; i < editor.lineCount(); i++) {
@@ -564,6 +567,7 @@ var app = app || {};
                 this.editor.removeLineWidget(l.widgets[0]);
             }
         },
+        //设置批注
         setLineWidget: function (l, text){
             var msg = $('<div></div>');
             var icon = $('<span></span>');

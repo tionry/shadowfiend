@@ -1,6 +1,8 @@
+/**
+ * 批注逻辑控制
+ */
 var app = app || {};
 
-/* 房间批注控制器 */
 app.Room && _.extend(app.Room.prototype, {
 
     //初始化批注
@@ -44,6 +46,7 @@ app.Room && _.extend(app.Room.prototype, {
         }
     },
 
+    //初始化批注
     initComments: function(){
         var path = this.docModel.attributes.path;
         app.socket.emit('get-comment', {

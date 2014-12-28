@@ -1,9 +1,11 @@
+/**
+ * 提示信息逻辑控制
+ */
 var app = app || {};
 
-/* 提示信息管理 */
 app.Room && _.extend(app.Room.prototype, {
 
-    //停止某道题目作答
+    //停止某道题目作答 信息提示
     stopOneProblem: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
@@ -15,6 +17,7 @@ app.Room && _.extend(app.Room.prototype, {
         }
     },
 
+    //开始某道题目作答 信息提示
     startOneProblem: function(){
         if (window.location.hash == '#edit/'){
             var modal = $('#stopprobleminfo');
@@ -43,6 +46,7 @@ app.Room && _.extend(app.Room.prototype, {
         }
     },
 
+    //结束一轮面试 信息提示
     endRound: function(){
         $('#stopprobleminfo').hide();
         if (window.location.hash == '#edit/'){
@@ -58,6 +62,7 @@ app.Room && _.extend(app.Room.prototype, {
         }
     },
 
+    //结束一场面试 信息提示
     endInterview: function(){
         $('#stopprobleminfo').hide();
         if (window.location.hash == '#edit/'){

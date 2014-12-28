@@ -22,6 +22,7 @@ var app = app || {};
             return this;
         },
 
+        //检查面试状态
         checkStatus: function(){
             if (this.options.status == 'completed')
                 this.checkIntervieweeFiles();
@@ -29,6 +30,7 @@ var app = app || {};
                 this.enterIntervieweeRoom();
         },
 
+        //面试结束：查看面试者做过的题目文件
         checkIntervieweeFiles: function(){
             var interviewName = this.options.interviewName,
                 intervieweeName = this.model.attributes.name;
@@ -38,6 +40,7 @@ var app = app || {};
             });
         },
 
+        //面试进行：尝试加入面试者房间
         enterIntervieweeRoom: function(){
             var intervieweeName = this.$el.find('h4').text().trim();
             var interviewName = $('#interviewer-item-name').text().trim();
