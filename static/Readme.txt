@@ -21,11 +21,15 @@
 		expression.js			调试窗口表达式模型
 		file.js				文件模型
 		user.js				用户模型
+		interview.js        面试模型
+		problem.js          问题模型
 		
 	/collections				Backbone框架Collection
 		expressions.js			表达式集合
 		files.js			文件集合
 		members.js			用户集合
+		interviews.js       面试集合
+		problems.js         问题集合
 		
 	/views					Backbone框架View
 		login-view.js			登录视图
@@ -65,7 +69,11 @@
 		file-sync.js			Backbone.Model.prototype底层sync机制的重载
 		main-socket.js			socket文件页面事件监听
 		room-socket.js			socket编辑页面事件监听
-		
+		interview-socket.js     socket面试页面事件监听
+		interview-sync.js       Backbone.Model.prototype底层sync机制的重载
+		problem-socket.js       socket问题页面事件监听
+		problem-sync.js         Backbone.Model.prototype底层sync机制的重载
+
 	/api					API相关js
 		ie.js				IE浏览器相关js
 		lock.js				socket通讯中lock的整合
